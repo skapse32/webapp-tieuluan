@@ -50,17 +50,17 @@ public class ChiTietSanPhamController {
 
 		json = response.getEntity(String.class);
 		if (response.getStatus() != 200) {
-			model.addAttribute("tieude", "Lỗi");
+			model.addAttribute("error", "Lỗi : bạn cần phải đăng nhập");
 			if (response.getStatus() == 401) {
 
-				model.addAttribute("noidung",
+				model.addAttribute("errorcontent",
 						"Bạn cần phải đăng nhập mới thấy được nội dung sản phẩm");
 
 			} else {
-				model.addAttribute("noidung", response.getStatus());
+				model.addAttribute("errorcontent", response.getStatus());
 			}
 			model.addAttribute("web", web);
-			return "notice";
+			return "dangnhap";
 		}
 		gson = new Gson();
 		Sanpham sp = new Sanpham();

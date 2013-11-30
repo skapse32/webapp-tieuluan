@@ -21,10 +21,10 @@
 			<mvc:mapping path="/admin/**" />
 			<bean class="com.tieuluan.daugia.interceptor.InterceptorAdmin" />
 		</mvc:interceptor>
-		<mvc:interceptor>
+		<!-- <mvc:interceptor>
 			<mvc:mapping path="/chitietsanpham/**" />
 			<bean class="com.tieuluan.daugia.interceptor.InterceptorUser" />
-		</mvc:interceptor>
+		</mvc:interceptor> -->
 		<mvc:interceptor>
 			<mvc:mapping path="/dangsanpham/**" />
 			<bean class="com.tieuluan.daugia.interceptor.InterceptorUser" />

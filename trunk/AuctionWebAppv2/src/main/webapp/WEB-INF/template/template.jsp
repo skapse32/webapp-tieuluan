@@ -8,13 +8,13 @@
 <html>
 <head>
 <title><tiles:insertAttribute name="title" ignore="true" /></title>
+
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/v2/css/style.css"
 	type="text/css" />
 <script
 	src="${pageContext.request.contextPath}/resources/v2/js/jquery.js"
 	type="text/javascript"></script>
-
 
 <!-- OLD ------------------------------------------------------------------------------------->
 
