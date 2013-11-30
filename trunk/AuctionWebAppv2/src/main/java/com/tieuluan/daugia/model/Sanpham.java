@@ -226,4 +226,9 @@ public class Sanpham implements java.io.Serializable {
 		this.ghichu = ghichu;
 	}
 
+	@Override
+	public String toString() {
+		return "Sanpham [masp=" + masp + ", giakhoidiem=" + giakhoidiem
+				+ ", giahientai=" + giahientai + "]";
+	}
 }

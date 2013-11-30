@@ -8,38 +8,6 @@
 	function pad(d) {
 		return (d < 10) ? '0' + d.toString() : d.toString();
 	}
-	
-	var timer;
-	$(function() {
-		timer = setInterval(vartimertick, 1000);
-	});
-	function vartimertick() {
-		// get the form values
-		var maLoaiSP = $('#maLoaiSP').val();
-		var size = $('#size').val();
-		var page = $('#page').val();
-		$.ajax({
-			type : "POST",
-			url : "/daugia/loaddssanphamdangdau",
-			data : "maLoaiSP=" + maLoaiSP + "&size=" + size + "&page=" + page,
-			success : function(data) {
-				var dsspList = jQuery.parseJSON(data);
-				$.each(dsspList,function(index, element) {
-					var x = numeral(element.giahientai).format(
-							'0,0');
-					x = x.replace(/,/g, ".");
-					document.getElementById("giahientai"
-							+ element.masp).innerHTML = x
-							+ "&nbsp;đ";
-				});
-
-			},
-			error : function(e) {
-				alert('Error: ' + e);
-			}
-		});
-	};
-
 	function doAjaxPost() {
 		// get the form values
 		var masp = $('#masp').val();
@@ -174,7 +142,7 @@
 					<a class="fl link_blue bold" href="chitietsanpham?masp=${sp.masp}">${sp.tensp}</a>
 				</div>
 				<img class="fl right8" src="resources/v2/images/arrow.gif" alt="" />
-	
+
 			</div>
 		</div>
 		<ul id="products-group-list" class="fl clb top10 list-none">
@@ -202,7 +170,8 @@
 						đ</strong>
 				</li>
 				<li class="fl w340 das_top h1"></li>
-				<li class="fl pd5 w330 clb">Dòng xe: <strong class="color3d">${sp.loaisp}</strong>
+				<li class="fl pd5 w330 clb">Dòng xe: <strong class="color3d">Xe
+						số</strong>
 				</li>
 				<li class="fl w340 das_top h1"></li>
 				<li class="fl pd5 w330 clb">Động cơ: <strong class="color3d"></strong>
@@ -619,121 +588,186 @@
 			<strong>Các sản phẩm khác cùng loại</strong>
 		</div>
 		<img alt="" src="resources/v2/images/sub-titles.jpg" />
-		<!-- phan trang -->
-		<div style="float: right; padding-top: 6px">
-				<form action="">
-					<input type="hidden" id="maLoaiSP" name="maLoaiSP"
-						value="${maLoaiSP}"> <input type="hidden" id="page"
-						name="trang" value="${trang}"> <input type="hidden"
-						id="size" value="${soLuongSanPhamTrenTrang}"><label
-						style="">Trang &nbsp;</label>
-					<c:forEach var="i" begin="1" end="${soTrang}" step="1">
-						<a style="color: #00C"
-							href="?maLoaiSP=${maLoaiSP}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
-
-							<c:choose>
-								<c:when test="${i==trang}">
-									<input type="button" value="${i}"
-										style="width: 25px; background-color: inactivecaption" />
-								</c:when>
-								<c:otherwise>
-									<input type="button" value="${i}" style="width: 25px" />
-								</c:otherwise>
-							</c:choose>
-						</a>
-					</c:forEach>
-
-					<label for="soLuongSanPhamTrenTrang">Số lượng</label> <select
-						name="soLuongSanPhamTrenTrang" onchange="submit()">
-						<c:forEach var="i" begin="1" end="5">
-							<option
-								<c:if test="${i*8 == soLuongSanPhamTrenTrang}" >
-		                                selected="selected"
-		                            </c:if>
-								value="${i*8}">${i*8}</option>
-						</c:forEach>
-						<option
-							<c:if test="${soLuongSanPhamTrenTrang==-1}" >
-		                            selected="selected"
-		                        </c:if>
-							value="-1">Tất cả</option>
-					</select>
-				</form>
-			</div>
 	</div>
 	<div id="yamaha-xe" class="fl wleft">
 		<ul id="yamaha-xe-list" class="fl clb top10 list-none wleft-2 das_top">
-			<c:forEach var="sp" items="${dssp}">
-					<div align="center" class="fl pd05 w170 hpros sep_pros">
-						<div class="HinhSP">
-							<a
-								href="chitietsanpham.html?masp=${sp.masp}"><img
-								class="HinhSP_Resize" src="${imageDirectory}${sp.hinhanh}" /></a>
-						</div>
-						<div class="TenSP">${sp.tensp}</div>
-						<div class="Gia" id="giahientai${sp.masp}"></div>
-						<input type="hidden" id="time${sp.masp}"
-							value="${sp.thoigianketthuc}">
-						<div class="Countdown" id="Countdown${sp.masp}"></div>
-						<script type="text/javascript">
-							$(function() {
-								var stringday = $('#time${sp.masp}').val()
-										.toString();
-								var longday = Number(stringday);
-								var BigDay = new Date(longday);
-								var msPerDay = 24 * 60 * 60 * 1000;
-								window
-										.setInterval(
-												function() {
-													var today = new Date();
-													var timeLeft = (BigDay
-															.getTime() - today
-															.getTime());
-													if (Math.floor(timeLeft) > 0) {
-														var e_daysLeft = timeLeft
-																/ msPerDay;
-														var daysLeft = pad(Math
-																.floor(e_daysLeft));
-														var e_hrsLeft = (e_daysLeft - daysLeft) * 24;
-														var hrsLeft = pad(Math
-																.floor(e_hrsLeft));
-														var e_minsLeft = (e_hrsLeft - hrsLeft) * 60;
-														var minsLeft = pad(Math
-																.floor(e_minsLeft));
-														var e_secsLeft = (e_minsLeft - minsLeft) * 60;
-														var secsLeft = pad(Math
-																.floor(e_secsLeft));
-														var timeString = daysLeft
-																+ " ngày "
-																+ hrsLeft
-																+ ":"
-																+ minsLeft
-																+ ":"
-																+ secsLeft;
-														$('#Countdown${sp.masp}').html(timeString);
-													} else {
-														//var timeString = "00 ngày " + "00:" +  "00:00";
-														var timeString = "Kết thúc";
-														$('#Countdown${sp.masp}')
-																.html(
-																		timeString);
-														document
-																.getElementById('Countdown${sp.masp}').style.color = 'red'; //'none';
-														document
-																.getElementById('bid${sp.masp}').style.visibility = 'hidden';
-													}
-												}, 1000);
-							});
-						</script>
+			<li id="yamaha-xe-items-10582" class="fl pd05 w170 hpros sep_pros">
+				<a class="fl l8 loadimage cOver top15 w163"
+				href="xe-may/383/10582/Yamaha-Exciter-GP-con-tay-2010-Xanh.html"
+				title="Yamaha Exciter GP côn tay 2010 Xanh"><img
+					name="Yamaha Exciter GP côn tay 2010 Xanh" class="fl img_pro_small"
+					src="resources/v2/upload/omz1274340756_1316419080.jpg"
+					style="display: inline" /></a>
+				<p class="top15" align="center">
+					<a href="xe-may/383/10582/Yamaha-Exciter-GP-con-tay-2010-Xanh.html"
+						title="Yamaha Exciter GP côn tay 2010 Xanh">Yamaha Exciter GP
+						côn tay 2010 Xanh</a>
+				</p>
+				<p class="top10" align="center">
+					Giá: <strong class="color_red">Liên hệ</strong>
+				</p>
+				<p class="top10" align="center">
+					<a href="xe-may/383/10582/Yamaha-Exciter-GP-con-tay-2010-Xanh.html"
+						class="fl l35 bg-hit detail_products">Đặt giá</a>
+				</p>
+			</li>
 
-						<p class="top10" align="center">
-							<a
-								href="${pageContext.request.contextPath}/chitietsanpham.html?masp=${sp.masp}"
-								class="fl l35 bg-hit detail_products">Đặt giá</a>
-						</p>
-					</div>
-				</c:forEach>
-				<!-- San Pham END-->
+			<li id="yamaha-xe-items-10581" class="fl pd05 w170 hpros sep_pros">
+				<a class="fl l8 loadimage cOver top15 w163"
+				href="xe-may/383/10581/Yamaha-Exciter-RC-2010-Trang.html"
+				title="Yamaha Exciter RC 2010 Trắng"><img
+					name="Yamaha Exciter RC 2010 Trắng" class="fl img_pro_small"
+					src="resources/v2/upload/njk1274339830_1316418975.jpg"
+					style="display: inline" /></a>
+				<p class="top15" align="center">
+					<a href="xe-may/383/10581/Yamaha-Exciter-RC-2010-Trang.html"
+						title="Yamaha Exciter RC 2010 Trắng">Yamaha Exciter RC 2010
+						Trắng</a>
+				</p>
+				<p class="top10" align="center">
+					Giá: <strong class="color_red">Liên hệ</strong>
+				</p>
+				<p class="top10" align="center">
+					<a href="xe-may/383/10581/Yamaha-Exciter-RC-2010-Trang.html"
+						class="fl l35 bg-hit detail_products">Đặt giá</a>
+				</p>
+			</li>
+
+			<li id="yamaha-xe-items-10580" class="fl pd05 w170 hpros sep_pros">
+				<a class="fl l8 loadimage cOver top15 w163"
+				href="xe-may/383/10580/Yamaha-Exciter-RC-2010-Vang-den.html"
+				title="Yamaha Exciter RC 2010 Vàng đen"><img
+					name="Yamaha Exciter RC 2010 Vàng đen" class="fl img_pro_small"
+					src="resources/v2/upload/aok1274339769_1316418861.jpg"
+					style="display: inline" /></a>
+				<p class="top15" align="center">
+					<a href="xe-may/383/10580/Yamaha-Exciter-RC-2010-Vang-den.html"
+						title="Yamaha Exciter RC 2010 Vàng đen">Yamaha Exciter RC 2010
+						Vàng đen</a>
+				</p>
+				<p class="top10" align="center">
+					Giá: <strong class="color_red">Liên hệ</strong>
+				</p>
+				<p class="top10" align="center">
+					<a href="xe-may/383/10580/Yamaha-Exciter-RC-2010-Vang-den.html"
+						class="fl l35 bg-hit detail_products">Đặt giá</a>
+				</p>
+			</li>
+
+			<li id="yamaha-xe-items-10577" class="fl pd05 w170 hpros "><a
+				class="fl l8 loadimage cOver top15 w163"
+				href="xe-may/383/10577/Yamaha-Exciter-Con-tay-2009-Trang.html"
+				title="Yamaha Exciter Côn tay 2009 Trắng"><img
+					name="Yamaha Exciter Côn tay 2009 Trắng" class="fl img_pro_small"
+					src="resources/v2/upload/ixi1240894164_1316418481.jpg"
+					style="display: inline" /></a>
+				<p class="top15" align="center">
+					<a href="xe-may/383/10577/Yamaha-Exciter-Con-tay-2009-Trang.html"
+						title="Yamaha Exciter Côn tay 2009 Trắng">Yamaha Exciter Côn
+						tay 2009 Trắng</a>
+				</p>
+				<p class="top10" align="center">
+					Giá: <strong class="color_red">Liên hệ</strong>
+				</p>
+				<p class="top10" align="center">
+					<a href="xe-may/383/10577/Yamaha-Exciter-Con-tay-2009-Trang.html"
+						class="fl l35 bg-hit detail_products">Đặt giá</a>
+				</p></li>
+			<li id="product-items-sep" class="fl wleft h1"></li>
+			<li id="yamaha-xe-items-10587" class="fl pd05 w170 hpros sep_pros">
+				<a class="fl l8 loadimage cOver top15 w163"
+				href="xe-may/383/10587/Yamaha-Exciter-RC-2011-Con-tay-Do.html"
+				title="Yamaha Exciter RC 2011 Côn tay - Đỏ"><img
+					name="Yamaha Exciter RC 2011 Côn tay - Đỏ" class="fl img_pro_small"
+					src="resources/v2/upload/dsb1302084915_1316420070.jpg"
+					style="display: inline" /></a>
+				<p class="top15" align="center">
+					<a href="xe-may/383/10587/Yamaha-Exciter-RC-2011-Con-tay-Do.html"
+						title="Yamaha Exciter RC 2011 Côn tay - Đỏ">Yamaha Exciter RC
+						2011 Côn tay - Đỏ</a>
+				</p>
+				<p class="top10" align="center">
+					Giá: <strong class="color_red">39,200,000 đ</strong>
+				</p>
+				<p class="top10" align="center">
+					<a href="xe-may/383/10587/Yamaha-Exciter-RC-2011-Con-tay-Do.html"
+						class="fl l35 bg-hit detail_products">Đặt giá</a>
+				</p>
+			</li>
+
+			<li id="yamaha-xe-items-10579" class="fl pd05 w170 hpros sep_pros">
+				<a class="fl l8 loadimage cOver top15 w163"
+				href="xe-may/383/10579/Yamaha-Exciter-RC-2010-Den-do.html"
+				title="Yamaha Exciter RC 2010 Đen đỏ"><img
+					name="Yamaha Exciter RC 2010 Đen đỏ" class="fl img_pro_small"
+					src="resources/v2/upload/ybq1304045430_1316418734.jpg"
+					style="display: inline" /></a>
+				<p class="top15" align="center">
+					<a href="xe-may/383/10579/Yamaha-Exciter-RC-2010-Den-do.html"
+						title="Yamaha Exciter RC 2010 Đen đỏ">Yamaha Exciter RC 2010
+						Đen đỏ</a>
+				</p>
+				<p class="top10" align="center">
+					Giá: <strong class="color_red">39,200,000 đ</strong>
+				</p>
+				<p class="top10" align="center">
+					<a href="xe-may/383/10579/Yamaha-Exciter-RC-2010-Den-do.html"
+						class="fl l35 bg-hit detail_products">Đặt giá</a>
+				</p>
+			</li>
+
+			<li id="yamaha-xe-items-10578" class="fl pd05 w170 hpros sep_pros">
+				<a class="fl l8 loadimage cOver top15 w163"
+				href="xe-may/383/10578/Yamaha-Exciter-RC-2010-Do.html"
+				title="Yamaha Exciter RC 2010 Đỏ"><img
+					name="Yamaha Exciter RC 2010 Đỏ" class="fl img_pro_small"
+					src="resources/v2/upload/xnd1274339650_1316418604.jpg"
+					style="display: inline" /></a>
+				<p class="top15" align="center">
+					<a href="xe-may/383/10578/Yamaha-Exciter-RC-2010-Do.html"
+						title="Yamaha Exciter RC 2010 Đỏ">Yamaha Exciter RC 2010 Đỏ</a>
+				</p>
+				<p class="top10" align="center">
+					Giá: <strong class="color_red">39,500,000 đ</strong>
+				</p>
+				<p class="top10" align="center">
+					<a href="xe-may/383/10578/Yamaha-Exciter-RC-2010-Do.html"
+						class="fl l35 bg-hit detail_products">Đặt giá</a>
+				</p>
+			</li>
+
+			<li id="yamaha-xe-items-10576" class="fl pd05 w170 hpros "><a
+				class="fl l8 loadimage cOver top15 w163"
+				href="xe-may/383/10576/Yamaha-Exciter-RC-2011-Con-tay-Trang.html"
+				title="Yamaha Exciter RC 2011 Côn tay - Trắng"><img
+					name="Yamaha Exciter RC 2011 Côn tay - Trắng"
+					class="fl img_pro_small"
+					src="resources/v2/upload/wrp1302085805_1316418338.png"
+					style="display: inline" /></a>
+				<p class="top15" align="center">
+					<a
+						href="xe-may/383/10576/Yamaha-Exciter-RC-2011-Con-tay-Trang.html"
+						title="Yamaha Exciter RC 2011 Côn tay - Trắng">Yamaha Exciter
+						RC 2011 Côn tay - Trắng</a>
+				</p>
+				<p class="top10" align="center">
+					Giá: <strong class="color_red">39,500,000 đ</strong>
+				</p>
+				<p class="top10" align="center">
+					<a
+						href="xe-may/383/10576/Yamaha-Exciter-RC-2011-Con-tay-Trang.html"
+						class="fl l35 bg-hit detail_products">Đặt giá</a>
+				</p></li>
+			<li id="product-items-sep" class="fl wleft h1"></li>
+			<li class="fl wleft pdt10">
+				<div class="start fl">
+					<span> Trước </span>
+				</div> <a class="PageingII fl">1</a> <a class="Pageing fl"
+				href="xe-may/383/Xe-may-Yamaha/Yamaha-Exciter-RC/?find=1&page=8">2</a><a
+				class="Pageing fl"
+				href="xe-may/383/Xe-may-Yamaha/Yamaha-Exciter-RC/?find=1&page=8">
+					Sau </a>
+			</li>
 		</ul>
 	</div>
 </div>

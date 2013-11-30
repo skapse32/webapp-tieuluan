@@ -62,8 +62,7 @@ public class SanPhamController {
 				.path("sanpham/findSanPhamDangDauTheoLoai")
 				.cookie(new NewCookie("JSESSIONID", session.getAttribute(
 						"sessionid").toString())).post(String.class,form);
-		Type typelist = new TypeToken<ArrayList<Sanpham>>() {
-		}.getType();
+		Type typelist = new TypeToken<ArrayList<Sanpham>>() {}.getType();
 		dssp = gson.fromJson(json, typelist);
 		// lay so luong san pham
 		form = new Form();
