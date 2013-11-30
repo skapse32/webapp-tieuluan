@@ -4,6 +4,11 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <div style="margin: 100px;" align="center">
+	<c:if test="${not empty error }">
+		<script type="text/javascript">
+			alert("${errorcontent}");
+		</script>
+	</c:if>
 	<form 
 		action="${pageContext.request.contextPath}/dangnhap?action=dangnhap"
 		method="post">

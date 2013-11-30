@@ -23,6 +23,9 @@
 					<a href="${pageContext.request.contextPath}/quanlyspuser">Quản
 						lý sản phẩm</a>
 				</h3>
+				<h3 style="margin-left: 40px">
+					<a href="${pageContext.request.contextPath}/dangxuat">Đăng xuất</a>
+				</h3>
 				<h2 style="margin-left: 20px">Manager</h2>
 				<h3 style="margin-left: 40px">
 					<a href="${pageContext.request.contextPath}/quanlyspad">Quản lý
