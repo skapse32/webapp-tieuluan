@@ -1,0 +1,49 @@
+/* COLOR */
+.color-black{color: #000;}
+
+.color3d{
+    color: #3d3d3d;
+}
+
+.color_gray{
+    color: #c1c1c1;
+}
+
+.color_yellow{color: yellow;}
+
+.color_red{
+    color: red;
+}
+
+.color_green{
+    color: green;
+}
+
+.color-text-black{color: #ababab;}
+
+.color_white{
+    color: white;
+}
+
+.color-company{
+    color: #b50000;
+}
+
+.color_facebok{color: #98d1f1;}
+
+.fontTahoma{
+    font-family: Tahoma;
+}
+
+.fontArial{
+    font-family: Arial;
+}
+
+.fontTime{
+    font-family: "Times New Roman";
+}
+
+.colorY{ color: #ff7800;}
+
+
+.font-hp-bank{font-family: HP-Bank;}
