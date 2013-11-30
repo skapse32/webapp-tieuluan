@@ -1,14 +1,19 @@
 package com.tieuluan.daugia.controller;
 
 import java.io.IOException;
+import java.lang.reflect.Type;
 import java.sql.Timestamp;
 import java.text.DecimalFormat;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.NewCookie;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,19 +22,26 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.representation.Form;
+import com.tieuluan.daugia.function.Function;
 import com.tieuluan.daugia.function.Server;
 import com.tieuluan.daugia.model.Sanpham;
 
 @Controller
 public class ChiTietSanPhamController {
+	
+	private Logger log = LoggerFactory.getLogger(ChiTietSanPhamController.class);
+	
 	@RequestMapping(value = "/chitietsanpham.html", method = RequestMethod.GET)
 	public String chitietsanpham(
+			@RequestParam(value = "trang", required = false, defaultValue = "1") int trang,
+			@RequestParam(value = "soLuongSanPhamTrenTrang", required = false, defaultValue = "8") int soLuongSanPhamTrenTrang,
 			@RequestParam(value = "masp", required = false, defaultValue = "1") String masp,
 			Model model, HttpSession session) throws IOException {
 		String imageDirectory = Server.addressAuctionImage;
@@ -87,6 +99,48 @@ public class ChiTietSanPhamController {
 		model.addAttribute("sp", sp);
 		model.addAttribute("imageDirectory", imageDirectory);
 		model.addAttribute("web", web);
+		
+		
+		//find san pham lien quan
+		List<Sanpham> dssp = new ArrayList<Sanpham>();
+		// lay danh sach san pham
+		form = new Form();
+		form.add("size", soLuongSanPhamTrenTrang);
+		form.add("page", trang);
+		int maloaisp = -1;
+		if("Xe Số".equals(sp.getLoaisp())){
+			log.info("Xe số");
+			maloaisp = 1;
+		}else if("Xe Ga".equals(sp.getLoaisp())){
+			log.info("Xe Ga");
+			maloaisp = 2;
+		}else if("Xe Tay Côn".equals(sp.getLoaisp())){
+			log.info("Xe Tay Côn");
+			maloaisp = 3;
+		}
+		log.info(maloaisp + "");
+		form.add("maloaisp", maloaisp);
+		json = webResource
+				.path("sanpham/findSanPhamDangDauTheoLoai")
+				.cookie(new NewCookie("JSESSIONID", session.getAttribute(
+						"sessionid").toString())).post(String.class,form);
+		Type typelist = new TypeToken<ArrayList<Sanpham>>() {}.getType();
+		dssp = gson.fromJson(json, typelist);
+		log.info(dssp.toString());
+		// lay so luong san pham
+		form = new Form();
+		form.add("maloaisp", maloaisp);
+		json = webResource
+				.path("sanpham/findSoSanPhamDangDau")
+				.cookie(new NewCookie("JSESSIONID", session.getAttribute(
+						"sessionid").toString())).post(String.class,form);
+		int soTrang = Function.tinhSoTrangSanPham(soLuongSanPhamTrenTrang,
+				Integer.parseInt(json));
+		model.addAttribute("soLuongSanPhamTrenTrang", soLuongSanPhamTrenTrang);
+		model.addAttribute("trang", trang);
+		model.addAttribute("maLoaiSP", maloaisp);
+		model.addAttribute("soTrang", soTrang);
+		model.addAttribute("dssp", dssp);
 		return "chitietsanpham.html";
 	}
 	@RequestMapping(value = "/datgia", method = RequestMethod.POST)
