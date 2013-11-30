@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="AuctionWebService"
+  id="myeclipse.1372783222473"
+  context-root="/AuctionWebService"
+  j2ee-spec="6.0"
+  archive="AuctionWebService.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+
