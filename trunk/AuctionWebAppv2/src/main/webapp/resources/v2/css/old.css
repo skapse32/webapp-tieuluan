@@ -1,0 +1,52 @@
+
+/***** Listing Displays *****/
+.HomePageFeaturedItem {
+	float: left;
+	height: 265px;
+	width: 158px;
+	margin: 5px 5px 0px 0px;
+	border: 1px solid #ccc;
+	text-align: center;
+	padding: 5px;
+	overflow: hidden;
+}
+
+.HomePageFeaturedItem h1 {
+	font-size: 115%;
+	height: 20px;
+	margin: 5px 5px 0px 5px;
+}
+
+.HomePageFeaturedItem a {
+	color: #000;
+	text-decoration: none;
+}
+
+.HomePageFeaturedItem img {
+	
+}
+
+.HomePageFeaturedItem_time {
+	font-size: 100%;
+	margin-bottom: 3px;
+}
+
+.HomePageFeaturedItem_price {
+	
+}
+
+.HomePageFeaturedSubtitle {
+	font-style: italic;
+	font-size: 100%;
+}
+
+.HomePageFeaturedItem_NoPhoto {
+	margin: 0px auto;
+	height: 148px;
+	width: 148px;
+	border: 1px solid #ccc;
+	background: #ebebeb;
+	color: #999;
+	font-size: 100%;
+	text-align: center;
+}

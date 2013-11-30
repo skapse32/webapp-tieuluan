@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	   		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	   		http://www.springframework.org/schema/context
+	   		http://www.springframework.org/schema/context/spring-context-3.0.xsd
+			http://www.springframework.org/schema/mvc 
+			http://www.springframework.org/schema/mvc/spring-mvc-3.0.xsd">
+	<mvc:resources mapping="/resources/**" location="/resources/" />
+	<context:annotation-config />
+	<context:component-scan base-package="com.tieuluan.daugia.controller" />
+	<mvc:interceptors>
+		<mvc:interceptor>
+			<mvc:mapping path="/**" />
+			<bean class="com.tieuluan.daugia.interceptor.InterceptorInit" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/admin/**" />
+			<bean class="com.tieuluan.daugia.interceptor.InterceptorAdmin" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/chitietsanpham/**" />
+			<bean class="com.tieuluan.daugia.interceptor.InterceptorUser" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/dangsanpham/**" />
+			<bean class="com.tieuluan.daugia.interceptor.InterceptorUser" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/taikhoan/**" />
+			<bean class="com.tieuluan.daugia.interceptor.InterceptorUser" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/qlsanphamdangthamgia/**" />
+			<bean class="com.tieuluan.daugia.interceptor.InterceptorUser" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/qlsanphamdaketthuc/**" />
+			<bean class="com.tieuluan.daugia.interceptor.InterceptorUser" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/qlsanphamchienthang/**" />
+			<bean class="com.tieuluan.daugia.interceptor.InterceptorUser" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/qlsanphamcuatoidangdau/**" />
+			<bean class="com.tieuluan.daugia.interceptor.InterceptorUser" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/qlsanphamcuatoibihuy/**" />
+			<bean class="com.tieuluan.daugia.interceptor.InterceptorUser" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/qlsanphamcuatoisapdau/**" />
+			<bean class="com.tieuluan.daugia.interceptor.InterceptorUser" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/qlsanphamcuatoidadauxong/**" />
+			<bean class="com.tieuluan.daugia.interceptor.InterceptorUser" />
+		</mvc:interceptor>
+		<mvc:interceptor>
+			<mvc:mapping path="/thanhtoan/**" />
+			<bean class="com.tieuluan.daugia.interceptor.InterceptorUser" />
+		</mvc:interceptor>
+	</mvc:interceptors>
+	
+
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
+	<bean
+		class="org.springframework.web.servlet.mvc.annotation.DefaultAnnotationHandlerMapping">
+	</bean>
+
+	<mvc:annotation-driven />
+
+</beans>
