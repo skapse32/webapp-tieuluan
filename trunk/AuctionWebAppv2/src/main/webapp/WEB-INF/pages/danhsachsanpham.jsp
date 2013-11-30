@@ -64,8 +64,16 @@
 						id="size" value="${soLuongSanPhamTrenTrang}"><label
 						style="">Trang &nbsp;</label>
 					<c:forEach var="i" begin="1" end="${soTrang}" step="1">
-						<a style="color: #00C"
-							href="?maLoaiSP=${maLoaiSP}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
+						<c:choose>
+							<c:when test="${check == 'thuonghieu'}">
+								<a style="color: #00C"
+							href="${pageContext.request.contextPath}/?thuonghieu=${thuonghieu}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
+							</c:when>
+							<c:otherwise>
+								<a style="color: #00C"
+							href="${pageContext.request.contextPath}/?maLoaiSP=${maLoaiSP}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
+							</c:otherwise>
+						</c:choose>
 
 							<c:choose>
 								<c:when test="${i==trang}">
@@ -230,6 +238,36 @@
 
 			</ul>
 		</div>
+
+		<c:if test="${sessionScope.dshangxe != null}">
+			<div id="catalog-products" class="fl wright">
+				<div id="catalog-products-titles"
+					class="fl bg-titles top10 products-group-title-news color_white fontTahoma wright-26">
+					<strong>Hãng xe</strong>
+				</div>
+				<ul id="catalog-products-list"
+					class="fl fontTahoma wright list-none top5">
+
+						<c:forEach var="xe" items="${sessionScope.dshangxe}">
+							<c:choose>
+								<c:when test="${${xe.tenhang == thuonghieu}">
+									<li class="fl pd5 w240 set-group-bg"><a
+										class="fl set-group pdl20"
+										href="${pageContext.request.contextPath}/?thuonghieu=${xe.tenhang}&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">${xe.tenhang}</a>
+									</li>
+									<li class="fl wright das_top h1"></li>
+								</c:when>
+								<c:otherwise>
+									<li class="fl pd5 w240 "><a class="fl  pdl20"
+										href="${pageContext.request.contextPath}/?thuonghieu=${xe.tenhang}&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">${xe.tenhang}</a>
+									</li>
+									<li class="fl wright das_top h1"></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+				</ul>
+			</div>
+		</c:if>
 
 		<div id="catalog-products" class="fl top10 wright">
 			<div id="catalog-products-titles"

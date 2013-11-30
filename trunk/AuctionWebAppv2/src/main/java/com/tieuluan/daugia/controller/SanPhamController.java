@@ -40,6 +40,7 @@ public class SanPhamController {
 	
 	@RequestMapping(value = "/sanphamdangdau.html", method = RequestMethod.GET)
 	public String sanphamdangdau(
+			@RequestParam(value = "thuonghieu", required = false, defaultValue = "0") String thuonghieu,
 			@RequestParam(value = "maLoaiSP", required = false, defaultValue = "-1") int maLoaiSP,
 			@RequestParam(value = "soLuongSanPhamTrenTrang", required = false, defaultValue = "8") int soLuongSanPhamTrenTrang,
 			@RequestParam(value = "trang", required = false, defaultValue = "1") int trang,
@@ -54,14 +55,28 @@ public class SanPhamController {
 		String json = "";
 		List<Sanpham> dssp = new ArrayList<Sanpham>();
 		// lay danh sach san pham
-		form = new Form();
-		form.add("size", soLuongSanPhamTrenTrang);
-		form.add("page", trang);
-		form.add("maloaisp", maLoaiSP);
-		json = webResource
-				.path("sanpham/findSanPhamDangDauTheoLoai")
-				.cookie(new NewCookie("JSESSIONID", session.getAttribute(
-						"sessionid").toString())).post(String.class,form);
+		if (thuonghieu.length() > 2) {
+			form = new Form();
+			form.add("size", soLuongSanPhamTrenTrang);
+			form.add("page", trang);
+			form.add("thuonghieu", thuonghieu);
+			json = webResource
+					.path("sanpham/findByThuongHieu")
+					.cookie(new NewCookie("JSESSIONID", session.getAttribute(
+							"sessionid").toString())).post(String.class, form);
+			model.addAttribute("check", "thuonghieu");
+			model.addAttribute("thuonghieu", thuonghieu);
+		} else {
+			form = new Form();
+			form.add("size", soLuongSanPhamTrenTrang);
+			form.add("page", trang);
+			form.add("maloaisp", maLoaiSP);
+			json = webResource
+					.path("sanpham/findSanPhamDangDauTheoLoai")
+					.cookie(new NewCookie("JSESSIONID", session.getAttribute(
+							"sessionid").toString())).post(String.class, form);
+			model.addAttribute("check", "masp");
+		}
 		Type typelist = new TypeToken<ArrayList<Sanpham>>() {}.getType();
 		dssp = gson.fromJson(json, typelist);
 		// lay so luong san pham
@@ -80,7 +95,9 @@ public class SanPhamController {
 		model.addAttribute("soTrang", soTrang);
 		model.addAttribute("dssp", dssp);
 		model.addAttribute("imageDirectory", imageDirectory);
-
+		
+		model.addAttribute("idxe", 1);
+		
 		model.addAttribute("method", "POST");
 		model.addAttribute("link", "/daugia/loaddssanphamdangdau");
 		model.addAttribute("web", web);
