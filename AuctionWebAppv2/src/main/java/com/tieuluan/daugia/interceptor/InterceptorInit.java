@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.NewCookie;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -20,12 +22,15 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.tieuluan.daugia.function.Server;
+import com.tieuluan.daugia.model.Hangxe;
 import com.tieuluan.daugia.model.Hinhthucthanhtoan;
 import com.tieuluan.daugia.model.Loaisp;
 import com.tieuluan.daugia.model.Tinhtrangsp;
 
 public class InterceptorInit implements HandlerInterceptor {
 
+	private Logger log = LoggerFactory.getLogger(InterceptorInit.class);
+	
 	public void afterCompletion(HttpServletRequest arg0,
 			HttpServletResponse arg1, Object arg2, Exception arg3)
 			throws Exception {
@@ -91,13 +96,19 @@ public class InterceptorInit implements HandlerInterceptor {
 			session.setAttribute("dshttt", dshttt);
 			session.setAttribute("loaiphien", 1);
 			session.setAttribute("tukhoa", "");
-			//gia su
-//			String username="QuyAnh";
-//			session.setAttribute("username",username);
-//			String role="User";
-//			session.setAttribute("role",role);
 			
-			
+			//load hang xe
+			json = webResource
+					.path("hangxe/findAll")
+					.cookie(new NewCookie("JSESSIONID", session.getAttribute(
+							"sessionid").toString())).post(String.class);
+			List<Hangxe> dshangxe = new ArrayList<Hangxe>();
+			typelist = new TypeToken<ArrayList<Hangxe>>() {
+			}.getType();
+			dshangxe = gson.fromJson(json, typelist);
+
+			log.info(dshangxe.toString());
+			session.setAttribute("dshangxe", dshangxe);
 		}
 		return true;
 	}

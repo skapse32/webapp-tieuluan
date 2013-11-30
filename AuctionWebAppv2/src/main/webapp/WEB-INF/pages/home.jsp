@@ -53,14 +53,19 @@
 
 		<!-- Banner -->
 
-            <div id="banner-home" class="fl wleft">
-            	<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000" codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0" width="730" height="251" id="tech" align="middle">
-            		<param name="allowScriptAccess" value="sameDomain" />
-            		<param name="movie" value="images/banner.swf" />
-            		<param name="quality" value="high" />
-            		<embed src="resources/v2/images/banner.swf" quality="high" width="730" height="251" name="tech" align="middle" allowScriptAccess="sameDomain" type="application/x-shockwave-flash" pluginspage="http://www.macromedia.com/go/getflashplayer" />
-            	</object>
-            </div>
+		<div id="banner-home" class="fl wleft">
+			<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+				codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
+				width="730" height="251" id="tech" align="middle">
+				<param name="allowScriptAccess" value="sameDomain" />
+				<param name="movie" value="images/banner.swf" />
+				<param name="quality" value="high" />
+				<embed src="resources/v2/images/banner.swf" quality="high"
+					width="730" height="251" name="tech" align="middle"
+					allowScriptAccess="sameDomain" type="application/x-shockwave-flash"
+					pluginspage="http://www.macromedia.com/go/getflashplayer" />
+			</object>
+		</div>
 		<!-- Banner end -->
 		<!-- Sản phẩm đang đấu -->
 		<div id="yamaha-xe-ga" class="fl top10 bg-top-products wleft">
@@ -77,8 +82,17 @@
 						id="size" value="${soLuongSanPhamTrenTrang}"><label
 						style="">Trang &nbsp;</label>
 					<c:forEach var="i" begin="1" end="${soTrang}" step="1">
-						<a style="color: #00C"
+						<c:choose>
+							<c:when test="${check == 'thuonghieu'}">
+								<a style="color: #00C"
+							href="${pageContext.request.contextPath}/?thuonghieu=${thuonghieu}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
+							</c:when>
+							<c:otherwise>
+								<a style="color: #00C"
 							href="${pageContext.request.contextPath}/?maLoaiSP=${maLoaiSP}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
+							</c:otherwise>
+						</c:choose>
+						
 
 							<c:choose>
 								<c:when test="${i==trang}">
@@ -241,13 +255,39 @@
 						</c:choose>
 
 					</c:when>
-					<c:otherwise>
-					</c:otherwise>
 				</c:choose>
 
 			</ul>
 		</div>
+		<c:if test="${sessionScope.dshangxe != null}">
+			<div id="catalog-products" class="fl wright">
+				<div id="catalog-products-titles"
+					class="fl bg-titles top10 products-group-title-news color_white fontTahoma wright-26">
+					<strong>Hãng xe</strong>
+				</div>
+				<ul id="catalog-products-list"
+					class="fl fontTahoma wright list-none top5">
 
+						<c:forEach var="xe" items="${sessionScope.dshangxe}">
+							<c:choose>
+								<c:when test="${xe.id == idxe}">
+									<li class="fl pd5 w240 set-group-bg"><a
+										class="fl set-group pdl20"
+										href="${pageContext.request.contextPath}/?thuonghieu=${xe.tenhang}&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">${xe.tenhang}</a>
+									</li>
+									<li class="fl wright das_top h1"></li>
+								</c:when>
+								<c:otherwise>
+									<li class="fl pd5 w240 "><a class="fl  pdl20"
+										href="${pageContext.request.contextPath}/?thuonghieu=${xe.tenhang}&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">${xe.tenhang}</a>
+									</li>
+									<li class="fl wright das_top h1"></li>
+								</c:otherwise>
+							</c:choose>
+						</c:forEach>
+				</ul>
+			</div>
+		</c:if>
 		<div id="catalog-products" class="fl top10 wright">
 			<div id="catalog-products-titles"
 				class="fl bg-titles products-group-title-news color_white fontTahoma wright-26">
@@ -268,7 +308,6 @@
 				<li class="fl wright das_top h1"></li>
 			</ul>
 		</div>
-
 	</div>
 	<!-- Right side END -->
 </div>
