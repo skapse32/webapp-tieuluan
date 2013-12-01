@@ -19,7 +19,7 @@
 <!-- OLD ------------------------------------------------------------------------------------->
 
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/001.css_OLD	">
+	href="${pageContext.request.contextPath}/resources/css/001.css.OLD	">
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/reset.css">
 <link

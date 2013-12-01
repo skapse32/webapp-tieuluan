@@ -183,7 +183,9 @@ public class QuanLySanPhamUserController {
 		model.addAttribute("dssp", dssp);
 		model.addAttribute("imageDirectory", imageDirectory);
 		model.addAttribute("web", web);
-		return "qlsanphamcuatoidangdau";
+		model.addAttribute("link", "POST");
+		model.addAttribute("method", "/daugia/loaddssanphamcuatoidangdau");
+		return "qlsanpham";
 	}
 	@RequestMapping(value = "/loaddssanphamcuatoidangdau", method = RequestMethod.POST)
 	public @ResponseBody
@@ -225,7 +227,10 @@ public class QuanLySanPhamUserController {
 		model.addAttribute("dssp", dssp);
 		model.addAttribute("imageDirectory", imageDirectory);
 		model.addAttribute("web", web);
-		return "qlsanphamcuatoibihuy";
+
+		model.addAttribute("link", "GET");
+		model.addAttribute("method", "/daugia/qlsanphamcuatoibihuy");
+		return "qlsanpham";
 	}
 	@RequestMapping(value = "/qlsanphamcuatoisapdau", method = RequestMethod.GET)
 	public String qlsanphamcuatoisapdau(
@@ -250,7 +255,9 @@ public class QuanLySanPhamUserController {
 		model.addAttribute("dssp", dssp);
 		model.addAttribute("imageDirectory", imageDirectory);
 		model.addAttribute("web", web);
-		return "qlsanphamcuatoisapdau";
+		model.addAttribute("link", "GET");
+		model.addAttribute("method", "/daugia/qlsanphamcuatoisapdau");
+		return "qlsanpham";
 	}
 	@RequestMapping(value = "/qlsanphamcuatoidadauxong", method = RequestMethod.GET)
 	public String qlsanphamcuatoidadauxong(
@@ -275,7 +282,9 @@ public class QuanLySanPhamUserController {
 		model.addAttribute("dssp", dssp);
 		model.addAttribute("imageDirectory", imageDirectory);
 		model.addAttribute("web", web);
-		return "qlsanphamcuatoidadauxong";
+		model.addAttribute("link", "GET");
+		model.addAttribute("method", "/daugia/qlsanphamcuatoidadauxong");
+		return "qlsanpham";
 	}
 	@RequestMapping(value = "/capnhatsanpham", method = RequestMethod.GET)
 	public String capnhatsanphamget(Model model, HttpServletRequest request)

@@ -4,7 +4,7 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 <!-- Content -->
 <style>
-.Required{
+.Required {
 	color: red
 }
 </style>
@@ -317,8 +317,8 @@
 					</tbody>
 				</table>
 			</span>
+		</form>
 	</div>
-	</form>
 </div>
 <div class="DIVclear"></div>
 <!-- end left box -->
