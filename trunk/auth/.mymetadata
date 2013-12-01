@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="auth"
+  id="myeclipse.1368960832633"
+  context-root="/auth"
+  j2ee-spec="6.0"
+  archive="auth.war">
+  <attributes>
+    <attribute name="webrootdir" value="src/main/webapp" />
+  </attributes>
+</project-module>
+
