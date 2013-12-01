@@ -11,8 +11,8 @@
 	function vartimertick() {
 		$
 				.ajax({
-					type : "POST",
-					url : "/daugia/loaddssanphamdangthamgia",
+					type : "${method}",
+					url : "${link}",
 					success : function(data) {
 						// we have the response
 						var dsspList = jQuery.parseJSON(data);
@@ -169,19 +169,14 @@
 											</li>
 
 										</c:forEach>
-										<li class="fl wleft line24 bor-top color3d pdtop5 pdb5"><span
-											class="fr pdr10 bold color3d txc">Tổng chi phí bạn
-												phải thanh toán chưa bao gồm chi phí phát sinh</span> <span
-											class="fr clb pdr10 bold color_red txc">~ 33,600,001
-												VNĐ</span></li>
+										
 										<li class="fl wleft line24 bor-top bold color3d pdt10 pdb5">
 											<span class="fl l35 w70 txc"></span> 
-											 
-											<a class="fr right8" href="javascript:history.back();" title="Xem tiếp"> >>Tiếp tục chọn sản phẩm</a></li>
+											<a class="fr right8" href="/daugia/" title="Xem tiếp"> >>Tiếp tục chọn sản phẩm</a></li>
 									</ul>
 								</c:when>
 								<c:otherwise>
-									Bạn chư tham gia đấu giá 1 sản phẩm nào.
+									Không có sản phẩm trong mục này.
 								</c:otherwise>
 							</c:choose>
 						</div>

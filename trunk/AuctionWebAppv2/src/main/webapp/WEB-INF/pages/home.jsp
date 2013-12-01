@@ -85,24 +85,24 @@
 						<c:choose>
 							<c:when test="${check == 'thuonghieu'}">
 								<a style="color: #00C"
-							href="${pageContext.request.contextPath}/?thuonghieu=${thuonghieu}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
+									href="${pageContext.request.contextPath}/?thuonghieu=${thuonghieu}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
 							</c:when>
 							<c:otherwise>
 								<a style="color: #00C"
-							href="${pageContext.request.contextPath}/?maLoaiSP=${maLoaiSP}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
+									href="${pageContext.request.contextPath}/?maLoaiSP=${maLoaiSP}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
 							</c:otherwise>
 						</c:choose>
-						
 
-							<c:choose>
-								<c:when test="${i==trang}">
-									<input type="button" value="${i}"
-										style="width: 25px; background-color: inactivecaption" />
-								</c:when>
-								<c:otherwise>
-									<input type="button" value="${i}" style="width: 25px" />
-								</c:otherwise>
-							</c:choose>
+
+						<c:choose>
+							<c:when test="${i==trang}">
+								<input type="button" value="${i}"
+									style="width: 25px; background-color: inactivecaption" />
+							</c:when>
+							<c:otherwise>
+								<input type="button" value="${i}" style="width: 25px" />
+							</c:otherwise>
+						</c:choose>
 						</a>
 					</c:forEach>
 
@@ -211,6 +211,21 @@
 
 	<!-- Right side -->
 	<div id="box-right" class="fl l10 top10 bg_white wright cright">
+		<c:if test="${not empty username }">
+		<div id="catalog-products" class="fl wright">
+			<div id="catalog-products-titles"
+				class="fl bg-titles top10 products-group-title-news color_white fontTahoma wright-26">
+				<strong>Sản phẩm đã đấu</strong>
+			</div>
+			<ul id="catalog-products-list"
+				class="fl fontTahoma wright list-none top5">
+				<li class="fl pd5 w240 ">
+					<a class="fl  pdl20" href="${pageContext.request.contextPath}/qlsanphamdangthamgia">Đã đấu ${soluongsptg} sản phẩm</a>
+				</li>
+				<li class="fl wright das_top h1"></li>
+			</ul>
+		</div>
+		</c:if>
 		<div id="catalog-products" class="fl wright">
 			<div id="catalog-products-titles"
 				class="fl bg-titles top10 products-group-title-news color_white fontTahoma wright-26">
@@ -268,23 +283,23 @@
 				<ul id="catalog-products-list"
 					class="fl fontTahoma wright list-none top5">
 
-						<c:forEach var="xe" items="${sessionScope.dshangxe}">
-							<c:choose>
-								<c:when test="${xe.id == idxe}">
-									<li class="fl pd5 w240 set-group-bg"><a
-										class="fl set-group pdl20"
-										href="${pageContext.request.contextPath}/?thuonghieu=${xe.tenhang}&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">${xe.tenhang}</a>
-									</li>
-									<li class="fl wright das_top h1"></li>
-								</c:when>
-								<c:otherwise>
-									<li class="fl pd5 w240 "><a class="fl  pdl20"
-										href="${pageContext.request.contextPath}/?thuonghieu=${xe.tenhang}&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">${xe.tenhang}</a>
-									</li>
-									<li class="fl wright das_top h1"></li>
-								</c:otherwise>
-							</c:choose>
-						</c:forEach>
+					<c:forEach var="xe" items="${sessionScope.dshangxe}">
+						<c:choose>
+							<c:when test="${xe.id == idxe}">
+								<li class="fl pd5 w240 set-group-bg"><a
+									class="fl set-group pdl20"
+									href="${pageContext.request.contextPath}/?thuonghieu=${xe.tenhang}&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">${xe.tenhang}</a>
+								</li>
+								<li class="fl wright das_top h1"></li>
+							</c:when>
+							<c:otherwise>
+								<li class="fl pd5 w240 "><a class="fl  pdl20"
+									href="${pageContext.request.contextPath}/?thuonghieu=${xe.tenhang}&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">${xe.tenhang}</a>
+								</li>
+								<li class="fl wright das_top h1"></li>
+							</c:otherwise>
+						</c:choose>
+					</c:forEach>
 				</ul>
 			</div>
 		</c:if>
