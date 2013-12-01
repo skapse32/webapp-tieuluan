@@ -58,6 +58,26 @@ public class HomeController {
 		Gson gson = new Gson();
 		String json = "";
 		List<Sanpham> dssp = new ArrayList<Sanpham>();
+		
+		//lay danh sach san pham da tham gia
+		Type typelist = new TypeToken<ArrayList<Sanpham>>() {
+		}.getType();
+		try {
+			json = webResource
+					.path("sanpham/findBySanPhamThamGiaDangDau")
+					.cookie(new NewCookie("JSESSIONID", session.getAttribute(
+							"sessionid").toString())).post(String.class);
+
+			
+			List<Sanpham> dssptg = new ArrayList<Sanpham>();
+			dssptg = gson.fromJson(json, typelist);
+			model.addAttribute("dssptg", dssptg);
+			model.addAttribute("soluongsptg", dssptg.size());	
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
+		
+		
 		// lay danh sach san pham
 		if (thuonghieu.length() > 2) {
 			form = new Form();
@@ -81,7 +101,7 @@ public class HomeController {
 							"sessionid").toString())).post(String.class, form);
 			model.addAttribute("check", "masp");
 		}
-		Type typelist = new TypeToken<ArrayList<Sanpham>>() {
+		typelist = new TypeToken<ArrayList<Sanpham>>() {
 		}.getType();
 		dssp = gson.fromJson(json, typelist);
 		// lay so luong san pham

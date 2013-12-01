@@ -38,7 +38,7 @@ public class TaiKhoanController {
 	private static final byte[] SALT = { (byte) 0xde, (byte) 0x33, (byte) 0x10,
 			(byte) 0x12, (byte) 0xde, (byte) 0x33, (byte) 0x10, (byte) 0x12, };
 	
-	@RequestMapping(value = "/taikhoan/thongtin", method = RequestMethod.GET)
+	@RequestMapping(value = "/thongtintaikhoan", method = RequestMethod.GET)
 	public String getUserInfo(HttpSession session, Model model)
 			throws UnknownHostException {
 		String web = Server.web;
@@ -58,7 +58,7 @@ public class TaiKhoanController {
 		return "taikhoan";
 	}
 	
-	@RequestMapping(value = "/taikhoan/doimatkhau")
+	@RequestMapping(value = "/doimatkhau")
 	public String doiMatKhau(
 			@RequestParam(value = "action", required = false) String action,
 			@RequestParam(value = "MKHienTai", required = false) String mkHienTai,
@@ -89,7 +89,7 @@ public class TaiKhoanController {
 						return "doimatkhau";
 					}
 				} catch (Exception e) {
-					model.addAttribute("error", "Thay đổi mật khẩu không thành công. M�?i bạn thử lại.");
+					model.addAttribute("error", "Thay đổi mật khẩu thành công. Mời bạn thử đăng nhập lại");
 					return "doimatkhau";
 				}
 			}

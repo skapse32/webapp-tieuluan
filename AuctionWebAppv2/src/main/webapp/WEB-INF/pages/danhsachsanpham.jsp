@@ -250,7 +250,7 @@
 
 						<c:forEach var="xe" items="${sessionScope.dshangxe}">
 							<c:choose>
-								<c:when test="${${xe.tenhang == thuonghieu}">
+								<c:when test="${xe.tenhang == thuonghieu}">
 									<li class="fl pd5 w240 set-group-bg"><a
 										class="fl set-group pdl20"
 										href="${pageContext.request.contextPath}/?thuonghieu=${xe.tenhang}&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">${xe.tenhang}</a>

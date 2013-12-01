@@ -37,6 +37,8 @@ import com.tieuluan.daugia.model.Sanpham;
 
 @Controller
 public class QuanLySanPhamUserController {
+	
+	
 	@RequestMapping(value = "/qlsanphamdangthamgia", method = RequestMethod.GET)
 	public String qlsanphamdangthamgia(
 
@@ -58,11 +60,13 @@ public class QuanLySanPhamUserController {
 		}.getType();
 		List<Sanpham> dssp = new ArrayList<Sanpham>();
 		dssp = gson.fromJson(json, typelist);
-		model.addAttribute("tieude", "Sáº£n pháº©m Ä‘ang tham gia");
+		model.addAttribute("tieude", "Sản phẩm đang tham gia");
 		model.addAttribute("dssp", dssp);
+		model.addAttribute("method", "POST");
+		model.addAttribute("link", "/daugia/loaddssanphamdangthamgia");
 		model.addAttribute("imageDirectory", imageDirectory);
 		model.addAttribute("web", web);
-		return "qlsanphamdangthamgia";
+		return "qlsanpham";
 	}
 
 	@RequestMapping(value = "/loaddssanphamdangthamgia", method = RequestMethod.POST)
@@ -108,7 +112,9 @@ public class QuanLySanPhamUserController {
 		model.addAttribute("dssp", dssp);
 		model.addAttribute("imageDirectory", imageDirectory);
 		model.addAttribute("web", web);
-		return "qlsanphamdaketthuc";
+		model.addAttribute("method", "GET");
+		model.addAttribute("link", "/daugia/qlsanphamdaketthuc");
+		return "qlsanpham";
 	}
 
 	@RequestMapping(value = "/qlsanphamchienthang", method = RequestMethod.GET)
@@ -142,12 +148,15 @@ public class QuanLySanPhamUserController {
 		}.getType();
 		List<Sanpham> dssp = new ArrayList<Sanpham>();
 		dssp = gson.fromJson(json, typelist);
-		model.addAttribute("tieude", "Sáº£n pháº©m chiáº¿n tháº¯ng");
+		model.addAttribute("tieude", "Sản phẩm chiến thắng");
 		model.addAttribute("dssp", dssp);
 		model.addAttribute("imageDirectory", imageDirectory);
 		model.addAttribute("trangthai", trangthai);
 		model.addAttribute("web", web);
-		return "qlsanphamchienthang";
+
+		model.addAttribute("method", "GET");
+		model.addAttribute("link", "/daugia/qlsanphamchienthang");
+		return "qlsanpham";
 	}
 
 	@RequestMapping(value = "/qlsanphamcuatoidangdau", method = RequestMethod.GET)
@@ -170,7 +179,7 @@ public class QuanLySanPhamUserController {
 		}.getType();
 		List<Sanpham> dssp = new ArrayList<Sanpham>();
 		dssp = gson.fromJson(json, typelist);
-		model.addAttribute("tieude", "Sáº£n pháº©m cá»§a tÃ´i Ä‘ang Ä‘áº¥u");
+		model.addAttribute("tieude", "Sản phẩm của tôi đang đấu");
 		model.addAttribute("dssp", dssp);
 		model.addAttribute("imageDirectory", imageDirectory);
 		model.addAttribute("web", web);
@@ -212,7 +221,7 @@ public class QuanLySanPhamUserController {
 		}.getType();
 		List<Sanpham> dssp = new ArrayList<Sanpham>();
 		dssp = gson.fromJson(json, typelist);
-		model.addAttribute("tieude", "Sáº£n pháº©m cá»§a tÃ´i bá»‹ há»§y");
+		model.addAttribute("tieude", "Sản phẩm của tôi bị hủy");
 		model.addAttribute("dssp", dssp);
 		model.addAttribute("imageDirectory", imageDirectory);
 		model.addAttribute("web", web);
@@ -306,7 +315,7 @@ public class QuanLySanPhamUserController {
 		model.addAttribute("thoigianketthuc", thoigianketthuc);
 		model.addAttribute("sp", sp);
 		model.addAttribute("imageDirectory", imageDirectory);
-		model.addAttribute("tieude", "Cáº­p nháº­t sáº£n pháº©m");
+		model.addAttribute("tieude", "Cập nhật sản phẩm");
 		model.addAttribute("web", web);
 		return "capnhatsanpham";
 	}
@@ -334,7 +343,7 @@ public class QuanLySanPhamUserController {
 		
 		if(!"ok".equals(json)){
 			model.addAttribute("web", web);
-			model.addAttribute("tieude", "Lá»—i");
+			model.addAttribute("tieude", "Lỗi");
 			model.addAttribute("noidung", json);
 			return "thongbaoqlsanphamuser";
 		}else{
@@ -390,7 +399,7 @@ public class QuanLySanPhamUserController {
 			}
 		}
 		else{
-			noidung="KhÃ´ng chá»?n hÃ¬nh nÃ o";
+			noidung="Không chứa hình ảnh";
 		}
 		masp = request.getParameter("masp");
 		tensp = request.getParameter("txttensp");
@@ -474,7 +483,7 @@ public class QuanLySanPhamUserController {
 		model.addAttribute("thoigianketthuc", thoigianketthuc);
 		model.addAttribute("sp", sp);
 		model.addAttribute("imageDirectory", imageDirectory);
-		model.addAttribute("tieude", "Cáº­p nháº­t sáº£n pháº©m bá»‹ há»§y");
+		model.addAttribute("tieude", "Cập nhận sản phẩm bị hủy");
 		model.addAttribute("web", web);
 		return "capnhatsanphambihuy";
 	}
@@ -526,19 +535,19 @@ public class QuanLySanPhamUserController {
 				if (resultsaveimage.equals("OK")) {
 					noidung="Lưu hình ảnh thành công";
 				} else {
-					noidung="LÆ°u hÃ¬nh tháº¥t báº¡i("+resultsaveimage+")";
+					noidung="lưu hình ảnh thất bại("+resultsaveimage+")";
 					filename="null";
 				}
 			} catch (Exception e) {
 				e.printStackTrace();
 				error = e.getMessage();
-				model.addAttribute("tieude", "Lá»—i");
+				model.addAttribute("tieude", "Lỗi");
 				model.addAttribute("noidung", error);
 				return "thongbaoqlsanphamuser";
 			}
 		}
 		else{
-			noidung="KhÃ´ng chá»?n hÃ¬nh nÃ o";
+			noidung="Không chứa hình ảnh";
 		}
 		tensp = request.getParameter("txttensp");
 		matinhtrangsp = request.getParameter("selectttsp");
