@@ -484,11 +484,7 @@
 																			if (data == "true") {
 																				var r = confirm("Bạn đã thắng phiên này! Bấm OK để tiến hành thanh toán sản phẩm.");
 																				if (r == true) {
-																					var masp = $(
-																							'#masp')
-																							.val();
-																					window.location.href = "thanhtoan?masp="
-																							+ masp;
+																					window.location.href = "thanhtoan?masp=${sp.masp}";
 																				} else {
 
 																				}
