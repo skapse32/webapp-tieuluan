@@ -31,6 +31,11 @@
 			</tr>
 			<tr>
 				<td valign="top"><br></td>
+				<td colspan="2" valign="top"><a href="dangky">Bạn chưa có tài khoản?</a>
+				</td>
+			</tr>
+			<tr>
+				<td valign="top"><br></td>
 				<td colspan="2" valign="top"><label style="color: Red">${error}</label>
 				</td>
 			</tr>
