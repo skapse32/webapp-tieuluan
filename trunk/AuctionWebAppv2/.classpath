@@ -61,5 +61,24 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/tiles-jsp-2.2.2.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/tiles-servlet-2.2.2.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/tiles-template-2.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/lib/annotations-api.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/lib/catalina.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/lib/catalina-ant.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/lib/catalina-ha.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/lib/catalina-tribes.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/lib/ecj-4.2.2.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/lib/el-api.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/lib/jasper.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/lib/jasper-el.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/lib/tomcat-api.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/lib/tomcat-coyote.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/lib/tomcat-dbcp.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/lib/tomcat-i18n-es.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/lib/tomcat-i18n-fr.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/lib/tomcat-i18n-ja.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/lib/tomcat-jdbc.jar"/>
+	<classpathentry kind="lib" path="C:/Apache/lib/tomcat-util.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
