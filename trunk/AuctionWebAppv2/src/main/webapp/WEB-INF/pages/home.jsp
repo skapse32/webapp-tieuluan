@@ -2,45 +2,12 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
 <script type="text/javascript">
+	//
 	function pad(d) {
 		return (d < 10) ? '0' + d.toString() : d.toString();
 	}
-	var output;
-	var wssocket;
-	function init(){
-		RunWebSocket();
-	}
-	function RunWebSocket(){
-		wssocket = new WebSocket("ws://localhost:8080/daugia/websocket/daugia");
-		wssocket.onopen = function(evt){ onOpen(evt);};
-		wssocket.onclose = function(evt){ onClose(evt);};
-		wssocket.onmessage = function(evt) { onMessage(evt);};
-		wssocket.onerror = function(evt) { onerror(evt);};
-	}
-	
-	function onOpen(evt){
-		//connected
-		alert("Connected");
-	}
-	
-	function onClose(evt){
-		//websocket is closed
-		alert("Connection is closed.....");
-	}
-	
-	function onMessage(evt){
-		var received_msg = evt.data;
-		alert("Message is received...." + received_msg);
-	}
-	
-	function onError(evt){
-		alert(evt.data);
-	}
-	window.addEventListener("load", init, false);
-</script>
-<script type="text/javascript">
-	//
 	var timer;
 	$(function() {
 		timer = setInterval(vartimertick, 1000);
@@ -66,7 +33,7 @@
 
 									document.getElementById("giahientai"
 											+ element.masp).innerHTML = x
-											+ "&nbsp;đ";
+											+ "&nbsp;d";
 								});
 
 			},
@@ -76,7 +43,6 @@
 		});
 	};
 </script>
-
 <!-- Content -->
 <div id="content" class="wmain">
 	<!-- Left side -->

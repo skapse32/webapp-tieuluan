@@ -194,13 +194,16 @@ public class ChiTietSanPhamController {
 	public @ResponseBody
 	String kiemtranguoidatgia(HttpServletRequest request) {
 		HttpSession session=request.getSession();
+		System.out.println("kiem tra nguoi dat");
 		String nguoidatgia=request.getParameter("nguoidatgia");
 		String result="";
 		if (session.getAttribute("username") != null) {
 			result+=session.getAttribute("username").toString();
 		}
-		if(result.equals(nguoidatgia))
+		if(result.equals(nguoidatgia)){
+			System.out.println("trung");
 			return "true";
+		}
 		return "false";
 	}
 }

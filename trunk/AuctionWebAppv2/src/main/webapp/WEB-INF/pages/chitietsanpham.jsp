@@ -5,14 +5,14 @@
 <jsp:useBean id="myDate" class="java.util.Date" />
 
 <script type="text/javascript">
-	//run websocket
 	var output;
 	var wssocket;
 	function init() {
 		RunWebSocket();
 	}
 	function RunWebSocket() {
-		wssocket = new WebSocket("ws://localhost:8080/daugia/websocket/daugia");
+		wssocket = new WebSocket(
+				"ws://192.168.1.2:8080/daugia/websocket/daugia");
 		wssocket.onopen = function(evt) {
 			onOpen(evt);
 		};
@@ -29,7 +29,14 @@
 
 	function onOpen(evt) {
 		//connected
-		alert("Connected");
+		$.ajax({
+			type : "POST",
+			url : "/daugia/loaddsdatgia",
+			data : "masp=" + masp,
+			success : function(data) {
+				readdsdg(data);
+			}
+		});
 	}
 
 	function onClose(evt) {
@@ -39,17 +46,55 @@
 
 	function onMessage(evt) {
 		var received_msg = evt.data;
-		alert("Message is received...." + received_msg);
+		readdsdg(received_msg);
+	}
+
+	function readdsdg(data) {
+		// we have the response
+		//$('#error').html(data);
+		var dem = 0;
+		var result = '';
+		var dsdatgiaList = jQuery.parseJSON(data);
+		$
+				.each(
+						dsdatgiaList,
+						function(index, element) {
+							dem++;
+
+							if (dem == 1) {
+								result = element.giadat;
+								$('input[name=testting]').val(result);
+								document.getElementById("nguoidatgia").innerHTML = element.nguoidat;
+								var x = numeral(element.giadat).format('0,0');
+								x = x.replace(/,/g, ".");
+								$('#giahientai').html(x + "&nbsp;đ");
+							}
+							if (dem <= 10) {
+								document.getElementById("nguoidat" + dem).innerHTML = element.nguoidat;
+								document.getElementById("giadat" + dem).innerHTML = element.giadat;
+							}
+						});
+		document.getElementById("luotdat").innerHTML = dem;
 	}
 
 	function onError(evt) {
 		alert(evt.data);
 	}
-	window.addEventListener("load", init, false);
-	// end websocket
-</script>
 
-<script type="text/javascript">
+	function sendToServer() {
+		var masp = "${sp.masp}";
+		var giahientai = $('#giahientai').val();
+		var buocgia = $('#buocgia').val();
+		var numberbuocgia = $('#numberbuocgia').val();
+		var session = "${sessionid}";
+		var usename = "${username}";
+		var message = masp + "," + giahientai + "," + buocgia + ","
+				+ numberbuocgia + "," + usename + "," + session;
+		wssocket.send(message);
+	}
+
+	window.addEventListener("load", init, false);
+
 	function pad(d) {
 		return (d < 10) ? '0' + d.toString() : d.toString();
 	}
@@ -88,112 +133,9 @@
 	};
 
 	var masp = "${sp.masp}";
-	var timerloaddsdatgia;
-	$(function() {
-		timerloaddsdatgia = setInterval(vartimerdsdgtick, 1000);
-	});
-	var varCounter = 0;
-	function vartimerdsdgtick() {
-		$
-				.ajax({
-
-					type : "POST",
-					url : "/daugia/loaddsdatgia",
-					data : "masp=" + masp,
-					success : function(data) {
-						// we have the response
-						//$('#error').html(data);
-						var dem = 0;
-						var result = '';
-						var dsdatgiaList = jQuery.parseJSON(data);
-						$
-								.each(
-										dsdatgiaList,
-										function(index, element) {
-											dem++;
-
-											if (dem == 1) {
-												result = element.giadat;
-												$('input[name=testting]').val(
-														result);
-												document
-														.getElementById("nguoidatgia").innerHTML = element.nguoidat;
-												var x = numeral(element.giadat)
-														.format('0,0');
-												x = x.replace(/,/g, ".");
-												$('#cgiahientai').html(
-														x + "&nbsp;đ");
-											}
-											if (dem <= 10) {
-												document
-														.getElementById("nguoidat"
-																+ dem).innerHTML = element.nguoidat;
-												document
-														.getElementById("giadat"
-																+ dem).innerHTML = element.giadat;
-											}
-										});
-						document.getElementById("luotdat").innerHTML = dem;
-					},
-					error : function(e) {
-						alert('1Error: ' + e + masp);
-					}
-				});
-	};
 
 	function doAjaxPost() {
-		// get the form values
-		var masp = "${sp.masp}";
-		var giahientai = $('#giahientai').val();
-		var buocgia = $('#buocgia').val();
-		var numberbuocgia = $('#numberbuocgia').val();
-		$
-				.ajax({
-					type : "POST",
-					url : "/daugia/datgia",
-					data : "masp=" + masp + "&giahientai=" + giahientai
-							+ "&buocgia=" + buocgia + "&numberbuocgia="
-							+ numberbuocgia,
-					success : function(data) {
-						// we have the response
-						//$('#error').html(data);
-						var dem = 0;
-						var result = '';
-						var dsdatgiaList = jQuery.parseJSON(data);
-						$
-								.each(
-										dsdatgiaList,
-										function(index, element) {
-											dem++;
-
-											if (dem == 1) {
-												result = element.giadat;
-												$('input[name=testting]').val(
-														result);
-												document
-														.getElementById("nguoidatgia").innerHTML = element.nguoidat;
-												var x = numeral(element.giadat)
-														.format('0,0');
-												x = x.replace(/,/g, ".");
-												$('#cgiahientai').html(
-														x + "&nbsp;đ");
-
-											}
-											if (dem <= 10) {
-												document
-														.getElementById("nguoidat"
-																+ dem).innerHTML = element.nguoidat;
-												document
-														.getElementById("giadat"
-																+ dem).innerHTML = element.giadat;
-											}
-										});
-						document.getElementById("luotdat").innerHTML = dem;
-					},
-					error : function(e) {
-						alert('Error: ' + e);
-					}
-				});
+		sendToServer();
 	}
 </script>
 
@@ -491,55 +433,38 @@
 																	.html(
 																			timeString);
 														} else {
-															window
-																	.clearInterval(timer);
+															window.clearInterval(timer);
 															var timeString = "kết thúc";
-															$(
-																	'#Countdown${sp.masp}')
-																	.html(
-																			timeString);
-															document
-																	.getElementById('Countdown${sp.masp}').style.color = 'red'; //'none';
-															document
-																	.getElementById('numberbuocgia').style.visibility = 'hidden';
-															var divdatgia = $(
-																	'#divdatgia')
-																	.val();
+															$('#Countdown${sp.masp}').html(timeString);
+															document.getElementById('Countdown${sp.masp}').style.color = 'red'; //'none';
+															document.getElementById('numberbuocgia').style.visibility = 'hidden';
+															var divdatgia = $('#divdatgia').val();
 															if (divdatgia != null) {
-																document
-																		.getElementById('buttondatgia').style.visibility = 'hidden';
-																document
-																		.getElementById('hienthichuadaugia').style.visibility = 'hidden';
+																document.getElementById('buttondatgia').style.visibility = 'hidden';
+																document.getElementById('hienthichuadaugia').style.visibility = 'hidden';
 															}
 
-															var nguoidatgia = document
-																	.getElementById('nguoidatgia').innerHTML;
-															$
-																	.ajax({
-																		type : "POST",
-																		url : "/daugia/kiemtranguoidatgia",
-																		data : "nguoidatgia="
-																				+ nguoidatgia,
-																		success : function(
-																				data) {
-																			// we have the response
-																			//$('#error').html(data);
-																			if (data == "true") {
-																				var r = confirm("Bạn đã thắng phiên này! Bấm OK để tiến hành thanh toán sản phẩm.");
-																				if (r == true) {
-																					window.location.href = "thanhtoan?masp=${sp.masp}";
-																				} else {
-
-																				}
-																			}
-
-																		},
-																		error : function(
-																				e) {
-																			alert('Error: '
-																					+ e);
+															var nguoidatgia = document.getElementById('nguoidatgia').innerHTML;
+															$.ajax({
+																type : "POST",
+																url : "/daugia/kiemtranguoidatgia",
+																data : "nguoidatgia="
+																		+ nguoidatgia,
+																success : function(data) {
+																	// we have the response
+																	if (data == "true") {
+																		var r = confirm("Bạn đã thắng phiên này! Bấm OK để tiến hành thanh toán sản phẩm.");
+																		if (r == true) {
+																			window.location.href = "thanhtoan?masp=${sp.masp}";
+																		} else {
+																			alert("oh shit");
 																		}
-																	});
+																	}
+																},
+																error : function(e) {
+																	alert('Error: '+ e);
+																}
+															});
 
 														}
 
@@ -784,8 +709,7 @@
 								var longday = Number(stringday);
 								var BigDay = new Date(longday);
 								var msPerDay = 24 * 60 * 60 * 1000;
-								window
-										.setInterval(
+								window.setInterval(
 												function() {
 													var today = new Date();
 													var timeLeft = (BigDay
@@ -812,6 +736,7 @@
 																+ minsLeft
 																+ ":"
 																+ secsLeft;
+														alert(timeString);
 														$(
 																'#Countdown${sp.masp}')
 																.html(
