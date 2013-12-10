@@ -5,6 +5,51 @@
 <jsp:useBean id="myDate" class="java.util.Date" />
 
 <script type="text/javascript">
+	//run websocket
+	var output;
+	var wssocket;
+	function init() {
+		RunWebSocket();
+	}
+	function RunWebSocket() {
+		wssocket = new WebSocket("ws://localhost:8080/daugia/websocket/daugia");
+		wssocket.onopen = function(evt) {
+			onOpen(evt);
+		};
+		wssocket.onclose = function(evt) {
+			onClose(evt);
+		};
+		wssocket.onmessage = function(evt) {
+			onMessage(evt);
+		};
+		wssocket.onerror = function(evt) {
+			onerror(evt);
+		};
+	}
+
+	function onOpen(evt) {
+		//connected
+		alert("Connected");
+	}
+
+	function onClose(evt) {
+		//websocket is closed
+		alert("Connection is closed.....");
+	}
+
+	function onMessage(evt) {
+		var received_msg = evt.data;
+		alert("Message is received...." + received_msg);
+	}
+
+	function onError(evt) {
+		alert(evt.data);
+	}
+	window.addEventListener("load", init, false);
+	// end websocket
+</script>
+
+<script type="text/javascript">
 	function pad(d) {
 		return (d < 10) ? '0' + d.toString() : d.toString();
 	}
@@ -152,8 +197,6 @@
 	}
 </script>
 
-
-
 <div id="content" class="wmain">
 	<div id="box-left" class="fl bg_white top15 wleft">
 		<div id="products-group" class="fl bg-top-products wleft">
@@ -287,12 +330,13 @@
 									style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;"><span
 									style="font-size: 10pt; font-family: Arial;"
 									class="Apple-style-span"><span lang="vi"
-										style="font-size: 10pt;" class="Apple-style-span">Giá khởi điểm:</span></span></td>
+										style="font-size: 10pt;" class="Apple-style-span">Giá
+											khởi điểm:</span></span></td>
 								<td class="value"
 									style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;"><span
 									style="font-size: 10pt; font-family: Arial;"
-									class="Apple-style-span">${cgiakhoidiem}&nbsp;đ<input type="hidden"
-									id="giakhoidiem" value="${giakhoidiem}"></span>
+									class="Apple-style-span">${cgiakhoidiem}&nbsp;đ<input
+										type="hidden" id="giakhoidiem" value="${giakhoidiem}"></span>
 								</td>
 							</tr>
 
@@ -301,41 +345,40 @@
 									style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;"><span
 									style="font-size: 10pt; font-family: Arial;"
 									class="Apple-style-span"><span lang="vi"
-										style="font-size: 10pt;" class="Apple-style-span">Bước giá:</span></span></td>
+										style="font-size: 10pt;" class="Apple-style-span">Bước
+											giá:</span></span></td>
 								<td class="value"
 									style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-									<span
-									style="font-size: 10pt; font-family: Arial;"
+									<span style="font-size: 10pt; font-family: Arial;"
 									class="Apple-style-span">${cbuocgia}&nbsp;đ<span
-									style="">&nbsp;X</span> <input type="number" id="numberbuocgia"
-									value="1" size="5"
-									style="width: 50px; height: 23px; font-weight: bold;" /> <input
-									type="hidden" id="buocgia" value="${buocgia}">
-								<c:if
-										test="${sessionScope.role != 'Admin'}">
-										<c:choose>
-											<c:when test="${sp.tinhtrangdaugia == 0}">
-												<c:choose>
-													<c:when test="${sessionScope.username != sp.nguoidang}">
-														<input type="hidden" id="divdatgia" value="das">
-														<input type="button" class="SubmitBid_Button"
-															id="buttondatgia" name="datgiatudong"
-															onclick="doAjaxPost()" value="Đặt giá">
-														<span id="hienthichuadaugia" style="color: red;">Chưa
-															bắt đầu đấu giá</span>
-													</c:when>
-													<c:otherwise>
-														<div style="color: red;">Bạn không thể đấu giá sản
-															phẩm của chính bạn</div>
-													</c:otherwise>
-												</c:choose>
-											</c:when>
-											<c:otherwise>
-											</c:otherwise>
-										</c:choose>
-									</c:if>
-									</span>
-									</td>
+										style="">&nbsp;X</span> <input type="number"
+										id="numberbuocgia" value="1" size="5"
+										style="width: 50px; height: 23px; font-weight: bold;" /> <input
+										type="hidden" id="buocgia" value="${buocgia}"> <c:if
+											test="${sessionScope.role != 'Admin'}">
+											<c:choose>
+												<c:when test="${sp.tinhtrangdaugia == 0}">
+													<c:choose>
+														<c:when test="${sessionScope.username != sp.nguoidang}">
+															<input type="hidden" id="divdatgia" value="das">
+															<input type="button" class="SubmitBid_Button"
+																id="buttondatgia" name="datgiatudong"
+																onclick="doAjaxPost()" value="Đặt giá">
+															<span id="hienthichuadaugia" style="color: red;">Chưa
+																bắt đầu đấu giá</span>
+														</c:when>
+														<c:otherwise>
+															<div style="color: red;">Bạn không thể đấu giá sản
+																phẩm của chính bạn</div>
+														</c:otherwise>
+													</c:choose>
+												</c:when>
+												<c:otherwise>
+												</c:otherwise>
+											</c:choose>
+										</c:if>
+								</span>
+								</td>
 							</tr>
 							<tr class="title"
 								style="background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(229, 229, 229); color: rgb(204, 0, 0); font-weight: bold; text-align: center;">
