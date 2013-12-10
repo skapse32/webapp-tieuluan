@@ -59,19 +59,7 @@
 				href="http://10110clc.com">http://10110clc.com</a><br>
 
 		</div>
-		<div class="fr top20">
-			<!-- Histats.com  START (html only)-->
-			<a href="http://www.histats.com" alt="page hit counter"
-				target="_blank"> <embed src="http://s10.histats.com/10.swf"
-					flashvars="jver=1&acsid=1648566&domi=4" quality="high" width="200"
-					height="40" name="10.swf" align="middle"
-					type="application/x-shockwave-flash"
-					pluginspage="http://www.macromedia.com/go/getflashplayer"
-					wmode="transparent" /></a> <img
-				src="http://sstatic1.histats.com/0.gif?1648566&101"
-				alt="hit tracker" border="0">
-			<!-- Histats.com  END  -->
-		</div>
+
 	</div>
 </div>
 <!-- Footer end -->
