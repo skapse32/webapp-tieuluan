@@ -228,7 +228,7 @@
 
 						<p class="top10" align="center">
 							<a
-								href="${pageContext.request.contextPath}/chitietsanpham?masp=${sp.masp}"
+								href="${pageContext.request.contextPath}/chitietsanpham.html?masp=${sp.masp}"
 								class="fl l35 bg-hit detail_products">Đặt giá</a>
 						</p>
 					</div>

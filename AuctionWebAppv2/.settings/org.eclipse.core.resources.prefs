@@ -1,6 +1,8 @@
 eclipse.preferences.version=1
 encoding//src/main/java/com/tieuluan/daugia/controller/ChiTietSanPhamController.java=UTF-8
+encoding//src/main/java/com/tieuluan/daugia/controller/DangKyController.java=UTF-8
 encoding//src/main/java/com/tieuluan/daugia/controller/DangNhapController.java=UTF-8
+encoding//src/main/java/com/tieuluan/daugia/controller/DangNhapController_Backup.java=UTF-8
 encoding//src/main/java/com/tieuluan/daugia/controller/HomeController.java=UTF-8
 encoding//src/main/java/com/tieuluan/daugia/controller/QuanLySanPhamADController.java=UTF-8
 encoding//src/main/java/com/tieuluan/daugia/controller/QuanLySanPhamUserController.java=UTF-8

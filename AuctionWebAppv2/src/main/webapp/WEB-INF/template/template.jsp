@@ -7,7 +7,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title><tiles:insertAttribute name="title" ignore="true" /></title>
+<title>Đấu giá online - <tiles:insertAttribute name="title" ignore="true" /></title>
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/v2/css/style.css"

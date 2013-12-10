@@ -40,9 +40,9 @@ public class DangKyController {
 					model.addAttribute("tenDN", username);
 					if (!username.matches("[a-zA-Z0-9 ]*")) {
 						model.addAttribute("error",
-								"Tên đăng nhập không đúng");
+								"TÃªn Ä‘Äƒng nháº­p khÃ´ng Ä‘Ãºng");
 						model.addAttribute("web", web);
-						model.addAttribute("tieude", "Trang chủ");
+						model.addAttribute("tieude", "Trang chá»§");
 						return "dangky";
 					}
 					String resutl = "";
@@ -67,25 +67,25 @@ public class DangKyController {
 					if ("success".equals(resutl)) {
 						model.addAttribute("web", web);
 						model.addAttribute("tieude", "Trang chủ");
-						return "home";
+						return "dangnhap";
 					} else {
 						model.addAttribute("error",
-								"Tài khoản đã có ngư�?i sử dụng");
+								"Tài khoản đã có người sử dụng");
 						model.addAttribute("web", web);
-						model.addAttribute("tieude", "Trang chủ");
+						model.addAttribute("tieude", "Đăng ký");
 						return "dangky";
 					}
 				} catch (Exception e) {
 					model.addAttribute("error",
-							"�?ăng ký không thành công. M�?i bạn kiểm tra lại.");
+							"Đăng ký không thành công, mời bạn đăng ký lại");
 					model.addAttribute("web", web);
-					model.addAttribute("tieude", "Trang chủ");
+					model.addAttribute("tieude", "Đăng ký");
 					return "dangky";
 				}
 			}
 		}
 		model.addAttribute("web", web);
-		model.addAttribute("tieude", "�?ăng ký");
+		model.addAttribute("tieude", "Đăng ký");
 		return "dangky";
 	}
 }
