@@ -10,9 +10,11 @@ import javax.ws.rs.core.NewCookie;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.google.gson.Gson;
@@ -54,7 +56,7 @@ public class ThanhToanController {
 			if (response.getStatus() == 401) {
 
 				model.addAttribute("noidung",
-						"Bạn cần đăng nhập để thanh toán sản phẩm này");
+						"Bận cần phải đăng nhập mới thanh toán được sản phẩm này!");
 
 			} else {
 				model.addAttribute("noidung", response.getStatus());
@@ -68,7 +70,7 @@ public class ThanhToanController {
 		if(sp.getTinhtrangdaugia()==2){
 			model.addAttribute("tieude", "Lỗi");
 			model.addAttribute("noidung",
-					"Sản phẩm này đã bị hủy");
+					"Sản phẩm này đã bán hết");
 			model.addAttribute("web", web);
 			return "thongbao";
 		}else if(sp.getTinhtrangdaugia()==3){
@@ -88,7 +90,7 @@ public class ThanhToanController {
 			if(!username.equals(sp.getNguoidat())){
 				model.addAttribute("tieude", "Lỗi");
 				model.addAttribute("noidung",
-						"Bạn không có quy�?n thanh toán sản phẩm này");
+						"Bạn không có quyền thanh toán sản phẩm này");
 				model.addAttribute("web", web);
 				return "thongbao";
 			}
@@ -122,7 +124,7 @@ public class ThanhToanController {
 			model.addAttribute("imageDirectory", imageDirectory);
 			session.setAttribute("nguoimua", nguoimua);
 			session.setAttribute("nguoiban", nguoiban);
-			model.addAttribute("tieude", "Thanh toán");
+			model.addAttribute("tieude", "Thanh Toán");
 			model.addAttribute("web", web);
 			return "thanhtoan";
 		}
@@ -162,6 +164,24 @@ public class ThanhToanController {
 					json);
 			model.addAttribute("web", web);
 			return "thongbao";
+		}
+	}
+	@RequestMapping(value = "/updateTinhTrangDG" , method = RequestMethod.POST)
+	public @ResponseBody String updateTinhTrangDaugia(HttpServletRequest request , Model model){
+		String masp=request.getParameter("maSP");
+		HttpSession session = request.getSession();
+		String json = "";
+		ClientConfig config = new DefaultClientConfig();
+		Client client = Client.create(config);
+		WebResource webResource = client.resource(Server.addressAuctionWS);
+		System.out.println(masp);
+		Form form = new Form();
+		form.add("masp", masp);
+		json = webResource.path("tinhtrangdg/ketthuc").cookie(new NewCookie("JSESSIONID", session.getAttribute("sessionid").toString())).post(String.class,form);
+		if(json.equals("success")){
+			return "success";
+		}else{
+			return "fail";
 		}
 	}
 

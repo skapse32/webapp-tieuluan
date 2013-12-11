@@ -33,10 +33,6 @@
 					sản phẩm</a>
 			</h3>
 			<h3 style="margin-left: 40px">
-				<a href="${pageContext.request.contextPath}/quanlyspuser">Quản
-					lý sản phẩm</a>
-			</h3>
-			<h3 style="margin-left: 40px">
 				<a href="${pageContext.request.contextPath}/dangxuat">Đăng xuất</a>
 			</h3>
 		</div>

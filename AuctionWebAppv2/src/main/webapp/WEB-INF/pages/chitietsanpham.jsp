@@ -136,6 +136,42 @@
 	function doAjaxPost() {
 		sendToServer();
 	}
+
+	function updateTinhTrangSP(masp){
+		$.ajax({
+			type : "POST",
+			url : "/daugia/updateTinhTrangDG",
+			data : "maSP="
+					+ masp,
+			success : function(data) {
+			},
+			error : function(e) {
+				alert('Error: '+ e);
+			}
+		});
+	}
+	
+	function kiemtraNguoiDat(nguoidatgia){
+		$.ajax({
+			type : "POST",
+			url : "/daugia/kiemtranguoidatgia",
+			data : "nguoidatgia="
+					+ nguoidatgia,
+			success : function(data) {
+				// we have the response
+				if (data == "true") {
+					var r = confirm("Bạn đã thắng phiên này! Bấm OK để tiến hành thanh toán sản phẩm.");
+					if (r == true) {
+						window.location.href = "thanhtoan?masp=${sp.masp}";
+					} else {
+					}
+				}
+			},
+			error : function(e) {
+				alert('Error: '+ e);
+			}
+		});
+	}
 </script>
 
 <div id="content" class="wmain">
@@ -405,8 +441,7 @@
 														var timeLeft = (BigDay
 																.getTime() - today
 																.getTime());
-														if (Math
-																.floor(timeLeft) > 0) {
+														if (Math.floor(timeLeft) > 0) {
 															var e_daysLeft = timeLeft
 																	/ msPerDay;
 															var daysLeft = pad(Math
@@ -442,28 +477,12 @@
 																document.getElementById('buttondatgia').style.visibility = 'hidden';
 																document.getElementById('hienthichuadaugia').style.visibility = 'hidden';
 															}
-
+															//send request de thay doi tinh trang san pham.
+															var masp = "${sp.masp}";
+															updateTinhTrangSP(masp);
+															//kiem tra nguoi dat gia
 															var nguoidatgia = document.getElementById('nguoidatgia').innerHTML;
-															$.ajax({
-																type : "POST",
-																url : "/daugia/kiemtranguoidatgia",
-																data : "nguoidatgia="
-																		+ nguoidatgia,
-																success : function(data) {
-																	// we have the response
-																	if (data == "true") {
-																		var r = confirm("Bạn đã thắng phiên này! Bấm OK để tiến hành thanh toán sản phẩm.");
-																		if (r == true) {
-																			window.location.href = "thanhtoan?masp=${sp.masp}";
-																		} else {
-																			alert("oh shit");
-																		}
-																	}
-																},
-																error : function(e) {
-																	alert('Error: '+ e);
-																}
-															});
+															kiemtraNguoiDat(nguoidatgia);
 
 														}
 
