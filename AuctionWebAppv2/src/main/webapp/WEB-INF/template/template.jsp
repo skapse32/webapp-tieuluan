@@ -12,9 +12,11 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/v2/css/style.css"
 	type="text/css" />
-<script
-	src="${pageContext.request.contextPath}/resources/v2/js/jquery.js"
-	type="text/javascript"></script>
+
+<link rel="stylesheet" type="text/css" href="resources/v2/js/datetimepicker/jquery.datetimepicker.css"/>
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<script src="resources/v2/js/datetimepicker/jquery.js"></script>
+
 
 <!-- OLD ------------------------------------------------------------------------------------->
 
@@ -44,7 +46,7 @@
 	src="${pageContext.request.contextPath}/resources/js/SpryValidationConfirm.js"
 	type="text/javascript"></script>
 <script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/jquery-1.4.1.min.js"></script>
+	src="${pageContext.request.contextPath}/resources/js/jquery-1.4.1.min.js__OLD"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/jquery.countdown.js"></script>
 <script type="text/javascript"

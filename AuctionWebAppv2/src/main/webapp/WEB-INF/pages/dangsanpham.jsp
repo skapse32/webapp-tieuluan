@@ -8,6 +8,7 @@
 	color: red
 }
 </style>
+
 <div id="content" class="wmain">
 	<!-- start left-box -->
 
@@ -245,8 +246,8 @@
 							<td class="value"
 								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
 								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> <input name="txttgbt"
-									maxlength="50" size="30" type="text" value="">VND<b
+								class="Apple-style-span"> <input name="txttgbt" id="txttgbt"
+									maxlength="50" size="30" type="text" value=""><b
 									class="Required">*</b>
 							</span>
 							</td>
@@ -261,8 +262,8 @@
 							<td class="value"
 								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
 								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> <input name="txttgkt"
-									maxlength="50" size="30" type="text" value="">VND<b
+								class="Apple-style-span"> <input name="txttgkt" id="txttgkt"
+									maxlength="50" size="30" type="text" value=""><b
 									class="Required">*</b>
 							</span>
 							</td>
@@ -375,3 +376,13 @@
 		</ul>
 	</div>
 </div>
+<script src="resources/v2/js/datetimepicker/jquery.datetimepicker.js"></script>
+<script>
+//2013-11-29 00:00:00
+$('#txttgbt').datetimepicker({
+	format:'Y-m-d H:i:00'
+});
+$('#txttgkt').datetimepicker({
+	format:'Y-m-d H:i:00'
+});
+</script>

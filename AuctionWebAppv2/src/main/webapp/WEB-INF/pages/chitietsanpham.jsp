@@ -55,24 +55,27 @@
 		var dem = 0;
 		var result = '';
 		var dsdatgiaList = jQuery.parseJSON(data);
-		$.each(dsdatgiaList,function(index, element) {
-			dem++;
-			if(element.masp != "${sp.masp}"){
-				return;
-			}				
-			if (dem == 1) {
-				result = element.giadat;
-				$('input[name=testting]').val(result);
-				document.getElementById("nguoidatgia").innerHTML = element.nguoidat;
-				var x = numeral(element.giadat).format('0,0');
-				x = x.replace(/,/g, ".");
-				$('#giahientai').html(x + "&nbsp;đ");
-			}
-			if (dem <= 10) {
-				document.getElementById("nguoidat" + dem).innerHTML = element.nguoidat;
-				document.getElementById("giadat" + dem).innerHTML = element.giadat;
-			}
-		});
+		$
+				.each(
+						dsdatgiaList,
+						function(index, element) {
+							dem++;
+							if (element.masp != "${sp.masp}") {
+								return;
+							}
+							if (dem == 1) {
+								result = element.giadat;
+								$('input[name=testting]').val(result);
+								document.getElementById("nguoidatgia").innerHTML = element.nguoidat;
+								var x = numeral(element.giadat).format('0,0');
+								x = x.replace(/,/g, ".");
+								$('#giahientai').html(x + "&nbsp;đ");
+							}
+							if (dem <= 10) {
+								document.getElementById("nguoidat" + dem).innerHTML = element.nguoidat;
+								document.getElementById("giadat" + dem).innerHTML = element.giadat;
+							}
+						});
 		document.getElementById("luotdat").innerHTML = dem;
 	}
 
@@ -85,6 +88,7 @@
 		var giahientai = $('#giahientai').val();
 		var buocgia = $('#buocgia').val();
 		var numberbuocgia = $('#numberbuocgia').val();
+
 		var session = "${sessionid}";
 		var usename = "${username}";
 		var message = masp + "," + giahientai + "," + buocgia + ","
@@ -134,43 +138,47 @@
 	var masp = "${sp.masp}";
 
 	function doAjaxPost() {
-		sendToServer();
+		if ($('#numberbuocgia').val() > 10) {
+			alert("Bước giá không hợp lệ (<10)");
+		} else {
+			document.getElementById('buttondatgia').style.visibility = 'hidden';
+			sendToServer();
+		}
 	}
 
-	function updateTinhTrangSP(masp){
+	function updateTinhTrangSP(masp) {
 		$.ajax({
 			type : "POST",
 			url : "/daugia/updateTinhTrangDG",
-			data : "maSP="
-					+ masp,
+			data : "maSP=" + masp,
 			success : function(data) {
 			},
 			error : function(e) {
-				alert('Error: '+ e);
+				alert('Error: ' + e);
 			}
 		});
 	}
-	
-	function kiemtraNguoiDat(nguoidatgia){
-		$.ajax({
-			type : "POST",
-			url : "/daugia/kiemtranguoidatgia",
-			data : "nguoidatgia="
-					+ nguoidatgia,
-			success : function(data) {
-				// we have the response
-				if (data == "true") {
-					var r = confirm("Bạn đã thắng phiên này! Bấm OK để tiến hành thanh toán sản phẩm.");
-					if (r == true) {
-						window.location.href = "thanhtoan?masp=${sp.masp}";
-					} else {
+
+	function kiemtraNguoiDat(nguoidatgia) {
+		$
+				.ajax({
+					type : "POST",
+					url : "/daugia/kiemtranguoidatgia",
+					data : "nguoidatgia=" + nguoidatgia,
+					success : function(data) {
+						// we have the response
+						if (data == "true") {
+							var r = confirm("Bạn đã thắng phiên này! Bấm OK để tiến hành thanh toán sản phẩm.");
+							if (r == true) {
+								window.location.href = "thanhtoan?masp=${sp.masp}";
+							} else {
+							}
+						}
+					},
+					error : function(e) {
+						alert('Error: ' + e);
 					}
-				}
-			},
-			error : function(e) {
-				alert('Error: '+ e);
-			}
-		});
+				});
 	}
 </script>
 
@@ -329,7 +337,7 @@
 									<span style="font-size: 10pt; font-family: Arial;"
 									class="Apple-style-span">${cbuocgia}&nbsp;đ<span
 										style="">&nbsp;X</span> <input type="number"
-										id="numberbuocgia" value="1" size="5"
+										id="numberbuocgia" value="1" size="5" min="1" max="10"
 										style="width: 50px; height: 23px; font-weight: bold;" /> <input
 										type="hidden" id="buocgia" value="${buocgia}"> <c:if
 											test="${sessionScope.role != 'Admin'}">
@@ -430,10 +438,8 @@
 																		'#divdatgia')
 																		.val();
 																if (divdatgia != null) {
-																	document
-																			.getElementById('buttondatgia').style.visibility = 'visible';
-																	document
-																			.getElementById('hienthichuadaugia').style.visibility = 'hidden';
+																	document.getElementById('buttondatgia').style.visibility = 'visible';
+																	document.getElementById('hienthichuadaugia').style.visibility = 'hidden';
 																}
 
 															}
@@ -441,7 +447,8 @@
 														var timeLeft = (BigDay
 																.getTime() - today
 																.getTime());
-														if (Math.floor(timeLeft) > 0) {
+														if (Math
+																.floor(timeLeft) > 0) {
 															var e_daysLeft = timeLeft
 																	/ msPerDay;
 															var daysLeft = pad(Math
@@ -467,21 +474,32 @@
 																	.html(
 																			timeString);
 														} else {
-															window.clearInterval(timer);
+															window
+																	.clearInterval(timer);
 															var timeString = "kết thúc";
-															$('#Countdown${sp.masp}').html(timeString);
-															document.getElementById('Countdown${sp.masp}').style.color = 'red'; //'none';
-															document.getElementById('numberbuocgia').style.visibility = 'hidden';
-															var divdatgia = $('#divdatgia').val();
+															$(
+																	'#Countdown${sp.masp}')
+																	.html(
+																			timeString);
+															document
+																	.getElementById('Countdown${sp.masp}').style.color = 'red'; //'none';
+															document
+																	.getElementById('numberbuocgia').style.visibility = 'hidden';
+															var divdatgia = $(
+																	'#divdatgia')
+																	.val();
 															if (divdatgia != null) {
-																document.getElementById('buttondatgia').style.visibility = 'hidden';
-																document.getElementById('hienthichuadaugia').style.visibility = 'hidden';
+																document
+																		.getElementById('buttondatgia').style.visibility = 'hidden';
+																document
+																		.getElementById('hienthichuadaugia').style.visibility = 'hidden';
 															}
 															//send request de thay doi tinh trang san pham.
 															var masp = "${sp.masp}";
 															updateTinhTrangSP(masp);
 															//kiem tra nguoi dat gia
-															var nguoidatgia = document.getElementById('nguoidatgia').innerHTML;
+															var nguoidatgia = document
+																	.getElementById('nguoidatgia').innerHTML;
 															kiemtraNguoiDat(nguoidatgia);
 
 														}
@@ -727,7 +745,8 @@
 								var longday = Number(stringday);
 								var BigDay = new Date(longday);
 								var msPerDay = 24 * 60 * 60 * 1000;
-								window.setInterval(
+								window
+										.setInterval(
 												function() {
 													var today = new Date();
 													var timeLeft = (BigDay
