@@ -33,7 +33,7 @@ public class DangNhapController {
 			HttpSession session, Model model) throws IOException {
 		String web = Server.web;
 		model.addAttribute("web", web);
-		model.addAttribute("tieude", "Ðang nh?p");
+		model.addAttribute("tieude", "Ðăng nhập");
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
 		WebResource webResource = client.resource(Server.addressAuthenWS);
@@ -50,7 +50,7 @@ public class DangNhapController {
 						String.class, form);
 				if (authencode.equals("")) {
 					model.addAttribute("error",
-							"Tài kho?n hoac mat khau khong dung!!");
+							"Tài khoản hoặc mật khẩu không đúng !!");
 					return "dangnhap";
 				} else {
 					// access to AuctionService
@@ -64,7 +64,7 @@ public class DangNhapController {
 									.getAttribute("sessionid").toString()))
 							.post(String.class, form);
 					if (result.equals("WrongAuthenCode")) {
-						model.addAttribute("tieude", "L?i");
+						model.addAttribute("tieude", "Lỗi");
 						model.addAttribute("noidung", "Wrong AuthenCode;"
 								+ authencode);
 						return "thongbao";
@@ -85,6 +85,9 @@ public class DangNhapController {
 
 		return "dangnhap";
 	}
+	
+	//Test Admin dang nhap
+	/*
 	@RequestMapping(value = "/dangnhap1")
 	public String dangNhap1(
 			@RequestParam(value = "action", required = false) String action,
@@ -119,6 +122,7 @@ public class DangNhapController {
 		}
 		return "dangnhap";
 	}
+	*/
 
 	@RequestMapping(value = "/dangxuat")
 	public String dangXuat(HttpSession session, Model model) {

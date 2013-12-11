@@ -40,9 +40,9 @@ public class DangKyController {
 					model.addAttribute("tenDN", username);
 					if (!username.matches("[a-zA-Z0-9 ]*")) {
 						model.addAttribute("error",
-								"TÃªn Ä‘Äƒng nháº­p khÃ´ng Ä‘Ãºng");
+								"Tên đăng nhập không hợp lệ");
 						model.addAttribute("web", web);
-						model.addAttribute("tieude", "Trang chá»§");
+						model.addAttribute("tieude", "Trang chủ");
 						return "dangky";
 					}
 					String resutl = "";
@@ -65,6 +65,11 @@ public class DangKyController {
 					resutl = webResource.path("usermanager/addUser").post(
 							String.class, form);
 					if ("success".equals(resutl)) {
+
+						// ===========================
+						// Hi
+						// ===========================
+
 						model.addAttribute("web", web);
 						model.addAttribute("tieude", "Trang chủ");
 						return "dangnhap";
@@ -87,5 +92,38 @@ public class DangKyController {
 		model.addAttribute("web", web);
 		model.addAttribute("tieude", "Đăng ký");
 		return "dangky";
+	}
+
+	@RequestMapping(value = "/active")
+	public String active(
+			@RequestParam(value = "phoneNumber", required = false) String phoneNumber,
+			HttpSession session, Model model)
+			throws UnsupportedEncodingException {
+		String msg;
+		if (phoneNumber != null) {
+			try {
+				String resutl;
+				ClientConfig config = new DefaultClientConfig();
+				Client client = Client.create(config);
+				WebResource webResource = client
+						.resource(Server.addressAuthenWS);
+				Form form = new Form();
+				form.add("phoneNumber", phoneNumber);
+				resutl = webResource.path("usermanager/activeUser").post(
+						String.class, form);
+				if ("success".equals(resutl)) {
+					msg = "Kích hoạt thành công.";
+				} else {
+					msg = "Kích hoạt thất bại.";
+				}
+				model.addAttribute("msg", msg);
+				return "active";
+			} catch (Exception e) {
+				msg = "Server error !!";
+				return "active";
+			}
+		}
+		msg = "No phoneNumber";
+		return "active";
 	}
 }
