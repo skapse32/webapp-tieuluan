@@ -90,17 +90,17 @@
 											<li class="fl wleft line24 bor-top color3d pdtop5 pdb5">
 												<span class="fl l35 w70 txc">${sp.masp}</span> <span
 												class="fl w350 "> <a class="fl"
-													href="chitietsanpham.html?masp=${sp.masp}" title=""> <img alt=""
-														class="img_small" src="${imageDirectory}${sp.hinhanh}" />
+													href="chitietsanpham.html?masp=${sp.masp}" title=""> <img
+														alt="" class="img_small"
+														src="${imageDirectory}${sp.hinhanh}" />
 												</a>
-												<div class="fl l5">
+													<div class="fl l5">
 														<a class="fl bold" href="#chitietsanpham"
 															title="NOZZA Limited Edition MÀU ĐEN">${sp.tensp}</a> <span
 															class="fl clb color_gray">Mã: ${sp.masp}</span> <input
 															type="hidden" id="time${sp.masp}"
-															value="${sp.thoigianketthuc}">
-															<br /><br /> 
-															<div id="Countdown${sp.masp}"></div>
+															value="${sp.thoigianketthuc}"> <br /> <br />
+														<div id="Countdown${sp.masp}"></div>
 														<script type="text/javascript">
 															$(function() {
 																var stringday = $(
@@ -159,20 +159,61 @@
 																				1000);
 															});
 														</script>
-												</div>
+													</div>
 											</span> <span class="fl w126 txc"> <fmt:formatNumber
 														type="currency" currencyCode="VND"
 														value="${sp.giakhoidiem}" />
-											</span> 
-											<span class="fl w126 txc" id="giahientai${sp.masp}">1200</span> 
-											<span class="fl w80 txc"> ${sp.soluong} </span>
+											</span> <span class="fl w126 txc" id="giahientai${sp.masp}">1200</span>
+												<span class="fl w80 txc"> ${sp.soluong} </span>
 											</li>
-
+											<c:if test="${not empty sapdau }">
+												<div id="divcapnhatxoa"
+													style="width: 17%; color: #7E7C7C; font-size: 12px; font-weight: bold; padding-top: 10px; margin-left: 560px">
+													<a style="text-decoration: none;"
+														href="${pageContext.request.contextPath}/capnhatsanpham?masp=${sp.masp}">Cập
+														nhật</a> &nbsp;&nbsp; <a
+														style="text-decoration: none; color: red"
+														href="${pageContext.request.contextPath}/xoasanpham?masp=${sp.masp}">Xóa</a>
+												</div>
+											</c:if>
+											<c:if test="${not empty capnhatsanphamhuy }">
+												<a
+													style="font-size: 12px; text-decoration: none; font-weight: bold;"
+													href="${pageContext.request.contextPath}/capnhatsanphambihuy?masp=${sp.masp}">Xem</a>
+											</c:if>
+											<c:choose>
+												<c:when test="${sessionScope.role != null}">
+													<c:choose>
+														<c:when test="${sessionScope.role == 'Admin'}">
+															<div
+																style="width: 14%; color: #7E7C7C; font-size: 12px; font-weight: bold; text-align: center; padding-top: 10px;">
+																<c:choose>
+																	<c:when test="${sp.tinhtrangdaugia == 0}">
+																		<a
+																			style="font-size: 12px; text-decoration: none; font-weight: bold;"
+																			href="${pageContext.request.contextPath}/huysanpham?masp=${sp.masp}">Hủy</a>
+																	</c:when>
+																	<c:when test="${not empty chophepdau }">
+																		<a
+																			style="font-size: 12px; text-decoration: none; font-weight: bold;"
+																			href="${pageContext.request.contextPath}/chophepdaugia?masp=${sp.masp}">
+																			Cho phép đấu </a>
+																	</c:when>
+																	<c:otherwise>Đã hủy</c:otherwise>
+																</c:choose>
+															</div>
+														</c:when>
+													</c:choose>
+												</c:when>
+											</c:choose>
 										</c:forEach>
-										
-										<li class="fl wleft line24 bor-top bold color3d pdt10 pdb5">
-											<span class="fl l35 w70 txc"></span> 
-											<a class="fr right8" href="/daugia/" title="Xem tiếp"> >>Tiếp tục chọn sản phẩm</a></li>
+										<c:if test="${sessionScope.role != 'Admin'}">
+											<li class="fl wleft line24 bor-top bold color3d pdt10 pdb5">
+												<span class="fl l35 w70 txc"></span> <a class="fr right8"
+												href="/daugia/" title="Xem tiếp"> >>Tiếp tục chọn sản
+													phẩm</a>
+											</li>
+										</c:if>
 									</ul>
 								</c:when>
 								<c:otherwise>
@@ -189,56 +230,86 @@
 
 	<!-- Right side -->
 	<div id="box-right" class="fl l10 top10 bg_white wright cright">
-		<div id="catalog-products" class="fl wright">
-			<div id="catalog-products-titles"
-				class="fl bg-titles top10 products-group-title-news color_white fontTahoma wright-26">
-				<strong>Danh sách đấu giá</strong>
-			</div>
-			<ul id="catalog-products-list"
-				class="fl fontTahoma wright list-none top5">
-				<li class="fl pd5 w240 "><a class="fl pd5 w240 "
-					href="${pageContext.request.contextPath}/qlsanphamdangthamgia">Sản
-						phẩm đang tham gia</a></li>
-				<li class="fl wright das_top h1"></li>
-				<li class="fl pd5 w240 "><a class="fl pd5 w240 "
-					href="${pageContext.request.contextPath}/qlsanphamdaketthuc">Sản
-						phẩm đã kết thúc</a></li>
-				<li class="fl wright das_top h1"></li>
-				<li class="fl pd5 w240 "><a class="fl pd5 w240 "
-					href="${pageContext.request.contextPath}/qlsanphamchienthang">Sản
-						phẩm chiến thắng</a></li>
-				<li class="fl wright das_top h1"></li>
-			</ul>
-		</div>
-		<div id="catalog-products" class="fl wright">
-			<div id="catalog-products-titles"
-				class="fl bg-titles top10 products-group-title-news color_white fontTahoma wright-26">
-				<strong>Sản phẩm của tôi</strong>
-			</div>
-			<ul id="catalog-products-list"
-				class="fl fontTahoma wright list-none top5">
-				<li class="fl pd5 w240 "><a class="fl pd5 w240 "
-					href="${pageContext.request.contextPath}/qlsanphamcuatoidangdau">Sản
-						phẩm đang đấu</a></li>
-				<li class="fl wright das_top h1"></li>
-				<li class="fl pd5 w240 "><a class="fl pd5 w240 "
-					href="${pageContext.request.contextPath}/qlsanphamcuatoisapdau">Sản
-						phẩm sắp đấu</a></li>
-				<li class="fl wright das_top h1"></li>
-				<li class="fl pd5 w240 "><a class="fl pd5 w240 "
-					href="${pageContext.request.contextPath}/qlsanphamcuatoidadauxong">Sản
-						phẩm đã đấu xong</a></li>
-				<li class="fl wright das_top h1"></li>
-				<li class="fl pd5 w240 "><a class="fl pd5 w240 "
-					href="${pageContext.request.contextPath}/qlsanphamcuatoibihuy">Sản
-						phẩm bị hủy</a></li>
-				<li class="fl wright das_top h1"></li>
-				<li class="fl pd5 w240 "><a class="fl pd5 w240 "
-					href="${pageContext.request.contextPath}/dangsanpham">Đăng sản
-						phẩm</a></li>
-				<li class="fl wright das_top h1"></li>
-			</ul>
-		</div>
+		<c:choose>
+			<c:when test="${sessionScope.role != null}">
+				<c:choose>
+					<c:when test="${sessionScope.role == 'Admin'}">
+						<div id="catalog-products" class="fl wright">
+							<div id="catalog-products-titles"
+								class="fl bg-titles top10 products-group-title-news color_white fontTahoma wright-26">
+								<strong>Quản lý</strong>
+							</div>
+							<ul id="catalog-products-list"
+								class="fl fontTahoma wright list-none top5">
+								<li class="fl pd5 w240 "><a class="fl  pdl20"
+									href="${pageContext.request.contextPath}/sanphamhuyadmin">Hủy
+										đấu giá</a></li>
+								<li class="fl wright das_top h1"></li>
+								<li class="fl pd5 w240 "><a class="fl  pdl20"
+									href="${pageContext.request.contextPath}/sanphamchophepdauadmin">Cho
+										phép đấu</a></li>
+								<li class="fl wright das_top h1"></li>
+							</ul>
+						</div>
+					</c:when>
+					<c:otherwise>
+						<div id="catalog-products" class="fl wright">
+							<div id="catalog-products-titles"
+								class="fl bg-titles top10 products-group-title-news color_white fontTahoma wright-26">
+								<strong>Danh sách đấu giá</strong>
+							</div>
+							<ul id="catalog-products-list"
+								class="fl fontTahoma wright list-none top5">
+								<li class="fl pd5 w240 "><a class="fl pd5 w240 "
+									href="${pageContext.request.contextPath}/qlsanphamdangthamgia">Sản
+										phẩm đang tham gia</a></li>
+								<li class="fl wright das_top h1"></li>
+								<li class="fl pd5 w240 "><a class="fl pd5 w240 "
+									href="${pageContext.request.contextPath}/qlsanphamdaketthuc">Sản
+										phẩm đã kết thúc</a></li>
+								<li class="fl wright das_top h1"></li>
+								<li class="fl pd5 w240 "><a class="fl pd5 w240 "
+									href="${pageContext.request.contextPath}/qlsanphamchienthang">Sản
+										phẩm chiến thắng</a></li>
+								<li class="fl wright das_top h1"></li>
+							</ul>
+						</div>
+						<div id="catalog-products" class="fl wright">
+							<div id="catalog-products-titles"
+								class="fl bg-titles top10 products-group-title-news color_white fontTahoma wright-26">
+								<strong>Sản phẩm của tôi</strong>
+							</div>
+							<ul id="catalog-products-list"
+								class="fl fontTahoma wright list-none top5">
+								<li class="fl pd5 w240 "><a class="fl pd5 w240 "
+									href="${pageContext.request.contextPath}/qlsanphamcuatoidangdau">Sản
+										phẩm đang đấu</a></li>
+								<li class="fl wright das_top h1"></li>
+								<li class="fl pd5 w240 "><a class="fl pd5 w240 "
+									href="${pageContext.request.contextPath}/qlsanphamcuatoisapdau">Sản
+										phẩm sắp đấu</a></li>
+								<li class="fl wright das_top h1"></li>
+								<li class="fl pd5 w240 "><a class="fl pd5 w240 "
+									href="${pageContext.request.contextPath}/qlsanphamcuatoidadauxong">Sản
+										phẩm đã đấu xong</a></li>
+								<li class="fl wright das_top h1"></li>
+								<li class="fl pd5 w240 "><a class="fl pd5 w240 "
+									href="${pageContext.request.contextPath}/qlsanphamcuatoibihuy">Sản
+										phẩm bị hủy</a></li>
+								<li class="fl wright das_top h1"></li>
+								<li class="fl pd5 w240 "><a class="fl pd5 w240 "
+									href="${pageContext.request.contextPath}/dangsanpham">Đăng
+										sản phẩm</a></li>
+								<li class="fl wright das_top h1"></li>
+							</ul>
+						</div>
+					</c:otherwise>
+				</c:choose>
+			</c:when>
+
+		</c:choose>
+
+
 	</div>
 	<div class="DIVclear"></div>
 </div>

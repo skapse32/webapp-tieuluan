@@ -55,25 +55,24 @@
 		var dem = 0;
 		var result = '';
 		var dsdatgiaList = jQuery.parseJSON(data);
-		$
-				.each(
-						dsdatgiaList,
-						function(index, element) {
-							dem++;
-
-							if (dem == 1) {
-								result = element.giadat;
-								$('input[name=testting]').val(result);
-								document.getElementById("nguoidatgia").innerHTML = element.nguoidat;
-								var x = numeral(element.giadat).format('0,0');
-								x = x.replace(/,/g, ".");
-								$('#giahientai').html(x + "&nbsp;đ");
-							}
-							if (dem <= 10) {
-								document.getElementById("nguoidat" + dem).innerHTML = element.nguoidat;
-								document.getElementById("giadat" + dem).innerHTML = element.giadat;
-							}
-						});
+		$.each(dsdatgiaList,function(index, element) {
+			dem++;
+			if(element.masp != "${sp.masp}"){
+				return;
+			}				
+			if (dem == 1) {
+				result = element.giadat;
+				$('input[name=testting]').val(result);
+				document.getElementById("nguoidatgia").innerHTML = element.nguoidat;
+				var x = numeral(element.giadat).format('0,0');
+				x = x.replace(/,/g, ".");
+				$('#giahientai').html(x + "&nbsp;đ");
+			}
+			if (dem <= 10) {
+				document.getElementById("nguoidat" + dem).innerHTML = element.nguoidat;
+				document.getElementById("giadat" + dem).innerHTML = element.giadat;
+			}
+		});
 		document.getElementById("luotdat").innerHTML = dem;
 	}
 
@@ -736,7 +735,6 @@
 																+ minsLeft
 																+ ":"
 																+ secsLeft;
-														alert(timeString);
 														$(
 																'#Countdown${sp.masp}')
 																.html(
