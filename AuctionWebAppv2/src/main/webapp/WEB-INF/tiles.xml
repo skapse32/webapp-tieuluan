@@ -63,7 +63,7 @@
 	<definition name="capnhatsanphambihuy" extends="baseLayout">
 		<put-attribute name="title" value="Cập nhật sản phẩm bị hủy" />
 		<put-attribute name="maincontent"
-			value="/WEB-INF/pages/capnhatsanphambihuy.jsp" />
+			value="/WEB-INF/pages/capnhatsanpham.jsp" />
 	</definition>
 	<definition name="chitietsanpham.html" extends="baseLayout">
 		<put-attribute name="title" value="Chi tiết sản phẩm" />
@@ -89,12 +89,12 @@
 	</definition>
 	<definition name="sanphamhuyadmin" extends="baseLayout">
 		<put-attribute name="title" value="Quản lý sản phẩm (admin)" />
-		<put-attribute name="maincontent" value="/WEB-INF/pages/sanphamhuyadmin.jsp" />
+		<put-attribute name="maincontent" value="/WEB-INF/pages/qlysanpham.jsp" />
 	</definition>
 	<definition name="sanphamchophepdauadmin" extends="baseLayout">
 		<put-attribute name="title" value="Quản lý sản phẩm (admin)" />
 		<put-attribute name="maincontent"
-			value="/WEB-INF/pages/sanphamchophepdauadmin.jsp" />
+			value="/WEB-INF/pages/qlysanpham.jsp" />
 	</definition>
 	<definition name="qlsanpham" extends="baseLayout">
 		<put-attribute name="title" value="Quản lý sản phẩm" />

@@ -31,7 +31,6 @@ import com.tieuluan.daugia.function.Server;
 import com.tieuluan.daugia.model.Sanpham;
 
 @Controller
-@RequestMapping(value = "/admin")
 public class QuanLySanPhamADController {
 	@RequestMapping(value = "/sanphamhuyadmin", method = RequestMethod.GET)
 	public String sanphamhuyadmin(
@@ -83,7 +82,8 @@ public class QuanLySanPhamADController {
 		List<Sanpham> dssp = new ArrayList<Sanpham>();
 		dssp = gson.fromJson(json, typelist);
 		model.addAttribute("dssp", dssp);
-		model.addAttribute("tieude", "Cho phÃ©p Ä‘áº¥u");
+		model.addAttribute("tieude", "Cho Phép Đấu");
+		model.addAttribute("chophepdau", "OK");
 		model.addAttribute("imageDirectory", imageDirectory);
 		model.addAttribute("web", web);
 		return "sanphamchophepdauadmin";
@@ -95,7 +95,7 @@ public class QuanLySanPhamADController {
 		HttpSession session = request.getSession();
 		String web = Server.web;
 		if (request.getParameter("masp") == null) {
-			return "redirect:/admin/sanphamchophepdauadmin";
+			return "redirect:/sanphamchophepdauadmin";
 		}
 		String masp = request.getParameter("masp");
 		String json = "";
@@ -110,14 +110,14 @@ public class QuanLySanPhamADController {
 				.path("sanpham/choPhepDauGia")
 				.cookie(new NewCookie("JSESSIONID", session.getAttribute(
 						"sessionid").toString())).post(String.class, form);
-
+		model.addAttribute("chophepdau","OK");
 		if (!"ok".equals(json)) {
 			model.addAttribute("web", web);
-			model.addAttribute("tieude", "Lá»—i");
+			model.addAttribute("tieude", "Lỗi");
 			model.addAttribute("noidung", json);
 			return "thongbaoqlsanphamadmin";
 		} else {
-			return "redirect:/admin/sanphamchophepdauadmin";
+			return "redirect:/sanphamchophepdauadmin";
 		}
 	}
 
@@ -147,7 +147,7 @@ public class QuanLySanPhamADController {
 		sp = gson.fromJson(json, Sanpham.class);
 		if (new Date(sp.getThoigianbatdau()).getTime() < (new Date()).getTime()
 				|| sp.getTinhtrangdaugia() != 0) {
-			return "redirect:/admin/sanphamhuyadmin";
+			return "redirect:/sanphamhuyadmin";
 		}
 		DecimalFormat formatter = new DecimalFormat("#,###");
 		String buocgia = formatter.format(sp.getBuocgia());
@@ -157,7 +157,7 @@ public class QuanLySanPhamADController {
 
 		model.addAttribute("sp", sp);
 		model.addAttribute("imageDirectory", imageDirectory);
-		model.addAttribute("tieude", "Há»§y sáº£n pháº©m");
+		model.addAttribute("tieude", "Hủy Sản Phẩm");
 		model.addAttribute("web", web);
 		return "huysanpham";
 	}
@@ -171,7 +171,7 @@ public class QuanLySanPhamADController {
 		}String masp = request.getParameter("masp");
 		System.out.println(masp);
 		if (request.getParameter("txtlydo") == null) {
-			return "redirect:/admin/sanphamhuyadmin?tinhtrang=0";
+			return "redirect:/sanphamhuyadmin?tinhtrang=0";
 		}
 		String ghichu = request.getParameter("txtlydo");
 		
@@ -191,11 +191,11 @@ public class QuanLySanPhamADController {
 
 		if (!"ok".equals(json)) {
 			model.addAttribute("web", web);
-			model.addAttribute("tieude", "Lá»—i");
+			model.addAttribute("tieude", "Lỗi");
 			model.addAttribute("noidung", json);
 			return "thongbaoqlsanphamadmin";
 		} else {
-			return "redirect:/admin/sanphamhuyadmin?tinhtrang=0";
+			return "redirect:/sanphamhuyadmin?tinhtrang=0";
 		}
 
 	}

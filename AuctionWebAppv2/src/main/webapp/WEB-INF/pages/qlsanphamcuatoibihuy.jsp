@@ -67,9 +67,7 @@
 						style="width: 20%; font-size: 12px;padding-top: 10px;font-weight: bold; color: #7E7C7C;">
 
 
-						<a
-										style="font-size: 12px;text-decoration: none;font-weight: bold; "
-										href="${pageContext.request.contextPath}/capnhatsanphambihuy?masp=${sp.masp}">Xem</a>
+						<a style="font-size: 12px;text-decoration: none;font-weight: bold; " href="${pageContext.request.contextPath}/capnhatsanphambihuy?masp=${sp.masp}">Xem</a>
 
 					</div>
 				</div>

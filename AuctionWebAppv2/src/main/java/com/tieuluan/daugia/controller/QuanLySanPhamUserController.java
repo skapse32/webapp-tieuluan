@@ -227,7 +227,7 @@ public class QuanLySanPhamUserController {
 		model.addAttribute("dssp", dssp);
 		model.addAttribute("imageDirectory", imageDirectory);
 		model.addAttribute("web", web);
-
+		model.addAttribute("capnhatsanphamhuy", "OK");
 		model.addAttribute("link", "GET");
 		model.addAttribute("method", "/daugia/qlsanphamcuatoibihuy");
 		return "qlsanpham";
@@ -256,6 +256,7 @@ public class QuanLySanPhamUserController {
 		model.addAttribute("imageDirectory", imageDirectory);
 		model.addAttribute("web", web);
 		model.addAttribute("link", "GET");
+		model.addAttribute("sapdau", "ok");
 		model.addAttribute("method", "/daugia/qlsanphamcuatoisapdau");
 		return "qlsanpham";
 	}
