@@ -132,7 +132,7 @@ public class ThanhToanController {
 			return "redirect:/sanphamdangdau";
 		}
 	}
-	@RequestMapping(method = RequestMethod.POST)
+	@RequestMapping(value="/thanhcong",method = RequestMethod.GET)
 	public String thanhtoan(HttpServletRequest request,
 			 Model model)
 			 {

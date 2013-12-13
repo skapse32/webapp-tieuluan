@@ -86,43 +86,6 @@ public class DangNhapController {
 		return "dangnhap";
 	}
 	
-	//Test Admin dang nhap
-	/*
-	@RequestMapping(value = "/dangnhap1")
-	public String dangNhap1(
-			@RequestParam(value = "action", required = false) String action,
-			@RequestParam(value = "username", required = false) String username,
-			@RequestParam(value = "password", required = false) String password,
-			HttpSession session, Model model) throws IOException {
-		String web = Server.web;
-		model.addAttribute("web", web);
-		model.addAttribute("tieude", "Ä?Äƒng nháº­p");
-		ClientConfig config = new DefaultClientConfig();
-		Client client = Client.create(config);
-		WebResource webResource = client.resource(Server.addressAuthenWS);
-		Form form = null;
-		if (action != null) {
-			if (action.equals("dangnhap")) {
-				// access to AuctionService
-				webResource = client.resource(Server.addressAuctionWS);
-				form = new Form();
-				form.add("username", username);
-				form.add("authencode", "123456");
-				String result = webResource
-						.path("user/access1")
-						.cookie(new NewCookie("JSESSIONID", session
-								.getAttribute("sessionid").toString()))
-						.post(String.class, form);
-				session.setAttribute("username", username);
-				String role = "Admin";
-				session.setAttribute("role", role);
-				return "redirect:/sanphamdangdau";
-	
-			}
-		}
-		return "dangnhap";
-	}
-	*/
 
 	@RequestMapping(value = "/dangxuat")
 	public String dangXuat(HttpSession session, Model model) {
@@ -132,7 +95,6 @@ public class DangNhapController {
 		session.removeAttribute("role");
 		model.addAttribute("tieude", "Goodbye");
 		model.addAttribute("noidung", "See you again!");
-
 		return "thongbao";
 	}
 
