@@ -11,20 +11,75 @@
 		RunWebSocket();
 	}
 	function RunWebSocket() {
-		wssocket = new WebSocket(
-				"ws://192.168.1.2:8080/daugia/websocket/daugia");
-		wssocket.onopen = function(evt) {
-			onOpen(evt);
-		};
-		wssocket.onclose = function(evt) {
-			onClose(evt);
-		};
-		wssocket.onmessage = function(evt) {
-			onMessage(evt);
-		};
-		wssocket.onerror = function(evt) {
-			onerror(evt);
-		};
+		if ("WebSocket" in window) {
+			//website ho tro websocket
+			wssocket = new WebSocket(
+					"ws://192.168.1.2:8080/daugia/websocket/daugia");
+			wssocket.onopen = function(evt) {
+				onOpen(evt);
+			};
+			wssocket.onclose = function(evt) {
+				onClose(evt);
+			};
+			wssocket.onmessage = function(evt) {
+				onMessage(evt);
+			};
+			wssocket.onerror = function(evt) {
+				onerror(evt);
+			};
+		} else {
+			var masp = $('#masp').val();
+			var timerloaddsdatgia;
+			$(function() {
+				timerloaddsdatgia = setInterval(vartimerdsdgtick, 1000);
+			});
+			function vartimerdsdgtick() {
+				$.ajax({
+
+					type : "POST",
+					url : "/daugia/loaddsdatgia",
+					data : "masp=" + masp,
+					success : function(data) {
+						// we have the response
+						//$('#error').html(data);
+						var dem = 0;
+						var result = '';
+						var dsdatgiaList = jQuery.parseJSON(data);
+						$.each(dsdatgiaList,function(index, element) {
+							dem++;
+							if (dem == 1) {
+								result = element.giadat;
+								$(
+										'input[name=testting]')
+										.val(result);
+								document
+										.getElementById("nguoidatgia").innerHTML = element.nguoidat;
+								var x = numeral(
+										element.giadat)
+										.format('0,0');
+								x = x
+										.replace(/,/g,
+												".");
+								$('#cgiahientai').html(
+										x + "&nbsp;đ");
+							}
+							if (dem <= 10) {
+								document
+										.getElementById("nguoidat"
+												+ dem).innerHTML = element.nguoidat;
+								document
+										.getElementById("giadat"
+												+ dem).innerHTML = element.giadat;
+							}
+						});
+						document.getElementById("luotdat").innerHTML = dem;
+					},
+					error : function(e) {
+						alert('1Error: ' + e + masp);
+					}
+				});
+			};
+		}
 	}
 
 	function onOpen(evt) {
@@ -47,6 +102,7 @@
 	function onMessage(evt) {
 		var received_msg = evt.data;
 		readdsdg(received_msg);
+		document.getElementById('buttondatgia').style.visibility = 'visible';
 	}
 
 	function readdsdg(data) {
@@ -389,123 +445,127 @@
 											value="${sp.thoigianbatdau}"> <input type="hidden"
 											id="time${sp.masp}" value="${sp.thoigianketthuc}">
 											<div id="Countdown${sp.masp}"
-												style="color: green; font-weight: bold;"></div> <script
+												style="color: green; font-weight: bold;"></div> <input
+											id="countFunction" type="hidden" value="0" /> <script
 												type="text/javascript">
-													var stringday0 = $(
-															'#thoigianbatdau')
-															.val().toString();
-													var longday0;
-													var BigDay0;
+												var stringday0 = $(
+														'#thoigianbatdau')
+														.val().toString();
+												var longday0;
+												var BigDay0;
+												if (stringday0 != null) {
+													longday0 = Number(stringday0);
+													BigDay0 = new Date(longday0);
+												}
+												var stringday = $(
+														'#time${sp.masp}')
+														.val().toString();
+												var longday = Number(stringday);
+												var BigDay = new Date(longday);
+												var msPerDay = 24 * 60 * 60 * 1000;
+												var timer;
+												$(function() {
+													timer = setInterval(
+															vartimertick, 1000);
+												});
+												var varCounter = 0;
+												function vartimertick() {
+													var count = $(
+															'#countFunction')
+															.val();
+													var today = new Date();
 													if (stringday0 != null) {
-														longday0 = Number(stringday0);
-														BigDay0 = new Date(
-																longday0);
-													}
-
-													var stringday = $(
-															'#time${sp.masp}')
-															.val().toString();
-													var longday = Number(stringday);
-													var BigDay = new Date(
-															longday);
-													var msPerDay = 24 * 60 * 60 * 1000;
-													var timer;
-													$(function() {
-														timer = setInterval(
-																vartimertick,
-																1000);
-													});
-													var varCounter = 0;
-													function vartimertick() {
-														var today = new Date();
-														if (stringday0 !== null) {
-															var timeLeft0 = (today
-																	.getTime() - BigDay0
-																	.getTime());
-															if (timeLeft0 < 0) {
-																var divdatgia = $(
-																		'#divdatgia')
-																		.val();
-																if (divdatgia != null) {
-																	document
-																			.getElementById('buttondatgia').style.visibility = 'hidden';
-																	document
-																			.getElementById('hienthichuadaugia').style.visibility = 'visible';
-																}
-
-															} else {
-																var divdatgia = $(
-																		'#divdatgia')
-																		.val();
-																if (divdatgia != null) {
-																	document.getElementById('buttondatgia').style.visibility = 'visible';
-																	document.getElementById('hienthichuadaugia').style.visibility = 'hidden';
-																}
-
-															}
-														}
-														var timeLeft = (BigDay
-																.getTime() - today
+														var timeLeft0 = (today
+																.getTime() - BigDay0
 																.getTime());
-														if (Math
-																.floor(timeLeft) > 0) {
-															var e_daysLeft = timeLeft
-																	/ msPerDay;
-															var daysLeft = pad(Math
-																	.floor(e_daysLeft));
-															var e_hrsLeft = (e_daysLeft - daysLeft) * 24;
-															var hrsLeft = pad(Math
-																	.floor(e_hrsLeft));
-															var e_minsLeft = (e_hrsLeft - hrsLeft) * 60;
-															var minsLeft = pad(Math
-																	.floor(e_minsLeft));
-															var e_secsLeft = (e_minsLeft - minsLeft) * 60;
-															var secsLeft = pad(Math
-																	.floor(e_secsLeft));
-															var timeString = daysLeft
-																	+ " ngày "
-																	+ hrsLeft
-																	+ ":"
-																	+ minsLeft
-																	+ ":"
-																	+ secsLeft;
-															$(
-																	'#Countdown${sp.masp}')
-																	.html(
-																			timeString);
-														} else {
-															window
-																	.clearInterval(timer);
-															var timeString = "kết thúc";
-															$(
-																	'#Countdown${sp.masp}')
-																	.html(
-																			timeString);
-															document
-																	.getElementById('Countdown${sp.masp}').style.color = 'red'; //'none';
-															document
-																	.getElementById('numberbuocgia').style.visibility = 'hidden';
-															var divdatgia = $(
-																	'#divdatgia')
-																	.val();
-															if (divdatgia != null) {
+														var divdatgia = $(
+																'#divdatgia')
+																.val();
+														if (timeLeft0 < 0) {
+															if (divdatgia != null
+																	&& count == 0) {
+																count++;
+																$(
+																		'#countFunction')
+																		.val(
+																				count);
 																document
 																		.getElementById('buttondatgia').style.visibility = 'hidden';
 																document
-																		.getElementById('hienthichuadaugia').style.visibility = 'hidden';
+																		.getElementById('hienthichuadaugia').style.visibility = 'visible';
 															}
-															//send request de thay doi tinh trang san pham.
-															var masp = "${sp.masp}";
-															updateTinhTrangSP(masp);
-															//kiem tra nguoi dat gia
-															var nguoidatgia = document
-																	.getElementById('nguoidatgia').innerHTML;
-															kiemtraNguoiDat(nguoidatgia);
+														} else {
+															if (divdatgia != null) {
+																document
+																		.getElementById('buttondatgia').style.visibility = 'visible';
+																document
+																		.getElementById('hienthichuadaugia').style.visibility = 'hidden';
+																window
+																		.clearInterval(timer);
+															}
 
 														}
+													}
+													var timeLeft = (BigDay
+															.getTime() - today
+															.getTime());
+													if (Math.floor(timeLeft) > 0) {
+														var e_daysLeft = timeLeft
+																/ msPerDay;
+														var daysLeft = pad(Math
+																.floor(e_daysLeft));
+														var e_hrsLeft = (e_daysLeft - daysLeft) * 24;
+														var hrsLeft = pad(Math
+																.floor(e_hrsLeft));
+														var e_minsLeft = (e_hrsLeft - hrsLeft) * 60;
+														var minsLeft = pad(Math
+																.floor(e_minsLeft));
+														var e_secsLeft = (e_minsLeft - minsLeft) * 60;
+														var secsLeft = pad(Math
+																.floor(e_secsLeft));
+														var timeString = daysLeft
+																+ " ngày "
+																+ hrsLeft
+																+ ":"
+																+ minsLeft
+																+ ":"
+																+ secsLeft;
+														$(
+																'#Countdown${sp.masp}')
+																.html(
+																		timeString);
+													} else {
+														window
+																.clearInterval(timer);
+														var timeString = "kết thúc";
+														$(
+																'#Countdown${sp.masp}')
+																.html(
+																		timeString);
+														document
+																.getElementById('Countdown${sp.masp}').style.color = 'red'; //'none';
+														document
+																.getElementById('numberbuocgia').style.visibility = 'hidden';
+														var divdatgia = $(
+																'#divdatgia')
+																.val();
+														if (divdatgia != null) {
+															document
+																	.getElementById('buttondatgia').style.visibility = 'hidden';
+															document
+																	.getElementById('hienthichuadaugia').style.visibility = 'hidden';
+														}
+														//send request de thay doi tinh trang san pham.
+														var masp = "${sp.masp}";
+														updateTinhTrangSP(masp);
 
-													};
-												</script>
+														//kiem tra nguoi dat gia
+														var nguoidatgia = document
+																.getElementById('nguoidatgia').innerHTML;
+														kiemtraNguoiDat(nguoidatgia);
+													}
+												};
+											</script>
 									</span> </span></td>
 							</tr>
 							<tr class="technical" style="font-family: Tahoma, Verdana;">

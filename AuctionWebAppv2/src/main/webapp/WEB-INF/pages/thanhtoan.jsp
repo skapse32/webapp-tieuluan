@@ -139,13 +139,13 @@
 				<div style="padding-left: 110px;">
 					<p style="color: Red">${error}</p>
 					<input style="height: 28px;" name="btnDangKy" type="submit"
-						value="Thanh toán" />
+						value="Thanh toán" /> 
+						<a target="_blank"
+						href="https://www.nganluong.vn/button_payment.php?receiver=nvh0412@gmail.com&product_name=${sp.masp}&price=<fmt:formatNumber type="NUMBER" 
+										value="${sp.giahientai}" />&return_url=thanhtoan/thanhcong?masp=${sp.masp}&comments=hangtot"><img
+						src="https://www.nganluong.vn/data/images/buttons/11.gif"
+						border="0" /></a>
 				</div>
-
-
-
-
-
 			</div>
 			<!-- InstanceEndEditable -->
 			<div class="DIVclear"></div>

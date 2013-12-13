@@ -76,5 +76,6 @@
 	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.42/lib/tomcat-i18n-ja.jar"/>
 	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.42/lib/tomcat-jdbc.jar"/>
 	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.42/lib/tomcat-util.jar"/>
+	<classpathentry kind="lib" path="E:/Soft/Apache/lib/catalina.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>
