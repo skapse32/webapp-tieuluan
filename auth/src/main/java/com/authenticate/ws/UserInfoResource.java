@@ -45,7 +45,7 @@ public class UserInfoResource {
 			final SearchResultEntry entry = connection.searchSingleEntry("dc=springldap,dc=com", 
 					SearchScope.WHOLE_SUBTREE, "(uid=" + username + ")", "*");
 			user.setHoTen(entry.parseAttribute("fullname").asString());
-			user.setStatus("1");
+			user.setStatus(entry.parseAttribute("status").asString());
 			user.setUsername(username);
 			user.setEmail(entry.parseAttribute("mail").asString());
 			user.setDiaChi(entry.parseAttribute("address").asString());
