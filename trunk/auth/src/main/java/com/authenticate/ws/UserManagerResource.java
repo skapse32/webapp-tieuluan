@@ -49,7 +49,7 @@ public class UserManagerResource {
 				.addAttribute("sex", sex)
 				.addAttribute("birthday", birthday)
 				.addAttribute("mail", mail)
-				.addAttribute("status", 1);
+				.addAttribute("status", 1); // Deactive user
 
 		final LDAPConnectionFactory factory = new LDAPConnectionFactory("0.0.0.0", 1389);
 		Connection connection = null;
@@ -57,8 +57,8 @@ public class UserManagerResource {
 			connection = factory.getConnection();
 			connection.bind("cn=Directory Manager", "talavua".toCharArray());
 			connection.add(entry);
-			// Them user vao group
-			entry = new LinkedHashMapEntry("cn=User,ou=groups,dc=springldap,dc=com");
+			// Them user vao group chua xac nhan tai khoan UnregisterUser.
+			entry = new LinkedHashMapEntry("cn=DeactiveUsers,ou=groups,dc=springldap,dc=com");
 			Entry old = TreeMapEntry.deepCopyOfEntry(entry);
 			entry = entry.replaceAttribute("uniqueMember",
 					"cn=" + username + ",ou=users,dc=springldap,dc=com");
@@ -72,5 +72,24 @@ public class UserManagerResource {
 			}
 		}
 		return "success";
+	}
+	
+	@POST
+	@Path("/activeUser")
+	@Produces("application/json;")
+	public String addUser(@FormParam("phoneNumber") String phoneNumber) throws UnsupportedEncodingException {
+		log.info("Active phoneNumber " + phoneNumber);
+		
+		// Tìm user nào có phoneNumber trùng với request
+		// 
+		// 		[Nếu tìm thấy] --> Move user từ group DeactiveUsers sang group Users
+		//		return "success";
+		//
+		// 		[Không tìm thấy] --> Hiện thông báo "Tài khoản kg tồn tại"
+		//		return "error";
+		
+		// Huyện code đi
+		
+		return null;
 	}
 }
