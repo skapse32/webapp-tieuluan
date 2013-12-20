@@ -7,14 +7,17 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>Đấu giá online - <tiles:insertAttribute name="title" ignore="true" /></title>
+<title>Đấu giá online - <tiles:insertAttribute name="title"
+		ignore="true" /></title>
 
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/v2/css/style.css"
 	type="text/css" />
 
-<link rel="stylesheet" type="text/css" href="resources/v2/js/datetimepicker/jquery.datetimepicker.css"/>
-<link href="http://www.jqueryscript.net/css/jquerysctipttop.css" rel="stylesheet" type="text/css">
+<link rel="stylesheet" type="text/css"
+	href="resources/v2/js/datetimepicker/jquery.datetimepicker.css" />
+<link href="http://www.jqueryscript.net/css/jquerysctipttop.css"
+	rel="stylesheet" type="text/css">
 <script src="resources/v2/js/datetimepicker/jquery.js"></script>
 
 
@@ -51,7 +54,54 @@
 	src="${pageContext.request.contextPath}/resources/js/jquery.countdown.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/numeral.min.js"></script>
+	<script type="text/javascript" src="resources/v2/js/jquery.hovercard.min.js" ></script>
 <!-- OLD -->
+<script>
+	var imagePath = "images/Categories/";
+	var hoverHTMLDemoBasic = 'abc';
+	var temp = "";
+	$(document).ready(function() {
+		var id;
+		$(".HinhSP_Resize").mouseover(function() {
+			id = this.id;
+			$(".hc-details").remove();
+			$("#" + id).clone().prependTo("#" + id);
+			$.ajax({
+				url : 'getdata.aspx?id=' + id,
+				type : 'GET',
+				dataType : 'json',
+				success : function(data) {
+					temp = "";
+					$.each(data, function(index, value) {
+						if (index == "Id") {
+							temp += "ID Sản phẩm : " + value + "<br />";
+						} else if (index == "Name") {
+							temp += "Tên Sản Phẩm : " + value + "<br />";
+						} else if (index == "Images") {
+							imagePath = "images/Products/";
+							imagePath += value;
+						} else if (index == "Description") {
+							temp += "Mô tả sản phẩm : " + value + "<br />";
+						} else if (index == "UnitPrice") {
+							temp += "Giá Sản Phẩm : " + value + "<br />";
+						}
+					});
+				},
+				complete : function() {
+					$("#" + id).hovercard({
+						detailsHTML : temp,
+						width : 350,
+						cardImgSrc : imagePath,
+					});
+
+					$(".hc-details").show();
+				}
+			});
+		});
+
+	});
+</script>
+
 </head>
 
 <body>
