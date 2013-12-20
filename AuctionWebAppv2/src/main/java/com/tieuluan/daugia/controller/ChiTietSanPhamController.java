@@ -76,6 +76,7 @@ public class ChiTietSanPhamController {
 		}
 		gson = new Gson();
 		Sanpham sp = new Sanpham();
+		log.info(json);
 		sp = gson.fromJson(json, Sanpham.class);
 		model.addAttribute("tieude", "Chi tiết sản phẩm");
 		
@@ -95,7 +96,7 @@ public class ChiTietSanPhamController {
 		model.addAttribute("buocgia", sp.getBuocgia());
 		model.addAttribute("giahientai", sp.getGiahientai());
 		model.addAttribute("giakhoidiem",  sp.getGiakhoidiem());
-		
+		model.addAttribute("giamuangay",  sp.getGiamuangay());
 		model.addAttribute("sp", sp);
 		model.addAttribute("imageDirectory", imageDirectory);
 		model.addAttribute("web", web);
@@ -190,6 +191,9 @@ public class ChiTietSanPhamController {
 		json = response.getEntity(String.class);	
 		return json;
 	}
+	
+	
+	
 	@RequestMapping(value = "/kiemtranguoidatgia", method = RequestMethod.POST)
 	public @ResponseBody
 	String kiemtranguoidatgia(HttpServletRequest request) {

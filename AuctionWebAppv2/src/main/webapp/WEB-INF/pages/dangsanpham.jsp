@@ -235,7 +235,21 @@
 									class="Required">*</b>
 							</span>
 							</td>
-							<td></td>
+						</tr>
+						<tr>
+							<td class="name"
+								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
+								<span style="font-size: 10pt; font-family: Arial;"
+								class="Apple-style-span"> Giá mua ngay </span>
+							</td>
+							<td class="value"
+								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
+								<span style="font-size: 10pt; font-family: Arial;"
+								class="Apple-style-span"> <input name="txtmuangay"
+									maxlength="50" size="30" type="text" value="">VND<b
+									class="Required">*</b>
+							</span>
+							</td>
 						</tr>
 						<tr>
 							<td class="name"
