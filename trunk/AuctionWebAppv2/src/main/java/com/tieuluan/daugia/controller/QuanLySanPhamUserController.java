@@ -516,13 +516,13 @@ public class QuanLySanPhamUserController {
 		String web = Server.web;
 		model.addAttribute("web", web);
 		String  tensp = "0000", maloaisp = "2", matinhtrangsp = "1", soluong = "1000", xuatxu = "QuyAnh", thuonghieu = "QuyAnh", mota = "MoTa", giakhoidiem = "1000000.0", giahientai = "0.0", buocgia = "200000.0", thoigianbatdau = "2013-05-10 22:35:29.589", thoigianketthuc = "2013-05-30 22:35:29.589", mahttt = "1", thongtinlienhe = "QuyAnh";
+		String giamuangay ="";
 		String nguoidang = session.getAttribute("username").toString();
 		String filename = "null", pathname = "", error = "", resultsaveimage = "", resultsavesanpham = "";
 		String noidung="";
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
-		WebResource webResource = client
-				.resource(Server.addressAuctionWS);
+		WebResource webResource = client.resource(Server.addressAuctionWS);
 		if (!file.getOriginalFilename().equals("")) {
 			filename = file.getOriginalFilename();
 			pathname = Server.saveDirectory + file.getOriginalFilename();
@@ -572,7 +572,7 @@ public class QuanLySanPhamUserController {
 		thoigianketthuc = request.getParameter("txttgkt");
 		mahttt = request.getParameter("selecthttt");
 		thongtinlienhe = request.getParameter("txtthongtinlienhe");
-		
+		giamuangay = request.getParameter("txtmuangay");
 		Form form = new Form();
 		form.add("tensp", tensp);
 		form.add("matinhtrangsp", matinhtrangsp);
@@ -584,6 +584,7 @@ public class QuanLySanPhamUserController {
 		form.add("giakhoidiem", giakhoidiem);
 		form.add("giahientai", giahientai);
 		form.add("buocgia", buocgia);
+		form.add("giamuangay", giamuangay);
 		form.add("thoigianbatdau", thoigianbatdau);
 		form.add("thoigianketthuc", thoigianketthuc);
 		form.add("mahttt", mahttt);

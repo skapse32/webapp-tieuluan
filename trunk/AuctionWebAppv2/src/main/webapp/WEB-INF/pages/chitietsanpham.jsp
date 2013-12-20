@@ -14,7 +14,7 @@
 		if ("WebSocket" in window) {
 			//website ho tro websocket
 			wssocket = new WebSocket(
-					"ws://192.168.1.2:8080/daugia/websocket/daugia");
+					"ws://192.168.1.3:8080/daugia/websocket/daugia");
 			wssocket.onopen = function(evt) {
 				onOpen(evt);
 			};
@@ -34,51 +34,56 @@
 				timerloaddsdatgia = setInterval(vartimerdsdgtick, 1000);
 			});
 			function vartimerdsdgtick() {
-				$.ajax({
+				$
+						.ajax({
 
-					type : "POST",
-					url : "/daugia/loaddsdatgia",
-					data : "masp=" + masp,
-					success : function(data) {
-						// we have the response
-						//$('#error').html(data);
-						var dem = 0;
-						var result = '';
-						var dsdatgiaList = jQuery.parseJSON(data);
-						$.each(dsdatgiaList,function(index, element) {
-							dem++;
-							if (dem == 1) {
-								result = element.giadat;
-								$(
-										'input[name=testting]')
-										.val(result);
-								document
-										.getElementById("nguoidatgia").innerHTML = element.nguoidat;
-								var x = numeral(
-										element.giadat)
-										.format('0,0');
-								x = x
-										.replace(/,/g,
-												".");
-								$('#cgiahientai').html(
-										x + "&nbsp;đ");
-							}
-							if (dem <= 10) {
-								document
-										.getElementById("nguoidat"
-												+ dem).innerHTML = element.nguoidat;
-								document
-										.getElementById("giadat"
-												+ dem).innerHTML = element.giadat;
+							type : "POST",
+							url : "/daugia/loaddsdatgia",
+							data : "masp=" + masp,
+							success : function(data) {
+								// we have the response
+								//$('#error').html(data);
+								var dem = 0;
+								var result = '';
+								var dsdatgiaList = jQuery.parseJSON(data);
+								$
+										.each(
+												dsdatgiaList,
+												function(index, element) {
+													dem++;
+													if (dem == 1) {
+														result = element.giadat;
+														$(
+																'input[name=testting]')
+																.val(result);
+														document
+																.getElementById("nguoidatgia").innerHTML = element.nguoidat;
+														var x = numeral(
+																element.giadat)
+																.format('0,0');
+														x = x
+																.replace(/,/g,
+																		".");
+														$('#cgiahientai').html(
+																x + "&nbsp;đ");
+													}
+													if (dem <= 10) {
+														document
+																.getElementById("nguoidat"
+																		+ dem).innerHTML = element.nguoidat;
+														document
+																.getElementById("giadat"
+																		+ dem).innerHTML = element.giadat;
+													}
+												});
+								document.getElementById("luotdat").innerHTML = dem;
+							},
+							error : function(e) {
+								alert('1Error: ' + e + masp);
 							}
 						});
-						document.getElementById("luotdat").innerHTML = dem;
-					},
-					error : function(e) {
-						alert('1Error: ' + e + masp);
-					}
-				});
-			};
+			}
+			;
 		}
 	}
 
@@ -420,6 +425,25 @@
 										</c:if>
 								</span>
 								</td>
+							</tr>
+							<tr class="technical" style="font-family: Tahoma, Verdana;">
+								<td class="name"
+									style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;"><span
+									style="font-size: 10pt; font-family: Arial;"
+									class="Apple-style-span"><span lang="vi"
+										style="font-size: 10pt;" class="Apple-style-span">Giá
+											mua ngay :</span></span></td>
+								<td class="value"
+									style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;"><span
+									style="font-size: 10pt; font-family: Arial;"
+									class="Apple-style-span" id="giamuangay">${giamuangay}&nbsp;đ </span><input type="button" value="Mua Ngay" onclick="window.location.href = 'thanhtoan?masp=${sp.masp}'"/></td>
+								<script>
+									var x = numeral("${giamuangay}").format(
+											'0,0');
+									x = x.replace(/,/g, ".");
+									document.getElementById("giamuangay").innerHTML = x
+											+ "&nbsp;đ";
+								</script>
 							</tr>
 							<tr class="title"
 								style="background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(229, 229, 229); color: rgb(204, 0, 0); font-weight: bold; text-align: center;">

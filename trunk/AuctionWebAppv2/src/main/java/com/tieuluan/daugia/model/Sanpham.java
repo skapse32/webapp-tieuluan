@@ -16,6 +16,7 @@ public class Sanpham implements java.io.Serializable {
 	private String nguoidang;
 	private Double giakhoidiem;
 	private Double giahientai;
+	private Double giamuangay;
 	private String nguoidat;
 	private Double buocgia;
 	private Long thoigianbatdau;
@@ -41,7 +42,7 @@ public class Sanpham implements java.io.Serializable {
 
 	public Sanpham(Long masp, String tensp, String tinhtrangsp,
 			Integer soluong, String xuatxu, String thuonghieu, String loaisp,
-			String nguoidang, Double giakhoidiem, Double giahientai,String nguoidat,
+			String nguoidang, Double giakhoidiem, Double giahientai,Double giamuangay,String nguoidat,
 			Double buocgia, Long thoigianbatdau,
 			Long thoigianketthuc, String thongtinlienhe, String httt,
 			String hinhanh, String mota, Integer tinhtrangdaugia,String ghichu) {
@@ -55,7 +56,7 @@ public class Sanpham implements java.io.Serializable {
 		this.loaisp = loaisp;
 		this.nguoidang = nguoidang;
 		this.giakhoidiem = giakhoidiem;
-
+		this.giamuangay = giamuangay;
 		this.giahientai = giahientai;
 		this.buocgia = buocgia;
 		this.thoigianbatdau = thoigianbatdau;
@@ -224,6 +225,14 @@ public class Sanpham implements java.io.Serializable {
 
 	public void setGhichu(String ghichu) {
 		this.ghichu = ghichu;
+	}
+	
+	public Double getGiamuangay() {
+		return giamuangay;
+	}
+
+	public void setGiamuangay(Double giamuangay) {
+		this.giamuangay = giamuangay;
 	}
 
 	@Override
