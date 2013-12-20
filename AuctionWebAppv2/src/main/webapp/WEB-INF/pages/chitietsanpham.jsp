@@ -14,7 +14,7 @@
 		if ("WebSocket" in window) {
 			//website ho tro websocket
 			wssocket = new WebSocket(
-					"ws://192.168.0.107:8080/daugia/websocket/daugia");
+					"ws://192.168.1.3:8080/daugia/websocket/daugia");
 			wssocket.onopen = function(evt) {
 				onOpen(evt);
 			};

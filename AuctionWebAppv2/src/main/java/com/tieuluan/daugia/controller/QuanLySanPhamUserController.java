@@ -14,6 +14,9 @@ import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.NewCookie;
 
+import org.apache.commons.logging.Log;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -360,10 +363,11 @@ public class QuanLySanPhamUserController {
 			return "redirect:/qlsanphamcuatoisapdau";
 		}
 	}
-	@RequestMapping(value = "/capnhatsanpham", method = RequestMethod.POST)
+	@RequestMapping(value = "/capnhatsanpham", method = RequestMethod.POST, produces="application/json; charset=utf-8")
 	public String capnhatsanphampost(HttpServletRequest request,
 			@RequestParam CommonsMultipartFile file, Model model)
 			throws IllegalStateException, IOException {
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		String web = Server.web;
 		model.addAttribute("web", web);
@@ -411,6 +415,7 @@ public class QuanLySanPhamUserController {
 		else{
 			noidung="Không chứa hình ảnh";
 		}
+		log.info(request.getParameter("txtxuatxu"));
 		masp = request.getParameter("masp");
 		tensp = request.getParameter("txttensp");
 		matinhtrangsp = request.getParameter("selectttsp");
@@ -455,7 +460,7 @@ public class QuanLySanPhamUserController {
 		model.addAttribute("noidung", resultsavesanpham+"<br>"+noidung);
 		return "thongbaoqlsanphamuser";
 	}
-	@RequestMapping(value = "/capnhatsanphambihuy", method = RequestMethod.GET)
+	@RequestMapping(value = "/capnhatsanphambihuy", method = RequestMethod.GET , produces="application/json; charset=utf-8")
 	public String capnhatsanphambihuyget(Model model, HttpServletRequest request)
 			throws IOException {
 		HttpSession session = request.getSession();
@@ -507,11 +512,13 @@ public class QuanLySanPhamUserController {
 		return "dangsanpham";
 	}
 
-	@RequestMapping(value = "/dangsanpham",method = RequestMethod.POST)
+	private Logger log = LoggerFactory.getLogger(QuanLySanPhamUserController.class);
+	
+	@RequestMapping(value = "/dangsanpham",method = RequestMethod.POST ,produces="application/json; charset=utf-8")
 	public String dangsanphampost(HttpServletRequest request,
 			@RequestParam CommonsMultipartFile file, Model model)
 			throws IllegalStateException, IOException {
-		
+		request.setCharacterEncoding("UTF-8");
 		HttpSession session = request.getSession();
 		String web = Server.web;
 		model.addAttribute("web", web);
@@ -559,6 +566,7 @@ public class QuanLySanPhamUserController {
 		else{
 			noidung="Không chứa hình ảnh";
 		}
+		log.info(request.getParameter("txtxuatxu"));
 		tensp = request.getParameter("txttensp");
 		matinhtrangsp = request.getParameter("selectttsp");
 		maloaisp = request.getParameter("selectloaisp");
