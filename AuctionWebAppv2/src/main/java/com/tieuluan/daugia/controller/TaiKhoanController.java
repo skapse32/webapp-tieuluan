@@ -15,6 +15,7 @@ import javax.ws.rs.core.NewCookie;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -51,6 +52,28 @@ public class TaiKhoanController {
 				.path("user/getUserInfo")
 				.cookie(new NewCookie("JSESSIONID", session.getAttribute(
 						"sessionid").toString())).post(String.class);
+		User user = gson.fromJson(json, User.class);
+		session.setAttribute("tieude", "Thông tin tài khoản");
+		session.setAttribute("user", user);
+		model.addAttribute("web", web);
+		return "taikhoan";
+	}
+	
+	@RequestMapping(value = "/thongtintaikhoannguoiban/{nguoiban}", method = RequestMethod.GET)
+	public String getUserInfoById(@PathVariable("nguoiban") String nguoiban,HttpSession session, Model model)
+			throws UnknownHostException {
+		String web = Server.web;
+		Gson gson = new Gson();
+		ClientConfig config = new DefaultClientConfig();
+		Client client = Client.create(config);
+		WebResource webResource = client.resource(Server.addressAuctionWS);
+		String json = "";
+		Form form = new Form();
+		form.add("username", nguoiban);
+		json = webResource
+				.path("user/getUserInfoNguoiBan")
+				.cookie(new NewCookie("JSESSIONID", session.getAttribute(
+						"sessionid").toString())).post(String.class, form);
 		User user = gson.fromJson(json, User.class);
 		session.setAttribute("tieude", "Thông tin tài khoản");
 		session.setAttribute("user", user);

@@ -69,7 +69,7 @@
 							<td class="name"
 								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
 								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> Loại Sản Phẩm </span>
+								class="Apple-style-span"> Loại Xe </span>
 							</td>
 							<td class="value"
 								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
@@ -146,9 +146,13 @@
 							<td class="value"
 								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
 								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> <input name="txtthuonghieu"
-									maxlength="80" size="50" type="text" value=""><b
-									class="Required">*</b>
+								class="Apple-style-span">
+								<select name="thuonghieu" style="width: 150px;">
+										<c:forEach var="hangxe" items="${sessionScope.dshangxe}">
+											<option value="${hangxe.tenhang}">${hangxe.tenhang}</option>
+										</c:forEach>
+								</select>
+								<b class="Required">*</b>
 							</span>
 							</td>
 							<td></td>

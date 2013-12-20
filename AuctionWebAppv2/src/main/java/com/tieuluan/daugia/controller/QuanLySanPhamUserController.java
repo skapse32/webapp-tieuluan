@@ -564,7 +564,7 @@ public class QuanLySanPhamUserController {
 		maloaisp = request.getParameter("selectloaisp");
 		soluong = request.getParameter("txtsoluong");
 		xuatxu = request.getParameter("txtxuatxu");
-		thuonghieu = request.getParameter("txtthuonghieu");
+		thuonghieu = request.getParameter("thuonghieu");
 		mota = request.getParameter("txtmota");
 		giakhoidiem = request.getParameter("txtgiakhoidiem");
 		buocgia = request.getParameter("txtbuocgia");

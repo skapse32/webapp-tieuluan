@@ -133,8 +133,60 @@ public class ThanhToanController {
 		}
 	}
 	
-	public String thanhtoanngay(){
-		return "";
+	@RequestMapping(value = "/thanhtoanngay", method = RequestMethod.GET)
+	public String thanhtoanngay(@RequestParam(value = "masp", required = false, defaultValue = "-1") Long masp, HttpSession session,Model model){
+		if(masp==-1)
+			return "redirect:/sanphamdangdau";
+		String imageDirectory = Server.addressAuctionImage;
+		String web = Server.web;
+		String json = "";
+		Gson gson = null;
+		ClientConfig config = new DefaultClientConfig();
+		Client client = Client.create(config);
+		WebResource webResource = client.resource(Server.addressAuctionWS);
+		Form form = new Form();
+		form.add("masp", masp);
+		ClientResponse response = null;
+		
+		response = webResource
+				.path("sanpham/findById")
+				.cookie(new NewCookie("JSESSIONID", session.getAttribute("sessionid").toString()))
+				.post(ClientResponse.class, form);
+
+		json = response.getEntity(String.class);
+		if (response.getStatus() != 200) {
+			model.addAttribute("tieude", "Lỗi");
+			if (response.getStatus() == 401) {
+
+				model.addAttribute("noidung",
+						"Bận cần phải đăng nhập mới thanh toán được sản phẩm này!");
+
+			} else {
+				model.addAttribute("noidung", response.getStatus());
+			}
+			model.addAttribute("web", web);
+			return "thongbao";
+		}
+		gson = new Gson();
+		Sanpham sp = new Sanpham();
+		sp = gson.fromJson(json, Sanpham.class);
+		User nguoiban=new User();
+		nguoiban.setHoTen("Pham Quy Anh");
+		nguoiban.setDienThoai("123456789");
+		nguoiban.setDiaChi("987654321");
+		User nguoimua=new User();
+		nguoimua.setHoTen("Pham Quy Anh");
+		nguoimua.setDienThoai("123456789");
+		nguoimua.setDiaChi("987654321");
+		//
+		sp.setGiahientai(sp.getGiamuangay());
+		model.addAttribute("sp", sp);
+		model.addAttribute("imageDirectory", imageDirectory);
+		session.setAttribute("nguoimua", nguoimua);
+		session.setAttribute("nguoiban", nguoiban);
+		model.addAttribute("tieude", "Thanh Toán");
+		model.addAttribute("web", web);
+		return "thanhtoan";
 	}
 	
 	@RequestMapping(value="/thanhcong",method = RequestMethod.GET)

@@ -3,30 +3,30 @@
 <!-- Partner -->
 <div id="banner" class="wmain">
 	<div class="fl clb wmain partner">
-		<img class="fl" src="resources/v2/images/partner.jpg" alt="Partner" />
+		<img class="fl" src="${pageContext.request.contextPath}/resources/v2/images/partner.jpg" alt="Partner" />
 		<ul class="fl partners list-none">
 			<li class="fl l20"><a href="#"
 				title="Phong Cách Mới Việt Nam - Thiết kế Website, thiết kế Wapsite, Hostting"
 				target="_blank" class="fl cOver"><img
 					alt="Phong Cách Mới Việt Nam - Thiết kế Website, thiết kế Wapsite, Hostting"
-					src="resources/v2/upload/thietkeweb_1316248640.jpg" /></a></li>
+					src="${pageContext.request.contextPath}/resources/v2/upload/thietkeweb_1316248640.jpg" /></a></li>
 			<li class="fl l20"><a href="#" title="Yamaha Nozza FC Việt Nam"
 				target="_blank" class="fl cOver"><img
 					alt="Yamaha Nozza FC Việt Nam"
-					src="resources/v2/upload/yamaha-nozza-fc_1316723865.jpg" /></a></li>
+					src="${pageContext.request.contextPath}/resources/v2/upload/yamaha-nozza-fc_1316723865.jpg" /></a></li>
 			<li class="fl l20"><a href="#" title="Mua Chung Việt Nam"
 				target="_blank" class="fl cOver"><img alt="Mua Chung Việt Nam"
-					src="resources/v2/upload/muachung_1316248890.jpg" /></a></li>
+					src="${pageContext.request.contextPath}/resources/v2/upload/muachung_1316248890.jpg" /></a></li>
 			<li class="fl l20"><a href="#" title="Tập đoàn Prime group"
 				target="_blank" class="fl cOver"><img alt="Tập đoàn Prime group"
-					src="resources/v2/upload/4_1316248734.jpg" /></a></li>
+					src="${pageContext.request.contextPath}/resources/v2/upload/4_1316248734.jpg" /></a></li>
 			<li class="fl l20"><a href="#" title="Tập đoàn Hòa Phát"
 				target="_blank" class="fl cOver"><img alt="Tập đoàn Hòa Phát"
-					src="resources/v2/upload/5_1316248691.jpg" /></a></li>
+					src="${pageContext.request.contextPath}/resources/v2/upload/5_1316248691.jpg" /></a></li>
 			<li class="fl l20"><a href="#"
 				title=" MÁY PHÁT ĐIỆN KAMA HỒNG ĐÀO" target="_blank"
 				class="fl cOver"><img alt=" MÁY PHÁT ĐIỆN KAMA HỒNG ĐÀO"
-					src="resources/v2/upload/1_1316248983.jpg" /></a></li>
+					src="${pageContext.request.contextPath}resources/v2/upload/1_1316248983.jpg" /></a></li>
 		</ul>
 	</div>
 </div>
@@ -65,14 +65,14 @@
 <!-- Footer end -->
 
 <script type="text/javascript" language="javascript"
-	src="resources/v2/js/jquery.lazyload.js"></script>
+	src="${pageContext.request.contextPath}/resources/v2/js/jquery.lazyload.js"></script>
 <script>
 	//Lazy load
 	var isIE = (navigator.userAgent.toLowerCase().indexOf("msie") == -1 ? false
 			: true);
 	if (!isIE) {
 		$(".loadimage img").lazyload({
-			placeholder : "resources/v2/images/jcarousel_loading.gif",
+			placeholder : "${pageContext.request.contextPath}/resources/v2/images/jcarousel_loading.gif",
 			effect : "fadeIn"
 		});
 	}
