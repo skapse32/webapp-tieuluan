@@ -9,28 +9,24 @@
 	});
 	var varCounter = 0;
 	function vartimertick() {
-		$
-				.ajax({
+		$.ajax({
 					type : "${method}",
 					url : "${link}",
 					success : function(data) {
 						// we have the response
 						var dsspList = jQuery.parseJSON(data);
-						$
-								.each(
-										dsspList,
-										function(index, element) {
-											document.getElementById("nguoidat"
-													+ element.masp).innerHTML = element.nguoidat;
-											var x = numeral(element.giahientai)
-													.format('0,0');
-											x = x.replace(/,/g, ".");
-
-											document
-													.getElementById("giahientai"
-															+ element.masp).innerHTML = x
-													+ "&nbsp;đ";
-										});
+						$.each(dsspList,function(index, element) {
+							document.getElementById("nguoidat"
+									+ element.masp).innerHTML = element.nguoidat;
+							var x = numeral(element.giahientai)
+									.format('0,0');
+							x = x.replace(/,/g, ".");
+	
+							document
+									.getElementById("giahientai"
+											+ element.masp).innerHTML = x
+									+ "&nbsp;đ";
+						});
 
 					},
 					error : function(e) {
