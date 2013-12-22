@@ -23,10 +23,6 @@
 			<li class="fl l20"><a href="#" title="Tập đoàn Hòa Phát"
 				target="_blank" class="fl cOver"><img alt="Tập đoàn Hòa Phát"
 					src="${pageContext.request.contextPath}/resources/v2/upload/5_1316248691.jpg" /></a></li>
-			<li class="fl l20"><a href="#"
-				title=" MÁY PHÁT ĐIỆN KAMA HỒNG ĐÀO" target="_blank"
-				class="fl cOver"><img alt=" MÁY PHÁT ĐIỆN KAMA HỒNG ĐÀO"
-					src="${pageContext.request.contextPath}resources/v2/upload/1_1316248983.jpg" /></a></li>
 		</ul>
 	</div>
 </div>
