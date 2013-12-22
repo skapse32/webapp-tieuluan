@@ -7,17 +7,18 @@
 <div id="content" class="wmain">
 	<!-- Left side -->
 	<c:if test="${not empty thanhcong}">
-		<script>
-			var message = "${masp} : ${tensp} : ${thuonghieu} : ${giakhoidiem} : ${giamuangay}" ;
-			alert(message);
-			sendToServerDangSP(message);
+		<script type="text/javascript">
+			var message = "<a href='${pageContext.request.contextPath}/chitietsanpham.html?masp=${masp}'>Sản phẩm mới : ${tensp} <br /> Thương Hiệu : ${thuonghieu} <br/> Giá khởi điểm : ${giakhoidiem} <br/> Giá mua ngay : ${giamuangay}</a>";
+			var timeout = setTimeout(function() {
+			        $('#send').trigger('click');
+			 }, 500);
 		</script>
 	</c:if>
 	<div id="box-left" class="fl top10 bg_white wleft">
 		<h2 id="HomepageFeaturedList" class="h2row" style="text-align: center">${tieude}</h2>
 		<div style="text-align: center; padding-top: 10px;">
 			<h3>${noidung}</h3>
-			<input type="button" onclick="sendToServerDangSP(message)"/>
+			<input id="send" type="button" onclick="sendToServerDangSP(message)" hidden="true"/>
 		</div>
 	</div>
 	<!-- End left side -->
@@ -88,5 +89,7 @@
 			</ul>
 		</div>
 	</div>
+
 	<!-- Right side END -->
+
 </div>
