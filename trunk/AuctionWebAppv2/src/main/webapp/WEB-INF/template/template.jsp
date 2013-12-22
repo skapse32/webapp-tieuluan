@@ -90,8 +90,9 @@
 
 	function onMessageRe(evt) {
 		var received_msg = evt.data;
-		leftX = screen.width - 500;
-		topY = screen.height - 400;
+		
+		leftX = screen.width - 400;
+		topY = screen.height - 300;
 		TINY.box.show({html: received_msg ,animate:false,close:false,mask:false,boxid:'success',autohide:5,top:topY,left:leftX});
 	}
 	function onErrorRe(evt) {

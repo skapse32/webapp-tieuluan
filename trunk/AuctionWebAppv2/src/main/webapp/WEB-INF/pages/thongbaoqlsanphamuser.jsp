@@ -8,13 +8,20 @@
 	<!-- Left side -->
 	<c:if test="${not empty thanhcong}">
 		<script type="text/javascript">
-			var message = "<a href='${pageContext.request.contextPath}/chitietsanpham.html?masp=${masp}'>Sản phẩm mới : ${tensp} <br /> Thương Hiệu : ${thuonghieu} <br/> Giá khởi điểm : ${giakhoidiem} <br/> Giá mua ngay : ${giamuangay}</a>";
+			var message ="<div id='titler'>Thông báo</div>"
+		+"<div id='noidung'>"
+		+"<table><tr><td>Sản phẩm mới: </td><td id='ct'><a href='${pageContext.request.contextPath}/chitietsanpham.html?masp=${masp}'>${tensp}</a></td></tr>"
+		+"<tr><td>Thương hiệu: </td><td id='ct'><label>${thuonghieu}</label></td></tr>"
+		+"<tr><td>Giá khởi điểm: </td><td id='ct'><label>${giakhoidiem}</label></td></tr>"
+		+"<tr><td>Giá mua ngay: </td><td id='ct'><label>${giamuangay}</label></td></tr></table></div>"
+			/* var message = "<a href='${pageContext.request.contextPath}/chitietsanpham.html?masp=${masp}'>Sản phẩm mới : ${tensp} <br /> Thương Hiệu : ${thuonghieu} <br/> Giá khởi điểm : ${giakhoidiem} <br/> Giá mua ngay : ${giamuangay}</a>"; */
 			var timeout = setTimeout(function() {
 			        $('#send').trigger('click');
 			 }, 500);
 		</script>
 	</c:if>
 	<div id="box-left" class="fl top10 bg_white wleft">
+	
 		<h2 id="HomepageFeaturedList" class="h2row" style="text-align: center">${tieude}</h2>
 		<div style="text-align: center; padding-top: 10px;">
 			<h3>${noidung}</h3>
