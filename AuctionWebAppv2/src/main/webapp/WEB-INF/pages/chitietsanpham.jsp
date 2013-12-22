@@ -14,7 +14,7 @@
 		if ("WebSocket" in window) {
 			//website ho tro websocket
 			wssocket = new WebSocket(
-					"ws://192.168.1.3:8080/daugia/websocket/daugia");
+					"ws://localhost:8080/daugia/websocket/daugia");
 			wssocket.onopen = function(evt) {
 				onOpen(evt);
 			};
@@ -364,98 +364,100 @@
 
 						<tbody style="font-family: Tahoma, Verdana;">
 							<c:if test="${not empty username}">
-							<tr class="title"
-								style="background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(229, 229, 229); color: rgb(204, 0, 0); font-weight: bold; text-align: center;">
-								<td colspan="2" lang="vi"
-									style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-									<span style="font-size: 10pt; font-family: Arial;"
-									class="Apple-style-span"> Đấu giá </span>
-								</td>
-							</tr>
-							<tr class="technical" style="font-family: Tahoma, Verdana;">
-								<td class="name"
-									style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;"><span
-									style="font-size: 10pt; font-family: Arial;"
-									class="Apple-style-span"><span lang="vi"
-										style="font-size: 10pt;" class="Apple-style-span">Giá
-											khởi điểm:</span></span></td>
-								<td class="value"
-									style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;"><span
-									style="font-size: 10pt; font-family: Arial;"
-									class="Apple-style-span">${cgiakhoidiem}&nbsp;đ<input
-										type="hidden" id="giakhoidiem" value="${giakhoidiem}"></span>
-								</td>
-							</tr>
+								<tr class="title"
+									style="background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(229, 229, 229); color: rgb(204, 0, 0); font-weight: bold; text-align: center;">
+									<td colspan="2" lang="vi"
+										style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
+										<span style="font-size: 10pt; font-family: Arial;"
+										class="Apple-style-span"> Đấu giá </span>
+									</td>
+								</tr>
+								<tr class="technical" style="font-family: Tahoma, Verdana;">
+									<td class="name"
+										style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;"><span
+										style="font-size: 10pt; font-family: Arial;"
+										class="Apple-style-span"><span lang="vi"
+											style="font-size: 10pt;" class="Apple-style-span">Giá
+												khởi điểm:</span></span></td>
+									<td class="value"
+										style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;"><span
+										style="font-size: 10pt; font-family: Arial;"
+										class="Apple-style-span">${cgiakhoidiem}&nbsp;đ<input
+											type="hidden" id="giakhoidiem" value="${giakhoidiem}"></span>
+									</td>
+								</tr>
 
-							<tr class="technical" style="font-family: Tahoma, Verdana;">
-								<td class="name"
-									style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;"><span
-									style="font-size: 10pt; font-family: Arial;"
-									class="Apple-style-span"><span lang="vi"
-										style="font-size: 10pt;" class="Apple-style-span">Bước
-											giá:</span></span></td>
-								<td class="value"
-									style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-									<span style="font-size: 10pt; font-family: Arial;"
-									class="Apple-style-span">${cbuocgia}&nbsp;đ<span
-										style="">&nbsp;X</span> <input type="number"
-										id="numberbuocgia" value="1" size="5" min="1" max="10"
-										style="width: 50px; height: 23px; font-weight: bold;" /> <input
-										type="hidden" id="buocgia" value="${buocgia}"> <c:if
-											test="${sessionScope.role != 'Admin'}">
-											<c:choose>
-												<c:when test="${sp.tinhtrangdaugia == 0}">
-													<c:choose>
-														<c:when test="${sessionScope.username != sp.nguoidang}">
-															<input type="hidden" id="divdatgia" value="das">
-															<input type="button" class="SubmitBid_Button"
-																id="buttondatgia" name="datgiatudong"
-																onclick="doAjaxPost()" value="Đặt giá">
-															<span id="hienthichuadaugia" style="color: red;">Chưa
-																bắt đầu đấu giá</span>
-														</c:when>
-														<c:otherwise>
-															<div style="color: red;">Bạn không thể đấu giá sản
-																phẩm của chính bạn</div>
-														</c:otherwise>
-													</c:choose>
-												</c:when>
-												<c:otherwise>
-												</c:otherwise>
-											</c:choose>
-										</c:if>
-								</span>
-								</td>
-							</tr>
-							<tr class="technical" style="font-family: Tahoma, Verdana;">
-								<td class="name"
-									style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;"><span
-									style="font-size: 10pt; font-family: Arial;"
-									class="Apple-style-span"><span lang="vi"
-										style="font-size: 10pt;" class="Apple-style-span">Giá
-											mua ngay :</span></span></td>
-								<td class="value"
-									style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;"><span
-									style="font-size: 10pt; font-family: Arial;"
-									class="Apple-style-span" id="giamuangay">${giamuangay}&nbsp;đ </span>
-									<c:choose>
-										<c:when test="${sessionScope.username != sp.nguoidang}">
-											<input type="button" value="Mua Ngay" onclick="window.location.href = 'thanhtoanngay?masp=${sp.masp}'"/>
-										</c:when>
-										<c:otherwise>
-											<span style="font-size: 10pt; font-family: Arial; color: red;"
-									class="Apple-style-span">Bạn không thể mua sản phẩm của chính bạn</span>
-										</c:otherwise>
-									</c:choose>
-								</td>
-								<script>
-									var x = numeral("${giamuangay}").format(
-											'0,0');
-									x = x.replace(/,/g, ".");
-									document.getElementById("giamuangay").innerHTML = x
-											+ "&nbsp;đ";
-								</script>
-							</tr>
+								<tr class="technical" style="font-family: Tahoma, Verdana;">
+									<td class="name"
+										style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;"><span
+										style="font-size: 10pt; font-family: Arial;"
+										class="Apple-style-span"><span lang="vi"
+											style="font-size: 10pt;" class="Apple-style-span">Bước
+												giá:</span></span></td>
+									<td class="value"
+										style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
+										<span style="font-size: 10pt; font-family: Arial;"
+										class="Apple-style-span">${cbuocgia}&nbsp;đ<span
+											style="">&nbsp;X</span> <input type="number"
+											id="numberbuocgia" value="1" size="5" min="1" max="10"
+											style="width: 50px; height: 23px; font-weight: bold;" /> <input
+											type="hidden" id="buocgia" value="${buocgia}"> <c:if
+												test="${sessionScope.role != 'Admin'}">
+												<c:choose>
+													<c:when test="${sp.tinhtrangdaugia == 0}">
+														<c:choose>
+															<c:when test="${sessionScope.username != sp.nguoidang}">
+																<input type="hidden" id="divdatgia" value="das">
+																<input type="button" class="SubmitBid_Button"
+																	id="buttondatgia" name="datgiatudong"
+																	onclick="doAjaxPost()" value="Đặt giá">
+																<span id="hienthichuadaugia" style="color: red;">Chưa
+																	bắt đầu đấu giá</span>
+															</c:when>
+															<c:otherwise>
+																<div style="color: red;">Bạn không thể đấu giá sản
+																	phẩm của chính bạn</div>
+															</c:otherwise>
+														</c:choose>
+													</c:when>
+													<c:otherwise>
+													</c:otherwise>
+												</c:choose>
+											</c:if>
+									</span>
+									</td>
+								</tr>
+								<tr class="technical" style="font-family: Tahoma, Verdana;">
+									<td class="name"
+										style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;"><span
+										style="font-size: 10pt; font-family: Arial;"
+										class="Apple-style-span"><span lang="vi"
+											style="font-size: 10pt;" class="Apple-style-span">Giá
+												mua ngay :</span></span></td>
+									<td class="value"
+										style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;"><span
+										style="font-size: 10pt; font-family: Arial;"
+										class="Apple-style-span" id="giamuangay">${giamuangay}&nbsp;đ
+									</span> <c:choose>
+											<c:when test="${sessionScope.username != sp.nguoidang}">
+												<input type="button" value="Mua Ngay"
+													onclick="window.location.href = 'thanhtoanngay?masp=${sp.masp}'" />
+											</c:when>
+											<c:otherwise>
+												<span
+													style="font-size: 10pt; font-family: Arial; color: red;"
+													class="Apple-style-span">Bạn không thể mua sản phẩm
+													của chính bạn</span>
+											</c:otherwise>
+										</c:choose></td>
+									<script>
+										var x = numeral("${giamuangay}")
+												.format('0,0');
+										x = x.replace(/,/g, ".");
+										document.getElementById("giamuangay").innerHTML = x
+												+ "&nbsp;đ";
+									</script>
+								</tr>
 							</c:if>
 							<tr class="title"
 								style="background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(229, 229, 229); color: rgb(204, 0, 0); font-weight: bold; text-align: center;">
@@ -614,8 +616,8 @@
 								<td class="value"
 									style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;"><span
 									style="font-size: 10pt; font-family: Arial;"
-									class="Apple-style-span" id="cgiahientai">${cgiahientai}&nbsp;đ</span> <input
-									type="hidden" name="testting" id="giahientai"
+									class="Apple-style-span" id="cgiahientai">${cgiahientai}&nbsp;đ</span>
+									<input type="hidden" name="testting" id="giahientai"
 									value="${giahientai}"></td>
 
 							</tr>
@@ -630,6 +632,21 @@
 									style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
 									<span style="font-size: 10pt; font-family: Arial;"
 									class="Apple-style-span"> <span id="nguoidatgia">${sp.nguoidat}</span>
+								</span>
+								</td>
+
+							</tr>
+							<tr class="technical" style="font-family: Tahoma, Verdana;">
+								<td class="name"
+									style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;"><span
+									style="font-size: 10pt; font-family: Arial;"
+									class="Apple-style-span"><span lang="vi"
+										style="font-size: 10pt;" class="Apple-style-span">Số
+											lượt đặt của bạn</span></span></td>
+								<td class="value"
+									style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
+									<span style="font-size: 10pt; font-family: Arial;"> <a
+										href="luotdattrensp.html?masp=${sp.masp}">Xem chi tiết</a>
 								</span>
 								</td>
 
@@ -703,7 +720,8 @@
 								<td class="value"
 									style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;"><span
 									style="font-size: 10pt; font-family: Arial;"
-									class="Apple-style-span"><a href="${pageContext.request.contextPath}/thongtintaikhoannguoiban/${sp.nguoidang}">${sp.nguoidang}</a></span></td>
+									class="Apple-style-span"><a
+										href="${pageContext.request.contextPath}/thongtintaikhoannguoiban/${sp.nguoidang}">${sp.nguoidang}</a></span></td>
 							</tr>
 							<tr class="technical" style="font-family: Tahoma, Verdana;">
 								<td class="name"
@@ -824,6 +842,7 @@
 			<ul id="yamaha-xe-list"
 				class="fl clb top10 list-none wleft-2 das_top">
 				<c:forEach var="sp" items="${dssp}">
+
 					<div align="center" class="fl pd05 w170 hpros sep_pros">
 						<div class="HinhSP">
 							<a href="chitietsanpham.html?masp=${sp.masp}"><img

@@ -1,5 +1,6 @@
 package com.tieuluan.daugia.controller;
 
+import java.io.Console;
 import java.io.IOException;
 import java.lang.reflect.Type;
 import java.sql.Timestamp;
@@ -31,6 +32,7 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.representation.Form;
 import com.tieuluan.daugia.function.Function;
 import com.tieuluan.daugia.function.Server;
+import com.tieuluan.daugia.model.Lichsudaugia;
 import com.tieuluan.daugia.model.Sanpham;
 
 @Controller
@@ -144,6 +146,34 @@ public class ChiTietSanPhamController {
 		model.addAttribute("dssp", dssp);
 		return "chitietsanpham.html";
 	}
+	
+	@RequestMapping(value = "/luotdattrensp.html", method = RequestMethod.GET)
+	public String luotdattrensp(Model model,HttpServletRequest request, HttpSession session) throws IOException {
+		String masp = request.getParameter("masp");
+		String web = Server.web;
+		String json = "";
+		Gson gson = new Gson();
+		ClientConfig config = new DefaultClientConfig();
+		Client client = Client.create(config);
+		WebResource webResource = client.resource(Server.addressAuctionWS);
+		Form form = new Form();
+		form.add("masp", masp);
+		form.add("nguoidat", session.getAttribute("username").toString());
+		ClientResponse response = null;
+		ArrayList<Lichsudaugia> lss = new ArrayList<Lichsudaugia>();
+		json = webResource
+				.path("lichsudaugia/findByNguoidat")
+				.cookie(new NewCookie("JSESSIONID", session.getAttribute(
+						"sessionid").toString())).post(String.class,form);
+		Type typelist = new TypeToken<ArrayList<Lichsudaugia>>() {}.getType();
+		lss = gson.fromJson(json, typelist);
+		log.info(lss.toString());
+		model.addAttribute("lss", lss);
+		model.addAttribute("tieude", "Lượt đặt trên sản phẩm");
+		return "luotdattrensp.html";
+	}
+
+	
 	@RequestMapping(value = "/datgia", method = RequestMethod.POST)
 	public @ResponseBody
 	String datgia(HttpServletRequest request) {
@@ -191,9 +221,7 @@ public class ChiTietSanPhamController {
 		json = response.getEntity(String.class);	
 		return json;
 	}
-	
-	
-	
+		
 	@RequestMapping(value = "/kiemtranguoidatgia", method = RequestMethod.POST)
 	public @ResponseBody
 	String kiemtranguoidatgia(HttpServletRequest request) {
