@@ -54,8 +54,9 @@
 	src="${pageContext.request.contextPath}/resources/js/jquery.countdown.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/numeral.min.js"></script>
+<link href="${pageContext.request.contextPath}/resources/v2/css/tiny.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript"
-	src="resources/v2/js/jquery.hovercard.min.js"></script>
+	src="${pageContext.request.contextPath}/resources/v2/js/tinybox.js"></script>
 <!-- OLD -->
 <!-- socket nhan tin dang san pham -->
 <script type="text/javascript">
@@ -89,7 +90,9 @@
 
 	function onMessageRe(evt) {
 		var received_msg = evt.data;
-		alert(received_msg);
+		leftX = screen.width - 500;
+		topY = screen.height - 400;
+		TINY.box.show({html: received_msg ,animate:false,close:false,mask:false,boxid:'success',autohide:5,top:topY,left:leftX});
 	}
 	function onErrorRe(evt) {
 		alert(evt.data);

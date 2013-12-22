@@ -611,10 +611,10 @@ public class QuanLySanPhamUserController {
 				.post(String.class, form);
 		log.info(resultsavesanpham);
 		String[] args = resultsavesanpham.split(",");
-		model.addAttribute("masp", args[1]);
-		model.addAttribute("tieude", "Kết quả thuộc sản phẩm");
-		model.addAttribute("noidung", args[0] + "<br>"+noidung);
-		model.addAttribute("thanhcong", "true");
+		request.setAttribute("masp", args[1]);
+		request.setAttribute("tieude", "Kết quả thuộc sản phẩm");
+		request.setAttribute("noidung", args[0] + "<br>"+noidung);
+		request.setAttribute("thanhcong", "true");
 		return "thongbaoqlsanphamuser";		
 	}
 }
