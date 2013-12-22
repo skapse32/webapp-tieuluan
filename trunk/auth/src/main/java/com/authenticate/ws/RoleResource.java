@@ -11,11 +11,14 @@ import org.forgerock.opendj.ldap.Connection;
 import org.forgerock.opendj.ldap.LDAPConnectionFactory;
 import org.forgerock.opendj.ldap.SearchScope;
 import org.forgerock.opendj.ldap.responses.SearchResultEntry;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 @SuppressWarnings("rawtypes")
 @Path("/role")
 public class RoleResource {
 
+	
 	@POST
 	@Path("/getRoleUser")
 	public String getRole1(@FormParam("accessToken") String accessToken) {
@@ -42,7 +45,7 @@ public class RoleResource {
 		}
 
 		Connection connection = null;
-		String[] group = new String[] { "DeactiveUsers", "Users", "Admins" };
+		String[] group = new String[] { "DeactiveUser", "User", "Admin" };
 		try {
 			LDAPConnectionFactory factory = new LDAPConnectionFactory(
 					"localhost", 1389);
