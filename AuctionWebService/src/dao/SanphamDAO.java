@@ -31,6 +31,7 @@ public class SanphamDAO implements ISanphamDAO {
 	public static final String NGUOIDANG = "nguoidang";
 	public static final String GIAKHOIDIEM = "giakhoidiem";
 	public static final String GIAHIENTAI = "giahientai";
+	public static final String GIAMUANGAY = "giamuangay";
 	public static final String NGUOIDAT = "nguoidat";
 	public static final String BUOCGIA = "buocgia";
 	public static final String THONGTINLIENHE = "thongtinlienhe";

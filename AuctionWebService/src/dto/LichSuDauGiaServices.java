@@ -150,7 +150,6 @@ public class LichSuDauGiaServices {
 			modeldslsdg.add(modelsp);
 		}
 		return modeldslsdg;
-		
 	}
 	
 	@POST
