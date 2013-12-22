@@ -98,6 +98,14 @@ public class Lichsudaugia  implements java.io.Serializable {
     public void setGiadat(Double giadat) {
         this.giadat = giadat;
     }
+
+
+	@Override
+	public String toString() {
+		return "Lichsudaugia [id=" + id + ", sanpham=" + sanpham
+				+ ", nguoidat=" + nguoidat + ", thoigian=" + thoigian
+				+ ", giadat=" + giadat + "]";
+	}
    
 
 

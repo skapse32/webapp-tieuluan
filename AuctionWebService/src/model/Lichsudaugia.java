@@ -6,6 +6,13 @@ public class Lichsudaugia implements java.io.Serializable {
 
 	// Fields
 
+	@Override
+	public String toString() {
+		return "Lichsudaugia [id=" + id + ", masp=" + masp + ", tensp=" + tensp
+				+ ", nguoidat=" + nguoidat + ", thoigian=" + thoigian
+				+ ", giadat=" + giadat + "]";
+	}
+
 	private Long id;
 	private Long masp;
 	private String tensp;
