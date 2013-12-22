@@ -29,7 +29,7 @@
 		</div>
 		<form action="${pageContext.request.contextPath}/dangsanpham"
 			name="formdangsanpham" id="fdangsanpham" method="post"
-			enctype="multipart/form-data">
+			enctype="multipart/form-data" >
 			<!-- InstanceBeginEditable name="MainRegion" -->
 			<div class="Required_Notice" style="color: red; margin-top: 50px">
 				Bạn phải chọn các thông tin này "<b class="Required">*</b>"
@@ -328,8 +328,7 @@
 							<td colspan="2" lang="vi"
 								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
 								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> <input type="submit"
-									name="action" value="Đăng sản phẩm" />
+								class="Apple-style-span"> <input type="submit" name="action" value="Đăng sản phẩm" />
 							</span>
 							</td>
 						</tr>

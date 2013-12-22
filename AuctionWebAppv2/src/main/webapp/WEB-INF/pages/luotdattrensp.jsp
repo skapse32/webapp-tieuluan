@@ -7,8 +7,22 @@
 
 <div id="content" class="wmain">
 	<div id="box-left" class="fl top10 bg_white wleft">
+		<div id="products-group" class="fl bg-top-products wleft">
+			<div id="browser-modules" class="fl browser fontTahoma">
+				<a href="" class="fl url_home l8 right8"> <img class="fl w21-18"
+					alt="" src="resources/v2/images/blank.gif" />
+				</a> <img class="fl right8" src="resources/v2/images/arrow.gif" alt="" />
+				<div class="fl top3 right8">
+					<a class="fl link_blue bold" href="">${username}</a>
+				</div>
+				<img class="fl right8" src="resources/v2/images/arrow.gif" alt="" />
+				<div class="fl top3 right8">
+					<a class="fl link_blue bold" href="">Danh sách đặt giá bạn đã đặt</a>
+				</div>
+			</div>
+		</div>
 		<table class="product_technical_table"
-			style="font-family: Tahoma, Verdana; border-collapse: collapse; width: 340px;">
+			style="font-family: Tahoma, Verdana; border-collapse: collapse; width: 340px; margin: auto">
 			<tbody style="font-family: Tahoma, Verdana;">
 				<tr class="title"
 					style="background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(229, 229, 229); color: rgb(204, 0, 0); font-weight: bold; text-align: center;">

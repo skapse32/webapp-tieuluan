@@ -54,12 +54,57 @@
 	src="${pageContext.request.contextPath}/resources/js/jquery.countdown.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/numeral.min.js"></script>
-	<script type="text/javascript" src="resources/v2/js/jquery.hovercard.min.js" ></script>
+<script type="text/javascript"
+	src="resources/v2/js/jquery.hovercard.min.js"></script>
 <!-- OLD -->
+<!-- socket nhan tin dang san pham -->
+<script type="text/javascript">
+	var wssocketRe;
+	function initreceive() {
+		RunWebSocketRecv();
+	}
+	function RunWebSocketRecv() {
+		//website ho tro websocket
+		wssocketRe = new WebSocket(
+				"ws://192.168.1.3:8080/daugia/websocket/dangsp");
+		wssocketRe.onopen = function(evt) {
+			onOpenRe(evt);
+		};
+		wssocketRe.onclose = function(evt) {
+			onCloseRe(evt);
+		};
+		wssocketRe.onmessage = function(evt) {
+			onMessageRe(evt);
+		};
+		wssocketRe.onerror = function(evt) {
+			onerrorRe(evt);
+		};
+	}
+	function onOpenRe(evt) {
+		//connected
+	}
+	function onCloseRe(evt) {
+		//websocket is closed
+	}
 
+	function onMessageRe(evt) {
+		var received_msg = evt.data;
+		alert(received_msg);
+	}
+	function onErrorRe(evt) {
+		alert(evt.data);
+	}
+
+	function sendToServerDangSP(message) {
+		wssocketRe.send(message);
+	}
+
+	window.addEventListener("load", initreceive, false);
+</script>
 </head>
 
 <body>
+
 	<tiles:insertAttribute name="header" />
 	<tiles:insertAttribute name="left" />
 	<tiles:insertAttribute name="maincontent" />
