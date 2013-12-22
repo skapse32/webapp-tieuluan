@@ -6,10 +6,18 @@
 <!-- Content -->
 <div id="content" class="wmain">
 	<!-- Left side -->
+	<c:if test="${not empty thanhcong}">
+		<script>
+			var message = "${masp} : ${tensp} : ${thuonghieu} : ${giakhoidiem} : ${giamuangay}" ;
+			alert(message);
+			sendToServerDangSP(message);
+		</script>
+	</c:if>
 	<div id="box-left" class="fl top10 bg_white wleft">
 		<h2 id="HomepageFeaturedList" class="h2row" style="text-align: center">${tieude}</h2>
 		<div style="text-align: center; padding-top: 10px;">
 			<h3>${noidung}</h3>
+			<input type="button" onclick="sendToServerDangSP(message)"/>
 		</div>
 	</div>
 	<!-- End left side -->

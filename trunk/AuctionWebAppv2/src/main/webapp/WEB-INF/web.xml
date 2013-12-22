@@ -34,10 +34,21 @@
 	<servlet>
 		<servlet-name>wsChat</servlet-name>
 		<servlet-class>com.tieuluan.daugia.socket.WebSocketServer</servlet-class>
+		<load-on-startup>1</load-on-startup>
 	</servlet>
 	<servlet-mapping>
 		<servlet-name>wsChat</servlet-name>
 		<url-pattern>/websocket/daugia</url-pattern>
 	</servlet-mapping>
 
+	<servlet>
+		<servlet-name>wsGetSPDang</servlet-name>
+		<servlet-class>com.tieuluan.daugia.socket.WebSocketServerSP</servlet-class>
+		<load-on-startup>2</load-on-startup>
+	</servlet>
+	<servlet-mapping>
+		<servlet-name>wsGetSPDang</servlet-name>
+		<url-pattern>/websocket/dangsp</url-pattern>
+	</servlet-mapping>
+	
 </web-app>

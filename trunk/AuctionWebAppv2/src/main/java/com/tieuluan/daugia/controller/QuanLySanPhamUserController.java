@@ -535,7 +535,6 @@ public class QuanLySanPhamUserController {
 			pathname = Server.saveDirectory + file.getOriginalFilename();
 			file.transferTo(new File(pathname));
 			try {
-				
 				File fileupload = new File(pathname);
 				FileDataBodyPart fdp = new FileDataBodyPart("file", fileupload,
 						MediaType.APPLICATION_OCTET_STREAM_TYPE);
@@ -568,19 +567,23 @@ public class QuanLySanPhamUserController {
 		}
 		log.info(request.getParameter("txtxuatxu"));
 		tensp = request.getParameter("txttensp");
+		model.addAttribute("tensp", tensp);
 		matinhtrangsp = request.getParameter("selectttsp");
 		maloaisp = request.getParameter("selectloaisp");
 		soluong = request.getParameter("txtsoluong");
 		xuatxu = request.getParameter("txtxuatxu");
 		thuonghieu = request.getParameter("thuonghieu");
+		model.addAttribute("thuonghieu", thuonghieu);
 		mota = request.getParameter("txtmota");
 		giakhoidiem = request.getParameter("txtgiakhoidiem");
+		model.addAttribute("giakhoidiem", giakhoidiem);
 		buocgia = request.getParameter("txtbuocgia");
 		thoigianbatdau = request.getParameter("txttgbt");
 		thoigianketthuc = request.getParameter("txttgkt");
 		mahttt = request.getParameter("selecthttt");
 		thongtinlienhe = request.getParameter("txtthongtinlienhe");
 		giamuangay = request.getParameter("txtmuangay");
+		model.addAttribute("giamuangay", giamuangay);
 		Form form = new Form();
 		form.add("tensp", tensp);
 		form.add("matinhtrangsp", matinhtrangsp);
@@ -606,8 +609,12 @@ public class QuanLySanPhamUserController {
 				.type(MediaType.APPLICATION_FORM_URLENCODED)
 				.accept(MediaType.APPLICATION_JSON)
 				.post(String.class, form);
+		log.info(resultsavesanpham);
+		String[] args = resultsavesanpham.split(",");
+		model.addAttribute("masp", args[1]);
 		model.addAttribute("tieude", "Kết quả thuộc sản phẩm");
-		model.addAttribute("noidung", resultsavesanpham+"<br>"+noidung);
+		model.addAttribute("noidung", args[0] + "<br>"+noidung);
+		model.addAttribute("thanhcong", "true");
 		return "thongbaoqlsanphamuser";		
 	}
 }

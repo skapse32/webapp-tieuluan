@@ -35,9 +35,6 @@
 							+ "&nbsp;đ";
 				});
 
-			},
-			error : function(e) {
-				alert('Error: ' + e);
 			}
 		});
 	};

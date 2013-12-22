@@ -24,6 +24,7 @@ import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.representation.Form;
+import com.tieuluan.daugia.function.Function;
 import com.tieuluan.daugia.function.Server;
 import com.tieuluan.daugia.model.Sanpham;
 import com.tieuluan.daugia.model.User;
@@ -211,13 +212,34 @@ public class ThanhToanController {
 	@RequestMapping(value = "/updateTinhTrangDG" , method = RequestMethod.POST)
 	public @ResponseBody String updateTinhTrangDaugia(HttpServletRequest request , Model model){
 		String masp=request.getParameter("maSP");
+		String nguoidatagia = request.getParameter("nguoidat");
 		HttpSession session = request.getSession();
 		String json = "";
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
 		WebResource webResource = client.resource(Server.addressAuctionWS);
-		System.out.println(masp);
+		Gson gson = new Gson();
+		//lay thong tin user
+		json = webResource
+				.path("user/getUserInfo")
+				.cookie(new NewCookie("JSESSIONID", session.getAttribute(
+						"sessionid").toString())).post(String.class);
+		User user = gson.fromJson(json, User.class);
+		//lay thong tin sanpham
+		ClientResponse response = null;
 		Form form = new Form();
+		form.add("masp", masp);
+		response = webResource
+				.path("sanpham/findById")
+				.cookie(new NewCookie("JSESSIONID", session.getAttribute("sessionid").toString()))
+				.post(ClientResponse.class, form);
+		json = response.getEntity(String.class);
+		Sanpham sp = gson.fromJson(json, Sanpham.class);
+		
+		Function.sendmail(user, sp);
+		
+		System.out.println(masp);
+		form = new Form();
 		form.add("masp", masp);
 		json = webResource.path("tinhtrangdg/ketthuc").cookie(new NewCookie("JSESSIONID", session.getAttribute("sessionid").toString())).post(String.class,form);
 		if(json.equals("success")){

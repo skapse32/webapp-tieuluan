@@ -144,6 +144,12 @@ public class ChiTietSanPhamController {
 		model.addAttribute("maLoaiSP", maloaisp);
 		model.addAttribute("soTrang", soTrang);
 		model.addAttribute("dssp", dssp);
+		
+		//get tinh trang san pham.
+		if(sp.getTinhtrangdaugia() == 1){
+			//ket huc
+			model.addAttribute("dadau", "da xong");
+		}
 		return "chitietsanpham.html";
 	}
 	
