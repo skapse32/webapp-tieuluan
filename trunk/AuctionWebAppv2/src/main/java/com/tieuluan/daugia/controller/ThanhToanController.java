@@ -55,9 +55,7 @@ public class ThanhToanController {
 			model.addAttribute("tieude", "Lỗi");
 			if (response.getStatus() == 401) {
 
-				model.addAttribute("noidung",
-						"Bận cần phải đăng nhập mới thanh toán được sản phẩm này!");
-
+				model.addAttribute("noidung","Bận cần phải đăng nhập mới thanh toán được sản phẩm này!");
 			} else {
 				model.addAttribute("noidung", response.getStatus());
 			}
@@ -89,36 +87,23 @@ public class ThanhToanController {
 			String username=session.getAttribute("username").toString();
 			if(!username.equals(sp.getNguoidat())){
 				model.addAttribute("tieude", "Lỗi");
-				model.addAttribute("noidung",
-						"Bạn không có quyền thanh toán sản phẩm này");
+				model.addAttribute("noidung","Bạn không có quyền thanh toán sản phẩm này");
 				model.addAttribute("web", web);
 				return "thongbao";
 			}
 			//get thong tin nguoi ban
-//			form = new Form();
-//			form.add("username", sp.getNguoidang());
-//			json=webResource
-//					.path("user/getUserInfoNguoiBan")
-//					.cookie(new NewCookie("JSESSIONID", session.getAttribute("sessionid").toString()))
-//					.post(String.class, form);
-//			User nguoimua = gson.fromJson(json, User.class);
-//			//get thong tin nguoi mua
-//			form = new Form();
-//			form.add("username", username);
-//			json=webResource
-//					.path("user/getUserInfo")
-//					.cookie(new NewCookie("JSESSIONID", session.getAttribute("sessionid").toString()))
-//					.post(String.class, form);
-//			User nguoiban = gson.fromJson(json, User.class);
-			//
-			User nguoiban=new User();
-			nguoiban.setHoTen("Pham Quy Anh");
-			nguoiban.setDienThoai("123456789");
-			nguoiban.setDiaChi("987654321");
-			User nguoimua=new User();
-			nguoimua.setHoTen("Pham Quy Anh");
-			nguoimua.setDienThoai("123456789");
-			nguoimua.setDiaChi("987654321");
+			form = new Form();
+			form.add("username", sp.getNguoidang());
+			json=webResource.path("user/getUserInfoNguoiBan")
+					.cookie(new NewCookie("JSESSIONID", session.getAttribute("sessionid").toString()))
+					.post(String.class, form);
+			User nguoiban = gson.fromJson(json, User.class);
+			//get thong tin nguoi mua
+			form = new Form();
+			form.add("username", username);
+			json=webResource.path("user/getUserInfo").cookie(new NewCookie("JSESSIONID", session.getAttribute("sessionid").toString()))
+					.post(String.class, form);
+			User nguoimua = gson.fromJson(json, User.class);
 			//
 			model.addAttribute("sp", sp);
 			model.addAttribute("imageDirectory", imageDirectory);
