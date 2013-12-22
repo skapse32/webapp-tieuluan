@@ -18,6 +18,8 @@ public class LichsudaugiaDAO  implements ILichsudaugiaDAO{
 	//property constants
 	public static final String NGUOIDAT = "nguoidat";
 	public static final String GIADAT = "giadat";
+	public static final String MASP = "masp";
+	public static final String SANPHAMSP = "sanpham";
 
 
 
@@ -141,11 +143,30 @@ public class LichsudaugiaDAO  implements ILichsudaugiaDAO{
 						EntityManagerHelper.log("find by property name failed", Level.SEVERE, re);
 				throw re;
 		}
-	}			
+	}
+    public List<Lichsudaugia> findByPropertys(String propertyName1,String propertyName2, final Object value1,final Object value2
+            ) {
+        				EntityManagerHelper.log("finding Lichsudaugia instance with property: " + propertyName1 + ", value: " + value1.toString()+" and "+ propertyName2 +" value: "+value2.toString(), Level.INFO, null);
+    			try {
+    				getEntityManager().clear();
+    			final String queryString = "select model from Lichsudaugia model where model." 
+    					+ propertyName1 + "= :propertyValue1 "+"AND model."+ propertyName2 +"= :propertyValue2 ";
+    								Query query = getEntityManager().createQuery(queryString);
+    					query.setParameter("propertyValue1", value1);
+    					query.setParameter("propertyValue2", value2);
+    					return query.getResultList();
+    		} catch (RuntimeException re) {
+    						EntityManagerHelper.log("find by property name failed", Level.SEVERE, re);
+    				throw re;
+    		}
+    	}		
 	public List<Lichsudaugia> findByNguoidat(Object nguoidat
 	) {
 		return findByProperty(NGUOIDAT, nguoidat
 		);
+	}
+	public List<Lichsudaugia> findByNguoidats(Object nguoidat,Object msp) {
+		return findByPropertys(NGUOIDAT,SANPHAMSP, nguoidat, msp);
 	}
 	
 	public List<Lichsudaugia> findByGiadat(Object giadat

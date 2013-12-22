@@ -152,4 +152,24 @@ public class LichSuDauGiaServices {
 		return modeldslsdg;
 		
 	}
+	
+	@POST
+	@Path("/findByNguoidat")
+	@Produces("application/json; charset=utf-8")
+	public List<model.Lichsudaugia> findByNguoidat(@FormParam("nguoidat") String nguoidat,@FormParam("masp") Long masp ) {
+	//public List<model.Lichsudaugia> findByNguoidats( String nguoidat,Long masp) {
+		SanphamDAO spdao = new SanphamDAO();
+		dao.Sanpham daosp=spdao.findById(masp);
+		LichsudaugiaDAO lsdgdao=new LichsudaugiaDAO();
+		List<model.Lichsudaugia> modeldslsdg = new ArrayList<model.Lichsudaugia>();
+		
+		List<dao.Lichsudaugia> daodslsdg = lsdgdao.findByNguoidats(nguoidat,daosp);
+		for (dao.Lichsudaugia daolsdg : daodslsdg) {
+			model.Lichsudaugia modelsp = new model.Lichsudaugia(daolsdg.getId(),daolsdg.getSanpham().getMasp(),daolsdg.getSanpham().getTensp(),daolsdg.getNguoidat(),daolsdg.getThoigian().getTime(),daolsdg.getGiadat());
+			modeldslsdg.add(modelsp);
+		}
+	    System.out.println(modeldslsdg.toString());
+		return modeldslsdg;
+		
+	}
 }

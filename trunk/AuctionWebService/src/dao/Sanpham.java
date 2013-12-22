@@ -57,7 +57,23 @@ public class Sanpham  implements java.io.Serializable {
 
     // Constructors
 
-    /** default constructor */
+    @Override
+	public String toString() {
+		return "Sanpham [masp=" + masp + ", loaisp=" + loaisp
+				+ ", tinhtrangsp=" + tinhtrangsp + ", hinhthucthanhtoan="
+				+ hinhthucthanhtoan + ", tensp=" + tensp + ", soluong="
+				+ soluong + ", xuatxu=" + xuatxu + ", thuonghieu=" + thuonghieu
+				+ ", nguoidang=" + nguoidang + ", giakhoidiem=" + giakhoidiem
+				+ ", giahientai=" + giahientai + ", nguoidat=" + nguoidat
+				+ ", buocgia=" + buocgia + ", thoigianbatdau=" + thoigianbatdau
+				+ ", thoigianketthuc=" + thoigianketthuc + ", thongtinlienhe="
+				+ thongtinlienhe + ", hinhanh=" + hinhanh + ", mota=" + mota
+				+ ", tinhtrangdaugia=" + tinhtrangdaugia + ", ghichu=" + ghichu
+				+ ", hoadons=" + hoadons + ", lichsudaugias=" + lichsudaugias
+				+ "]";
+	}
+
+	/** default constructor */
     public Sanpham() {
     }
 
