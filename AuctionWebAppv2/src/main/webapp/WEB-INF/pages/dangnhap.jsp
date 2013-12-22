@@ -3,45 +3,42 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
-<div style="margin: 100px;" align="center">
+<div style="margin:40px auto 20px auto;" align="center">
 	<c:if test="${not empty error }">
 		<script type="text/javascript">
 			alert("${errorcontent}");
 		</script>
 	</c:if>
-	<form 
+	<form class="loginform"
 		action="${pageContext.request.contextPath}/dangnhap?action=dangnhap"
 		method="post">
-		<br />
-		<table style="font-size: 11pt">
+		<br/>
+		<table style="font-size: 11pt" class="logintable">
 			<tr>
-				<td width="300px" style="text-align: right; vertical-align: middle;">Tên đăng nhập :
+				<td width="300px" style="text-align: right; vertical-align: middle;"><label class="control-label">Tên đăng nhập</label>   
 				</td>
-				<td width="167"><input id="username" name="username" size="25"
+				<td width="167"><input id="username" class="login" name="username" size="25"
 					type="text" value="" /></td>
 				<td width="269">&nbsp;</td>
 			</tr>
 			<tr></tr>
 			<tr valign="middle">
-				<td style="text-align: right; vertical-align: middle;">Mật
-					khẩu :</td>
-				<td><input id="password" name="password" size="25"
+				<td style="padding:5px;text-align: right; vertical-align: middle;"><label class="control-label">Mật khẩu</label></td>
+				<td><input id="password" class="login" name="password" size="25"
 					type="password" value="" /></td>
 				<td>&nbsp;</td>
 			</tr>
 			<tr>
 				<td valign="top"><br></td>
-				<td colspan="2" valign="top"><a href="dangky">Bạn chưa có tài khoản?</a>
+				<td colspan="2" valign="top" style="padding:10px;"><a href="dangky" class="qlogin">Bạn chưa có tài khoản?</a>
 				</td>
 			</tr>
-			<tr>
-				<td valign="top"><br></td>
-				<td colspan="2" valign="top"><label style="color: Red">${error}</label>
-				</td>
-			</tr>
+			
 		</table>
 		<div align="center">
-			<input type="submit" value="Đăng nhập" id="btnDangNhap" />
+		<div style="width:100px;">
+			<input class="button orange" type="submit"  value="Đăng nhập" id="btnDangNhap">
+		</div>
 		</div>
 	</form>
 </div>
