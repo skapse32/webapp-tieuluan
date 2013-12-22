@@ -16,8 +16,8 @@ import dao.EntityManagerHelper;
 
 public class Function {
 	public static void sendmail(model.User user, dao.Sanpham sp){
-		final String username = "09110clc@gmail.com";
-		final String password = "thayphuong";
+		final String username = "auctionSPKT@gmail.com";
+		final String password = "congnghethongtin";
 
 		DecimalFormat formatter = new DecimalFormat("#,###");
 		
@@ -39,7 +39,7 @@ public class Function {
 		try {
  
 			Message message = new MimeMessage(session);
-			message.setFrom(new InternetAddress("09110clc@gmail.com"));
+			message.setFrom(new InternetAddress("auctionSPKT@gmail.com"));
 			message.setRecipients(Message.RecipientType.TO,
 				InternetAddress.parse(user.getEmail()));
 			message.setSubject("Thắng phiên!");

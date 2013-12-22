@@ -42,6 +42,7 @@ public class Sanpham  implements java.io.Serializable {
      private String nguoidang;
      private Double giakhoidiem;
      private Double giahientai;
+     private Double giamuangay;
      private String nguoidat;
      private Double buocgia;
      private Timestamp thoigianbatdau;
@@ -78,7 +79,7 @@ public class Sanpham  implements java.io.Serializable {
     }
 
 	/** minimal constructor */
-    public Sanpham(Loaisp loaisp, Tinhtrangsp tinhtrangsp, Hinhthucthanhtoan hinhthucthanhtoan, String tensp, Integer soluong, String xuatxu, String thuonghieu, String nguoidang, Double giakhoidiem, Double giahientai, String nguoidat, Double buocgia, Timestamp thoigianbatdau, Timestamp thoigianketthuc, String thongtinlienhe, String hinhanh, String mota, Integer tinhtrangdaugia, String ghichu) {
+    public Sanpham(Loaisp loaisp, Tinhtrangsp tinhtrangsp, Hinhthucthanhtoan hinhthucthanhtoan, String tensp, Integer soluong, String xuatxu, String thuonghieu, String nguoidang, Double giakhoidiem, Double giahientai, String nguoidat, Double buocgia, Double giamuangay ,Timestamp thoigianbatdau, Timestamp thoigianketthuc, String thongtinlienhe, String hinhanh, String mota, Integer tinhtrangdaugia, String ghichu) {
         this.loaisp = loaisp;
         this.tinhtrangsp = tinhtrangsp;
         this.hinhthucthanhtoan = hinhthucthanhtoan;
@@ -98,10 +99,11 @@ public class Sanpham  implements java.io.Serializable {
         this.mota = mota;
         this.tinhtrangdaugia = tinhtrangdaugia;
         this.ghichu = ghichu;
+        this.giamuangay = giamuangay;
     }
     
     /** full constructor */
-    public Sanpham(Loaisp loaisp, Tinhtrangsp tinhtrangsp, Hinhthucthanhtoan hinhthucthanhtoan, String tensp, Integer soluong, String xuatxu, String thuonghieu, String nguoidang, Double giakhoidiem, Double giahientai, String nguoidat, Double buocgia, Timestamp thoigianbatdau, Timestamp thoigianketthuc, String thongtinlienhe, String hinhanh, String mota, Integer tinhtrangdaugia, String ghichu, Set<Hoadon> hoadons, Set<Lichsudaugia> lichsudaugias) {
+    public Sanpham(Loaisp loaisp, Tinhtrangsp tinhtrangsp, Hinhthucthanhtoan hinhthucthanhtoan, String tensp, Integer soluong, String xuatxu, String thuonghieu, String nguoidang, Double giakhoidiem, Double giahientai, String nguoidat,Double giamuangay ,Double buocgia, Timestamp thoigianbatdau, Timestamp thoigianketthuc, String thongtinlienhe, String hinhanh, String mota, Integer tinhtrangdaugia, String ghichu, Set<Hoadon> hoadons, Set<Lichsudaugia> lichsudaugias) {
         this.loaisp = loaisp;
         this.tinhtrangsp = tinhtrangsp;
         this.hinhthucthanhtoan = hinhthucthanhtoan;
@@ -123,6 +125,7 @@ public class Sanpham  implements java.io.Serializable {
         this.ghichu = ghichu;
         this.hoadons = hoadons;
         this.lichsudaugias = lichsudaugias;
+        this.giamuangay = giamuangay;
     }
 
    
@@ -279,7 +282,16 @@ public class Sanpham  implements java.io.Serializable {
         this.thoigianketthuc = thoigianketthuc;
     }
     
-    @Column(name="thongtinlienhe", nullable=false, length=500)
+    @Column(name="giamuangay", nullable=true, precision=22, scale=0)
+    public Double getGiamuangay() {
+		return giamuangay;
+	}
+
+	public void setGiamuangay(Double giamuangay) {
+		this.giamuangay = giamuangay;
+	}
+
+	@Column(name="thongtinlienhe", nullable=false, length=500)
 
     public String getThongtinlienhe() {
         return this.thongtinlienhe;
