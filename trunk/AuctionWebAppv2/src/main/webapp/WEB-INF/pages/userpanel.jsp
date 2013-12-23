@@ -5,6 +5,7 @@
 
 <!-- Content -->
 <div id="content" class="wmain">
+
 	<!-- Left side -->
 	<div id="box-left" class="fl top10 bg_white wleft">
 		<div id="products-group" class="fl bg-top-products wleft">
@@ -21,20 +22,20 @@
 				</div>
 			</div>
 		</div>
-		<h2 id="HomepageFeaturedList" class="h2row" style="text-align: center">Home</h2>
-		<div>
-			<h2 style="margin-left: 20px">User</h2>
-			<h3 style="margin-left: 40px">
-				<a href="${pageContext.request.contextPath}/sanphamdangdau.html">Danh
-					sách sản phẩm</a>
-			</h3>
-			<h3 style="margin-left: 40px">
-				<a href="${pageContext.request.contextPath}/dangsanpham">Đăng
-					sản phẩm</a>
-			</h3>
-			<h3 style="margin-left: 40px">
-				<a href="${pageContext.request.contextPath}/dangxuat">Đăng xuất</a>
-			</h3>
+		
+		<div class="userpanel bor_gr">
+			<table>
+				<tr>
+					<td><a href="${pageContext.request.contextPath}/sanphamdangdau.html"><img src="${pageContext.request.contextPath}/resources/images/view_list.png" /><label>Danh sách sản phẩm</label></a> </td>
+				</tr>
+				<tr>
+					<td> <a href="${pageContext.request.contextPath}/dangsanpham"><img src="${pageContext.request.contextPath}/resources/images/add.png" /><label>Đăng sản phẩm</label></a></td>
+				</tr>
+				<tr>
+					<td><a href="${pageContext.request.contextPath}/dangxuat"><img src="${pageContext.request.contextPath}/resources/images/logout.png" /><label>Đăng xuất</label></a> </td>
+				</tr>
+			</table>
+			
 		</div>
 	</div>
 

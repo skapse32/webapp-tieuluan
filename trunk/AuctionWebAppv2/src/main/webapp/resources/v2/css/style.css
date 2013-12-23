@@ -967,6 +967,64 @@ input.login:focus, input.login:focus {
 	background: -moz-linear-gradient(top,  #f47a20,  #faa51a);
 	filter:  progid:DXImageTransform.Microsoft.gradient(startColorstr='#f47a20', endColorstr='#faa51a');
 }
+.userpanel{
+	padding-top:50px;
+	min-height: 500px;
+	height: auto;
+	margin-bottom:20px;
+}
+.userpanel table{
+	margin: auto;
+	border-spacing: 10px;
+}
+.userpanel table td{
+	background-color:#FAFAFA;
+	width: 380px;
+	padding:10px;
+	border: 1px solid #DADADA;
+	border-left: 5px solid #DADADA;
+	border-right: 5px solid #DADADA;
+	}
+.userpanel table td:hover{
+	background-color:#FAFAFA;
+	width: 380px;
+	padding:10px;
+	border: 1px solid #EE564D;
+	border-left: 5px solid #EE564D;
+	border-right: 5px solid #EE564D;
+	}
+.userpanel img{
+	width:100px;
+	height: auto;
+	float:left;
+}
+.userpanel a{
+	
+	font-size: 18px;
+	font-weight: bold;
+	text-decoration: none;
+}
+.userpanel a:hover{
+	
+	font-weight: bold;
+	text-decoration:underline;
+}
+.userpanel label{
+	position:relative;
+	float:left;
+	text-align:center;
+	margin:auto;
+	top:34px;
+	right:-40px;
+}
+.bor_gr{
+	border-left: 1px solid #e5e5e5;
+	border-left-style: dashed;
+	border-right: 1px solid #e5e5e5;
+	border-right-style: dashed;
+	border-bottom: 1px solid #e5e5e5;
+	border-bottom-style: dashed;
+}
 .bor_group {
 	background: #fff;
 	border-left: 1px solid #e5e5e5;
