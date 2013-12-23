@@ -6,7 +6,7 @@
 
 <!-- Header -->
 	<div id="header" class="header wmain">
-        <a class="fl top32 l10" href="."><img class="fl logo" alt="Yamaha Nozza, Cuxi, Nouvo, Luvias, Exciter, Jupiter - Tổng đại lý Yamaha Motor tại Việt Nam" src="resources/v2/images/logo.jpg"/></a>
+        <a class="fl top28" href="."><img class="fl logo" alt="Website dau gia online" src="resources/v2/images/logo2.png"/></a>
     </div>
 <!-- Header end -->
 
