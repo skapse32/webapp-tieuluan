@@ -45,6 +45,24 @@ body {
 	font-weight: bold;
 }
 
+input.bu{
+	width:25px;
+	height:25px;
+	background-color: #FAFAFA;
+	border:1px solid #AB2D2A;
+}
+input.bu-a{
+	color:white;
+	width:25px;
+	height:25px;
+	background-color: #AB2D2A;
+	border:1px solid #AB2D2A;
+}
+
+select.s-page{
+	height: 25px;
+	border:1px solid #AB2D2A;
+}
 img {
 	border: none;
 	margin: 0;
