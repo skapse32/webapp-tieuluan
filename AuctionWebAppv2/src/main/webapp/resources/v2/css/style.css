@@ -387,6 +387,9 @@ ul li {
 .top10 {
 	margin-top: 10px;
 }
+.top20 {
+	margin-top: 20px;
+}
 
 .top9 {
 	margin-top: 9px;
@@ -720,7 +723,7 @@ a.set-group {
 a.detail_products {
 	width: 93px;
 	height: 18px;
-	padding-top: 3px;
+	padding-top: 3px !important;
 	text-decoration: none;
 }
 

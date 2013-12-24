@@ -16,9 +16,12 @@
 
 <link rel="stylesheet" type="text/css"
 	href="resources/v2/js/datetimepicker/jquery.datetimepicker.css" />
+<link rel="stylesheet" type="text/css"
+	href="resources/v2/css/slider-style.css" />
 <link href="http://www.jqueryscript.net/css/jquerysctipttop.css"
 	rel="stylesheet" type="text/css">
 <script src="resources/v2/js/datetimepicker/jquery.js"></script>
+<script src="resources/v2/js/jquery.flexisel.js"></script>
 
 
 <!-- OLD ------------------------------------------------------------------------------------->
@@ -67,7 +70,7 @@
 	function RunWebSocketRecv() {
 		//website ho tro websocket
 		wssocketRe = new WebSocket(
-				"ws://192.168.1.3:8080/daugia/websocket/dangsp");
+				"ws:/localhost:8080/daugia/websocket/dangsp");
 		wssocketRe.onopen = function(evt) {
 			onOpenRe(evt);
 		};
