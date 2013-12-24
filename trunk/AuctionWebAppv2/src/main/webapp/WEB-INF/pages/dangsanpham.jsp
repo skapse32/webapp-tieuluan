@@ -11,7 +11,11 @@
 
 <div id="content" class="wmain">
 	<!-- start left-box -->
-
+	<c:if test="${not empty error}">
+	<script type="text/javascript">
+		TINY.box.show({html:'${error}',animate:false,close:false,boxid:'error',top:5});
+	</script>
+	</c:if>
 	<div id="box-left" class="fl top10 bg_white wleft">
 		<div id="products-group" class="fl bg-top-products wleft">
 			<div id="browser-modules" class="fl browser fontTahoma">
@@ -217,9 +221,10 @@
 							<td class="value"
 								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
 								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> <input name="txtgiakhoidiem"
-									maxlength="50" size="30" type="text" value="">VND<b
-									class="Required">*</b>
+								class="Apple-style-span" id="txtgiakhoidiem"> <input  name="txtgiakhoidiem"
+									maxlength="50" size="30" type="text" value="">VND<span
+							class="textfieldInvalidFormatMsg">Chưa đúng địng dạng
+								mệnh giá</span><span class="textfieldRequiredMsg">*</span>
 							</span>
 							</td>
 							<td></td>
@@ -234,9 +239,10 @@
 							<td class="value"
 								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
 								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> <input name="txtbuocgia"
-									maxlength="50" size="30" type="text" value="">VND<b
-									class="Required">*</b>
+								class="Apple-style-span" id="txtbuocgia"> <input name="txtbuocgia"
+									maxlength="50" size="30" type="text" value="">VND<span
+							class="textfieldInvalidFormatMsg">Chưa đúng địng dạng
+								mệnh giá</span><span class="textfieldRequiredMsg">*</span>
 							</span>
 							</td>
 						</tr>
@@ -249,9 +255,10 @@
 							<td class="value"
 								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
 								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> <input name="txtmuangay"
-									maxlength="50" size="30" type="text" value="">VND<b
-									class="Required">*</b>
+								class="Apple-style-span" id="txtmuangay"> <input name="txtmuangay"
+									maxlength="50" size="30" type="text" value="">VND<span
+							class="textfieldInvalidFormatMsg">Chưa đúng địng dạng
+								mệnh giá</span><span class="textfieldRequiredMsg">*</span>
 							</span>
 							</td>
 						</tr>
@@ -402,4 +409,7 @@ $('#txttgbt').datetimepicker({
 $('#txttgkt').datetimepicker({
 	format:'Y-m-d H:i:00'
 });
+var textfieldwidget1 = new Spry.Widget.ValidationTextField("txtgiakhoidiem", "currency" , { validateOn : [ "change" ]});
+var textfieldwidget1 = new Spry.Widget.ValidationTextField("txtbuocgia", "currency" , { validateOn : [ "change" ]});
+var textfieldwidget1 = new Spry.Widget.ValidationTextField("txtmuangay", "currency" , { validateOn : [ "change" ]});
 </script>
