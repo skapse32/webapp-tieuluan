@@ -104,6 +104,18 @@ public class HomeController {
 		typelist = new TypeToken<ArrayList<Sanpham>>() {
 		}.getType();
 		dssp = gson.fromJson(json, typelist);
+		//lay top 10 san pham
+		gson = new Gson();
+		List<Sanpham> dstop = new ArrayList<Sanpham>();
+		form = new Form();
+		form.add("top", 10);
+		json = webResource
+				.path("sanpham/findSanPhamDangDauTop")
+				.cookie(new NewCookie("JSESSIONID", session.getAttribute(
+						"sessionid").toString())).post(String.class, form);
+		typelist = new TypeToken<ArrayList<Sanpham>>(){}.getType();
+		dstop = gson.fromJson(json, typelist);
+		model.addAttribute("dstop", dstop);
 		// lay so luong san pham
 		form = new Form();
 		form.add("maloaisp", maLoaiSP);

@@ -61,7 +61,7 @@
 			<img alt="" src="resources/v2/images/sub-titles.jpg" />
 		<div id="banner-home" class="fl wleft">
 		<ul id="flexiselslider">
-			   <c:forEach var="sp" items="${dssp}">
+			   <c:forEach var="sp" items="${dstop}">
 			   <li>
 					<div align="center" class="fl pd05 w170 hpros sep_pros">
 						<div class="HinhSP">
