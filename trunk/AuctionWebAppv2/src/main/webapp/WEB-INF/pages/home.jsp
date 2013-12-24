@@ -34,6 +34,9 @@
 									document.getElementById("giahientai"
 											+ element.masp).innerHTML = x
 											+ "&nbsp;d";
+									document.getElementById("agiahientai"
+											+ element.masp).innerHTML = x
+											+ "&nbsp;d";
 								});
 
 			},
@@ -47,12 +50,120 @@
 <div id="content" class="wmain">
 	<!-- Left side -->
 	<div id="box-left" class="fl top10 bg_white wleft">
-		<div id="error" style="color: red;"></div>
+		<!-- <div id="error" style="color: red;"></div> -->
 
 		<!-- Banner -->
-
+		<div id="yamaha-xe-ga" class="fl top10 bg-top-products wleft">
+			<div id="yamaha-xe-ga-title"
+				class="fl bg-titles products-group-title-news color_white fontTahoma">
+				<a class="link-white" href="#"><strong>Sản phẩm đang hot</strong></a>
+			</div>
+			<img alt="" src="resources/v2/images/sub-titles.jpg" />
 		<div id="banner-home" class="fl wleft">
-			<object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
+		<ul id="flexiselslider">
+			   <c:forEach var="sp" items="${dssp}">
+			   <li>
+					<div align="center" class="fl pd05 w170 hpros sep_pros">
+						<div class="HinhSP">
+							<a
+								href="${pageContext.request.contextPath}/chitietsanpham.html?masp=${sp.masp}"><img
+								class="HinhSP_Resize" src="${imageDirectory}${sp.hinhanh}" /></a>
+						</div>
+						<div class="TenSP">${sp.tensp}</div>
+						<div class="Gia" id="agiahientai${sp.masp}"></div>
+						<input type="hidden" id="atime${sp.masp}"
+							value="${sp.thoigianketthuc}">
+						<div class="Countdown" id="aCountdown${sp.masp}"></div>
+						<script type="text/javascript">
+							$(function() {
+								var stringday = $('#atime${sp.masp}').val()
+										.toString();
+								var longday = Number(stringday);
+								var BigDay = new Date(longday);
+								var msPerDay = 24 * 60 * 60 * 1000;
+								window
+										.setInterval(
+												function() {
+													var today = new Date();
+													var timeLeft = (BigDay
+															.getTime() - today
+															.getTime());
+													if (Math.floor(timeLeft) > 0) {
+														var e_daysLeft = timeLeft
+																/ msPerDay;
+														var daysLeft = pad(Math
+																.floor(e_daysLeft));
+														var e_hrsLeft = (e_daysLeft - daysLeft) * 24;
+														var hrsLeft = pad(Math
+																.floor(e_hrsLeft));
+														var e_minsLeft = (e_hrsLeft - hrsLeft) * 60;
+														var minsLeft = pad(Math
+																.floor(e_minsLeft));
+														var e_secsLeft = (e_minsLeft - minsLeft) * 60;
+														var secsLeft = pad(Math
+																.floor(e_secsLeft));
+														var timeString = daysLeft
+																+ " ngày "
+																+ hrsLeft
+																+ ":"
+																+ minsLeft
+																+ ":"
+																+ secsLeft;
+														$(
+																'#aCountdown${sp.masp}')
+																.html(
+																		timeString);
+													} else {
+														//var timeString = "00 ngày " + "00:" +  "00:00";
+														var timeString = "kết thúc";
+														$(
+																'#aCountdown${sp.masp}')
+																.html(
+																		timeString);
+														document
+																.getElementById('aCountdown${sp.masp}').style.color = 'red'; //'none';
+														document
+																.getElementById('abid${sp.masp}').style.visibility = 'hidden';
+													}
+												}, 1000);
+							});
+						</script>
+
+						<p class="top10" align="center">
+							<a href="${pageContext.request.contextPath}/chitietsanpham.html?masp=${sp.masp}" class="fl l35 bg-hit detail_products">Đặt giá</a>
+						</p>
+					</div>
+				</li>
+				</c:forEach>
+		</ul>
+		<script type="text/javascript">
+		$(window).load(function() {
+			$("#flexiselslider").flexisel({
+		        visibleItems: 4,
+		        animationSpeed: 1000,
+		        autoPlay: true,
+		        autoPlaySpeed: 3000,            
+		        pauseOnHover: true,
+		        enableResponsiveBreakpoints: true,
+		        responsiveBreakpoints: { 
+		            portrait: { 
+		                changePoint:480,
+		                visibleItems: 1
+		            }, 
+		            landscape: { 
+		                changePoint:640,
+		                visibleItems: 2
+		            },
+		            tablet: { 
+		                changePoint:768,
+		                visibleItems: 3
+		            }
+		        }
+		    });
+		});
+		</script>
+		
+			<!-- <object classid="clsid:d27cdb6e-ae6d-11cf-96b8-444553540000"
 				codebase="http://fpdownload.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=6,0,0,0"
 				width="730" height="251" id="tech" align="middle">
 				<param name="allowScriptAccess" value="sameDomain" />
@@ -62,8 +173,9 @@
 					width="730" height="251" name="tech" align="middle"
 					allowScriptAccess="sameDomain" type="application/x-shockwave-flash"
 					pluginspage="http://www.macromedia.com/go/getflashplayer" />
-			</object>
+			</object> -->
 		</div>
+	</div>
 		<!-- Banner end -->
 		<!-- Sản phẩm đang đấu -->
 		<div id="yamaha-xe-ga" class="fl top10 bg-top-products wleft">
