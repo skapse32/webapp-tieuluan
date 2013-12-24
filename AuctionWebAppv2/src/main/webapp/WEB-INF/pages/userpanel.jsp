@@ -55,6 +55,10 @@
 								href="${pageContext.request.contextPath}/sanphamhuyadmin">Quản
 									lý sản phẩm (admin)</a></li>
 							<li class="fl wright das_top h1"></li>
+							
+							<li class="fl pd5 w240 "><a class="fl  pdl20"
+								href="${pageContext.request.contextPath}/hoadon">Hoá đơn</a></li>
+							<li class="fl wright das_top h1"></li>
 						</ul>
 					</c:when>
 					<c:otherwise>
@@ -124,6 +128,8 @@
 									href="${pageContext.request.contextPath}/dangsanpham">Đăng
 										sản phẩm</a></li>
 								<li class="fl wright das_top h1"></li>
+								
+							
 							</ul>
 						</div>
 					</c:otherwise>

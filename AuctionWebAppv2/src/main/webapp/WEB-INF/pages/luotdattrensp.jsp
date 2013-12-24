@@ -60,19 +60,19 @@
 						<td class="name"
 							style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: center;">
 							<span style="font-size: 10pt; font-family: Arial;"
-							class="Apple-style-span"><c:set target="${myDate}"
-											property="time" value="${ls.getThoigian()}" /> <fmt:formatDate
-											pattern="HH:mm:ss dd-MM-yyyy" value="${myDate}" /></span>
+							class="Apple-style-span"><c:set target="${myDate}" property="time" value="${ls.getThoigian()}" /> 
+							<fmt:formatDate pattern="HH:mm:ss dd-MM-yyyy" value="${myDate}" /></span>
 						</td>
 						<td class="name"
 							style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: center;">
 							<span style="font-size: 10pt; font-family: Arial;"
 							class="Apple-style-span"><span lang="vi"
-								style="font-size: 10pt;" class="Apple-style-span" id="gia"> ${ls.getGiadat()}&nbsp;</span>
+								style="font-size: 10pt;" class="Apple-style-span" id="gia<%=i%>"> ${ls.getGiadat()}&nbsp;</span>
 						</span> <script>
 							var x = numeral("${ls.getGiadat()}").format('0,0');
 							x = x.replace(/,/g, ".");
-							document.getElementById("gia").innerHTML = x
+							var idd = "gia"+<%=i%>;
+							document.getElementById(idd).innerHTML = x
 									+ "&nbsp;đ";
 						</script>
 						</td>
