@@ -2,6 +2,8 @@ package dto;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 
@@ -18,6 +20,7 @@ import javax.ws.rs.core.MediaType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import util.SanPhamComparator;
 import model.Sanpham;
 
 import com.sun.jersey.spi.container.ResourceFilters;
@@ -117,6 +120,7 @@ public class SanPhamServices {
 		dao.SanphamDAO sanphamdao = new dao.SanphamDAO();
 		List<dao.Sanpham> daodssp = sanphamdao.findSanPhamDangDauTheoLoai(size,
 				page, maloaisp);
+		
 		for (dao.Sanpham daosp : daodssp) {
 			model.Sanpham pojosp = new Sanpham(daosp.getMasp(), daosp.getTensp(),
 					daosp.getTinhtrangsp().getTentinhtrangsp(), daosp.getSoluong(),
@@ -131,6 +135,40 @@ public class SanPhamServices {
 					daosp.getTinhtrangdaugia(), daosp.getGhichu());
 			pojodssp.add(pojosp);
 		}
+		return pojodssp;
+	}
+	@POST
+	@Path("/findSanPhamDangDauTop")
+	@Produces("application/json; charset=utf-8")
+	public List<model.Sanpham> findSanPhamDangDauTop(
+			@FormParam("top") int top) {
+		List<model.Sanpham> pojodssp = new ArrayList<model.Sanpham>();
+		dao.SanphamDAO sanphamdao = new dao.SanphamDAO();
+		List<dao.Sanpham> daodssp = sanphamdao.findSanPhamDangDau();
+		Collections.sort(daodssp, new SanPhamComparator());
+		int i = 1;
+		
+			for (dao.Sanpham daosp : daodssp) {
+				model.Sanpham pojosp = new model.Sanpham(daosp.getMasp(),
+						daosp.getTensp(), daosp.getTinhtrangsp()
+								.getTentinhtrangsp(), daosp.getSoluong(),
+						daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
+								.getTenloaisp(), daosp.getNguoidang(),
+						daosp.getGiakhoidiem(), daosp.getGiahientai(),daosp.getGiamuangay(),
+						daosp.getNguoidat(), daosp.getBuocgia(), daosp
+								.getThoigianbatdau().getTime(), daosp
+								.getThoigianketthuc().getTime(),
+						daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
+								.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
+						daosp.getTinhtrangdaugia(), daosp.getGhichu());
+				pojodssp.add(pojosp);
+				i++;
+				if(i>top){
+					break;
+				}
+			
+		}
+		System.out.println(i+pojodssp.toString());
 		return pojodssp;
 	}
 

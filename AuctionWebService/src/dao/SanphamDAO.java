@@ -358,6 +358,23 @@ public class SanphamDAO implements ISanphamDAO {
 		}
 	}
 
+	@SuppressWarnings("unchecked")
+	public List<Sanpham> findSanPhamDangDau() {
+		EntityManagerHelper.log("finding Sanphams", Level.INFO, null);
+		try {
+			String queryString = "";
+			
+				queryString = "select model from Sanpham model where  model.thoigianbatdau < CURRENT_TIMESTAMP AND model.tinhtrangdaugia = 0 ";
+			
+			Query query = getEntityManager().createQuery(queryString);		
+			return query.getResultList();
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("find by property name failed",
+					Level.SEVERE, re);
+			throw re;
+		}
+	}
+
 	public Integer findSoSanPhamSapDau(long maloaisp) {
 
 		EntityManagerHelper.log("finding Sanphams with maloaisp: " + maloaisp,
