@@ -3,6 +3,7 @@ package com.tieuluan.daugia.controller;
 import java.io.File;
 import java.io.IOException;
 import java.lang.reflect.Type;
+import java.sql.Timestamp;
 import java.text.Format;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
@@ -580,6 +581,24 @@ public class QuanLySanPhamUserController {
 		buocgia = request.getParameter("txtbuocgia");
 		thoigianbatdau = request.getParameter("txttgbt");
 		thoigianketthuc = request.getParameter("txttgkt");
+		Timestamp timeBD = Timestamp.valueOf(thoigianbatdau);
+		Timestamp timeKT = Timestamp.valueOf(thoigianketthuc);
+		java.util.Date date= new java.util.Date();
+		Timestamp now = new Timestamp(date.getTime());
+		if(timeBD.after(timeKT)){
+			System.out.println(timeBD + "|" + timeKT);
+			model.addAttribute("tieude", "Đăng sản phẩm");
+			model.addAttribute("web", web);
+			model.addAttribute("error", "Thời gian bắt đầu phải trước thời gian kết thúc!");
+			return "dangsanpham";
+		}
+		if(timeBD.before(now)){
+			System.out.println(timeBD + "|" + now);
+			model.addAttribute("tieude", "Đăng sản phẩm");
+			model.addAttribute("web", web);
+			model.addAttribute("error", "Thời gian bắt đầu phải sau thời gian hiên tại!<br />. Để ban quản trị duyệt sản phẩm của bạn có quyền được đăng hay không!");
+			return "dangsanpham";
+		}
 		mahttt = request.getParameter("selecthttt");
 		thongtinlienhe = request.getParameter("txtthongtinlienhe");
 		giamuangay = request.getParameter("txtmuangay");
@@ -615,6 +634,6 @@ public class QuanLySanPhamUserController {
 		request.setAttribute("tieude", "Kết quả thuộc sản phẩm");
 		request.setAttribute("noidung", args[0] + "<br>"+noidung);
 		request.setAttribute("thanhcong", "true");
-		return "thongbaoqlsanphamuser";		
+		return "thongbaoqlsanphamuser";
 	}
 }

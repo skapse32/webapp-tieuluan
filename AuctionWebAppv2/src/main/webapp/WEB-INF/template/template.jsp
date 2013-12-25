@@ -3,7 +3,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-
+<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
@@ -57,10 +57,27 @@
 	src="${pageContext.request.contextPath}/resources/js/jquery.countdown.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/numeral.min.js"></script>
-<link href="${pageContext.request.contextPath}/resources/v2/css/tiny.css" rel="stylesheet" type="text/css"/>
+<link
+	href="${pageContext.request.contextPath}/resources/v2/css/tiny.css"
+	rel="stylesheet" type="text/css" />
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/v2/js/tinybox.js"></script>
 <!-- OLD -->
+
+<!-- Jqgrid load user -->
+<!-- jQuery and jQuery UI --> 
+<link href="${pageContext.request.contextPath}/resources/v2/css/custom-theme/jquery-ui-1.10.3.custom.css" rel="stylesheet" type="text/css"/>
+<script src="${pageContext.request.contextPath}/resources/v2/jqgrid/jquery-ui-1.10.3.custom.js" type="text/javascript"></script> 
+<script type="text/javascript">
+	$.jgrid.no_legacy_api = true;
+	$.jgrid.useJSON = true;
+</script>
+
+
+<link rel="stylesheet" type="text/css" media="screen" href="${pageContext.request.contextPath}/resources/v2/jqgrid/ui.jqgrid.css" />
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/v2/jqgrid/grid.locale-en.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/v2/jqgrid/jquery.jqGrid.js"></script>
+<script src="${pageContext.request.contextPath}/resources/v2/jqgrid/plugins/grid.addons.js" type="text/javascript"></script>
 <!-- socket nhan tin dang san pham -->
 <script type="text/javascript">
 	var wssocketRe;
@@ -70,7 +87,7 @@
 	function RunWebSocketRecv() {
 		//website ho tro websocket
 		wssocketRe = new WebSocket(
-				"ws:/localhost:8080/daugia/websocket/dangsp");
+				"ws:/192.168.1.3:8080/daugia/websocket/dangsp");
 		wssocketRe.onopen = function(evt) {
 			onOpenRe(evt);
 		};
@@ -93,13 +110,18 @@
 
 	function onMessageRe(evt) {
 		var received_msg = evt.data;
-		
 		leftX = screen.width - 400;
 		topY = screen.height - 300;
-		TINY.box.show({html: received_msg ,animate:false,close:false,mask:false,boxid:'success',autohide:5,top:topY,left:leftX});
-	}
-	function onErrorRe(evt) {
-		alert(evt.data);
+		TINY.box.show({
+			html : received_msg,
+			animate : false,
+			close : false,
+			mask : false,
+			boxid : 'success',
+			autohide : 5,
+			top : topY,
+			left : leftX
+		});
 	}
 
 	function sendToServerDangSP(message) {
