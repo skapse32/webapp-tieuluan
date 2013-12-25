@@ -75,6 +75,15 @@ public class TaiKhoanController {
 				.cookie(new NewCookie("JSESSIONID", session.getAttribute(
 						"sessionid").toString())).post(String.class, form);
 		User user = gson.fromJson(json, User.class);
+		
+		form = new Form();
+		form.add("username", nguoiban);
+		webResource = client.resource(Server.addressAuthenWS);
+		json = webResource
+				.path("role/getRoleUserByUsername")
+				.cookie(new NewCookie("JSESSIONID", session.getAttribute(
+						"sessionid").toString())).post(String.class, form);
+		model.addAttribute("userrole", json);
 		session.setAttribute("tieude", "Thông tin tài khoản");
 		session.setAttribute("user", user);
 		model.addAttribute("web", web);

@@ -37,7 +37,7 @@
 						</td>
 					</tr>
 					<tr class="technical" style="font-family: Tahoma, Verdana;">
-						<td rowspan="7" class="name"
+						<td rowspan="8" class="name"
 							style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 250px;">
 							<span style="font-size: 10pt; font-family: Arial;"
 							class="Apple-style-span"> <img
@@ -104,7 +104,13 @@
 						<td class="value"
 							style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
 							<span style="font-size: 10pt; font-family: Arial;"
-							class="Apple-style-span"> ${gioiTinh}</span>
+							class="Apple-style-span">
+							<c:choose>
+								<c:when test="${user.gioiTinh == true}">Nam</c:when>
+								<c:otherwise>Nữ</c:otherwise>
+							</c:choose>
+							
+							</span>
 						</td>
 						<td></td>
 					</tr>
@@ -132,8 +138,37 @@
 							<span style="font-size: 10pt; font-family: Arial;"
 							class="Apple-style-span"> ${user.dienThoai}</span>
 						</td>
-						<td></td>
 					</tr>
+					<c:if test="${sessionScope.role == 'Admin' }">
+					
+					<tr class="technical" style="font-family: Tahoma, Verdana;">
+						<td class="name"
+							style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 150px;">
+							<span style="font-size: 10pt; font-family: Arial;"
+							class="Apple-style-span"> Cấm người dùng sử dụng dịch vụ : </span>
+						</td>
+						<td class="value"
+							style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
+							<span style="font-size: 10pt; font-family: Arial;"
+							class="Apple-style-span">
+							<c:choose>
+							<c:when test="${userrole == 'BannedUser'}">
+							<form action="${pageContext.request.contextPath}/activeUser" method="post">
+								<input type="hidden" name="useractive" value="${user.username}"/>
+								<input type="submit" value="Kích hoạt lại"/>
+							</form>
+							</c:when>
+							<c:otherwise>
+							<form action="${pageContext.request.contextPath}/banUser" method="post">
+								<input type="hidden" name="userban" value="${user.username}"/>
+								<input type="submit" value="thực hiện cấm"/>
+							</form>
+							</c:otherwise>
+							</c:choose>
+							</span>
+						</td>
+					</tr>
+					</c:if>
 					<c:choose>
 					<c:when test="${sessionScope.username == user.username}">
 					<tr class="title"

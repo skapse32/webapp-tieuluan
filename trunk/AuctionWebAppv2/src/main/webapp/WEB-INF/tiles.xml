@@ -19,6 +19,10 @@
 		<put-attribute name="maincontent" value="/WEB-INF/pages/luotdattrensp.jsp" />
 	</definition>
 
+	<definition name="quanlyuser" extends="baseLayout">
+		<put-attribute name="title" value="Quản lý User" />
+		<put-attribute name="maincontent" value="/WEB-INF/pages/qlyUserAdmin.jsp" />
+	</definition>
 
 	<definition name="dangnhap" extends="baseLayout">
 		<put-attribute name="title" value="Đăng nhập" />

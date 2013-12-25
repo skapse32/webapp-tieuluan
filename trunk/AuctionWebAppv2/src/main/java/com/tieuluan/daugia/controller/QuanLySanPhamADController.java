@@ -9,15 +9,19 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.core.Cookie;
 import javax.ws.rs.core.NewCookie;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
 
 import com.google.gson.Gson;
@@ -29,6 +33,8 @@ import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.representation.Form;
 import com.tieuluan.daugia.function.Server;
 import com.tieuluan.daugia.model.Sanpham;
+import com.tieuluan.daugia.model.User;
+import com.tieuluan.daugia.util.JqGridData;
 
 @Controller
 public class QuanLySanPhamADController {
@@ -198,5 +204,76 @@ public class QuanLySanPhamADController {
 			return "redirect:/sanphamhuyadmin?tinhtrang=0";
 		}
 
+	}
+	
+	//quan ly user
+	@RequestMapping(value="/qlyuser" , method = RequestMethod.GET)
+	public String quanlyUser(){
+		return "quanlyuser";
+	}
+	
+	//fill user len grid.
+	@RequestMapping(value ="/grid" , method = RequestMethod.GET , produces="application/json; charset=utf-8")
+	public @ResponseBody String getUserForGrid(HttpServletRequest request){
+		HttpSession session =  request.getSession();
+		String json = "";
+		Gson gson = new Gson();
+		ClientConfig config = new DefaultClientConfig();
+		Client client = Client.create(config);
+		WebResource resource = client.resource(Server.addressAuthenWS);
+		//get all user's infor.
+		json = resource.path("userinfo/findAll").cookie(new NewCookie("JSESSIONID", session.getAttribute("sessionid").toString())).post(String.class);
+		List<User> users = new ArrayList<User>();
+		Type type = new TypeToken<ArrayList<User>>() {
+		}.getType();
+		
+		users = gson.fromJson(json, type);
+		int totalNumberOfPages = 1;
+	    int currentPageNumber = 1;
+	    int totalNumberOfRecords = 8;
+		JqGridData<User> jqgrid = new JqGridData<User>(totalNumberOfPages, currentPageNumber , totalNumberOfRecords , users);
+		return new Gson().toJson(jqgrid);
+	}
+	
+	@RequestMapping(value = "/banUser", method = RequestMethod.POST)
+	public String banUser(HttpServletRequest request, Model model){
+		String userban =  request.getParameter("userban");
+		//ban user thong qua authen.
+		String json = "";
+		ClientConfig config = new DefaultClientConfig();
+		Client client = Client.create(config);
+		WebResource resource = client.resource(Server.addressAuthenWS);
+		Form form = new Form();
+		form.add("username", userban);
+		model.addAttribute("tieude", "Cấm User");
+		json = resource.path("usermanager/banUser").post(String.class,form);
+		System.out.print(json);
+		if(json.equals("success")){
+			model.addAttribute("noidung", "Lệnh cấm User thành công");
+		}else{
+			model.addAttribute("noidung", "Lệnh cấm User thất bại!");
+		}
+		return "thongbao";
+	}
+	
+	@RequestMapping(value = "/activeUser", method = RequestMethod.POST)
+	public String activeUser(HttpServletRequest request, Model model){
+		String userban =  request.getParameter("useractive");
+		//ban user thong qua authen.
+		String json = "";
+		ClientConfig config = new DefaultClientConfig();
+		Client client = Client.create(config);
+		WebResource resource = client.resource(Server.addressAuthenWS);
+		Form form = new Form();
+		form.add("username", userban);
+		model.addAttribute("tieude", "Kích Hoạt User");
+		json = resource.path("usermanager/activeBannedUser").post(String.class,form);
+		System.out.print(json);
+		if(json.equals("success")){
+			model.addAttribute("noidung", "Kích hoạt User thành công");
+		}else{
+			model.addAttribute("noidung", "Kích hoạt User thất bại!");
+		}
+		return "thongbao";
 	}
 }
