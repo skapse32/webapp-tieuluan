@@ -214,7 +214,13 @@ public class QuanLySanPhamADController {
 	
 	//fill user len grid.
 	@RequestMapping(value ="/grid" , method = RequestMethod.GET , produces="application/json; charset=utf-8")
-	public @ResponseBody String getUserForGrid(HttpServletRequest request){
+	public @ResponseBody String getUserForGrid(@RequestParam(value = "page", required = false) Integer page,
+			@RequestParam(value = "rows", required = false) Integer rows,
+			@RequestParam(value = "sidx", required = false) String sortBy,
+			@RequestParam(value = "sord", required = false) String order,
+			@RequestParam(value = "_search", required = false) boolean isSearch,
+			@RequestParam(value = "username", required = false) String username,
+			@RequestParam(value = "email", required = false) String email,HttpServletRequest request){
 		HttpSession session =  request.getSession();
 		String json = "";
 		Gson gson = new Gson();
@@ -222,7 +228,12 @@ public class QuanLySanPhamADController {
 		Client client = Client.create(config);
 		WebResource resource = client.resource(Server.addressAuthenWS);
 		//get all user's infor.
-		json = resource.path("userinfo/findAll").cookie(new NewCookie("JSESSIONID", session.getAttribute("sessionid").toString())).post(String.class);
+		Form form = new Form();
+		form.add("username", username);
+		form.add("email",email);
+		System.out.println(username);
+		System.out.println(email);
+		json = resource.path("userinfo/findAll").cookie(new NewCookie("JSESSIONID", session.getAttribute("sessionid").toString())).post(String.class, form);
 		List<User> users = new ArrayList<User>();
 		Type type = new TypeToken<ArrayList<User>>() {
 		}.getType();

@@ -39,9 +39,6 @@
 											+ "&nbsp;d";
 								});
 
-			},
-			error : function(e) {
-				alert('Error: ' + e);
 			}
 		});
 	};
