@@ -97,9 +97,6 @@
 		wssocketRe.onmessage = function(evt) {
 			onMessageRe(evt);
 		};
-		wssocketRe.onerror = function(evt) {
-			onerrorRe(evt);
-		};
 	}
 	function onOpenRe(evt) {
 		//connected

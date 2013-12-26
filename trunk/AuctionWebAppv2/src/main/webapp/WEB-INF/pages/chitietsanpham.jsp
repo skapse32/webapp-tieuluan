@@ -77,9 +77,6 @@
 													}
 												});
 								document.getElementById("luotdat").innerHTML = dem;
-							},
-							error : function(e) {
-								alert('1Error: ' + e + masp);
 							}
 						});
 			}
@@ -101,7 +98,7 @@
 
 	function onClose(evt) {
 		//websocket is closed
-		alert("Connection is closed.....");
+		//alert("Connection is closed.....");
 	}
 
 	function onMessage(evt) {
@@ -138,9 +135,6 @@
 		document.getElementById("luotdat").innerHTML = dem;
 	}
 
-	function onError(evt) {
-		alert(evt.data);
-	}
 
 	function sendToServer() {
 		var masp = "${sp.masp}";
