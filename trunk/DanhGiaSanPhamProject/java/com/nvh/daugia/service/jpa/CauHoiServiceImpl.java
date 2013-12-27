@@ -1,0 +1,56 @@
+package com.nvh.daugia.service.jpa;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.google.common.collect.Lists;
+import com.nvh.daugia.model.jpa.BangDanhGia;
+import com.nvh.daugia.model.jpa.CauHoi;
+import com.nvh.daugia.model.jpa.LoaiCauHoi;
+import com.nvh.daugia.repository.CauHoiRepository;
+import com.nvh.daugia.service.CauHoiService;
+
+@Service("JpaCauHoiService")
+public class CauHoiServiceImpl implements CauHoiService {
+
+	@Autowired
+	private CauHoiRepository chRepository;
+	
+	@Override
+	public List<CauHoi> findAll() {
+		// TODO Auto-generated method stub
+		return Lists.newArrayList(chRepository.findAll());
+	}
+
+	@Override
+	public CauHoi findById(String id) {
+		// TODO Auto-generated method stub
+		return chRepository.findOne(id);
+	}
+
+	@Override
+	public CauHoi save(CauHoi ch) {
+		// TODO Auto-generated method stub
+		return chRepository.save(ch);
+	}
+
+	@Override
+	public void delete(CauHoi ch) {
+		// TODO Auto-generated method stub
+		chRepository.delete(ch);
+	}
+
+	@Override
+	public List<CauHoi> findByloaicau(LoaiCauHoi lch) {
+		return chRepository.findByloaicau(lch);
+	}
+
+	@Override
+	public List<CauHoi> findByBangDanhGia(BangDanhGia lch) {
+		// TODO Auto-generated method stub
+		return chRepository.findBybang(lch);
+	}
+
+}
