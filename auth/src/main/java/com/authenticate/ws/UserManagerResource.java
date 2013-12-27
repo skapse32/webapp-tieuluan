@@ -62,7 +62,7 @@ public class UserManagerResource {
 				.addAttribute("mail", mail)
 				.addAttribute("status", 1); // Deactive user
 
-		final LDAPConnectionFactory factory = new LDAPConnectionFactory("0.0.0.0", 1389);
+		final LDAPConnectionFactory factory = new LDAPConnectionFactory("0.0.0.0", 389);
 		Connection connection = null;
 		try {
 			connection = factory.getConnection();
@@ -85,6 +85,29 @@ public class UserManagerResource {
 		return "success";
 	}
 	
+	@POST
+	@Path("/checkUser")
+	@Produces("application/json;")
+	public String checkUser(@FormParam("username") String username) throws UnsupportedEncodingException {
+		log.info("Come here " + username);
+		try {
+			final LDAPConnectionFactory fac = new LDAPConnectionFactory("0.0.0.0", 389);
+			connection = fac.getConnection();
+
+			SearchResultEntry entry = connection.searchSingleEntry("dc=springldap,dc=com",
+					SearchScope.WHOLE_SUBTREE, "(uid="+username+")", "cn");
+			DN bindDN = entry.getName();
+			System.out.println("user exist " + bindDN + "!.");
+			return "true";
+		} catch (ErrorResultException e) {
+			System.err.println("error " + e.getMessage());
+		} finally {
+			if (connection != null) {
+				connection.close();
+			}
+		}
+		return "false";
+	}
 	@POST
 	@Path("/activeUser")
 	@Produces("application/json;")
