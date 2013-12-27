@@ -357,16 +357,80 @@ public class SanphamDAO implements ISanphamDAO {
 			throw re;
 		}
 	}
-
-	@SuppressWarnings("unchecked")
-	public List<Sanpham> findSanPhamDangDau() {
+	public List<Sanpham> findSanPhamDangDauAll() {
 		EntityManagerHelper.log("finding Sanphams", Level.INFO, null);
+		
 		try {
 			String queryString = "";
 			
 				queryString = "select model from Sanpham model where  model.thoigianbatdau < CURRENT_TIMESTAMP AND model.tinhtrangdaugia = 0 ";
 			
-			Query query = getEntityManager().createQuery(queryString);		
+			Query query = getEntityManager().createQuery(queryString);	
+			
+			return query.getResultList();
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("find by property name failed",
+					Level.SEVERE, re);
+			throw re;
+		}
+	}
+	@SuppressWarnings("unchecked")
+	public List<Sanpham> findSanPhamDangDau(int size, int page) {
+		EntityManagerHelper.log("finding Sanphams", Level.INFO, null);
+		int n = (page - 1) * size;
+		int m = size;
+		try {
+			String queryString = "";
+			
+				queryString = "select model from Sanpham model where  model.thoigianbatdau < CURRENT_TIMESTAMP AND model.tinhtrangdaugia = 0 ";
+			
+			Query query = getEntityManager().createQuery(queryString);	
+			if (size != -1) {
+				query.setFirstResult(n);
+				query.setMaxResults(m);
+			}
+			return query.getResultList();
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("find by property name failed",
+					Level.SEVERE, re);
+			throw re;
+		}
+	}
+	public List<Sanpham> findSanPhamSapDau(int size, int page) {
+		EntityManagerHelper.log("finding Sanphams", Level.INFO, null);
+		int n = (page - 1) * size;
+		int m = size;
+		try {
+			String queryString = "";
+			
+				queryString = "select model from Sanpham model where  model.thoigianbatdau > CURRENT_TIMESTAMP AND model.tinhtrangdaugia = 0 ";
+			
+			Query query = getEntityManager().createQuery(queryString);	
+			if (size != -1) {
+				query.setFirstResult(n);
+				query.setMaxResults(m);
+			}
+			return query.getResultList();
+		} catch (RuntimeException re) {
+			EntityManagerHelper.log("find by property name failed",
+					Level.SEVERE, re);
+			throw re;
+		}
+	}
+	public List<Sanpham> findSanPhamDaDau(int size, int page) {
+		EntityManagerHelper.log("finding Sanphams", Level.INFO, null);
+		int n = (page - 1) * size;
+		int m = size;
+		try {
+			String queryString = "";
+			
+				queryString = "select model from Sanpham model where  model.tinhtrangdaugia = 1 OR model.tinhtrangdaugia = 3  ";
+			
+			Query query = getEntityManager().createQuery(queryString);	
+			if (size != -1) {
+				query.setFirstResult(n);
+				query.setMaxResults(m);
+			}
 			return query.getResultList();
 		} catch (RuntimeException re) {
 			EntityManagerHelper.log("find by property name failed",

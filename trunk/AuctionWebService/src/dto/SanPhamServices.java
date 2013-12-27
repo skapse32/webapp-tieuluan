@@ -21,6 +21,9 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import util.SanPhamComparator;
+import util.SanphamComparatorNew;
+import util.SanphamComparatorPriceDown;
+import util.SanphamComparatorPriceUp;
 import model.Sanpham;
 
 import com.sun.jersey.spi.container.ResourceFilters;
@@ -51,14 +54,15 @@ public class SanPhamServices {
 		List<dao.Sanpham> daodssp = sanphamdao.findAll();
 		// EntityManagerHelper.commit();
 		for (dao.Sanpham daosp : daodssp) {
-			model.Sanpham pojosp = new Sanpham(daosp.getMasp(), daosp.getTensp(),
-					daosp.getTinhtrangsp().getTentinhtrangsp(), daosp.getSoluong(),
+			model.Sanpham pojosp = new Sanpham(daosp.getMasp(),
+					daosp.getTensp(), daosp.getTinhtrangsp()
+							.getTentinhtrangsp(), daosp.getSoluong(),
 					daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
 							.getTenloaisp(), daosp.getNguoidang(),
-					daosp.getGiakhoidiem(), daosp.getGiahientai(),daosp.getGiamuangay(),
-					daosp.getNguoidat(), daosp.getBuocgia(), daosp
-							.getThoigianbatdau().getTime(), daosp
-							.getThoigianketthuc().getTime(),
+					daosp.getGiakhoidiem(), daosp.getGiahientai(),
+					daosp.getGiamuangay(), daosp.getNguoidat(),
+					daosp.getBuocgia(), daosp.getThoigianbatdau().getTime(),
+					daosp.getThoigianketthuc().getTime(),
 					daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
 							.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
 					daosp.getTinhtrangdaugia(), daosp.getGhichu());
@@ -77,14 +81,15 @@ public class SanPhamServices {
 		List<dao.Sanpham> daodssp = sanphamdao.findByProperty(
 				"tinhtrangdaugia", tinhtrangdaugia);
 		for (dao.Sanpham daosp : daodssp) {
-			model.Sanpham pojosp = new Sanpham(daosp.getMasp(), daosp.getTensp(),
-					daosp.getTinhtrangsp().getTentinhtrangsp(), daosp.getSoluong(),
+			model.Sanpham pojosp = new Sanpham(daosp.getMasp(),
+					daosp.getTensp(), daosp.getTinhtrangsp()
+							.getTentinhtrangsp(), daosp.getSoluong(),
 					daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
 							.getTenloaisp(), daosp.getNguoidang(),
-					daosp.getGiakhoidiem(), daosp.getGiahientai(),daosp.getGiamuangay(),
-					daosp.getNguoidat(), daosp.getBuocgia(), daosp
-							.getThoigianbatdau().getTime(), daosp
-							.getThoigianketthuc().getTime(),
+					daosp.getGiakhoidiem(), daosp.getGiahientai(),
+					daosp.getGiamuangay(), daosp.getNguoidat(),
+					daosp.getBuocgia(), daosp.getThoigianbatdau().getTime(),
+					daosp.getThoigianketthuc().getTime(),
 					daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
 							.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
 					daosp.getTinhtrangdaugia(), daosp.getGhichu());
@@ -120,16 +125,17 @@ public class SanPhamServices {
 		dao.SanphamDAO sanphamdao = new dao.SanphamDAO();
 		List<dao.Sanpham> daodssp = sanphamdao.findSanPhamDangDauTheoLoai(size,
 				page, maloaisp);
-		
+
 		for (dao.Sanpham daosp : daodssp) {
-			model.Sanpham pojosp = new Sanpham(daosp.getMasp(), daosp.getTensp(),
-					daosp.getTinhtrangsp().getTentinhtrangsp(), daosp.getSoluong(),
+			model.Sanpham pojosp = new Sanpham(daosp.getMasp(),
+					daosp.getTensp(), daosp.getTinhtrangsp()
+							.getTentinhtrangsp(), daosp.getSoluong(),
 					daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
 							.getTenloaisp(), daosp.getNguoidang(),
-					daosp.getGiakhoidiem(), daosp.getGiahientai(),daosp.getGiamuangay(),
-					daosp.getNguoidat(), daosp.getBuocgia(), daosp
-							.getThoigianbatdau().getTime(), daosp
-							.getThoigianketthuc().getTime(),
+					daosp.getGiakhoidiem(), daosp.getGiahientai(),
+					daosp.getGiamuangay(), daosp.getNguoidat(),
+					daosp.getBuocgia(), daosp.getThoigianbatdau().getTime(),
+					daosp.getThoigianketthuc().getTime(),
 					daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
 							.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
 					daosp.getTinhtrangdaugia(), daosp.getGhichu());
@@ -137,38 +143,88 @@ public class SanPhamServices {
 		}
 		return pojodssp;
 	}
+
 	@POST
 	@Path("/findSanPhamDangDauTop")
 	@Produces("application/json; charset=utf-8")
-	public List<model.Sanpham> findSanPhamDangDauTop(
-			@FormParam("top") int top) {
+	public List<model.Sanpham> findSanPhamDangDauTop(@FormParam("top") int top) {
 		List<model.Sanpham> pojodssp = new ArrayList<model.Sanpham>();
 		dao.SanphamDAO sanphamdao = new dao.SanphamDAO();
-		List<dao.Sanpham> daodssp = sanphamdao.findSanPhamDangDau();
+		List<dao.Sanpham> daodssp = sanphamdao.findSanPhamDangDauAll();
 		Collections.sort(daodssp, new SanPhamComparator());
 		int i = 1;
-		
-			for (dao.Sanpham daosp : daodssp) {
-				model.Sanpham pojosp = new model.Sanpham(daosp.getMasp(),
-						daosp.getTensp(), daosp.getTinhtrangsp()
-								.getTentinhtrangsp(), daosp.getSoluong(),
-						daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
-								.getTenloaisp(), daosp.getNguoidang(),
-						daosp.getGiakhoidiem(), daosp.getGiahientai(),daosp.getGiamuangay(),
-						daosp.getNguoidat(), daosp.getBuocgia(), daosp
-								.getThoigianbatdau().getTime(), daosp
-								.getThoigianketthuc().getTime(),
-						daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
-								.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
-						daosp.getTinhtrangdaugia(), daosp.getGhichu());
-				pojodssp.add(pojosp);
-				i++;
-				if(i>top){
-					break;
-				}
-			
+
+		for (dao.Sanpham daosp : daodssp) {
+			model.Sanpham pojosp = new model.Sanpham(daosp.getMasp(),
+					daosp.getTensp(), daosp.getTinhtrangsp()
+							.getTentinhtrangsp(), daosp.getSoluong(),
+					daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
+							.getTenloaisp(), daosp.getNguoidang(),
+					daosp.getGiakhoidiem(), daosp.getGiahientai(),
+					daosp.getGiamuangay(), daosp.getNguoidat(),
+					daosp.getBuocgia(), daosp.getThoigianbatdau().getTime(),
+					daosp.getThoigianketthuc().getTime(),
+					daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
+							.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
+					daosp.getTinhtrangdaugia(), daosp.getGhichu());
+			pojodssp.add(pojosp);
+			i++;
+			if (i > top) {
+				break;
+			}
+
 		}
-		System.out.println(i+pojodssp.toString());
+		System.out.println(i + pojodssp.toString());
+		return pojodssp;
+	}
+
+	@POST
+	@Path("/findSanPhamTheoGiaLoc")
+	@Produces("application/json; charset=utf-8")
+	public List<model.Sanpham> findSanPhamTheoGiaLoc(
+			@FormParam("loaisp") int loaisp, @FormParam("sort") int sort,@FormParam("size") int size, @FormParam("page") int page) {
+		List<model.Sanpham> pojodssp = new ArrayList<model.Sanpham>();
+		dao.SanphamDAO sanphamdao = new dao.SanphamDAO();
+		List<dao.Sanpham> daodssp = null;
+		if (loaisp == -1) {
+			// san pham dang dau
+			daodssp = sanphamdao.findSanPhamDangDau(size,page);
+		} else if (loaisp == 1) {
+			// san pham da dau
+			daodssp = sanphamdao.findSanPhamDaDau(size,page);
+		} else {
+			// san pham sap dau
+			daodssp = sanphamdao.findSanPhamSapDau(size,page);
+		}
+
+		if (sort == 1) {
+			// sap xep tang dan
+			Collections.sort(daodssp, new SanphamComparatorPriceUp());
+
+		} else if (sort == -1){
+			// sap xep giam dan
+			Collections.sort(daodssp, new SanphamComparatorPriceDown());
+		} else{
+			// sap xep theo thoi gian
+			Collections.sort(daodssp, new SanphamComparatorNew());
+		}
+		for (dao.Sanpham daosp : daodssp) {
+			model.Sanpham pojosp = new model.Sanpham(daosp.getMasp(),
+					daosp.getTensp(), daosp.getTinhtrangsp()
+							.getTentinhtrangsp(), daosp.getSoluong(),
+					daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
+							.getTenloaisp(), daosp.getNguoidang(),
+					daosp.getGiakhoidiem(), daosp.getGiahientai(),
+					daosp.getGiamuangay(), daosp.getNguoidat(),
+					daosp.getBuocgia(), daosp.getThoigianbatdau().getTime(),
+					daosp.getThoigianketthuc().getTime(),
+					daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
+							.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
+					daosp.getTinhtrangdaugia(), daosp.getGhichu());
+			pojodssp.add(pojosp);
+
+		}
+	
 		return pojodssp;
 	}
 
@@ -192,14 +248,15 @@ public class SanPhamServices {
 		List<dao.Sanpham> daodssp = sanphamdao.findSanPhamSapDauTheoLoai(size,
 				page, maloaisp);
 		for (dao.Sanpham daosp : daodssp) {
-			model.Sanpham pojosp = new Sanpham(daosp.getMasp(), daosp.getTensp(),
-					daosp.getTinhtrangsp().getTentinhtrangsp(), daosp.getSoluong(),
+			model.Sanpham pojosp = new Sanpham(daosp.getMasp(),
+					daosp.getTensp(), daosp.getTinhtrangsp()
+							.getTentinhtrangsp(), daosp.getSoluong(),
 					daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
 							.getTenloaisp(), daosp.getNguoidang(),
-					daosp.getGiakhoidiem(), daosp.getGiahientai(),daosp.getGiamuangay(),
-					daosp.getNguoidat(), daosp.getBuocgia(), daosp
-							.getThoigianbatdau().getTime(), daosp
-							.getThoigianketthuc().getTime(),
+					daosp.getGiakhoidiem(), daosp.getGiahientai(),
+					daosp.getGiamuangay(), daosp.getNguoidat(),
+					daosp.getBuocgia(), daosp.getThoigianbatdau().getTime(),
+					daosp.getThoigianketthuc().getTime(),
 					daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
 							.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
 					daosp.getTinhtrangdaugia(), daosp.getGhichu());
@@ -228,14 +285,15 @@ public class SanPhamServices {
 		List<dao.Sanpham> daodssp = sanphamdao.findSanPhamDaDauTheoLoai(size,
 				page, maloaisp);
 		for (dao.Sanpham daosp : daodssp) {
-			model.Sanpham pojosp = new Sanpham(daosp.getMasp(), daosp.getTensp(),
-					daosp.getTinhtrangsp().getTentinhtrangsp(), daosp.getSoluong(),
+			model.Sanpham pojosp = new Sanpham(daosp.getMasp(),
+					daosp.getTensp(), daosp.getTinhtrangsp()
+							.getTentinhtrangsp(), daosp.getSoluong(),
 					daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
 							.getTenloaisp(), daosp.getNguoidang(),
-					daosp.getGiakhoidiem(), daosp.getGiahientai(),daosp.getGiamuangay(),
-					daosp.getNguoidat(), daosp.getBuocgia(), daosp
-							.getThoigianbatdau().getTime(), daosp
-							.getThoigianketthuc().getTime(),
+					daosp.getGiakhoidiem(), daosp.getGiahientai(),
+					daosp.getGiamuangay(), daosp.getNguoidat(),
+					daosp.getBuocgia(), daosp.getThoigianbatdau().getTime(),
+					daosp.getThoigianketthuc().getTime(),
 					daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
 							.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
 					daosp.getTinhtrangdaugia(), daosp.getGhichu());
@@ -266,14 +324,15 @@ public class SanPhamServices {
 		List<dao.Sanpham> daodssp = sanphamdao.findByTenSP(tensp, loaiphien,
 				size, page);
 		for (dao.Sanpham daosp : daodssp) {
-			model.Sanpham pojosp = new Sanpham(daosp.getMasp(), daosp.getTensp(),
-					daosp.getTinhtrangsp().getTentinhtrangsp(), daosp.getSoluong(),
+			model.Sanpham pojosp = new Sanpham(daosp.getMasp(),
+					daosp.getTensp(), daosp.getTinhtrangsp()
+							.getTentinhtrangsp(), daosp.getSoluong(),
 					daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
 							.getTenloaisp(), daosp.getNguoidang(),
-					daosp.getGiakhoidiem(), daosp.getGiahientai(),daosp.getGiamuangay(),
-					daosp.getNguoidat(), daosp.getBuocgia(), daosp
-							.getThoigianbatdau().getTime(), daosp
-							.getThoigianketthuc().getTime(),
+					daosp.getGiakhoidiem(), daosp.getGiahientai(),
+					daosp.getGiamuangay(), daosp.getNguoidat(),
+					daosp.getBuocgia(), daosp.getThoigianbatdau().getTime(),
+					daosp.getThoigianketthuc().getTime(),
 					daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
 							.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
 					daosp.getTinhtrangdaugia(), daosp.getGhichu());
@@ -285,21 +344,24 @@ public class SanPhamServices {
 	@POST
 	@Path("/findByThuongHieu")
 	@Produces("application/json; charset=utf-8")
-	public List<model.Sanpham> findByThuongHieu(@FormParam("thuonghieu") String thuonghieu,
+	public List<model.Sanpham> findByThuongHieu(
+			@FormParam("thuonghieu") String thuonghieu,
 			@FormParam("loaiphien") int loaiphien, @FormParam("size") int size,
 			@FormParam("page") int page) {
 		List<model.Sanpham> pojodssp = new ArrayList<model.Sanpham>();
 		dao.SanphamDAO sanphamdao = new dao.SanphamDAO();
-		List<dao.Sanpham> daodssp = sanphamdao.findByThuonghieu(size, page, thuonghieu);
+		List<dao.Sanpham> daodssp = sanphamdao.findByThuonghieu(size, page,
+				thuonghieu);
 		for (dao.Sanpham daosp : daodssp) {
-			model.Sanpham pojosp = new Sanpham(daosp.getMasp(), daosp.getTensp(),
-					daosp.getTinhtrangsp().getTentinhtrangsp(), daosp.getSoluong(),
+			model.Sanpham pojosp = new Sanpham(daosp.getMasp(),
+					daosp.getTensp(), daosp.getTinhtrangsp()
+							.getTentinhtrangsp(), daosp.getSoluong(),
 					daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
 							.getTenloaisp(), daosp.getNguoidang(),
-					daosp.getGiakhoidiem(), daosp.getGiahientai(),daosp.getGiamuangay(),
-					daosp.getNguoidat(), daosp.getBuocgia(), daosp
-							.getThoigianbatdau().getTime(), daosp
-							.getThoigianketthuc().getTime(),
+					daosp.getGiakhoidiem(), daosp.getGiahientai(),
+					daosp.getGiamuangay(), daosp.getNguoidat(),
+					daosp.getBuocgia(), daosp.getThoigianbatdau().getTime(),
+					daosp.getThoigianketthuc().getTime(),
 					daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
 							.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
 					daosp.getTinhtrangdaugia(), daosp.getGhichu());
@@ -307,11 +369,11 @@ public class SanPhamServices {
 		}
 		return pojodssp;
 	}
-	
+
 	@POST
 	@Path("/findById")
 	@Produces("application/json; charset=utf-8")
-	//@ResourceFilters({ FilterUser.class })
+	// @ResourceFilters({ FilterUser.class })
 	public model.Sanpham findById(@FormParam("masp") long masp) {
 		dao.SanphamDAO sanphamdao = new dao.SanphamDAO();
 		dao.Sanpham daosp = sanphamdao.findById(masp);
@@ -319,18 +381,18 @@ public class SanPhamServices {
 				daosp.getTinhtrangsp().getTentinhtrangsp(), daosp.getSoluong(),
 				daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
 						.getTenloaisp(), daosp.getNguoidang(),
-				daosp.getGiakhoidiem(), daosp.getGiahientai(),daosp.getGiamuangay(),
-				daosp.getNguoidat(), daosp.getBuocgia(), daosp
-						.getThoigianbatdau().getTime(), daosp
-						.getThoigianketthuc().getTime(),
-				daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
-						.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
+				daosp.getGiakhoidiem(), daosp.getGiahientai(),
+				daosp.getGiamuangay(), daosp.getNguoidat(), daosp.getBuocgia(),
+				daosp.getThoigianbatdau().getTime(), daosp.getThoigianketthuc()
+						.getTime(), daosp.getThongtinlienhe(), daosp
+						.getHinhthucthanhtoan().getTenhttt(),
+				daosp.getHinhanh(), daosp.getMota(),
 				daosp.getTinhtrangdaugia(), daosp.getGhichu());
 		return pojosp;
 	}
 
 	private Logger log = LoggerFactory.getLogger(SanPhamServices.class);
-	
+
 	@POST
 	@Path("/save")
 	@Produces("application/json; charset=utf-8")
@@ -363,14 +425,14 @@ public class SanPhamServices {
 		EntityManagerHelper.commit();
 		dao.Sanpham sp = new dao.Sanpham(loaisp, ttsp, httt, tensp, soluong,
 				xuatxu, thuonghieu, nguoidang, giakhoidiem, giakhoidiem, "",
-				buocgia,giamuangay, thoigianbatdau, thoigianketthuc, thongtinlienhe,
-				hinhanh, mota, 0, "");
+				buocgia, giamuangay, thoigianbatdau, thoigianketthuc,
+				thongtinlienhe, hinhanh, mota, 0, "");
 		EntityManagerHelper.beginTransaction();
 		spdao.save(sp);
 		List<dao.Sanpham> sps = spdao.findAll();
 		EntityManagerHelper.commit();
 
-		String result = "Thêm thành công," + sps.get(sps.size()-1).getMasp();
+		String result = "Thêm thành công," + sps.get(sps.size() - 1).getMasp();
 		log.info(result);
 		return result;
 	}
@@ -443,14 +505,15 @@ public class SanPhamServices {
 		List<dao.Sanpham> daodssp = sanphamdao
 				.findBySanPhamThamGiaKetThuc(username);
 		for (dao.Sanpham daosp : daodssp) {
-			model.Sanpham pojosp = new Sanpham(daosp.getMasp(), daosp.getTensp(),
-					daosp.getTinhtrangsp().getTentinhtrangsp(), daosp.getSoluong(),
+			model.Sanpham pojosp = new Sanpham(daosp.getMasp(),
+					daosp.getTensp(), daosp.getTinhtrangsp()
+							.getTentinhtrangsp(), daosp.getSoluong(),
 					daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
 							.getTenloaisp(), daosp.getNguoidang(),
-					daosp.getGiakhoidiem(), daosp.getGiahientai(),daosp.getGiamuangay(),
-					daosp.getNguoidat(), daosp.getBuocgia(), daosp
-							.getThoigianbatdau().getTime(), daosp
-							.getThoigianketthuc().getTime(),
+					daosp.getGiakhoidiem(), daosp.getGiahientai(),
+					daosp.getGiamuangay(), daosp.getNguoidat(),
+					daosp.getBuocgia(), daosp.getThoigianbatdau().getTime(),
+					daosp.getThoigianketthuc().getTime(),
 					daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
 							.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
 					daosp.getTinhtrangdaugia(), daosp.getGhichu());
@@ -471,14 +534,15 @@ public class SanPhamServices {
 		List<dao.Sanpham> daodssp = sanphamdao
 				.findBySanPhamThamGiaDangDau(username);
 		for (dao.Sanpham daosp : daodssp) {
-			model.Sanpham pojosp = new Sanpham(daosp.getMasp(), daosp.getTensp(),
-					daosp.getTinhtrangsp().getTentinhtrangsp(), daosp.getSoluong(),
+			model.Sanpham pojosp = new Sanpham(daosp.getMasp(),
+					daosp.getTensp(), daosp.getTinhtrangsp()
+							.getTentinhtrangsp(), daosp.getSoluong(),
 					daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
 							.getTenloaisp(), daosp.getNguoidang(),
-					daosp.getGiakhoidiem(), daosp.getGiahientai(),daosp.getGiamuangay(),
-					daosp.getNguoidat(), daosp.getBuocgia(), daosp
-							.getThoigianbatdau().getTime(), daosp
-							.getThoigianketthuc().getTime(),
+					daosp.getGiakhoidiem(), daosp.getGiahientai(),
+					daosp.getGiamuangay(), daosp.getNguoidat(),
+					daosp.getBuocgia(), daosp.getThoigianbatdau().getTime(),
+					daosp.getThoigianketthuc().getTime(),
 					daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
 							.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
 					daosp.getTinhtrangdaugia(), daosp.getGhichu());
@@ -499,14 +563,15 @@ public class SanPhamServices {
 		List<dao.Sanpham> daodssp = sanphamdao
 				.findBySanPhamChienThangAll(username);
 		for (dao.Sanpham daosp : daodssp) {
-			model.Sanpham pojosp = new Sanpham(daosp.getMasp(), daosp.getTensp(),
-					daosp.getTinhtrangsp().getTentinhtrangsp(), daosp.getSoluong(),
+			model.Sanpham pojosp = new Sanpham(daosp.getMasp(),
+					daosp.getTensp(), daosp.getTinhtrangsp()
+							.getTentinhtrangsp(), daosp.getSoluong(),
 					daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
 							.getTenloaisp(), daosp.getNguoidang(),
-					daosp.getGiakhoidiem(), daosp.getGiahientai(),daosp.getGiamuangay(),
-					daosp.getNguoidat(), daosp.getBuocgia(), daosp
-							.getThoigianbatdau().getTime(), daosp
-							.getThoigianketthuc().getTime(),
+					daosp.getGiakhoidiem(), daosp.getGiahientai(),
+					daosp.getGiamuangay(), daosp.getNguoidat(),
+					daosp.getBuocgia(), daosp.getThoigianbatdau().getTime(),
+					daosp.getThoigianketthuc().getTime(),
 					daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
 							.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
 					daosp.getTinhtrangdaugia(), daosp.getGhichu());
@@ -527,14 +592,15 @@ public class SanPhamServices {
 		List<dao.Sanpham> daodssp = sanphamdao
 				.findBySanPhamChienThangChuaThanhToan(username);
 		for (dao.Sanpham daosp : daodssp) {
-			model.Sanpham pojosp = new Sanpham(daosp.getMasp(), daosp.getTensp(),
-					daosp.getTinhtrangsp().getTentinhtrangsp(), daosp.getSoluong(),
+			model.Sanpham pojosp = new Sanpham(daosp.getMasp(),
+					daosp.getTensp(), daosp.getTinhtrangsp()
+							.getTentinhtrangsp(), daosp.getSoluong(),
 					daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
 							.getTenloaisp(), daosp.getNguoidang(),
-					daosp.getGiakhoidiem(), daosp.getGiahientai(),daosp.getGiamuangay(),
-					daosp.getNguoidat(), daosp.getBuocgia(), daosp
-							.getThoigianbatdau().getTime(), daosp
-							.getThoigianketthuc().getTime(),
+					daosp.getGiakhoidiem(), daosp.getGiahientai(),
+					daosp.getGiamuangay(), daosp.getNguoidat(),
+					daosp.getBuocgia(), daosp.getThoigianbatdau().getTime(),
+					daosp.getThoigianketthuc().getTime(),
 					daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
 							.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
 					daosp.getTinhtrangdaugia(), daosp.getGhichu());
@@ -555,14 +621,15 @@ public class SanPhamServices {
 		List<dao.Sanpham> daodssp = sanphamdao
 				.findBySanPhamChienThangDaThanhToan(username);
 		for (dao.Sanpham daosp : daodssp) {
-			model.Sanpham pojosp = new Sanpham(daosp.getMasp(), daosp.getTensp(),
-					daosp.getTinhtrangsp().getTentinhtrangsp(), daosp.getSoluong(),
+			model.Sanpham pojosp = new Sanpham(daosp.getMasp(),
+					daosp.getTensp(), daosp.getTinhtrangsp()
+							.getTentinhtrangsp(), daosp.getSoluong(),
 					daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
 							.getTenloaisp(), daosp.getNguoidang(),
-					daosp.getGiakhoidiem(), daosp.getGiahientai(),daosp.getGiamuangay(),
-					daosp.getNguoidat(), daosp.getBuocgia(), daosp
-							.getThoigianbatdau().getTime(), daosp
-							.getThoigianketthuc().getTime(),
+					daosp.getGiakhoidiem(), daosp.getGiahientai(),
+					daosp.getGiamuangay(), daosp.getNguoidat(),
+					daosp.getBuocgia(), daosp.getThoigianbatdau().getTime(),
+					daosp.getThoigianketthuc().getTime(),
 					daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
 							.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
 					daosp.getTinhtrangdaugia(), daosp.getGhichu());
@@ -583,14 +650,15 @@ public class SanPhamServices {
 		List<dao.Sanpham> daodssp = sanphamdao
 				.findBySanPhamCuaToiDangDau(username);
 		for (dao.Sanpham daosp : daodssp) {
-			model.Sanpham pojosp = new Sanpham(daosp.getMasp(), daosp.getTensp(),
-					daosp.getTinhtrangsp().getTentinhtrangsp(), daosp.getSoluong(),
+			model.Sanpham pojosp = new Sanpham(daosp.getMasp(),
+					daosp.getTensp(), daosp.getTinhtrangsp()
+							.getTentinhtrangsp(), daosp.getSoluong(),
 					daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
 							.getTenloaisp(), daosp.getNguoidang(),
-					daosp.getGiakhoidiem(), daosp.getGiahientai(),daosp.getGiamuangay(),
-					daosp.getNguoidat(), daosp.getBuocgia(), daosp
-							.getThoigianbatdau().getTime(), daosp
-							.getThoigianketthuc().getTime(),
+					daosp.getGiakhoidiem(), daosp.getGiahientai(),
+					daosp.getGiamuangay(), daosp.getNguoidat(),
+					daosp.getBuocgia(), daosp.getThoigianbatdau().getTime(),
+					daosp.getThoigianketthuc().getTime(),
 					daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
 							.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
 					daosp.getTinhtrangdaugia(), daosp.getGhichu());
@@ -611,14 +679,15 @@ public class SanPhamServices {
 		List<dao.Sanpham> daodssp = sanphamdao
 				.findBySanPhamCuaToiBiHuy(username);
 		for (dao.Sanpham daosp : daodssp) {
-			model.Sanpham pojosp = new Sanpham(daosp.getMasp(), daosp.getTensp(),
-					daosp.getTinhtrangsp().getTentinhtrangsp(), daosp.getSoluong(),
+			model.Sanpham pojosp = new Sanpham(daosp.getMasp(),
+					daosp.getTensp(), daosp.getTinhtrangsp()
+							.getTentinhtrangsp(), daosp.getSoluong(),
 					daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
 							.getTenloaisp(), daosp.getNguoidang(),
-					daosp.getGiakhoidiem(), daosp.getGiahientai(),daosp.getGiamuangay(),
-					daosp.getNguoidat(), daosp.getBuocgia(), daosp
-							.getThoigianbatdau().getTime(), daosp
-							.getThoigianketthuc().getTime(),
+					daosp.getGiakhoidiem(), daosp.getGiahientai(),
+					daosp.getGiamuangay(), daosp.getNguoidat(),
+					daosp.getBuocgia(), daosp.getThoigianbatdau().getTime(),
+					daosp.getThoigianketthuc().getTime(),
 					daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
 							.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
 					daosp.getTinhtrangdaugia(), daosp.getGhichu());
@@ -639,14 +708,15 @@ public class SanPhamServices {
 		List<dao.Sanpham> daodssp = sanphamdao
 				.findBySanPhamCuaToiSapDau(username);
 		for (dao.Sanpham daosp : daodssp) {
-			model.Sanpham pojosp = new Sanpham(daosp.getMasp(), daosp.getTensp(),
-					daosp.getTinhtrangsp().getTentinhtrangsp(), daosp.getSoluong(),
+			model.Sanpham pojosp = new Sanpham(daosp.getMasp(),
+					daosp.getTensp(), daosp.getTinhtrangsp()
+							.getTentinhtrangsp(), daosp.getSoluong(),
 					daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
 							.getTenloaisp(), daosp.getNguoidang(),
-					daosp.getGiakhoidiem(), daosp.getGiahientai(),daosp.getGiamuangay(),
-					daosp.getNguoidat(), daosp.getBuocgia(), daosp
-							.getThoigianbatdau().getTime(), daosp
-							.getThoigianketthuc().getTime(),
+					daosp.getGiakhoidiem(), daosp.getGiahientai(),
+					daosp.getGiamuangay(), daosp.getNguoidat(),
+					daosp.getBuocgia(), daosp.getThoigianbatdau().getTime(),
+					daosp.getThoigianketthuc().getTime(),
 					daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
 							.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
 					daosp.getTinhtrangdaugia(), daosp.getGhichu());
@@ -667,14 +737,15 @@ public class SanPhamServices {
 		List<dao.Sanpham> daodssp = sanphamdao
 				.findBySanPhamCuaToiDaDauXong(username);
 		for (dao.Sanpham daosp : daodssp) {
-			model.Sanpham pojosp = new Sanpham(daosp.getMasp(), daosp.getTensp(),
-					daosp.getTinhtrangsp().getTentinhtrangsp(), daosp.getSoluong(),
+			model.Sanpham pojosp = new Sanpham(daosp.getMasp(),
+					daosp.getTensp(), daosp.getTinhtrangsp()
+							.getTentinhtrangsp(), daosp.getSoluong(),
 					daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
 							.getTenloaisp(), daosp.getNguoidang(),
-					daosp.getGiakhoidiem(), daosp.getGiahientai(),daosp.getGiamuangay(),
-					daosp.getNguoidat(), daosp.getBuocgia(), daosp
-							.getThoigianbatdau().getTime(), daosp
-							.getThoigianketthuc().getTime(),
+					daosp.getGiakhoidiem(), daosp.getGiahientai(),
+					daosp.getGiamuangay(), daosp.getNguoidat(),
+					daosp.getBuocgia(), daosp.getThoigianbatdau().getTime(),
+					daosp.getThoigianketthuc().getTime(),
 					daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
 							.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
 					daosp.getTinhtrangdaugia(), daosp.getGhichu());
@@ -745,14 +816,15 @@ public class SanPhamServices {
 		dao.SanphamDAO sanphamdao = new dao.SanphamDAO();
 		List<dao.Sanpham> daodssp = sanphamdao.findBySanPhamHuyAdmin(tinhtrang);
 		for (dao.Sanpham daosp : daodssp) {
-			model.Sanpham pojosp = new Sanpham(daosp.getMasp(), daosp.getTensp(),
-					daosp.getTinhtrangsp().getTentinhtrangsp(), daosp.getSoluong(),
+			model.Sanpham pojosp = new Sanpham(daosp.getMasp(),
+					daosp.getTensp(), daosp.getTinhtrangsp()
+							.getTentinhtrangsp(), daosp.getSoluong(),
 					daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
 							.getTenloaisp(), daosp.getNguoidang(),
-					daosp.getGiakhoidiem(), daosp.getGiahientai(),daosp.getGiamuangay(),
-					daosp.getNguoidat(), daosp.getBuocgia(), daosp
-							.getThoigianbatdau().getTime(), daosp
-							.getThoigianketthuc().getTime(),
+					daosp.getGiakhoidiem(), daosp.getGiahientai(),
+					daosp.getGiamuangay(), daosp.getNguoidat(),
+					daosp.getBuocgia(), daosp.getThoigianbatdau().getTime(),
+					daosp.getThoigianketthuc().getTime(),
 					daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
 							.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
 					daosp.getTinhtrangdaugia(), daosp.getGhichu());
@@ -770,14 +842,15 @@ public class SanPhamServices {
 		dao.SanphamDAO sanphamdao = new dao.SanphamDAO();
 		List<dao.Sanpham> daodssp = sanphamdao.findBySanPhamChoPhepDauAdmin();
 		for (dao.Sanpham daosp : daodssp) {
-			model.Sanpham pojosp = new Sanpham(daosp.getMasp(), daosp.getTensp(),
-					daosp.getTinhtrangsp().getTentinhtrangsp(), daosp.getSoluong(),
+			model.Sanpham pojosp = new Sanpham(daosp.getMasp(),
+					daosp.getTensp(), daosp.getTinhtrangsp()
+							.getTentinhtrangsp(), daosp.getSoluong(),
 					daosp.getXuatxu(), daosp.getThuonghieu(), daosp.getLoaisp()
 							.getTenloaisp(), daosp.getNguoidang(),
-					daosp.getGiakhoidiem(), daosp.getGiahientai(),daosp.getGiamuangay(),
-					daosp.getNguoidat(), daosp.getBuocgia(), daosp
-							.getThoigianbatdau().getTime(), daosp
-							.getThoigianketthuc().getTime(),
+					daosp.getGiakhoidiem(), daosp.getGiahientai(),
+					daosp.getGiamuangay(), daosp.getNguoidat(),
+					daosp.getBuocgia(), daosp.getThoigianbatdau().getTime(),
+					daosp.getThoigianketthuc().getTime(),
 					daosp.getThongtinlienhe(), daosp.getHinhthucthanhtoan()
 							.getTenhttt(), daosp.getHinhanh(), daosp.getMota(),
 					daosp.getTinhtrangdaugia(), daosp.getGhichu());
