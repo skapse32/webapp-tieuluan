@@ -6,7 +6,7 @@
 <div style="margin:40px auto 20px auto;" align="center">
 	<c:if test="${not empty error }">
 		<script type="text/javascript">
-			alert("${errorcontent}");
+			alert("${error}");
 		</script>
 	</c:if>
 	<form class="loginform"

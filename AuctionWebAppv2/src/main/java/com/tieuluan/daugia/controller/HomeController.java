@@ -144,6 +144,7 @@ public class HomeController {
 		model.addAttribute("tieude", "Sản phẩm đang đấu");
 		model.addAttribute("soLuongSanPhamTrenTrang", soLuongSanPhamTrenTrang);
 		model.addAttribute("trang", trang);
+		model.addAttribute("locsp", sort);
 		model.addAttribute("maLoaiSP", maLoaiSP);
 		model.addAttribute("soTrang", soTrang);
 		model.addAttribute("dssp", dssp);

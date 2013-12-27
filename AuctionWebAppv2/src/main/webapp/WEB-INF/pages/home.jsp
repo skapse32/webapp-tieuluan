@@ -194,9 +194,13 @@
 								<a style="color: #00C"
 									href="${pageContext.request.contextPath}/?thuonghieu=${thuonghieu}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
 							</c:when>
-							<c:otherwise>
+							<c:when test="${check == 'maloaiSP'}">
 								<a style="color: #00C"
 									href="${pageContext.request.contextPath}/?maLoaiSP=${maLoaiSP}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
+							</c:when>
+							<c:otherwise>
+								<a style="color: #00C"
+									href="${pageContext.request.contextPath}/?locsp=${locsp}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
 							</c:otherwise>
 						</c:choose>
 
