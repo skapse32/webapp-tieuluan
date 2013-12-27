@@ -2,57 +2,63 @@ package com.authenticate.test;
 
 import java.io.UnsupportedEncodingException;
 import java.net.URLDecoder;
+import java.util.ArrayList;
+import java.util.List;
 
 import org.forgerock.opendj.ldap.Connection;
 import org.forgerock.opendj.ldap.Entries;
 import org.forgerock.opendj.ldap.Entry;
 import org.forgerock.opendj.ldap.ErrorResultException;
+import org.forgerock.opendj.ldap.ErrorResultIOException;
 import org.forgerock.opendj.ldap.LDAPConnectionFactory;
 import org.forgerock.opendj.ldap.LinkedHashMapEntry;
+import org.forgerock.opendj.ldap.SearchResultReferenceIOException;
+import org.forgerock.opendj.ldap.SearchScope;
 import org.forgerock.opendj.ldap.TreeMapEntry;
 import org.forgerock.opendj.ldap.requests.ModifyRequest;
+import org.forgerock.opendj.ldap.responses.SearchResultEntry;
+import org.forgerock.opendj.ldif.ConnectionEntryReader;
+
+import com.authenticate.pojo.User;
 
 public class TestOpenDJ {
 
-	public static void main(String[] args) throws UnsupportedEncodingException {
+	public static void main(String[] args) throws UnsupportedEncodingException, ErrorResultException, ErrorResultIOException, SearchResultReferenceIOException {
 		// TODO Auto-generated method stub
-		Entry entry = new LinkedHashMapEntry("cn=nvh"
-				+ ",ou=users,dc=springldap,dc=com")
-				.addAttribute("cn", "nvh")
-				.addAttribute("uid", "nvh")
-				.addAttribute("objectclass", "myobjectclass")
-				.addAttribute("userPassword", "talavua")
-				
-				.addAttribute("fullname", URLDecoder.decode("Nguyễn Văn Hòa", "UTF-8"))
-		.addAttribute("address",  URLDecoder.decode("43 Hàn Thuyên", "UTF-8"))
-		.addAttribute("telephoneNumber", "01289816416")
-		.addAttribute("sex", true)
-		.addAttribute("birthday", "04-12-1992")
-		.addAttribute("mail", "nvh0412@gmail.com")
-		.addAttribute("status", 1);
-
-		final LDAPConnectionFactory factory = new LDAPConnectionFactory(
-				"0.0.0.0", 389);
 		Connection connection = null;
-		try {
-			connection = factory.getConnection();
-			connection.bind("cn=Directory Manager", "talavua".toCharArray());
-			connection.add(entry);
-			// Them user vao group
-			entry = new LinkedHashMapEntry(
-					"cn=User,ou=groups,dc=springldap,dc=com");
-			Entry old = TreeMapEntry.deepCopyOfEntry(entry);
-			entry = entry.replaceAttribute("uniqueMember", "cn=" + "nvh"
-					+ ",ou=users,dc=springldap,dc=com");
-			ModifyRequest request = Entries.diffEntries(old, entry);
-			connection.modify(request);
-		} catch (final ErrorResultException e) {
-			e.printStackTrace();
-		} finally {
-			if (connection != null) {
-				connection.close();
+		List<User> users = new ArrayList<User>();
+		final LDAPConnectionFactory factory = new LDAPConnectionFactory(
+				"0.0.0.0", 1389);
+		connection = factory.getConnection();
+		final ConnectionEntryReader reader = connection
+				.search("dc=springldap,dc=com", SearchScope.WHOLE_SUBTREE,
+						"uid=*", "*");
+		while (reader.hasNext()) {
+			if (!reader.isReference()) {
+				User user = new User();
+				SearchResultEntry entry = reader.readEntry();
+				user.setHoTen(entry.parseAttribute("fullname").asString());
+				user.setStatus(entry.parseAttribute("status").asString());
+				user.setUsername(entry.parseAttribute("uid").asString());
+				user.setEmail(entry.parseAttribute("mail").asString());
+				user.setDiaChi(entry.parseAttribute("address").asString());
+				user.setDienThoai(entry.parseAttribute("telephoneNumber")
+						.asString());
+				user.setNgaySinh(entry.parseAttribute("birthday").asString());
+				if(entry.parseAttribute("sex") != null){
+					user.setGioiTinh(entry.parseAttribute("sex").asBoolean());
+				}else{
+					user.setGioiTinh(true);
+				}
+				user.setTrangThai(entry.parseAttribute("status").asInteger());
+				System.out.println(user);
+				users.add(user);
 			}
 		}
-	}
+		System.out.println(users);
 
+		if (connection != null) {
+			connection.close();
+		}
+	}
 }
