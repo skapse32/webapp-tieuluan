@@ -58,6 +58,7 @@ public class LoginResource {
 	@Path("/accessToken")
 	@Produces("application/json")
 	public String getAccessToken(@FormParam("authenCode") String authenCode) {
+		System.out.println("authenCode : "+ authenCode );
 		if (listUserName.containsValue(authenCode)) {
 			String accessToken = UUID.randomUUID().toString();
 			listAccessToken.put(authenCode, accessToken);

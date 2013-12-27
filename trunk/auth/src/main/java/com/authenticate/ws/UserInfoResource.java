@@ -2,6 +2,8 @@ package com.authenticate.ws;
 
 import java.io.IOException;
 import java.security.GeneralSecurityException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.crypto.Cipher;
 import javax.crypto.SecretKey;
@@ -15,9 +17,13 @@ import javax.ws.rs.Produces;
 
 import org.forgerock.opendj.ldap.Connection;
 import org.forgerock.opendj.ldap.DN;
+import org.forgerock.opendj.ldap.ErrorResultException;
+import org.forgerock.opendj.ldap.ErrorResultIOException;
 import org.forgerock.opendj.ldap.LDAPConnectionFactory;
+import org.forgerock.opendj.ldap.SearchResultReferenceIOException;
 import org.forgerock.opendj.ldap.SearchScope;
 import org.forgerock.opendj.ldap.responses.SearchResultEntry;
+import org.forgerock.opendj.ldif.ConnectionEntryReader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -32,6 +38,7 @@ public class UserInfoResource {
 	private static final byte[] SALT = { (byte) 0xde, (byte) 0x33, (byte) 0x10,
 			(byte) 0x12, (byte) 0xde, (byte) 0x33, (byte) 0x10, (byte) 0x12, };
 	Logger logger = LoggerFactory.getLogger(UserInfoResource.class);
+
 	@POST
 	@Path("/username")
 	@Produces("application/json")
@@ -40,16 +47,19 @@ public class UserInfoResource {
 		User user = new User();
 		try {
 			logger.info("Come to read user");
-			final LDAPConnectionFactory factory = new LDAPConnectionFactory("0.0.0.0", 1389);
+			final LDAPConnectionFactory factory = new LDAPConnectionFactory(
+					"0.0.0.0", 1389);
 			connection = factory.getConnection();
-			final SearchResultEntry entry = connection.searchSingleEntry("dc=springldap,dc=com", 
-					SearchScope.WHOLE_SUBTREE, "(uid=" + username + ")", "*");
+			final SearchResultEntry entry = connection.searchSingleEntry(
+					"dc=springldap,dc=com", SearchScope.WHOLE_SUBTREE, "(uid="
+							+ username + ")", "*");
 			user.setHoTen(entry.parseAttribute("fullname").asString());
 			user.setStatus(entry.parseAttribute("status").asString());
 			user.setUsername(username);
 			user.setEmail(entry.parseAttribute("mail").asString());
 			user.setDiaChi(entry.parseAttribute("address").asString());
-			user.setDienThoai(entry.parseAttribute("telephoneNumber").asString());
+			user.setDienThoai(entry.parseAttribute("telephoneNumber")
+					.asString());
 			user.setNgaySinh(entry.parseAttribute("birthday").asString());
 			user.setGioiTinh(entry.parseAttribute("sex").asBoolean());
 			user.setTrangThai(entry.parseAttribute("status").asInteger());
@@ -65,9 +75,65 @@ public class UserInfoResource {
 		}
 	}
 
+	// find all
+	@POST
+	@Path("/findAll")
+	@Produces("application/json;charset=utf-8")
+	public List<User> getAllUserInfoPOST(
+			@FormParam("username") String username,
+			@FormParam("email") String email) throws ErrorResultException, ErrorResultIOException, SearchResultReferenceIOException {
+		Connection connection = null;
+		List<User> users = new ArrayList<User>();
+		final LDAPConnectionFactory factory = new LDAPConnectionFactory(
+				"0.0.0.0", 1389);
+		connection = factory.getConnection();
+		String filter = "";
+		System.out.println(username + "|" + email);
+		if(username.equals("") && email.equals("")){
+			filter = "(uid=*)";
+		}else if(!username.equals("") && email.equals("")){
+			filter = "(uid="+ username + ")";
+		}else if(username.equals("") && !email.equals("")){
+			filter = "(mail="+ email + ")";
+		}
+		else{
+			filter = "(&(uid="+username+")(mail="+email+"))";
+		}
+		System.out.println(filter);
+		final ConnectionEntryReader reader = connection
+				.search("dc=springldap,dc=com", SearchScope.WHOLE_SUBTREE,
+						filter,"*");
+		while (reader.hasNext()) {
+			if (!reader.isReference()) {
+				User user = new User();
+				SearchResultEntry entry = reader.readEntry();
+				user.setHoTen(entry.parseAttribute("fullname").asString());
+				user.setStatus(entry.parseAttribute("status").asString());
+				user.setUsername(entry.parseAttribute("uid").asString());
+				user.setEmail(entry.parseAttribute("mail").asString());
+				user.setDiaChi(entry.parseAttribute("address").asString());
+				user.setDienThoai(entry.parseAttribute("telephoneNumber")
+						.asString());
+				user.setNgaySinh(entry.parseAttribute("birthday").asString());
+				if(entry.parseAttribute("sex") != null){
+					user.setGioiTinh(entry.parseAttribute("sex").asBoolean());
+				}else{
+					user.setGioiTinh(true);
+				}
+				user.setTrangThai(entry.parseAttribute("status").asInteger());
+				users.add(user);
+			}
+		}
+
+		if (connection != null) {
+			connection.close();
+		}
+		return users;
+	}
+
 	@POST
 	@Path("/password")
-	@Produces("application/json")
+	@Produces("application/json; charset=utf-8")
 	public String getUserPassPOST(@FormParam("username") String username,
 			@FormParam("password") String password,
 			@FormParam("newPassword") String newPassword) {
@@ -75,22 +141,24 @@ public class UserInfoResource {
 		try {
 			String passDecrypt = decrypt(password);
 			// Check username and password
-			LDAPConnectionFactory factory = new LDAPConnectionFactory("localhost", 1389);
+			LDAPConnectionFactory factory = new LDAPConnectionFactory(
+					"localhost", 1389);
 			connection = factory.getConnection();
-			SearchResultEntry entry = connection.searchSingleEntry("dc=springldap,dc=com", 
-					SearchScope.WHOLE_SUBTREE, "(uid="+ username + ")", "*");
+			SearchResultEntry entry = connection.searchSingleEntry(
+					"dc=springldap,dc=com", SearchScope.WHOLE_SUBTREE, "(uid="
+							+ username + ")", "*");
 			DN bindDN = entry.getName();
 			connection.bind(bindDN.toString(), passDecrypt.toCharArray());
 			// Update password
 			String newPassDecrypt = decrypt(newPassword);
-			String str = "cmd /C C:/OpenDJ-2.5.0/bat/ldappasswordmodify" +
-					" --port 1389" + 
-					" --authzID \"dn:cn=" + username + ",ou=users,dc=springldap,dc=com\""+
-					" --currentPassword " + passDecrypt + 
-					" --newPassword " + newPassDecrypt;
+			String str = "cmd /C C:/OpenDJ-2.5.0/bat/ldappasswordmodify"
+					+ " --port 1389" + " --authzID \"dn:cn=" + username
+					+ ",ou=users,dc=springldap,dc=com\""
+					+ " --currentPassword " + passDecrypt + " --newPassword "
+					+ newPassDecrypt;
 			Process process = Runtime.getRuntime().exec(str);
 			synchronized (process) {
-				process.wait(2000);			
+				process.wait(2000);
 			}
 			connection.bind(bindDN.toString(), newPassDecrypt.toCharArray());
 			return "success";
@@ -103,11 +171,14 @@ public class UserInfoResource {
 		}
 	}
 
-	private static String decrypt(String password) throws GeneralSecurityException, IOException {
-		SecretKeyFactory keyFactory = SecretKeyFactory.getInstance("PBEWithMD5AndDES");
+	private static String decrypt(String password)
+			throws GeneralSecurityException, IOException {
+		SecretKeyFactory keyFactory = SecretKeyFactory
+				.getInstance("PBEWithMD5AndDES");
 		SecretKey key = keyFactory.generateSecret(new PBEKeySpec(KEY));
 		Cipher pbeCipher = Cipher.getInstance("PBEWithMD5AndDES");
-		pbeCipher.init(Cipher.DECRYPT_MODE, key, new PBEParameterSpec(SALT, 20));
+		pbeCipher
+				.init(Cipher.DECRYPT_MODE, key, new PBEParameterSpec(SALT, 20));
 		return new String(pbeCipher.doFinal(base64Decode(password)), "UTF-8");
 	}
 

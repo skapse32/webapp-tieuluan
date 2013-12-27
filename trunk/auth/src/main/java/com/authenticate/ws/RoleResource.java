@@ -43,9 +43,9 @@ public class RoleResource {
 				}
 			}
 		}
-
+		System.out.println("UserName : " + username + " | AuthenCode  : " + authenCode );
 		Connection connection = null;
-		String[] group = new String[] { "DeactiveUser", "User", "Admin" };
+		String[] group = new String[] { "DeactiveUser", "User", "Admin" , "BannedUser" };
 		try {
 			LDAPConnectionFactory factory = new LDAPConnectionFactory(
 					"localhost", 1389);
@@ -59,10 +59,11 @@ public class RoleResource {
 						.searchSingleEntry("ou=groups,dc=springldap,dc=com",
 								SearchScope.WHOLE_SUBTREE, "(cn=" + group[i]
 										+ ")", "*");
-				Set<String> users = entry.parseAttribute("uniqueMember")
+				Set<String> users = entry.parseAttribute("member")
 						.asSetOfString("");
 				for (String j : users) {
 					if (j.contains(cn)) {
+						System.out.println(group[i]);
 						return group[i];
 					}
 				}
@@ -76,5 +77,41 @@ public class RoleResource {
 		}
 		return "norole";
 	}
-
+	
+	@POST
+	@Path("/getRoleUserByUsername")
+	public String getRoleUserName(@FormParam("username") String username) {
+		Connection connection = null;
+		String[] group = new String[] { "DeactiveUser", "User", "Admin" , "BannedUser" };
+		try {
+			LDAPConnectionFactory factory = new LDAPConnectionFactory(
+					"localhost", 1389);
+			connection = factory.getConnection();
+			SearchResultEntry entry = null;
+			entry = connection.searchSingleEntry("dc=springldap,dc=com",
+					SearchScope.WHOLE_SUBTREE, "(uid=" + username + ")", "*");
+			String cn = "cn=" + entry.parseAttribute("cn").asString();
+			for (int i = 0; i < group.length; i++) {
+				entry = connection
+						.searchSingleEntry("ou=groups,dc=springldap,dc=com",
+								SearchScope.WHOLE_SUBTREE, "(cn=" + group[i]
+										+ ")", "*");
+				Set<String> users = entry.parseAttribute("member")
+						.asSetOfString("");
+				for (String j : users) {
+					if (j.contains(cn)) {
+						System.out.println(group[i]);
+						return group[i];
+					}
+				}
+			}
+		} catch (final Exception e) {
+			return "error";
+		} finally {
+			if (connection != null) {
+				connection.close();
+			}
+		}
+		return "norole";
+	}
 }
