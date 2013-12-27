@@ -1,7 +1,11 @@
 package com.tieuluan.daugia.controller;
 
 import java.io.IOException;
+import java.net.HttpCookie;
 
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.NewCookie;
 
@@ -30,7 +34,7 @@ public class DangNhapController {
 			@RequestParam(value = "action", required = false) String action,
 			@RequestParam(value = "username", required = false) String username,
 			@RequestParam(value = "password", required = false) String password,
-			HttpSession session, Model model) throws IOException {
+			HttpSession session, Model model, HttpServletResponse response) throws IOException {
 		String web = Server.web;
 		model.addAttribute("web", web);
 		model.addAttribute("tieude", "Ðăng nhập");
@@ -46,7 +50,7 @@ public class DangNhapController {
 				form = new Form();
 				form.add("username", username);
 				form.add("password", password);
-				authencode = webResource.path("login/loginpost").post(
+				authencode = webResource.path("login/loginpost").cookie(new NewCookie("authenCode", authencode)).post(
 						String.class, form);
 				if (authencode.equals("")) {
 					model.addAttribute("error",
@@ -54,6 +58,7 @@ public class DangNhapController {
 					return "dangnhap";
 				} else {
 					// access to AuctionService
+					System.out.print("Auction Authencode : " + authencode);
 					webResource = client.resource(Server.addressAuctionWS);
 					form = new Form();
 					form.add("username", username);
