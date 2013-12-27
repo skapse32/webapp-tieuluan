@@ -59,7 +59,7 @@
 						value="${maLoaiSP}"> <input type="hidden" id="page"
 						name="trang" value="${trang}"> <input type="hidden"
 						id="size" value="${soLuongSanPhamTrenTrang}"><label
-						style="">Trang &nbsp;</label>
+						style="color:#AB2D2A">Trang &nbsp;</label>
 					<c:forEach var="i" begin="1" end="${soTrang}" step="1">
 						<c:choose>
 							<c:when test="${check == 'thuonghieu'}">
@@ -75,16 +75,16 @@
 							<c:choose>
 								<c:when test="${i==trang}">
 									<input type="button" value="${i}"
-										style="width: 25px; background-color: inactivecaption" />
+										class="bu-a" />
 								</c:when>
 								<c:otherwise>
-									<input type="button" value="${i}" style="width: 25px" />
+									<input type="button" value="${i}" class="bu" />
 								</c:otherwise>
 							</c:choose>
 						</a>
 					</c:forEach>
 
-					<label for="soLuongSanPhamTrenTrang">Số lượng</label> <select
+					<label for="soLuongSanPhamTrenTrang" style="color:#AB2D2A">Số lượng</label> <select class="s-page"
 						name="soLuongSanPhamTrenTrang" onchange="submit()">
 						<c:forEach var="i" begin="1" end="5">
 							<option
