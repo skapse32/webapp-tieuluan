@@ -44,6 +44,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String sanphamhome(
+			@RequestParam(value = "locsp", required = false, defaultValue = "0") int sort,
 			@RequestParam(value = "thuonghieu", required = false, defaultValue = "0") String thuonghieu,
 			@RequestParam(value = "maLoaiSP", required = false, defaultValue = "-1") int maLoaiSP,
 			@RequestParam(value = "soLuongSanPhamTrenTrang", required = false, defaultValue = "8") int soLuongSanPhamTrenTrang,
@@ -90,7 +91,7 @@ public class HomeController {
 							"sessionid").toString())).post(String.class, form);
 			model.addAttribute("check", "thuonghieu");
 			model.addAttribute("thuonghieu", thuonghieu);
-		} else {
+		}  else {
 			form = new Form();
 			form.add("size", soLuongSanPhamTrenTrang);
 			form.add("page", trang);
@@ -101,9 +102,24 @@ public class HomeController {
 							"sessionid").toString())).post(String.class, form);
 			model.addAttribute("check", "masp");
 		}
+		// sort san pham
+		if(sort != 0) {
+			form = new Form();
+			form.add("loaisp", -1); // đang đấu 
+			form.add("sort", sort);
+			form.add("size", soLuongSanPhamTrenTrang);
+			form.add("page", trang);
+			json = webResource
+					.path("sanpham/findSanPhamTheoGiaLoc")
+					.cookie(new NewCookie("JSESSIONID", session.getAttribute(
+							"sessionid").toString())).post(String.class, form);
+		}
+	
+		//------
 		typelist = new TypeToken<ArrayList<Sanpham>>() {
 		}.getType();
 		dssp = gson.fromJson(json, typelist);
+		
 		//lay top 10 san pham
 		gson = new Gson();
 		List<Sanpham> dstop = new ArrayList<Sanpham>();
