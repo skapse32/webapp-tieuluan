@@ -8,6 +8,7 @@ import javax.ws.rs.FormParam;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
 
 import org.forgerock.opendj.ldap.Connection;
 import org.forgerock.opendj.ldap.DN;
@@ -35,6 +36,7 @@ import org.slf4j.LoggerFactory;
 @Path("/usermanager")
 public class UserManagerResource {
 
+	final LDAPConnectionFactory factory = new LDAPConnectionFactory("0.0.0.0", 389);
 	private Logger log = LoggerFactory.getLogger(UserManagerResource.class);
 	
 	@POST
@@ -62,7 +64,6 @@ public class UserManagerResource {
 				.addAttribute("mail", mail)
 				.addAttribute("status", 1); // Deactive user
 
-		final LDAPConnectionFactory factory = new LDAPConnectionFactory("0.0.0.0", 389);
 		Connection connection = null;
 		try {
 			connection = factory.getConnection();
@@ -87,12 +88,11 @@ public class UserManagerResource {
 	
 	@POST
 	@Path("/checkUser")
-	@Produces("application/json;")
-	public String checkUser(@FormParam("username") String username) throws UnsupportedEncodingException {
-		log.info("Come here " + username);
+	@Produces(MediaType.TEXT_PLAIN)
+	public String checkUser(@FormParam("username") String username){
+		log.info("Checking username: " + username);
 		try {
-			final LDAPConnectionFactory fac = new LDAPConnectionFactory("0.0.0.0", 389);
-			connection = fac.getConnection();
+			connection = factory.getConnection();
 
 			SearchResultEntry entry = connection.searchSingleEntry("dc=springldap,dc=com",
 					SearchScope.WHOLE_SUBTREE, "(uid="+username+")", "cn");
@@ -108,6 +108,32 @@ public class UserManagerResource {
 		}
 		return "false";
 	}
+	
+
+	@POST
+	@Path("/checkEmail")
+	@Produces(MediaType.TEXT_PLAIN)
+	public String checkEmail(@FormParam("email") String email){
+		log.info("Checking email: " + email);
+		
+		try {
+			connection = factory.getConnection();
+
+			SearchResultEntry entry = connection.searchSingleEntry("dc=springldap,dc=com",
+					SearchScope.WHOLE_SUBTREE, "(mail="+email+")", "cn");
+			DN bindDN = entry.getName();
+			System.out.println("user exist " + bindDN + "!.");
+			return "true";
+		} catch (ErrorResultException e) {
+			System.err.println("error " + e.getMessage());
+		} finally {
+			if (connection != null) {
+				connection.close();
+			}
+		}
+		return "false";
+	}
+	
 	@POST
 	@Path("/activeUser")
 	@Produces("application/json;")
@@ -128,7 +154,6 @@ public class UserManagerResource {
         final ModificationType delType = getModificationType("del");
         final ModificationType addType = getModificationType("add");
 		try {
-			final LDAPConnectionFactory factory = new LDAPConnectionFactory("localhost", 1389);
 			connection = factory.getConnection();
 			 
 			final String user = "cn=Directory Manager";
@@ -164,9 +189,8 @@ public class UserManagerResource {
         final ModificationType delType = getModificationType("del");
         final ModificationType addType = getModificationType("add");
 		try {
-			final LDAPConnectionFactory factory = new LDAPConnectionFactory("localhost", 1389);
 			connection = factory.getConnection();
-			 
+			
 			final String user = "cn=Directory Manager";
             final char[] password = "talavua".toCharArray();
             connection.bind(user, password);
