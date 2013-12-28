@@ -1,31 +1,22 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 
 <!-- Partner -->
-<div id="banner" class="wmain">
-	<div class="fl clb wmain partner">
-		<img class="fl" src="${pageContext.request.contextPath}/resources/v2/images/partner.jpg" alt="Partner" />
-		<ul class="fl partners list-none">
-			<li class="fl l20"><a href="#"
-				title="Phong Cách Mới Việt Nam - Thiết kế Website, thiết kế Wapsite, Hostting"
-				target="_blank" class="fl cOver"><img
-					alt="Phong Cách Mới Việt Nam - Thiết kế Website, thiết kế Wapsite, Hostting"
-					src="${pageContext.request.contextPath}/resources/v2/upload/thietkeweb_1316248640.jpg" /></a></li>
-			<li class="fl l20"><a href="#" title="Yamaha Nozza FC Việt Nam"
-				target="_blank" class="fl cOver"><img
-					alt="Yamaha Nozza FC Việt Nam"
-					src="${pageContext.request.contextPath}/resources/v2/upload/yamaha-nozza-fc_1316723865.jpg" /></a></li>
-			<li class="fl l20"><a href="#" title="Mua Chung Việt Nam"
-				target="_blank" class="fl cOver"><img alt="Mua Chung Việt Nam"
-					src="${pageContext.request.contextPath}/resources/v2/upload/muachung_1316248890.jpg" /></a></li>
-			<li class="fl l20"><a href="#" title="Tập đoàn Prime group"
-				target="_blank" class="fl cOver"><img alt="Tập đoàn Prime group"
-					src="${pageContext.request.contextPath}/resources/v2/upload/4_1316248734.jpg" /></a></li>
-			<li class="fl l20"><a href="#" title="Tập đoàn Hòa Phát"
-				target="_blank" class="fl cOver"><img alt="Tập đoàn Hòa Phát"
-					src="${pageContext.request.contextPath}/resources/v2/upload/5_1316248691.jpg" /></a></li>
-		</ul>
-	</div>
-</div>
+
+<!-- Partner -->
+    <div id="banner" class="wmain">
+        <div class="fl clb wmain partner">
+            <img class="fl" src="${pageContext.request.contextPath}/resources/v2/images/partner.jpg" alt="Partner"/>
+            <ul class="fl partners list-none">
+                <li class="fl l20"><a href="http://www.phongcachmoi.vn/" title="Phong Cách Mới Việt Nam - Thiết kế Website, thiết kế Wapsite, Hostting" target="_blank" class="fl cOver"><img alt="Phong Cách Mới Việt Nam - Thiết kế Website, thiết kế Wapsite, Hostting" src="${pageContext.request.contextPath}/resources/v2/upload/thietkeweb_1316248640.jpg" /></a></li>
+                <li class="fl l20"><a href="http://www.nozza.coo.me/" title="Yamaha Nozza FC Việt Nam" target="_blank" class="fl cOver"><img alt="Yamaha Nozza FC Việt Nam" src="${pageContext.request.contextPath}/resources/v2/upload/yamaha-nozza-fc_1316723865.jpg" /></a></li>
+                <li class="fl l20"><a href="http://muachungvietnam.net/" title="Mua Chung Việt Nam" target="_blank" class="fl cOver"><img alt="Mua Chung Việt Nam" src="${pageContext.request.contextPath}/resources/v2/upload/muachung_1316248890.jpg" /></a></li>
+                <li class="fl l20"><a href="http://www.phongcachmoi.vn/" title="Tập đoàn Prime group" target="_blank" class="fl cOver"><img alt="Tập đoàn Prime group" src="${pageContext.request.contextPath}/resources/v2/upload/4_1316248734.jpg" /></a></li>
+                <li class="fl l20"><a href="http://hoaphat.com.vn" title="Tập đoàn Hòa Phát" target="_blank" class="fl cOver"><img alt="Tập đoàn Hòa Phát" src="${pageContext.request.contextPath}/resources/v2/upload/5_1316248691.jpg" /></a></li>
+                <li class="fl l20"><a href="http://kama.com.vn/" title=" MÁY PHÁT ĐIỆN KAMA HỒNG ĐÀO" target="_blank" class="fl cOver"><img alt=" MÁY PHÁT ĐIỆN KAMA HỒNG ĐÀO" src="${pageContext.request.contextPath}/resources/v2/upload/1_1316248983.jpg" /></a></li>
+            </ul>
+        </div>
+    </div>
+<!-- Partner END -->
 <!-- Partner END -->
 
 <!-- Footer -->

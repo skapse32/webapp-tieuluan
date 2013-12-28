@@ -14,7 +14,7 @@
 				class="fl bg-titles products-group-title-news color_white fontTahoma">
 				<a class="link-white" href="#"><strong>${tieude}</strong></a>
 			</div>	
-			<img alt="" src="resources/v2/images/sub-titles.jpg" />
+			<img alt="" src="${pageContext.request.contextPath}/resources/v2/images/sub-titles.jpg" />
 			<div style="float: right; padding-top: 6px">
 			<form></form>
 			</div>

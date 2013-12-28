@@ -27,8 +27,8 @@
 	href="resources/v2/css/slider-style.css" />
 <link href="http://www.jqueryscript.net/css/jquerysctipttop.css"
 	rel="stylesheet" type="text/css">
-<script src="resources/v2/js/datetimepicker/jquery.js"></script>
-<script src="resources/v2/js/jquery.flexisel.js"></script>
+<script src="${pageContext.request.contextPath}/resources/v2/js/datetimepicker/jquery.js"></script>
+<script src="${pageContext.request.contextPath}/resources/v2/js/jquery.flexisel.js"></script>
 
 
 <!-- OLD ------------------------------------------------------------------------------------->

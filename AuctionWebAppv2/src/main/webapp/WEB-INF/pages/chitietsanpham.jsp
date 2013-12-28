@@ -243,20 +243,20 @@
 		<div id="products-group" class="fl bg-top-products wleft">
 			<div id="browser-modules" class="fl browser fontTahoma">
 				<a href="" class="fl url_home l8 right8"> <img class="fl w21-18"
-					alt="" src="resources/v2/images/blank.gif" />
-				</a> <img class="fl right8" src="resources/v2/images/arrow.gif" alt="" />
+					alt="" src="${pageContext.request.contextPath}/resources/v2/images/blank.gif" />
+				</a> <img class="fl right8" src="${pageContext.request.contextPath}/resources/v2/images/arrow.gif" alt="" />
 				<div class="fl top3 right8">
 					<a class="fl link_blue bold" href="">${sp.loaisp}</a>
 				</div>
-				<img class="fl right8" src="resources/v2/images/arrow.gif" alt="" />
+				<img class="fl right8" src="${pageContext.request.contextPath}/resources/v2/images/arrow.gif" alt="" />
 				<div class="fl top3 right8">
 					<a class="fl link_blue bold" href="">${sp.thuonghieu}</a>
 				</div>
-				<img class="fl right8" src="resources/v2/images/arrow.gif" alt="" />
+				<img class="fl right8" src="${pageContext.request.contextPath}/resources/v2/images/arrow.gif" alt="" />
 				<div class="fl top3 right8">
 					<a class="fl link_blue bold" href="chitietsanpham?masp=${sp.masp}">${sp.tensp}</a>
 				</div>
-				<img class="fl right8" src="resources/v2/images/arrow.gif" alt="" />
+				<img class="fl right8" src="${pageContext.request.contextPath}/resources/v2/images/arrow.gif" alt="" />
 
 			</div>
 		</div>
@@ -813,7 +813,7 @@
 				class="fl bg-titles products-group-title-news color_white fontTahoma">
 				<strong>Các sản phẩm khác cùng loại ${sp.loaisp}</strong>
 			</div>
-			<img alt="" src="resources/v2/images/sub-titles.jpg" />
+			<img alt="" src="${pageContext.request.contextPath}/resources/v2/images/sub-titles.jpg" />
 			<!-- phan trang -->
 			<div style="float: right; padding-top: 6px">
 				<form action="">
@@ -1040,13 +1040,13 @@
 				<li class="fl pd5 w240"><a class="fl pdl10"
 					title="Chăm sóc khách hàng"
 					href="ymsgr:SendIM?phamhoaquan&amp;m=Hello Yamaha Motor"><img
-						alt="" src="resources/v2/images/on.gif" /></a><span class="fl l5">
+						alt="" src="${pageContext.request.contextPath}/resources/v2/images/on.gif" /></a><span class="fl l5">
 						- Chăm sóc khách hàng</span></li>
 				<li class="fl wright das_top h1"></li>
 				<li class="fl pd5 w240"><a class="fl pdl10"
 					title="Phòng kinh doanh"
 					href="ymsgr:SendIM?phamhoaquan&amp;m=Hello Yamaha Motor"><img
-						alt="" src="resources/v2/images/on.gif" /></a><span class="fl l5">
+						alt="" src="${pageContext.request.contextPath}/resources/v2/images/on.gif" /></a><span class="fl l5">
 						- Phòng kinh doanh</span></li>
 				<li class="fl wright das_top h1"></li>
 			</ul>

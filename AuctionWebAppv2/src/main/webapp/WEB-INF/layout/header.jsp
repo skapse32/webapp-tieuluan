@@ -6,7 +6,7 @@
 
 <!-- Header -->
 	<div id="header" class="header wmain">
-        <a class="fl top28" href="."><img class="fl logo" alt="Website dau gia online" src="resources/v2/images/logo2.png"/></a>
+        <a class="fl top28" href="."><img class="fl logo" alt="Website dau gia online" src="${pageContext.request.contextPath}/resources/v2/images/logo2.png"/></a>
     </div>
 <!-- Header end -->
 
