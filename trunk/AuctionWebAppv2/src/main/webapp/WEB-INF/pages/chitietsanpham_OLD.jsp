@@ -228,7 +228,7 @@
 			</tbody>
 		</table>
 	</div>
-	<div id="error" style="color: red;"></div>
+	
 	<div id="error1" style="color: red;"></div>
 	<table cellpadding="0" cellspacing="0" width="400px">
 		<tr>

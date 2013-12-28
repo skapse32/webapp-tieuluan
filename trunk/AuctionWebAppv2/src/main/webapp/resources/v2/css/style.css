@@ -934,6 +934,7 @@ input.login:focus, input.login:focus {
 	border-bottom: 1px solid #e5e5e5;
 	border-bottom-style: dashed;
 	width:990px;
+	padding-top:80px;
 	padding-bottom:80px;
 }
 .logintable{

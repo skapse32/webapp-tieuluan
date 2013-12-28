@@ -3,7 +3,6 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 
-
 <!-- Header -->
 	<div id="header" class="header wmain">
         <a class="fl top28" href="."><img class="fl logo" alt="Website dau gia online" src="${pageContext.request.contextPath}/resources/v2/images/logo2.png"/></a>

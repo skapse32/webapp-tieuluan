@@ -42,7 +42,7 @@
 <div id="content" class="wmain">
 	<!-- Left side -->
 	<div id="box-left" class="fl top10 bg_white wleft">
-		<div id="error" style="color: red;"></div>
+		
 		<div id="gio-hang-cua-ban" class="fl top10 bg_white wleft">
 			<div class="fl top10 bg_white wleft">
 				<div class="fl wmain h27 bg_sep_bottom">

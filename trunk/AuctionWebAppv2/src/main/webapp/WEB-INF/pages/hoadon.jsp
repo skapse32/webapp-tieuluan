@@ -6,7 +6,7 @@
 
 <div id="content" class="wmain">
 	<div id="box-left" class="fl top10 bg_white wleft">
-<!-- 	<div id="error" style="color: red;"></div> -->
+<!-- 	 -->
 	
 	<!-- left box -->
 		<div id="yamaha-xe-ga" class="bor_gr fl top10 bg-top-products wleft">

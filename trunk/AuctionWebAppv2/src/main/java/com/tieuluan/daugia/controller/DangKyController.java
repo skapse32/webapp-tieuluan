@@ -100,16 +100,20 @@ public class DangKyController {
 	@ResponseBody
 	public String checkUser(@RequestParam(value = "username") String username,
 			Model model) {
-		Client client = Client.create(new DefaultClientConfig());
-		WebResource webResource = client.resource(Server.addressAuthenWS);
-		Form form = new Form();
-		form.add("username", username);
-		String result = webResource.path("usermanager/checkUser").post(
-				String.class, form);
-		if (result.equals("true")) {
-			return "true";
-		} else {
-			return "false";
+		try {
+			Client client = Client.create(new DefaultClientConfig());
+			WebResource webResource = client.resource(Server.addressAuthenWS);
+			Form form = new Form();
+			form.add("username", username);
+			String result = webResource.path("usermanager/checkUser").post(
+					String.class, form);
+			if (result.equals("true")) {
+				return "true";
+			} else {
+				return "false";
+			}
+		} catch (Exception ex) {
+			return "error";
 		}
 	}
 
