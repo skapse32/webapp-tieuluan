@@ -20,12 +20,12 @@
 		<div id="products-group" class="fl bg-top-products wleft">
 			<div id="browser-modules" class="fl browser fontTahoma">
 				<a href="" class="fl url_home l8 right8"> <img class="fl w21-18"
-					alt="" src="resources/v2/images/blank.gif" />
-				</a> <img class="fl right8" src="resources/v2/images/arrow.gif" alt="" />
+					alt="" src="${pageContext.request.contextPath}/resources/v2/images/blank.gif" />
+				</a> <img class="fl right8" src="${pageContext.request.contextPath}/resources/v2/images/arrow.gif" alt="" />
 				<div class="fl top3 right8">
 					<a class="fl link_blue bold" href="">${username}</a>
 				</div>
-				<img class="fl right8" src="resources/v2/images/arrow.gif" alt="" />
+				<img class="fl right8" src="${pageContext.request.contextPath}/resources/v2/images/arrow.gif" alt="" />
 				<div class="fl top3 right8">
 					<a class="fl link_blue bold" href="">Đăng sản phẩm</a>
 				</div>
@@ -400,7 +400,7 @@
 		</ul>
 	</div>
 </div>
-<script src="resources/v2/js/datetimepicker/jquery.datetimepicker.js"></script>
+<script src="${pageContext.request.contextPath}/resources/v2/js/datetimepicker/jquery.datetimepicker.js"></script>
 <script>
 //2013-11-29 00:00:00
 $('#txttgbt').datetimepicker({

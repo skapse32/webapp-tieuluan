@@ -15,7 +15,7 @@
 				class="fl bg-titles products-group-title-news color_white fontTahoma">
 				<a class="link-white" href="#"><strong>${tieude}</strong></a>
 			</div>
-			<img alt="" src="resources/v2/images/sub-titles.jpg" />
+			<img alt="" src="${pageContext.request.contextPath}/resources/v2/images/sub-titles.jpg" />
 			<div style="float: right; padding-top: 6px">
 				<form action="${pageContext.request.contextPath}/sanphamdangdau">
 					<input type="hidden" id="maLoaiSP" name="maLoaiSP"
@@ -204,13 +204,13 @@
 				<li class="fl pd5 w240"><a class="fl pdl10"
 					title="Chăm sóc khách hàng"
 					href="ymsgr:SendIM?phamhoaquan&amp;m=Hello Yamaha Motor"><img
-						alt="" src="resources/v2/images/on.gif" /></a><span class="fl l5">
+						alt="" src="${pageContext.request.contextPath}/resources/v2/images/on.gif" /></a><span class="fl l5">
 						- Chăm sóc khách hàng</span></li>
 				<li class="fl wright das_top h1"></li>
 				<li class="fl pd5 w240"><a class="fl pdl10"
 					title="Phòng kinh doanh"
 					href="ymsgr:SendIM?phamhoaquan&amp;m=Hello Yamaha Motor"><img
-						alt="" src="resources/v2/images/on.gif" /></a><span class="fl l5">
+						alt="" src="${pageContext.request.contextPath}/resources/v2/images/on.gif" /></a><span class="fl l5">
 						- Phòng kinh doanh</span></li>
 				<li class="fl wright das_top h1"></li>
 			</ul>

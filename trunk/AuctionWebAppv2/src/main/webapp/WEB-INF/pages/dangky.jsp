@@ -73,7 +73,7 @@ function isEmail(x)
 		<div id="products-group" class="fl bg-top-products wleft">
 			<div id="browser-modules" class="fl browser fontTahoma">
 				<a href="" class="fl url_home l8 right8"> <img class="fl w21-18"
-					alt="" src="resources/v2/images/blank.gif" />
+					alt="" src="${pageContext.request.contextPath}/resources/v2/images/blank.gif" />
 				</a>
 				<div class="fl top3 right8">
 					<a class="fl link_blue bold" href="">Đăng ký tài khoản</a>
@@ -230,13 +230,13 @@ function isEmail(x)
 				<li class="fl pd5 w240"><a class="fl pdl10"
 					title="Chăm sóc khách hàng"
 					href="ymsgr:SendIM?auction_01&amp;m=Hello !!"><img
-						alt="" src="resources/v2/images/on.gif" /></a><span class="fl l5">
+						alt="" src="${pageContext.request.contextPath}/resources/v2/images/on.gif" /></a><span class="fl l5">
 						- Chăm sóc khách hàng</span></li>
 				<li class="fl wright das_top h1"></li>
 				<li class="fl pd5 w240"><a class="fl pdl10"
 					title="Phòng kinh doanh"
 					href="ymsgr:SendIM?auction_02&amp;m=Hello !!"><img
-						alt="" src="resources/v2/images/on.gif" /></a><span class="fl l5">
+						alt="" src="${pageContext.request.contextPath}/resources/v2/images/on.gif" /></a><span class="fl l5">
 						- Phòng kinh doanh</span></li>
 				<li class="fl wright das_top h1"></li>
 			</ul>

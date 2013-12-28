@@ -129,20 +129,20 @@
 			<div id="products-group" class="fl bg-top-products wleft">
 				<div id="browser-modules" class="fl browser fontTahoma">
 					<a href="" class="fl url_home l8 right8"> <img
-						class="fl w21-18" alt="" src="resources/v2/images/blank.gif" />
-					</a> <img class="fl right8" src="resources/v2/images/arrow.gif" alt="" />
+						class="fl w21-18" alt="" src="${pageContext.request.contextPath}/resources/v2/images/blank.gif" />
+					</a> <img class="fl right8" src="${pageContext.request.contextPath}/resources/v2/images/arrow.gif" alt="" />
 					<div class="fl top3 right8">
 						<a class="fl link_blue bold" href="">${sp.loaisp}</a>
 					</div>
-					<img class="fl right8" src="resources/v2/images/arrow.gif" alt="" />
+					<img class="fl right8" src="${pageContext.request.contextPath}/resources/v2/images/arrow.gif" alt="" />
 					<div class="fl top3 right8">
 						<a class="fl link_blue bold" href="">${sp.thuonghieu}</a>
 					</div>
-					<img class="fl right8" src="resources/v2/images/arrow.gif" alt="" />
+					<img class="fl right8" src="${pageContext.request.contextPath}/resources/v2/images/arrow.gif" alt="" />
 					<div class="fl top3 right8">
 						<a class="fl link_blue bold" href="chitietsanpham?masp=${sp.masp}">${sp.tensp}</a>
 					</div>
-					<img class="fl right8" src="resources/v2/images/arrow.gif" alt="" />
+					<img class="fl right8" src="${pageContext.request.contextPath}/resources/v2/images/arrow.gif" alt="" />
 
 				</div>
 			</div>
@@ -590,7 +590,7 @@
 					class="fl bg-titles products-group-title-news color_white fontTahoma">
 					<strong>Các sản phẩm khác cùng loại</strong>
 				</div>
-				<img alt="" src="resources/v2/images/sub-titles.jpg" />
+				<img alt="" src="${pageContext.request.contextPath}/resources/v2/images/sub-titles.jpg" />
 			</div>
 			<div id="yamaha-xe" class="fl wleft">
 				<ul id="yamaha-xe-list"
@@ -601,7 +601,7 @@
 						title="Yamaha Exciter GP côn tay 2010 Xanh"><img
 							name="Yamaha Exciter GP côn tay 2010 Xanh"
 							class="fl img_pro_small"
-							src="resources/v2/upload/omz1274340756_1316419080.jpg"
+							src="${pageContext.request.contextPath}/resources/v2/upload/omz1274340756_1316419080.jpg"
 							style="display: inline" /></a>
 						<p class="top15" align="center">
 							<a
@@ -624,7 +624,7 @@
 						href="xe-may/383/10581/Yamaha-Exciter-RC-2010-Trang.html"
 						title="Yamaha Exciter RC 2010 Trắng"><img
 							name="Yamaha Exciter RC 2010 Trắng" class="fl img_pro_small"
-							src="resources/v2/upload/njk1274339830_1316418975.jpg"
+							src="${pageContext.request.contextPath}/resources/v2/upload/njk1274339830_1316418975.jpg"
 							style="display: inline" /></a>
 						<p class="top15" align="center">
 							<a href="xe-may/383/10581/Yamaha-Exciter-RC-2010-Trang.html"
@@ -645,7 +645,7 @@
 						href="xe-may/383/10580/Yamaha-Exciter-RC-2010-Vang-den.html"
 						title="Yamaha Exciter RC 2010 Vàng đen"><img
 							name="Yamaha Exciter RC 2010 Vàng đen" class="fl img_pro_small"
-							src="resources/v2/upload/aok1274339769_1316418861.jpg"
+							src="${pageContext.request.contextPath}/resources/v2/upload/aok1274339769_1316418861.jpg"
 							style="display: inline" /></a>
 						<p class="top15" align="center">
 							<a href="xe-may/383/10580/Yamaha-Exciter-RC-2010-Vang-den.html"
@@ -666,7 +666,7 @@
 						href="xe-may/383/10577/Yamaha-Exciter-Con-tay-2009-Trang.html"
 						title="Yamaha Exciter Côn tay 2009 Trắng"><img
 							name="Yamaha Exciter Côn tay 2009 Trắng" class="fl img_pro_small"
-							src="resources/v2/upload/ixi1240894164_1316418481.jpg"
+							src="${pageContext.request.contextPath}/resources/v2/upload/ixi1240894164_1316418481.jpg"
 							style="display: inline" /></a>
 						<p class="top15" align="center">
 							<a href="xe-may/383/10577/Yamaha-Exciter-Con-tay-2009-Trang.html"
@@ -687,7 +687,7 @@
 						title="Yamaha Exciter RC 2011 Côn tay - Đỏ"><img
 							name="Yamaha Exciter RC 2011 Côn tay - Đỏ"
 							class="fl img_pro_small"
-							src="resources/v2/upload/dsb1302084915_1316420070.jpg"
+							src="${pageContext.request.contextPath}/resources/v2/upload/dsb1302084915_1316420070.jpg"
 							style="display: inline" /></a>
 						<p class="top15" align="center">
 							<a href="xe-may/383/10587/Yamaha-Exciter-RC-2011-Con-tay-Do.html"
@@ -708,7 +708,7 @@
 						href="xe-may/383/10579/Yamaha-Exciter-RC-2010-Den-do.html"
 						title="Yamaha Exciter RC 2010 Đen đỏ"><img
 							name="Yamaha Exciter RC 2010 Đen đỏ" class="fl img_pro_small"
-							src="resources/v2/upload/ybq1304045430_1316418734.jpg"
+							src="${pageContext.request.contextPath}/resources/v2/upload/ybq1304045430_1316418734.jpg"
 							style="display: inline" /></a>
 						<p class="top15" align="center">
 							<a href="xe-may/383/10579/Yamaha-Exciter-RC-2010-Den-do.html"
@@ -729,7 +729,7 @@
 						href="xe-may/383/10578/Yamaha-Exciter-RC-2010-Do.html"
 						title="Yamaha Exciter RC 2010 Đỏ"><img
 							name="Yamaha Exciter RC 2010 Đỏ" class="fl img_pro_small"
-							src="resources/v2/upload/xnd1274339650_1316418604.jpg"
+							src="${pageContext.request.contextPath}/resources/v2/upload/xnd1274339650_1316418604.jpg"
 							style="display: inline" /></a>
 						<p class="top15" align="center">
 							<a href="xe-may/383/10578/Yamaha-Exciter-RC-2010-Do.html"
@@ -750,7 +750,7 @@
 						title="Yamaha Exciter RC 2011 Côn tay - Trắng"><img
 							name="Yamaha Exciter RC 2011 Côn tay - Trắng"
 							class="fl img_pro_small"
-							src="resources/v2/upload/wrp1302085805_1316418338.png"
+							src="${pageContext.request.contextPath}/resources/v2/upload/wrp1302085805_1316418338.png"
 							style="display: inline" /></a>
 						<p class="top15" align="center">
 							<a
