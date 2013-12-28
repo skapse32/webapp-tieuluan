@@ -36,7 +36,7 @@ import org.slf4j.LoggerFactory;
 @Path("/usermanager")
 public class UserManagerResource {
 
-	final LDAPConnectionFactory factory = new LDAPConnectionFactory("0.0.0.0", 389);
+	final LDAPConnectionFactory factory = new LDAPConnectionFactory("0.0.0.0", 1389);
 	private Logger log = LoggerFactory.getLogger(UserManagerResource.class);
 	
 	@POST
