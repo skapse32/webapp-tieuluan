@@ -122,7 +122,7 @@ public class UserManagerResource {
 			SearchResultEntry entry = connection.searchSingleEntry("dc=springldap,dc=com",
 					SearchScope.WHOLE_SUBTREE, "(mail="+email+")", "cn");
 			DN bindDN = entry.getName();
-			System.out.println("user exist " + bindDN + "!.");
+			System.out.println("email exist " + bindDN + "!.");
 			return "true";
 		} catch (ErrorResultException e) {
 			System.err.println("error " + e.getMessage());
