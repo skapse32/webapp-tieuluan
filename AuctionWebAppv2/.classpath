@@ -57,24 +57,26 @@
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/aopalliance-1.0.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/jsp-api.jar"/>
 	<classpathentry kind="lib" path="src/main/webapp/WEB-INF/lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="E:/Soft/Apache/lib/catalina.jar"/>
-	<classpathentry kind="lib" path="E:/Soft/Apache/lib/annotations-api.jar"/>
-	<classpathentry kind="lib" path="E:/Soft/Apache/lib/catalina-ant.jar"/>
-	<classpathentry kind="lib" path="E:/Soft/Apache/lib/catalina-ha.jar"/>
-	<classpathentry kind="lib" path="E:/Soft/Apache/lib/catalina-tribes.jar"/>
-	<classpathentry kind="lib" path="E:/Soft/Apache/lib/ecj-4.2.2.jar"/>
-	<classpathentry kind="lib" path="E:/Soft/Apache/lib/el-api.jar"/>
-	<classpathentry kind="lib" path="E:/Soft/Apache/lib/jasper.jar"/>
-	<classpathentry kind="lib" path="E:/Soft/Apache/lib/jasper-el.jar"/>
-	<classpathentry kind="lib" path="E:/Soft/Apache/lib/jsp-api.jar"/>
-	<classpathentry kind="lib" path="E:/Soft/Apache/lib/servlet-api.jar"/>
-	<classpathentry kind="lib" path="E:/Soft/Apache/lib/tomcat-api.jar"/>
-	<classpathentry kind="lib" path="E:/Soft/Apache/lib/tomcat-coyote.jar"/>
-	<classpathentry kind="lib" path="E:/Soft/Apache/lib/tomcat-dbcp.jar"/>
-	<classpathentry kind="lib" path="E:/Soft/Apache/lib/tomcat-i18n-es.jar"/>
-	<classpathentry kind="lib" path="E:/Soft/Apache/lib/tomcat-i18n-fr.jar"/>
-	<classpathentry kind="lib" path="E:/Soft/Apache/lib/tomcat-i18n-ja.jar"/>
-	<classpathentry kind="lib" path="E:/Soft/Apache/lib/tomcat-jdbc.jar"/>
-	<classpathentry kind="lib" path="E:/Soft/Apache/lib/tomcat-util.jar"/>
+	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.47/lib/annotations-api.jar"/>
+	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.47/lib/catalina.jar"/>
+	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.47/lib/catalina-ant.jar"/>
+	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.47/lib/catalina-ha.jar"/>
+	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.47/lib/catalina-tribes.jar"/>
+	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.47/lib/ecj-4.2.2.jar"/>
+	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.47/lib/el-api.jar"/>
+	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.47/lib/jasper.jar"/>
+	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.47/lib/jasper-el.jar"/>
+	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.47/lib/jsp-api.jar"/>
+	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.47/lib/servlet-api.jar"/>
+	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.47/lib/tomcat7-websocket.jar"/>
+	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.47/lib/tomcat-api.jar"/>
+	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.47/lib/tomcat-coyote.jar"/>
+	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.47/lib/tomcat-dbcp.jar"/>
+	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.47/lib/tomcat-i18n-es.jar"/>
+	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.47/lib/tomcat-i18n-fr.jar"/>
+	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.47/lib/tomcat-i18n-ja.jar"/>
+	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.47/lib/tomcat-jdbc.jar"/>
+	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.47/lib/tomcat-util.jar"/>
+	<classpathentry kind="lib" path="D:/Now/apache-tomcat-7.0.47/lib/websocket-api.jar"/>
 	<classpathentry kind="output" path="target/classes"/>
 </classpath>

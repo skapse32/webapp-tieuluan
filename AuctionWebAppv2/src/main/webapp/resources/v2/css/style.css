@@ -6,9 +6,8 @@
 
 @import url('old.css');
 
-html {
-	
-}
+@import url('new.css');
+
 
 body {
 	color: #404040;

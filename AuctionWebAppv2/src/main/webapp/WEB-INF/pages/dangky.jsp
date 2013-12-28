@@ -2,6 +2,77 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<%@ page language="java" import="com.tieuluan.daugia.function.Server"%>
+
+<script type="text/javascript">
+
+function checkUserName(value)
+{
+	if(value) {
+		$('#usercheck').html('<img src="${pageContext.request.contextPath}/resources/v2/images/ajax-loader.gif" />');
+		$.post("<%=Server.addressAuthenWS%>usermanager/checkUser", {
+			username : value
+		}, function(data) {
+			if (data != '' || data != undefined || data != null) {
+				if (data == "true") {
+					data = '<span class="error">Tài khoản đã tồn tại</span>';
+				} else {
+					data = '<span class="success">Tên đăng nhập hợp lệ</span>';
+				}
+
+				$('#usercheck').html(data);
+				
+			}
+		});
+	}
+	else
+	{
+		$('#usercheck').html("");
+	}
+}
+
+function checkEmail(value)
+{
+	if(isEmail(value)) {
+		$('#usercheck').html('<img src="${pageContext.request.contextPath}/resources/v2/images/ajax-loader.gif" />');
+		$.post("<%=Server.addressAuthenWS%>usermanager/checkEmail", {
+			email : value
+		}, function(data) {
+			if (data != '' || data != undefined || data != null) {
+				if (data == "true") {
+					data = '<span class="error">Email này đã có người sử dụng.</span>';
+				} else {
+					data = '<span class="success">Email hợp lệ</span>';
+				}
+
+				$('#emailcheck').html(data);
+				
+			}
+		});
+	}
+	else
+	{
+		$('#emailcheck').html("");
+	}
+}
+
+function isEmail(x)
+{
+	var atpos=x.indexOf("@");
+	var dotpos=x.lastIndexOf(".");
+	if (atpos<1 || dotpos<atpos+2 || dotpos+2>=x.length)
+	{
+		return false;
+	}
+	else
+	{
+	return true;
+	}
+}
+</script>
+
+
 <div id="content" class="wmain">
 	<!-- start left-box -->
 	<div id="box-left" class="fl top10 bg_white wleft">
@@ -18,184 +89,101 @@
 		<form id="Form_Registration" method="post"
 			action="${pageContext.request.contextPath}/dangky?action=dangky"
 			accept-charset="ISO-8859-1">
-			<h2 class="h2row" align="center">Đăng ký tài khoản</h2>
-			<div style="height: 20px; text-align: center; margin-top: 7px;">(*)
-				Xin bạn điền đầy đủ và chính xác các thông tin này</div>
-			<table class="product_technical_table" cellpadding="0"
-				cellspacing="0"
-				style="font-family: Tahoma, Verdana; border-collapse: collapse; width: 730px">
-				<tbody style="font-family: Tahoma, Verdana;">
-					<tr class="title"
-						style="background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(229, 229, 229); color: rgb(204, 0, 0); font-weight: bold; text-align: center;">
-						<td colspan="2" lang="vi"
-							style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-							<span style="font-size: 10pt; font-family: Arial;"
-							class="Apple-style-span"> Thông tin tài khoản </span>
-						</td>
-					</tr>
-					<tr class="technical" style="font-family: Tahoma, Verdana;">
-						<td class="name"
-							style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-							<span style="font-size: 10pt; font-family: Arial;"
-							class="Apple-style-span"> Tên đăng nhập :</span>
-						</td>
-						<td class="value"
-							style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-							<span style="font-size: 10pt; font-family: Arial;"
-							class="Apple-style-span" id="stfTaiKhoan"> <input
-								type="text" name="TaiKhoan" id="TaiKhoan" value="${tenDN}" /> <span
-								class="textfieldRequiredMsg">*</span>
-						</span> <label style="display: none; color: #F00" id="lblErrorTaiKhoan">Tài
-								khoản này đã có người sử dụng</label>
-						</td>
+			<table width="730px">
+				<tbody>
+					<tr>
+						<td colspan="2" class="title">Thông tin đăng nhập</td>
 					</tr>
 					<tr>
-						<td></td>
-						<td>&nbsp;Bạn chỉ được nhập các ký tự a-z, A-Z và số 0-9</td>
-						<td></td>
+						<td><span>Tên đăng nhập :</span></td>
+						<td><span><span class="Apple-style-span"
+								id="stfTaiKhoan"> <input type="text" name="username"
+									id="username" value="${tenDN}"
+									onchange="checkUserName(this.value)" /> <span id="usercheck"></span>
+									<span class="textfieldRequiredMsg">*</span>
+							</span> <label style="display: none; color: #F00" id="lblErrorTaiKhoan">Tài
+									khoản này đã có người sử dụng</label></span></td>
 					</tr>
 					<tr>
-						<td class="name"
-							style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-							<span style="font-size: 10pt; font-family: Arial;"
-							class="Apple-style-span"> Mật khẩu(*) :</span>
-						</td>
-						<td class="value"
-							style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-							<span style="font-size: 10pt; font-family: Arial;"
-							class="Apple-style-span" id="spMatKhau"> <input
-								type="password" name="MatKhau" id="MatKhau" /> <span
-								class="passwordRequiredMsg">*</span><span
-								class="passwordMinCharsMsg">Mật khẩu ít nhất phải có 6 ký
-									tự</span>
-						</span>
-						</td>
+						<td><span>Mật khẩu(*) :</span></td>
+						<td><span><span class="Apple-style-span"
+								id="spMatKhau"> <input type="password" name="MatKhau"
+									id="MatKhau" /> <span class="passwordRequiredMsg">*</span><span
+									class="passwordMinCharsMsg">Mật khẩu phải có ít nhất 6
+										ký tự</span>
+							</span></td>
 					</tr>
 					<tr>
-						<td class="name"
-							style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-							<span style="font-size: 10pt; font-family: Arial;"
-							class="Apple-style-span"> Nhập lại mật khẩu :</span>
-						</td>
-						<td class="value"
-							style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-							<span style="font-size: 10pt; font-family: Arial;"
-							class="Apple-style-span" id="scNhapLai"> <input
-								type="password" name="NhapLai" id="NhapLai" /> <span
-								class="confirmRequiredMsg">*</span><span
-								class="confirmInvalidMsg">Xác nhận mật khẩu chưa đúng</span>
-							</span>
-						</td>
+						<td><span>Nhập lại mật khẩu :</span></td>
+						<td><span><span class="Apple-style-span"
+								id="scNhapLai"> <input type="password" name="NhapLai"
+									id="NhapLai" /> <span class="confirmRequiredMsg">*</span><span
+									class="confirmInvalidMsg">Xác nhận mật khẩu chưa khớp</span>
+							</span></td>
 					</tr>
 				</tbody>
-				<tr class="title"
-					style="background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(229, 229, 229); color: rgb(204, 0, 0); font-weight: bold; text-align: center;">
-					<td colspan="2" lang="vi"
-						style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-						<span style="font-size: 10pt; font-family: Arial;"
-						class="Apple-style-span"> Thông tin tài khoản </span>
-					</td>
+				<tr>
+
+					<td colspan="2" class="title">Thông tin tài khoản</span></td>
 				</tr>
 				<tr>
-					<td class="name"
-						style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-						<span style="font-size: 10pt; font-family: Arial;"
-						class="Apple-style-span"> Họ tên (*) :</span>
-					</td>
-					<td class="value"
-							style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-							<span style="font-size: 10pt; font-family: Arial;"
-							class="Apple-style-span" id="stfHoTen"> <input type="text"
-							name="HoTen" id="HoTen" /> <span class="textfieldRequiredMsg">*</span>
-					</span></td>
+					<td><span>Họ tên (*) :</span></td>
+					<td><span><span class="Apple-style-span" id="stfHoTen">
+								<input type="text" name="HoTen" id="HoTen" /> <span
+								class="textfieldRequiredMsg">*</span>
+						</span></td>
 				</tr>
 				<tr>
-					<td class="name"
-						style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-						<span style="font-size: 10pt; font-family: Arial;"
-						class="Apple-style-span"> Ngày sinh(*) :</span>
-					</td>
-					<td class="value"
-							style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-							<span style="font-size: 10pt; font-family: Arial;"
-							class="Apple-style-span" id="stfNgaySinh"> <input type="text"
-							name="NgaySinh" id="NgaySinh" /> <span
-							class="textfieldRequiredMsg">*</span><span
-							class="textfieldInvalidFormatMsg">Kh&ocirc;ng đ&uacute;ng
-								định dạng ng&agrave;y</span>
-							<br />
-							&nbsp;Ví dụ: 30-12-1992
-					</span></td>
+					<td><span>Ngày sinh(*) :</span></td>
+					<td><span><span class="Apple-style-span"
+							id="stfNgaySinh"> <input type="date" name="NgaySinh"
+								id="NgaySinh" /> <span
+								class="textfieldRequiredMsg">*</span><span
+								class="textfieldInvalidFormatMsg">Kh&ocirc;ng đ&uacute;ng
+									định dạng ng&agrave;y</span> <br /> &nbsp;Ví dụ: 30-12-1992
+						</span></td>
 				</tr>
 				<tr>
-					<td class="name"
-						style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-						<span style="font-size: 10pt; font-family: Arial;"
-						class="Apple-style-span"> Địa chỉ(*) :</span>
-					</td>
-					<td class="value"
-							style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-							<span style="font-size: 10pt; font-family: Arial;"
-							class="Apple-style-span" id="stfDiaChi"> <input type="text"
-							name="DiaChi" id="DiaChi" size="50" /> <span
-							class="textfieldRequiredMsg">*</span>
-					</span></td>
+					<td><span>Địa chỉ(*) :</span></td>
+					<td><span><span class="Apple-style-span" id="stfDiaChi">
+								<input type="text" name="DiaChi" id="DiaChi" size="50" /> <span
+								class="textfieldRequiredMsg">*</span>
+						</span></td>
 				</tr>
 				<tr>
-					<td class="name"
-						style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-						<span style="font-size: 10pt; font-family: Arial;"
-						class="Apple-style-span"> Số điện thoại (*) :</span>
-					</td>
-					<td class="value"
-							style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-							<span style="font-size: 10pt; font-family: Arial;"
-							class="Apple-style-span" id="stfSoDienThoai"> <input type="text"
-							name="SoDienThoai" id="SoDienThoai" /> <span
-							class="textfieldRequiredMsg">*</span><span
-							class="textfieldInvalidFormatMsg">Bạn không được nhập chữ</span>
-							<span class="textfieldMaxCharsMsg">*</span><span
-							class="textfieldMinCharsMsg">*</span>
-					</span></td>
+					<td><span>Số điện thoại (*) :</span></td>
+					<td><span><span class="Apple-style-span"
+							id="stfSoDienThoai"> <input type="text" name="SoDienThoai"
+								id="SoDienThoai" /> <span class="textfieldRequiredMsg">*</span><span
+								class="textfieldInvalidFormatMsg">Bạn không được nhập chữ</span>
+								<span class="textfieldMaxCharsMsg">*</span><span
+								class="textfieldMinCharsMsg">*</span>
+						</span></td>
 				</tr>
 				<tr>
-					<td class="name"
-						style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-						<span style="font-size: 10pt; font-family: Arial;"
-						class="Apple-style-span"> Email (*) :</span>
-					</td>
-					<td class="value"
-							style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-							<span style="font-size: 10pt; font-family: Arial;"
-							class="Apple-style-span" id="stfEmail"> <input type="text"
-							name="Email" id="Email" size="40" onblur="kiemTraEmail()" /> <span
-							class="textfieldInvalidFormatMsg">Chưa đúng địng dạng
-								email</span><span class="textfieldRequiredMsg">*</span>
-					</span>
-					</td>
+					<td><span>Email (*) :</span></td>
+					<td><span><span class="Apple-style-span" id="stfEmail">
+								<input type="text" name="email" id="email" 
+								onchange="checkEmail(this.value)" /> <span id="emailcheck"></span>
+								<span class="textfieldInvalidFormatMsg">Chưa đúng địng
+									dạng email</span><span class="textfieldRequiredMsg">*</span>
+						</span></td>
 				</tr>
 				<tr>
-					<td class="name"
-						style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-						<span style="font-size: 10pt; font-family: Arial;"
-						class="Apple-style-span"> Giới tính :</span>
-					</td>
-					<td class="value"
-							style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-							<span style="font-size: 10pt; font-family: Arial;"
-							class="Apple-style-span" ><input
-						type="radio" name="GioiTinh" value="Nam" checked="checked" /> Nam
-						<input type="radio" name="GioiTinh" value="Nu" /> Nữ
-						</span>
-					</td>
+					<td><span>Giới tính :</span></td>
+					<td><span><input type="radio" name="GioiTinh"
+							value="Nam" checked="checked" /> Nam <input type="radio"
+							name="GioiTinh" value="Nu" /> Nữ</span></td>
 				</tr>
-				<tr class="title"
-					style="background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(229, 229, 229); color: rgb(204, 0, 0); font-weight: bold; text-align: center;">
-					<td colspan="2" lang="vi"
-						style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-						<span style="font-size: 10pt; font-family: Arial;"
-						class="Apple-style-span"> <p style="color: Red">${error}</p>
-				<input name="btnDangKy" type="submit" value="Đăng ký" onclick="" /> </span>
+				<tr>
+					<td colspan="2" class="registerNode"><span> <font color="red">(*)</font> Xin hãy điền đầy đủ và chính
+							xác các thông tin này.</span>
+								
+						<p style="color: Red">${error}</p></td>
+				</tr>
+				<tr>
+					<td colspan="2" class="registerSubmit">
+						<input name="btnDangKy" type="submit" value="Đăng ký"/>
 					</td>
 				</tr>
 			</table>
@@ -219,9 +207,8 @@
 			validateOn : [ "change" ]
 		});
 		var sprytextfield8 = new Spry.Widget.ValidationTextField("stfNgaySinh",
-				"date", {
-					validateOn : [ "blur" ],
-					format : "dd-mm-yyyy"
+				"custom", {
+					validateOn : [ "blur" ]
 				});
 		var sprytextfield9 = new Spry.Widget.ValidationTextField("stfDiaChi",
 				"none", {
@@ -239,75 +226,29 @@
 				});
 	</script>
 
-		<!-- right box -->
+	<!-- right box -->
 	<div id="box-right" class="fl l10 top10 bg_white wright cright">
-		<div id="catalog-products" class="fl wright">
+		<div id="catalog-products" class="fl top10 wright">
 			<div id="catalog-products-titles"
-				class="fl bg-titles top10 products-group-title-news color_white fontTahoma wright-26">
-				<strong>Danh mục</strong>
+				class="fl bg-titles products-group-title-news color_white fontTahoma wright-26">
+				<strong>Hỗ trợ trực tuyến</strong>
 			</div>
-			<ul id="catalog-products-list"
-				class="fl fontTahoma wright list-none top5">
-				<c:choose>
-					<c:when test="${sessionScope.dsloaisp != null}">
-						<c:forEach var="lsp" items="${sessionScope.dsloaisp}">
-							<c:choose>
-								<c:when test="${lsp.maloaisp == maLoaiSP}">
-									<li class="fl pd5 w240 set-group-bg"><a
-										class="fl set-group pdl20"
-										href="${pageContext.request.contextPath}/sanphamdadau?maLoaiSP=${lsp.maloaisp}&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">+&nbsp;${lsp.tenloaisp}</a>
-									</li>
-								</c:when>
-								<c:otherwise>
-									<li class="fl pd5 w240 "><a class="fl  pdl20"
-										href="${pageContext.request.contextPath}/sanphamdadau?maLoaiSP=${lsp.maloaisp}&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">+&nbsp;${lsp.tenloaisp}</a></li>
-									<li class="fl wright das_top h1"></li>
-								</c:otherwise>
-							</c:choose>
-
-						</c:forEach>
-						<c:choose>
-							<c:when test="${-1 == maLoaiSP}">
-								<li class="fl pd5 w240 set-group-bg"><a
-										class="fl set-group pdl20"
-									href="${pageContext.request.contextPath}/sanphamdadau?maLoaiSP=-1&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">+&nbsp;Tất
-										cả</a></li>
-							</c:when>
-							<c:otherwise>
-								<li class="fl pd5 w240 "><a class="fl  pdl20"
-									href="${pageContext.request.contextPath}/sanphamdadau?maLoaiSP=-1&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">+&nbsp;Tất
-										cả</a></li>
-							</c:otherwise>
-						</c:choose>
-
-					</c:when>
-					<c:otherwise>
-					</c:otherwise>
-				</c:choose>
-
+			<ul id="catalog-products-list" class="fl wright list-none top5">
+				<li class="fl pd5 w240"><a class="fl pdl10"
+					title="Chăm sóc khách hàng"
+					href="ymsgr:SendIM?auction_01&amp;m=Hello !!"><img
+						alt="" src="resources/v2/images/on.gif" /></a><span class="fl l5">
+						- Chăm sóc khách hàng</span></li>
+				<li class="fl wright das_top h1"></li>
+				<li class="fl pd5 w240"><a class="fl pdl10"
+					title="Phòng kinh doanh"
+					href="ymsgr:SendIM?auction_02&amp;m=Hello !!"><img
+						alt="" src="resources/v2/images/on.gif" /></a><span class="fl l5">
+						- Phòng kinh doanh</span></li>
+				<li class="fl wright das_top h1"></li>
 			</ul>
 		</div>
-		<input type="hidden" id="maLoaiSP" name="maLoaiSP" value="${maLoaiSP}">
-		<input type="hidden" id="page" name="trang" value="${trang}">
-		<input type="hidden" id="size" value="${soLuongSanPhamTrenTrang}">
-		<div id="catalog-products" class="fl wright">
-			<div id="catalog-products-titles"
-				class="fl bg-titles top10 products-group-title-news color_white fontTahoma wright-26">
-				<strong>SẢN PHẨM ĐẤU GIÁ</strong>
-			</div>
-			<ul id="catalog-products-list"
-				class="fl fontTahoma wright list-none top5">
-			<li class="fl pd5 w240 "><a class="fl  pdl20"
-				href="${pageContext.request.contextPath}/sanphamdangdau.html">+&nbsp;
-					Sản phẩm đang đấu giá</a></li>
-			<li class="fl pd5 w240 "><a class="fl  pdl20"
-				href="${pageContext.request.contextPath}/sanphamsapdau.html">+&nbsp;
-					Sản phẩm sắp đấu giá</a></li>
-			<li class="fl pd5 w240 "><a class="fl  pdl20"
-				href="${pageContext.request.contextPath}/sanphamdadau.html">+&nbsp;
-					Sản phẩm đã đấu giá</a></li>
 
-		</ul>
+		<!-- End right box -->
 	</div>
-	<!-- End right box -->
 </div>
