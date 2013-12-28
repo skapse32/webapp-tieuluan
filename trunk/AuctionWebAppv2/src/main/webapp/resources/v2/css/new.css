@@ -1,0 +1,44 @@
+table {
+	font-size: 12px;
+	font-family: Arial;
+	border-collapse: collapse;
+	border: 1px solid #DEDEDE;
+}
+
+.main {
+	margin-left: auto;
+	margin-right: auto;
+	width: 1200px;
+}
+
+.title {
+	text-align: center;
+	padding: 5px;
+	font-weight: bold;
+	background: #0066ff;
+	color: white;
+	border: 1px solid #0066ff;
+}
+
+.registerSubmit {
+	text-align: center;
+	padding: 5px;
+	font-weight: bold;
+	background: #00A600 !important;
+	color: white;
+	border: 1px solid #00A600;
+	text-align: center;
+}
+
+th,td {
+	padding: 1px 1px 1px 4px;
+	text-align: left;
+}
+
+tr:nth-child(2n+3) {
+	background: #F5F5F5;
+}
+
+.registerNode {
+	padding: 5px;
+}

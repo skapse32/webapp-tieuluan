@@ -1,0 +1,14 @@
+.error {
+	color: #FF0000;
+	font-size: 12px;
+}
+
+.success {
+	color: #33CC00;
+	font-size: 12px;
+}
+
+.usercheck {
+	padding-left: 2px;
+	vertical-align: middle;
+}

@@ -14,6 +14,13 @@
 	href="${pageContext.request.contextPath}/resources/v2/css/style.css"
 	type="text/css" />
 
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath}/resources/v2/css/validation.css"
+	type="text/css" />
+	
+	
+	
+	
 <link rel="stylesheet" type="text/css"
 	href="resources/v2/js/datetimepicker/jquery.datetimepicker.css" />
 <link rel="stylesheet" type="text/css"
@@ -29,7 +36,7 @@
 <link rel="stylesheet" type="text/css"
 	href="${pageContext.request.contextPath}/resources/css/001.css.OLD	">
 <link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/reset.css">
+	href="${pageContext.request.contextPath}/resources/css/reset.css_OLD">
 <link
 	href="${pageContext.request.contextPath}/resources/css/jquery.countdown.css"
 	rel="stylesheet" type="text/css" />
