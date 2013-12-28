@@ -8,7 +8,7 @@
 		</attributes>
 	</classpathentry>
 	<classpathentry kind="con" path="melibrary.com.genuitec.eclipse.lib.jpa2.MYECLIPSE_ECLIPSELINK21"/>
-	<classpathentry kind="lib" path="C:/Users/VANHOA/Desktop/google-gson-2.2.4/gson-2.2.4.jar"/>
-	<classpathentry kind="lib" path="C:/Users/VANHOA/Dropbox/TieuLuanChuyenNganh/com.mysql.jdbc_5.1.5.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/com.mysql.jdbc_5.1.5.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/gson-2.2.4.jar"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>
