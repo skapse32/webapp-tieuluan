@@ -4,11 +4,13 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 import javax.servlet.http.HttpSession;
+import javax.ws.rs.Path;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
@@ -22,13 +24,13 @@ public class DangKyController {
 	@RequestMapping(value = "/dangky")
 	public String dangKy(
 			@RequestParam(value = "action", required = false) String action,
-			@RequestParam(value = "TaiKhoan", required = false) String username,
+			@RequestParam(value = "username", required = false) String username,
 			@RequestParam(value = "MatKhau", required = false) String password,
 			@RequestParam(value = "HoTen", required = false) String hoTen,
 			@RequestParam(value = "NgaySinh", required = false) String ngaySinh,
 			@RequestParam(value = "DiaChi", required = false) String diaChi,
 			@RequestParam(value = "SoDienThoai", required = false) String soDT,
-			@RequestParam(value = "Email", required = false) String email,
+			@RequestParam(value = "email", required = false) String email,
 			@RequestParam(value = "GioiTinh", required = false) String gioiTinh,
 			HttpSession session, Model model)
 			throws UnsupportedEncodingException {
@@ -92,6 +94,40 @@ public class DangKyController {
 		model.addAttribute("web", web);
 		model.addAttribute("tieude", "Đăng ký");
 		return "dangky";
+	}
+
+	@RequestMapping("checkUser")
+	@ResponseBody
+	public String checkUser(@RequestParam(value = "username") String username,
+			Model model) {
+		Client client = Client.create(new DefaultClientConfig());
+		WebResource webResource = client.resource(Server.addressAuthenWS);
+		Form form = new Form();
+		form.add("username", username);
+		String result = webResource.path("usermanager/checkUser").post(
+				String.class, form);
+		if (result.equals("true")) {
+			return "true";
+		} else {
+			return "false";
+		}
+	}
+
+	@RequestMapping("checkEmail")
+	@ResponseBody
+	public String checkEmail(@RequestParam(value = "email") String email,
+			Model model) {
+		Client client = Client.create(new DefaultClientConfig());
+		WebResource webResource = client.resource(Server.addressAuthenWS);
+		Form form = new Form();
+		form.add("email", email);
+		String result = webResource.path("usermanager/checkEmail").post(
+				String.class, form);
+		if (result.equals("true")) {
+			return "true";
+		} else {
+			return "false";
+		}
 	}
 
 	@RequestMapping(value = "/active")
