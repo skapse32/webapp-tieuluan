@@ -1,8 +1,6 @@
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 
 <!-- Partner -->
-
-<!-- Partner -->
     <div id="banner" class="wmain">
         <div class="fl clb wmain partner">
             <img class="fl" src="${pageContext.request.contextPath}/resources/v2/images/partner.jpg" alt="Partner"/>
@@ -16,7 +14,6 @@
             </ul>
         </div>
     </div>
-<!-- Partner END -->
 <!-- Partner END -->
 
 <!-- Footer -->
@@ -40,9 +37,8 @@
 	<div class="fl wmain">
 		<div class="fl wleft pdl10 top10 pdb10 fontTahoma line18">
 			<span style="font-weight: bold;">Sàn đấu giá Xe gắn máy Online</span><br>
-			Địa chỉ : 01 Võ Văn Ngân, Quận Thủ Đức, Tp. Hồ Chí Minh<br> Tel
-			: 1900-585-585, Fax: 08-6292-6292<br> Email : <a
-				href="mailto:mail@10110clc.com">mail@10110clc.com</a> | Website : <a
+			Địa chỉ: 01 Võ Văn Ngân, Quận Thủ Đức, Tp. Hồ Chí Minh<br> Hot-line: 1900-585-585, Fax: 08-6292-6292<br> Email: <a
+				href="mailto:mail@10110clc.com">mail@10110clc.com</a> | Website: <a
 				href="http://10110clc.com">http://10110clc.com</a><br>
 
 		</div>
@@ -51,8 +47,7 @@
 </div>
 <!-- Footer end -->
 
-<script type="text/javascript" language="javascript"
-	src="${pageContext.request.contextPath}/resources/v2/js/jquery.lazyload.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/v2/js/jquery.lazyload.js"></script>
 <script>
 	//Lazy load
 	var isIE = (navigator.userAgent.toLowerCase().indexOf("msie") == -1 ? false

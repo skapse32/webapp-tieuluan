@@ -7,7 +7,7 @@
 <div id="content" class="wmain">
 	<!-- Left side -->
 	<div id="box-left" class="fl top10 bg_white wleft">
-		<div id="error" style="color: red;"></div>
+		
 
 		<!-- Sản phẩm đang đấu -->
 		<div id="yamaha-xe-ga" class="fl top10 bg-top-products wleft">
@@ -147,7 +147,7 @@
 		<div id="catalog-products" class="fl wright">
 			<div id="catalog-products-titles"
 				class="fl bg-titles top10 products-group-title-news color_white fontTahoma wright-26">
-				<strong>Danh mục sản phẩm</strong>
+				<strong>Loại xe</strong>
 			</div>
 			<ul id="catalog-products-list"
 				class="fl fontTahoma wright list-none top5">
@@ -203,13 +203,13 @@
 			<ul id="catalog-products-list" class="fl wright list-none top5">
 				<li class="fl pd5 w240"><a class="fl pdl10"
 					title="Chăm sóc khách hàng"
-					href="ymsgr:SendIM?phamhoaquan&amp;m=Hello Yamaha Motor"><img
+					href="ymsgr:SendIM?auction_supporter&amp;m=Hello !!"><img
 						alt="" src="${pageContext.request.contextPath}/resources/v2/images/on.gif" /></a><span class="fl l5">
 						- Chăm sóc khách hàng</span></li>
 				<li class="fl wright das_top h1"></li>
 				<li class="fl pd5 w240"><a class="fl pdl10"
 					title="Phòng kinh doanh"
-					href="ymsgr:SendIM?phamhoaquan&amp;m=Hello Yamaha Motor"><img
+					href="ymsgr:SendIM?auction_supporter&amp;m=Hello !!"><img
 						alt="" src="${pageContext.request.contextPath}/resources/v2/images/on.gif" /></a><span class="fl l5">
 						- Phòng kinh doanh</span></li>
 				<li class="fl wright das_top h1"></li>

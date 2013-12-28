@@ -15,9 +15,13 @@ function checkUserName(value)
 			if (data != '' || data != undefined || data != null) {
 				if (data == "true") {
 					data = '<span class="error">Tài khoản đã tồn tại</span>';
-				} else {
+				} else if (data == "false"){
 					data = '<span class="success">Tên đăng nhập hợp lệ</span>';
 				}
+				else
+					{
+					data = '<span class="error">Không tìm thấy Authentication server</span>';
+					}
 				$('#usercheck').html(data);				
 			}
 		});
@@ -82,9 +86,8 @@ function isEmail(x)
 		</div>
 		<form id="Form_Registration" method="post"
 			action="${pageContext.request.contextPath}/dangky?action=dangky"
-			accept-charset="ISO-8859-1">
+			accept-charset="UTF-8">
 			<table width="730px">
-				<tbody>
 					<tr>
 						<td colspan="2" class="title">Thông tin đăng nhập</td>
 					</tr>
@@ -115,7 +118,6 @@ function isEmail(x)
 									class="confirmInvalidMsg">Xác nhận mật khẩu chưa khớp</span>
 							</span></td>
 					</tr>
-				</tbody>
 				<tr>
 
 					<td colspan="2" class="title">Thông tin tài khoản</span></td>
@@ -229,13 +231,13 @@ function isEmail(x)
 			<ul id="catalog-products-list" class="fl wright list-none top5">
 				<li class="fl pd5 w240"><a class="fl pdl10"
 					title="Chăm sóc khách hàng"
-					href="ymsgr:SendIM?auction_01&amp;m=Hello !!"><img
+					href="ymsgr:SendIM?auction_supporter&amp;m=Hello !!"><img
 						alt="" src="${pageContext.request.contextPath}/resources/v2/images/on.gif" /></a><span class="fl l5">
 						- Chăm sóc khách hàng</span></li>
 				<li class="fl wright das_top h1"></li>
 				<li class="fl pd5 w240"><a class="fl pdl10"
 					title="Phòng kinh doanh"
-					href="ymsgr:SendIM?auction_02&amp;m=Hello !!"><img
+					href="ymsgr:SendIM?auction_supporter&amp;m=Hello !!"><img
 						alt="" src="${pageContext.request.contextPath}/resources/v2/images/on.gif" /></a><span class="fl l5">
 						- Phòng kinh doanh</span></li>
 				<li class="fl wright das_top h1"></li>

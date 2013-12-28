@@ -7,7 +7,7 @@
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
-<title>Đấu giá online - <tiles:insertAttribute name="title"
+<title>Đấu giá Online - <tiles:insertAttribute name="title"
 		ignore="true" /></title>
 
 <link rel="stylesheet"
@@ -139,7 +139,6 @@
 <body>
 
 	<tiles:insertAttribute name="header" />
-	<tiles:insertAttribute name="left" />
 	<tiles:insertAttribute name="maincontent" />
 	<tiles:insertAttribute name="footer" />
 </body>
