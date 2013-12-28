@@ -3,15 +3,13 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 
-<%@ page language="java" import="com.tieuluan.daugia.function.Server"%>
-
 <script type="text/javascript">
 
 function checkUserName(value)
 {
 	if(value) {
 		$('#usercheck').html('<img src="${pageContext.request.contextPath}/resources/v2/images/ajax-loader.gif" />');
-		$.post("<%=Server.addressAuthenWS%>usermanager/checkUser", {
+		$.post("${pageContext.request.contextPath}/checkUser", {
 			username : value
 		}, function(data) {
 			if (data != '' || data != undefined || data != null) {
@@ -20,9 +18,7 @@ function checkUserName(value)
 				} else {
 					data = '<span class="success">Tên đăng nhập hợp lệ</span>';
 				}
-
-				$('#usercheck').html(data);
-				
+				$('#usercheck').html(data);				
 			}
 		});
 	}
@@ -35,8 +31,8 @@ function checkUserName(value)
 function checkEmail(value)
 {
 	if(isEmail(value)) {
-		$('#usercheck').html('<img src="${pageContext.request.contextPath}/resources/v2/images/ajax-loader.gif" />');
-		$.post("<%=Server.addressAuthenWS%>usermanager/checkEmail", {
+		$('#emailcheck').html('<img src="${pageContext.request.contextPath}/resources/v2/images/ajax-loader.gif" />');
+		$.post("${pageContext.request.contextPath}/checkEmail", {
 			email : value
 		}, function(data) {
 			if (data != '' || data != undefined || data != null) {
@@ -45,9 +41,7 @@ function checkEmail(value)
 				} else {
 					data = '<span class="success">Email hợp lệ</span>';
 				}
-
-				$('#emailcheck').html(data);
-				
+				$('#emailcheck').html(data);	
 			}
 		});
 	}
@@ -96,7 +90,7 @@ function isEmail(x)
 					</tr>
 					<tr>
 						<td><span>Tên đăng nhập :</span></td>
-						<td><span><span class="Apple-style-span"
+						<td><span class="Apple-style-span"
 								id="stfTaiKhoan"> <input type="text" name="username"
 									id="username" value="${tenDN}"
 									onchange="checkUserName(this.value)" /> <span id="usercheck"></span>
@@ -106,7 +100,7 @@ function isEmail(x)
 					</tr>
 					<tr>
 						<td><span>Mật khẩu(*) :</span></td>
-						<td><span><span class="Apple-style-span"
+						<td><span class="Apple-style-span"
 								id="spMatKhau"> <input type="password" name="MatKhau"
 									id="MatKhau" /> <span class="passwordRequiredMsg">*</span><span
 									class="passwordMinCharsMsg">Mật khẩu phải có ít nhất 6
@@ -115,7 +109,7 @@ function isEmail(x)
 					</tr>
 					<tr>
 						<td><span>Nhập lại mật khẩu :</span></td>
-						<td><span><span class="Apple-style-span"
+						<td><span class="Apple-style-span"
 								id="scNhapLai"> <input type="password" name="NhapLai"
 									id="NhapLai" /> <span class="confirmRequiredMsg">*</span><span
 									class="confirmInvalidMsg">Xác nhận mật khẩu chưa khớp</span>
@@ -128,31 +122,30 @@ function isEmail(x)
 				</tr>
 				<tr>
 					<td><span>Họ tên (*) :</span></td>
-					<td><span><span class="Apple-style-span" id="stfHoTen">
+					<td><span class="Apple-style-span" id="stfHoTen">
 								<input type="text" name="HoTen" id="HoTen" /> <span
 								class="textfieldRequiredMsg">*</span>
 						</span></td>
 				</tr>
 				<tr>
 					<td><span>Ngày sinh(*) :</span></td>
-					<td><span><span class="Apple-style-span"
+					<td><span class="Apple-style-span"
 							id="stfNgaySinh"> <input type="date" name="NgaySinh"
 								id="NgaySinh" /> <span
 								class="textfieldRequiredMsg">*</span><span
-								class="textfieldInvalidFormatMsg">Kh&ocirc;ng đ&uacute;ng
-									định dạng ng&agrave;y</span> <br /> &nbsp;Ví dụ: 30-12-1992
+								class="textfieldInvalidFormatMsg">*</span>
 						</span></td>
 				</tr>
 				<tr>
 					<td><span>Địa chỉ(*) :</span></td>
-					<td><span><span class="Apple-style-span" id="stfDiaChi">
+					<td><span class="Apple-style-span" id="stfDiaChi">
 								<input type="text" name="DiaChi" id="DiaChi" size="50" /> <span
 								class="textfieldRequiredMsg">*</span>
 						</span></td>
 				</tr>
 				<tr>
 					<td><span>Số điện thoại (*) :</span></td>
-					<td><span><span class="Apple-style-span"
+					<td><span class="Apple-style-span"
 							id="stfSoDienThoai"> <input type="text" name="SoDienThoai"
 								id="SoDienThoai" /> <span class="textfieldRequiredMsg">*</span><span
 								class="textfieldInvalidFormatMsg">Bạn không được nhập chữ</span>
@@ -162,7 +155,7 @@ function isEmail(x)
 				</tr>
 				<tr>
 					<td><span>Email (*) :</span></td>
-					<td><span><span class="Apple-style-span" id="stfEmail">
+					<td><span class="Apple-style-span" id="stfEmail">
 								<input type="text" name="email" id="email" 
 								onchange="checkEmail(this.value)" /> <span id="emailcheck"></span>
 								<span class="textfieldInvalidFormatMsg">Chưa đúng địng
