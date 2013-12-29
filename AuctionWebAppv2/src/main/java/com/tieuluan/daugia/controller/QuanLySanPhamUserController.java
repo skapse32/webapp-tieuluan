@@ -9,13 +9,10 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.NewCookie;
-
-import org.apache.commons.logging.Log;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -25,7 +22,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
-
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sun.jersey.api.client.Client;
@@ -37,6 +33,7 @@ import com.sun.jersey.api.representation.Form;
 import com.sun.jersey.multipart.FormDataMultiPart;
 import com.sun.jersey.multipart.file.FileDataBodyPart;
 import com.tieuluan.daugia.function.Server;
+import com.tieuluan.daugia.model.Hoadon;
 import com.tieuluan.daugia.model.Sanpham;
 
 @Controller
@@ -54,7 +51,6 @@ public class QuanLySanPhamUserController {
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
 		WebResource webResource = client.resource(Server.addressAuctionWS);
-
 		json = webResource
 				.path("sanpham/findBySanPhamThamGiaDangDau")
 				.cookie(new NewCookie("JSESSIONID", session.getAttribute(
@@ -635,5 +631,30 @@ public class QuanLySanPhamUserController {
 		request.setAttribute("noidung", args[0] + "<br>"+noidung);
 		request.setAttribute("thanhcong", "true");
 		return "thongbaoqlsanphamuser";
+	}
+	
+	@RequestMapping(value = "/hoadon", method = RequestMethod.GET)
+	public String hoadon(Model model, HttpSession session) throws IOException {
+		String web = Server.web;
+		String json = "";
+		Gson gson = new Gson();
+		ClientConfig config = new DefaultClientConfig();
+		Client client = Client.create(config);
+		WebResource webResource = client.resource(Server.addressAuctionWS);
+		json = webResource
+				.path("hoadon/findAll")
+				.cookie(new NewCookie("JSESSIONID", session.getAttribute(
+						"sessionid").toString())).post(String.class);
+
+		Type typelist = new TypeToken<ArrayList<Hoadon>>() {
+		}.getType();
+		List<Hoadon> dshd = new ArrayList<Hoadon>();
+		dshd = gson.fromJson(json, typelist);
+		model.addAttribute("tieude", "Hoá đơn");
+		model.addAttribute("dshd", dshd);
+		model.addAttribute("web", web);
+		model.addAttribute("link", "GET");
+		model.addAttribute("method", "/daugia/hoadon");
+		return "hoadon";
 	}
 }
