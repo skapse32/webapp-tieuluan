@@ -236,6 +236,28 @@
 			</ul>
 		</div>
 
+<!-- sort -->
+			<div id="catalog-products" class="fl wright">
+				<div id="catalog-products-titles"
+					class="fl bg-titles top10 products-group-title-news color_white fontTahoma wright-26">
+					<strong>Sắp xếp</strong>
+				</div>
+				<ul id="catalog-products-list"
+					class="fl fontTahoma wright list-none top5">
+								<li class="fl pd5 w240 "><a
+									class="fl  pdl20"
+									href="?locsp=1&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">Tăng dần</a>
+								</li>
+								<li class="fl wright das_top h1"></li>
+								<li class="fl pd5 w240"><a
+									class="fl pdl20"
+									href="?locsp=-1&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">Giảm dần</a>
+								</li>
+								<li class="fl wright das_top h1"></li>
+							
+				</ul>
+			</div>
+		<!-- --- -->
 		<c:if test="${sessionScope.dshangxe != null}">
 			<div id="catalog-products" class="fl wright">
 				<div id="catalog-products-titles"
