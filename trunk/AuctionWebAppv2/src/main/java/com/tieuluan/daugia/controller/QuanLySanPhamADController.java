@@ -32,6 +32,7 @@ import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
 import com.sun.jersey.api.representation.Form;
 import com.tieuluan.daugia.function.Server;
+import com.tieuluan.daugia.model.Hoadon;
 import com.tieuluan.daugia.model.Sanpham;
 import com.tieuluan.daugia.model.User;
 import com.tieuluan.daugia.util.JqGridData;
@@ -286,5 +287,30 @@ public class QuanLySanPhamADController {
 			model.addAttribute("noidung", "Kích hoạt User thất bại!");
 		}
 		return "thongbao";
+	}
+	
+	@RequestMapping(value = "/hoadon", method = RequestMethod.GET)
+	public String hoadon(Model model, HttpSession session) throws IOException {
+		String web = Server.web;
+		String json = "";
+		Gson gson = new Gson();
+		ClientConfig config = new DefaultClientConfig();
+		Client client = Client.create(config);
+		WebResource webResource = client.resource(Server.addressAuctionWS);
+		json = webResource
+				.path("hoadon/findAll")
+				.cookie(new NewCookie("JSESSIONID", session.getAttribute(
+						"sessionid").toString())).post(String.class);
+
+		Type typelist = new TypeToken<ArrayList<Hoadon>>() {
+		}.getType();
+		List<Hoadon> dshd = new ArrayList<Hoadon>();
+		dshd = gson.fromJson(json, typelist);
+		model.addAttribute("tieude", "Hoá đơn");
+		model.addAttribute("dshd", dshd);
+		model.addAttribute("web", web);
+		model.addAttribute("link", "GET");
+		model.addAttribute("method", "/daugia/hoadon");
+		return "hoadon";
 	}
 }
