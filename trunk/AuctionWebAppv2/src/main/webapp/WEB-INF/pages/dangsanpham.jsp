@@ -141,7 +141,6 @@
 		</form>
 	</div>
 </div>
-<div class="DIVclear"></div>
 <!-- end left box -->
 <!-- right box -->
 <div id="box-right" class="fl l10 top10 bg_white wright cright">
