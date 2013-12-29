@@ -10,7 +10,8 @@
 		</script>
 	</c:if>
 	<div class="login">
-		<form action="${pageContext.request.contextPath}/dangnhap?action=dangnhap"
+		<form
+			action="${pageContext.request.contextPath}/dangnhap?action=dangnhap"
 			method="post">
 			<table>
 				<tr>
@@ -23,16 +24,16 @@
 				</tr>
 				<tr>
 					<td>Mật khẩu :</td>
-					<td><input id="password" name="password" size="25" type="password"
-						value="" /></td>
+					<td><input id="password" name="password" size="25"
+						type="password" value="" /></td>
 				</tr>
 				<tr>
 					<td></td>
-					<td><input type="submit" value="Đăng nhập" id="btnDangNhap">
-						<a href="dangky"><input type="button" value="Đăng ký"
-							id="btnDangKy"></a></td>
+					<td><input type="submit" value="Đăng nhập" id="btnDangNhap"></td>
 				</tr>
 			</table>
 		</form>
+		<a href="dangky">Đăng ký</a> | <a href="quenmatkhau">Quên mật khẩu
+			?</a>
 	</div>
 </div>

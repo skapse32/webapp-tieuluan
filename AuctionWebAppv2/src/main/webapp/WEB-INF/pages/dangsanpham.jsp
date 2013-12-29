@@ -8,7 +8,15 @@
 	color: red
 }
 </style>
-
+<!-- Editor -->
+<div id="sample">
+  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/v2/js/NicEdit/nicEdit.js"></script> <script type="text/javascript">
+//<![CDATA[
+        bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
+  //]]>
+  </script>
+</div>
+<!-- Editor END -->
 <div id="content" class="wmain">
 	<!-- start left-box -->
 	<c:if test="${not empty error}">
@@ -34,314 +42,102 @@
 		<form action="${pageContext.request.contextPath}/dangsanpham"
 			name="formdangsanpham" id="fdangsanpham" method="post"
 			enctype="multipart/form-data" >
-			<!-- InstanceBeginEditable name="MainRegion" -->
-			<div class="Required_Notice" style="color: red; margin-top: 50px">
-				Bạn phải chọn các thông tin này "<b class="Required">*</b>"
-			</div>
-
-			<span class="Apple-style-span"
-				style="font-family: Tahoma, Verdana; font-size: 12px; line-height: 17px; background-color: rgb(255, 255, 255);">
-				<table class="product_technical_table" cellpadding="0"
-					cellspacing="0"
-					style="font-family: Tahoma, Verdana; border-collapse: collapse; width: 730px">
-					<tbody style="font-family: Tahoma, Verdana;">
-						<tr class="title"
-							style="background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(229, 229, 229); color: rgb(204, 0, 0); font-weight: bold; text-align: center;">
-							<td colspan="2" lang="vi"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> Thông tin sản phẩm </span>
-							</td>
-						</tr>
-						<tr class="technical" style="font-family: Tahoma, Verdana;">
-							<td class="name"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> Tên sản phẩm</span>
-							</td>
-							<td class="value"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> <input name="txttensp"
-									maxlength="80" size="50" type="text" value=""><b
-									class="Required">*</b></span>
-							</td>
-							
-						</tr>
-
-						<tr class="technical" style="font-family: Tahoma, Verdana;">
-							<td class="name"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> Loại Xe </span>
-							</td>
-							<td class="value"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> <select name="selectloaisp"
-									style="width: 150px;">
-										<c:forEach var="loaisp" items="${sessionScope.dsloaisp}">
-											<option value="${loaisp.maloaisp}">${loaisp.tenloaisp}</option>
-										</c:forEach>
-								</select>
-							</span>
-							</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td class="name"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> Tình Trạng Sản Phẩm </span>
-							</td>
-							<td class="value"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> <select name="selectttsp"
-									style="width: 150px;">
-
-										<c:forEach var="tinhtrangsp"
-											items="${sessionScope.dstinhtrangsp}">
-											<option value="${tinhtrangsp.matinhtrangsp}">${tinhtrangsp.tentinhtrangsp}</option>
-										</c:forEach>
-								</select>
-							</span>
-							</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td class="name"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> Số Lượng </span>
-							</td>
-							<td class="value"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> <input name="txtsoluong"
-									maxlength="80" size="50" type="text" value=""><b
-									class="Required">*</b>
-							</span>
-							</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td class="name"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> Xuất xứ </span>
-							</td>
-							<td class="value"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> <input name="txtxuatxu"
-									maxlength="80" size="50" type="text" value=""><b
-									class="Required">*</b>
-							</span>
-							</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td class="name"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> Thương Hiệu </span>
-							</td>
-							<td class="value"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span">
-								<select name="thuonghieu" style="width: 150px;">
-										<c:forEach var="hangxe" items="${sessionScope.dshangxe}">
-											<option value="${hangxe.tenhang}">${hangxe.tenhang}</option>
-										</c:forEach>
-								</select>
-								<b class="Required">*</b>
-							</span>
-							</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td class="name"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> Mô Tả </span>
-							</td>
-							<td class="value"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> <textarea name="txtmota"
-										cols="3" rows="3"
-										style="margin: 2px; width: 580px; height: 100px;">
-										</textarea>
-							</span>
-							</td>
-							<td></td>
-						</tr>
-						<tr class="title"
-							style="background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(229, 229, 229); color: rgb(204, 0, 0); font-weight: bold; text-align: center;">
-							<td colspan="2" lang="vi"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> Hình Ảnh </span>
-							</td>
-						</tr>
-
-						<tr>
-							<td class="name"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> Hình </span>
-							</td>
-							<td class="value"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> <input type="file" name="file"
-									value="" />
-							</span>
-							</td>
-							<td></td>
-						</tr>
-
-						<tr class="title"
-							style="background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(229, 229, 229); color: rgb(204, 0, 0); font-weight: bold; text-align: center;">
-							<td colspan="2" lang="vi"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> Thông tin đấu giá </span>
-							</td>
-						</tr>
-
-						<tr>
-							<td class="name"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> Giá khởi điểm </span>
-							</td>
-							<td class="value"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span" id="txtgiakhoidiem"> <input  name="txtgiakhoidiem"
-									maxlength="50" size="30" type="text" value="">VND<span
-							class="textfieldInvalidFormatMsg">Chưa đúng địng dạng
-								mệnh giá</span><span class="textfieldRequiredMsg">*</span>
-							</span>
-							</td>
-							<td></td>
-						</tr>
-
-						<tr>
-							<td class="name"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> Bước Giá </span>
-							</td>
-							<td class="value"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span" id="txtbuocgia"> <input name="txtbuocgia"
-									maxlength="50" size="30" type="text" value="">VND<span
-							class="textfieldInvalidFormatMsg">Chưa đúng địng dạng
-								mệnh giá</span><span class="textfieldRequiredMsg">*</span>
-							</span>
-							</td>
-						</tr>
-						<tr>
-							<td class="name"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> Giá mua ngay </span>
-							</td>
-							<td class="value"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span" id="txtmuangay"> <input name="txtmuangay"
-									maxlength="50" size="30" type="text" value="">VND<span
-							class="textfieldInvalidFormatMsg">Chưa đúng địng dạng
-								mệnh giá</span><span class="textfieldRequiredMsg">*</span>
-							</span>
-							</td>
-						</tr>
-						<tr>
-							<td class="name"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> Thời Gian Bắt Đầu </span>
-							</td>
-							<td class="value"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> <input name="txttgbt" id="txttgbt"
-									maxlength="50" size="30" type="text" value=""><b
-									class="Required">*</b>
-							</span>
-							</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td class="name"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> Thời Gian Kết Thúc </span>
-							</td>
-							<td class="value"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> <input name="txttgkt" id="txttgkt"
-									maxlength="50" size="30" type="text" value=""><b
-									class="Required">*</b>
-							</span>
-							</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td class="name"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> Hình thức thanh toán </span>
-							</td>
-							<td class="value"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> <select name="selecthttt"
-									style="width: 150px;">
-										<c:forEach var="httt" items="${sessionScope.dshttt}">
-											<option value="${httt.mahttt}">${httt.tenhttt}</option>
-										</c:forEach>
-								</select>
-							</span>
-							</td>
-							<td></td>
-						</tr>
-						<tr>
-							<td class="name"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: middle; font-weight: bold; text-align: right; width: 327px;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> Thông tin liên hệ </span>
-							</td>
-							<td class="value"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> <textarea
-										name="txtthongtinlienhe" cols="3" rows="3"
-										style="margin: 2px; width: 300px; height: 100px;"></textarea><b
-									class="Required">*</b>
-							</span>
-							</td>
-							<td></td>
-						</tr>
-						<tr class="title"
-							style="background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(229, 229, 229); color: rgb(204, 0, 0); font-weight: bold; text-align: center;">
-							<td colspan="2" lang="vi"
-								style="border-top-width: 1px; border-right-width: 1px; border-bottom-width: 1px; border-left-width: 1px; border-top-color: rgb(202, 202, 202); border-right-color: rgb(202, 202, 202); border-bottom-color: rgb(202, 202, 202); border-left-color: rgb(202, 202, 202); border-top-style: solid; border-right-style: solid; border-bottom-style: solid; border-left-style: solid; padding-top: 3px; padding-right: 6px; padding-bottom: 3px; padding-left: 6px; vertical-align: top;">
-								<span style="font-size: 10pt; font-family: Arial;"
-								class="Apple-style-span"> <input type="submit" name="action" value="Đăng sản phẩm" />
-							</span>
-							</td>
-						</tr>
-					</tbody>
-				</table>
-			</span>
+			<table class="DangSanPham">
+  <tr>
+    <td class="title">Thông tin sản phẩm</td>
+  </tr>
+  <tr>
+    <td width="544"><label for="txttensp">Tên sản phẩm :</label>
+    <input type="text" name="txttensp" id="txttensp"></td>
+  </tr>
+  <tr>
+    <td><label for="selectloaisp">Loại xe :</label>
+      <select name="selectloaisp" id="selectloaisp">
+      <c:forEach var="loaisp" items="${sessionScope.dsloaisp}">
+      <option value="${loaisp.maloaisp}">${loaisp.tenloaisp}</option>
+      </c:forEach>
+    </select></td>
+  </tr>
+  <tr>
+    <td><label for="thuonghieu">Hãng xe :</label>
+      <select name="thuonghieu" id="thuonghieu">
+      <c:forEach var="hangxe" items="${sessionScope.dshangxe}">
+      <option value="${hangxe.tenhang}">${hangxe.tenhang}</option>
+      </c:forEach>
+    </select></td>
+  </tr>
+  <tr>
+    <td><label for="selectttsp">Tình trạng :</label>
+      <select name="selectttsp" id="selectttsp">
+      <c:forEach var="tinhtrangsp" items="${sessionScope.dstinhtrangsp}">
+      <option value="${tinhtrangsp.matinhtrangsp}">${tinhtrangsp.tentinhtrangsp}</option>
+      </c:forEach>
+    </select></td>
+  </tr>
+  <tr>
+    <td><label for="txtsoluong">Số lượng :</label>
+    <input name="txtsoluong" type="number" id="txtsoluong" min="1" value="1"></td>
+  </tr>
+  <tr>
+    <td><label for="txtxuatxu">Xuất xứ :</label>
+    <input type="text" name="txtxuatxu" id="txtxuatxu"></td>
+  </tr>
+  <tr>
+    <td><label for="file">Ảnh đại diện :</label>
+    <input type="file" name="file" id="file"></td>
+  </tr>
+  <tr>
+    <td class="title">Mô tả sản phẩm</td>
+  </tr>
+  <tr>
+    <td><textarea name="txtmota" id="txtmota" rows="8"></textarea></td>
+  </tr>
+  <tr>
+    <td class="title">Thông tin đấu giá</td>
+  </tr>
+  <tr>
+    <td><label for="txtgiakhoidiem">Giá khởi điểm :</label>
+    <input type="text" name="txtgiakhoidiem" id="txtgiakhoidiem"> 
+    VNĐ <span class="textfieldInvalidFormatMsg"><br>Chưa đúng định dạng mệnh giá</span><span class="textfieldRequiredMsg">*</span></td>
+  </tr>
+  <tr>
+    <td><label for="txtbuocgia">Bước giá :</label>
+    <input type="text" name="txtbuocgia" id="txtbuocgia"> 
+    VNĐ <span class="textfieldInvalidFormatMsg"><br>Chưa đúng định dạng mệnh giá</span><span class="textfieldRequiredMsg">*</span></td>
+  </tr>
+  <tr>
+    <td><label for="txtmuangay">Giá mua ngay :</label>
+    <input type="text" name="txtmuangay" id="txtmuangay"> 
+    VNĐ <span class="textfieldInvalidFormatMsg"><br>Chưa đúng định dạng mệnh giá</span><span class="textfieldRequiredMsg">*</span></td>
+  </tr>
+  <tr>
+    <td><label for="txttgbt">Thời gian bắt đầu :</label>
+    <input type="text" name="txttgbt" id="txttgbt"></td>
+  </tr>
+  <tr>
+    <td><label for="txttgkt">Thời gian kết thúc :</label>
+    <input type="text" name="txttgkt" id="txttgkt"></td>
+  </tr>
+  <tr>
+    <td><label for="selecthttt">Hình thức thanh toán :</label>
+      <select name="selecthttt" id="selecthttt">
+      <c:forEach var="httt" items="${sessionScope.dshttt}">
+      <option value="${httt.mahttt}">${httt.tenhttt}</option>
+      </c:forEach>
+    </select></td>
+  </tr>
+  <tr>
+    <td class="title">Thông tin liên hệ</td>
+  </tr>
+  <tr>
+    <td class="white"><textarea name="txtthongtinlienhe" rows="8" id="txtthongtinlienhe"></textarea></td>
+  </tr>
+  <tr>
+    <td class="btnDangSanPham"><div align="center">
+      <input type="submit" name="submit" id="submit" value="Đăng sản phẩm">
+    </div></td>
+  </tr>
+</table>
 		</form>
 	</div>
 </div>

@@ -28,6 +28,11 @@
 		<put-attribute name="maincontent" value="/WEB-INF/pages/dangnhap.jsp" />
 	</definition>
 
+	<definition name="hoadon" extends="baseLayout">
+		<put-attribute name="title" value="Đăng ký" />
+		<put-attribute name="maincontent" value="/WEB-INF/pages/hoadon.jsp" />
+	</definition>
+	
 	<definition name="dangky" extends="baseLayout">
 		<put-attribute name="title" value="Đăng ký" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/dangky.jsp" />
