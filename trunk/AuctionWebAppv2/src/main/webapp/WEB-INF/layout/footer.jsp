@@ -37,8 +37,8 @@
 	<div class="fl wmain">
 		<div class="fl wleft pdl10 top10 pdb10 fontTahoma line18">
 			<span style="font-weight: bold;">Sàn đấu giá Xe gắn máy Online</span><br>
-			Địa chỉ: 01 Võ Văn Ngân, Quận Thủ Đức, Tp. Hồ Chí Minh<br> Hot-line: 1900-585-585, Fax: 08-6292-6292<br> Email: <a
-				href="mailto:mail@10110clc.com">mail@10110clc.com</a> | Website: <a
+			Địa chỉ : 01 Võ Văn Ngân, Quận Thủ Đức, Tp. Hồ Chí Minh<br> Hot-line : 1900-585-585, Fax : 08-6292-6292<br> Email : <a
+				href="mailto:mail@10110clc.com">mail@10110clc.com</a> | Website : <a
 				href="http://10110clc.com">http://10110clc.com</a><br>
 
 		</div>

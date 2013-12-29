@@ -90,7 +90,7 @@ public class TaiKhoanController {
 		return "taikhoan";
 	}
 	
-	@RequestMapping(value = "/doimatkhau")
+	@RequestMapping(value = "doimatkhau")
 	public String doiMatKhau(
 			@RequestParam(value = "action", required = false) String action,
 			@RequestParam(value = "MKHienTai", required = false) String mkHienTai,
