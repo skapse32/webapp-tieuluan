@@ -33,48 +33,39 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.AbstractController;
 
 import com.nvh.applicationscope.BangDanhGiaChoose;
+import com.nvh.daugia.model.Sanpham;
+import com.nvh.daugia.model.User;
 import com.nvh.daugia.model.jpa.BangDanhGia;
 import com.nvh.daugia.model.jpa.BangDanhGiaKq;
 import com.nvh.daugia.model.jpa.CauHoi;
 import com.nvh.daugia.model.jpa.CauHoiKq;
-import com.nvh.daugia.model.jpa.LichSuDauGia;
 import com.nvh.daugia.model.jpa.LoaiCauHoi;
-import com.nvh.daugia.model.jpa.SanPham;
-import com.nvh.daugia.model.jpa.User;
 import com.nvh.daugia.service.BangDanhGiaKqService;
 import com.nvh.daugia.service.BangDanhGiaService;
-import com.nvh.daugia.service.MonHocService;
-import com.nvh.daugia.service.ThoiKhoaBieuService;
-import com.nvh.daugia.service.UserService;
 import com.nvh.util.DisplayResult;
 
 @Controller
 public class RevenueReportController{
 	
 	private Logger log = LoggerFactory.getLogger(RevenueReportController.class);
-
-	@Autowired
-	private MonHocService mhService;
-	@Autowired
-	private ThoiKhoaBieuService tkbService;
+	
 	@Autowired
 	private BangDanhGiaKqService dgkqService;
 	@Autowired
 	private BangDanhGiaService bdgService;
 	
-	@Autowired
-	private UserService userService;
+
 
 	@Autowired
 	private BangDanhGiaChoose choose;
 
 	@RequestMapping(value = "/download" , method= RequestMethod.GET)
 	protected void handleRequestInternal(HttpServletRequest request, HttpServletResponse response) throws IOException {
-		// TODO Auto-generated method stub
+		/*// TODO Auto-generated method stub
 		String iddg = request.getParameter("iddg");
 		String mhh = request.getParameter("mh");
 		String iduser = request.getParameter("iduser");
-		User user = userService.findById(iduser);
+		User user = null;
 		log.info(iddg + "|" + mhh);
 		response.setContentType("application/vnd.ms-excel");
 		response.setHeader("Content-Disposition",": attachment; filename=\"baocao.xls\"");
@@ -102,17 +93,18 @@ public class RevenueReportController{
 		row.createCell(0).setCellValue(
 				new HSSFRichTextString("Khoa đào tạo chất lượng cao"));
 
-		SanPham mh = mhService.findById(mhh);
+		Sanpham mh = null;
+		//mhService.findById(mhh);
 		
 		worksheet.createRow(2);
 
 		row= worksheet.createRow(4);
 		row.createCell(0).setCellValue(new HSSFRichTextString("Giảng viên : "));
-		row.createCell(1).setCellValue(new HSSFRichTextString(user.getHoten()));
+		row.createCell(1).setCellValue(new HSSFRichTextString(user.getHoTen()));
 		
 		row= worksheet.createRow(5);
 		row.createCell(0).setCellValue(new HSSFRichTextString("Môn giảng dạy : "));
-		row.createCell(1).setCellValue(new HSSFRichTextString(mh.getTenMH()));
+		row.createCell(1).setCellValue(new HSSFRichTextString(mh.getTensp()));
 		
 		worksheet.createRow(6);
 		
@@ -172,7 +164,7 @@ public class RevenueReportController{
 		List<LoaiCauHoi> lchs = new ArrayList<LoaiCauHoi>(bdg.getLchs());
 		Collections.sort(lchs);
 
-		List<LichSuDauGia> tkbs = tkbService.findByMonhoc(mh);
+		List<LichSuDauGia> tkbs = tkbService.findBySanpham(mh.getMasp());
 		List<BangDanhGiaKq> dgkqs = new ArrayList<BangDanhGiaKq>();
 		for (LichSuDauGia thoiKhoaBieu : tkbs) {
 			if(thoiKhoaBieu.getDgkq()!= null){ dgkqs.add(thoiKhoaBieu.getDgkq());}
@@ -212,7 +204,7 @@ public class RevenueReportController{
 			row.createCell(4).setCellValue(((double) c / dgkqs.size()) * 100 + "%");
 			row.createCell(5).setCellValue(((double) d / dgkqs.size()) * 100 + "%");
 		}
-		wb.write(os);
+		wb.write(os);*/
 	}
 
 }

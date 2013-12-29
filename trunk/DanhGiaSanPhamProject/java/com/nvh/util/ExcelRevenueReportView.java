@@ -18,24 +18,17 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.servlet.view.document.AbstractExcelView;
 
+import com.nvh.daugia.model.Sanpham;
 import com.nvh.daugia.model.jpa.BangDanhGia;
 import com.nvh.daugia.model.jpa.BangDanhGiaKq;
 import com.nvh.daugia.model.jpa.CauHoi;
 import com.nvh.daugia.model.jpa.CauHoiKq;
-import com.nvh.daugia.model.jpa.LichSuDauGia;
 import com.nvh.daugia.model.jpa.LoaiCauHoi;
-import com.nvh.daugia.model.jpa.SanPham;
 import com.nvh.daugia.service.BangDanhGiaKqService;
 import com.nvh.daugia.service.BangDanhGiaService;
-import com.nvh.daugia.service.MonHocService;
-import com.nvh.daugia.service.ThoiKhoaBieuService;
 
 public class ExcelRevenueReportView extends AbstractExcelView {
 
-	@Autowired
-	private MonHocService mhService;
-	@Autowired
-	private ThoiKhoaBieuService tkbService;
 	@Autowired
 	private BangDanhGiaKqService dgkqService;
 	@Autowired
@@ -46,7 +39,7 @@ public class ExcelRevenueReportView extends AbstractExcelView {
 			HSSFWorkbook arg1, HttpServletRequest arg2, HttpServletResponse arg3)
 			throws Exception {
 		// TODO Auto-generated method stub
-		Map<String,String> revenueData = (Map<String,String>) arg0.get("revenueData");
+		/*Map<String,String> revenueData = (Map<String,String>) arg0.get("revenueData");
 		HSSFWorkbook wb = new HSSFWorkbook();
 
 		HSSFFont font = wb.createFont();
@@ -118,8 +111,8 @@ public class ExcelRevenueReportView extends AbstractExcelView {
 		List<LoaiCauHoi> lchs = new ArrayList<LoaiCauHoi>(bdg.getLchs());
 		Collections.sort(lchs);
 
-		SanPham mh = mhService.findById(revenueData.get("mh"));
-		List<LichSuDauGia> tkbs = tkbService.findByMonhoc(mh);
+		Sanpham sp = null;
+		List<LichSuDauGia> tkbs = tkbService.findBySanpham(sp.getMasp());
 		List<BangDanhGiaKq> dgkqs = new ArrayList<BangDanhGiaKq>();
 		for (LichSuDauGia thoiKhoaBieu : tkbs) {
 			BangDanhGiaKq dgkq = null;
@@ -162,7 +155,7 @@ public class ExcelRevenueReportView extends AbstractExcelView {
 			row.createCell(3).setCellValue(((double) b / dgkqs.size()) * 100);
 			row.createCell(4).setCellValue(((double) c / dgkqs.size()) * 100);
 			row.createCell(5).setCellValue(((double) d / dgkqs.size()) * 100);
-		}
+		}*/
 	}
 
 }

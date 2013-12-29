@@ -43,13 +43,10 @@ import com.nvh.daugia.model.jpa.LoaiCauHoi;
 import com.nvh.daugia.model.jpa.SearchCriteria;
 import com.nvh.daugia.model.jpa.ThongBao;
 import com.nvh.daugia.model.jpa.TimeBean;
-import com.nvh.daugia.model.jpa.User;
 import com.nvh.daugia.service.BangDanhGiaService;
 import com.nvh.daugia.service.CauHoiService;
-import com.nvh.daugia.service.ImportService;
 import com.nvh.daugia.service.LoaiCauHoiService;
 import com.nvh.daugia.service.ThongBaoService;
-import com.nvh.daugia.service.UserService;
 
 @Controller
 @RequestMapping("/admin")
@@ -70,23 +67,17 @@ public class AdminController {
 	private CauHoiService chService;
 
 	@Autowired
-	private UserService userService;
-
-	@Autowired
 	private BangDanhGiaChoose choose;
 
 	@Autowired
 	private ThongBaoService tbService;
 
-	@Autowired
-	private ImportService importService;
 
 	@RequestMapping(method = RequestMethod.GET)
 	public String login() {
 		return "admin";
 	}
-
-	@PreAuthorize("isAuthenticated()")
+	
 	@RequestMapping(params = "qldg", method = RequestMethod.GET)
 	public String quanlyDanhGia(HttpSession session) {
 		List<BangDanhGia> dgs = dgService.findAll();
@@ -95,7 +86,6 @@ public class AdminController {
 		return "admin/qldanhgia";
 	}
 
-	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/{id}", method = RequestMethod.GET)
 	public String showBang(@PathVariable("id") int id, Model model) {
 		logger.info("Get " + id);
@@ -110,7 +100,6 @@ public class AdminController {
 		return "admin/showbang";
 	}
 
-	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "/{id}", method = RequestMethod.POST)
 	public String deleteBang(@PathVariable("id") int id, Model model) {
 		logger.info("Xoa " + id);
@@ -120,8 +109,7 @@ public class AdminController {
 		dgService.delete(bdg);
 		return "redirect:/admin?qldg";
 	}
-
-	@PreAuthorize("isAuthenticated()")
+	
 	@RequestMapping(value = "/{id}", params = "update", method = RequestMethod.POST)
 	public String updateBang(@PathVariable("id") int id,
 			HttpServletRequest request) {
@@ -132,7 +120,6 @@ public class AdminController {
 		return "redirect:/admin?qldg";
 	}
 
-	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(params = "form", method = RequestMethod.POST)
 	public String themBang(HttpServletRequest request,
 			RedirectAttributes redirect) throws UnsupportedEncodingException {
@@ -284,7 +271,7 @@ public class AdminController {
 	@RequestMapping(value = "qluserlist", params = "update", method = RequestMethod.POST)
 	public String updateUser(HttpServletRequest request, Model model)
 			throws ParseException, UnsupportedEncodingException {
-		request.setCharacterEncoding("UTF-8");
+		/*request.setCharacterEncoding("UTF-8");
 		User user = userService.findById(request.getParameter("id"));
 		user.setHoten(request.getParameter("hoten"));
 		user.setNoisinh(request.getParameter("noisinh"));
@@ -296,7 +283,7 @@ public class AdminController {
 		userService.save(user);
 		model.addAttribute("info", user);
 		// update account sau khi update
-		model.addAttribute("user", user);
+		model.addAttribute("user", user);*/
 		return "admin/userinfo";
 	}
 
@@ -373,7 +360,7 @@ public class AdminController {
 		 * userService.findAllByPage(pageRequest);
 		 */
 
-		Page<User> userPage = userService.findUserByCriteria(criteria,
+		/*Page<User> userPage = userService.findUserByCriteria(criteria,
 				pageRequest);
 
 		// Construct the grid data that will return as JSON data
@@ -381,25 +368,24 @@ public class AdminController {
 		userGrid.setCurrentPage(userPage.getNumber() + 1);
 		userGrid.setTotalPages(userPage.getTotalPages());
 		userGrid.setTotalRecords(userPage.getTotalElements());
-		userGrid.setUserData(Lists.newArrayList(userPage.iterator()));
-		return userGrid;
+		userGrid.setUserData(Lists.newArrayList(userPage.iterator()));*/
+		return null;
 	}
 
 	@RequestMapping(value = "user/{id}", method = RequestMethod.GET)
 	public String getUserInfo(@PathVariable("id") String id, Model model) {
-		User user = userService.findById(id);
+		/*User user = userService.findById(id);
 		model.addAttribute("info", user);
-		logger.info("send user ");
+		logger.info("send user ");*/
 		return "admin/userinfo";
 	}
 
-	@PreAuthorize("isAuthenticated()")
 	@RequestMapping(value = "user", method = RequestMethod.POST, produces = "text/plain;charset=UTF-8")
 	public @ResponseBody
 	String saveUser(Model model, HttpServletRequest request)
 			throws ParseException {
 		try {
-			if (userService.findById(request.getParameter("id")) != null) {
+			/*if (userService.findById(request.getParameter("id")) != null) {
 				// da co user nay.
 				model.addAttribute("idtrung", request.getParameter("id"));
 				return "User đã tồn tại [id : " + request.getParameter("id")
@@ -415,7 +401,7 @@ public class AdminController {
 			user.setTypeaccount(Integer.parseInt(request
 					.getParameter("loaiaccount")));
 			userService.save(user);
-			model.addAttribute("useradded", user);
+			model.addAttribute("useradded", user);*/
 			return "Thêm thành công";
 		} catch (Exception e) {
 			// TODO: handle exception
@@ -432,7 +418,7 @@ public class AdminController {
 			for (CommonsMultipartFile aFile : fileUpload) {
 				FileBean fb = new FileBean();
 				fb.setFileData(aFile);
-				dups = importService.importFile(fb);
+				//dups = importService.importFile(fb);
 			}
 		}
 		model.addAttribute("dups", dups);

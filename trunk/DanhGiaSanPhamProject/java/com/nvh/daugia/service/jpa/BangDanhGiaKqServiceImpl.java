@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.google.common.collect.Lists;
 import com.nvh.daugia.model.jpa.BangDanhGiaKq;
-import com.nvh.daugia.model.jpa.LichSuDauGia;
 import com.nvh.daugia.repository.BangDanhGiaKqRepository;
 import com.nvh.daugia.service.BangDanhGiaKqService;
 
@@ -42,9 +41,15 @@ public class BangDanhGiaKqServiceImpl implements BangDanhGiaKqService {
 	}
 
 	@Override
-	public BangDanhGiaKq findByMonhocdg(LichSuDauGia tkb) {
+	public BangDanhGiaKq findByUserbAndUserd(String userb, String userd) {
 		// TODO Auto-generated method stub
-		return bdgkqRepository.findByMonhocdg(tkb);
+		return bdgkqRepository.findByUserbAndUserd(userb, userd);
+	}
+
+	@Override
+	public List<BangDanhGiaKq> findByUserb(String userb) {
+		// TODO Auto-generated method stub
+		return bdgkqRepository.findByUserb(userb);
 	}
 
 }

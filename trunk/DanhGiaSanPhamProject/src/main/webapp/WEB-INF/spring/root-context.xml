@@ -98,7 +98,7 @@
 			<bean class="com.nvh.daugia.interceptor.InterceptorInit" />
 		</mvc:interceptor>
 		<mvc:interceptor>
-			<mvc:mapping path="/**" />
+			<mvc:mapping path="/**"  />
 			<bean class="com.nvh.daugia.interceptor.InterceptorInit" />
 		</mvc:interceptor>
 		<mvc:interceptor>
@@ -106,7 +106,7 @@
 			<bean class="com.nvh.daugia.interceptor.InterceptorAdmin" />
 		</mvc:interceptor>
 		<mvc:interceptor>
-			<mvc:mapping path="/sinhvien/**" />
+			<mvc:mapping path="/user/**" />
 			<bean class="com.nvh.daugia.interceptor.InterceptorUser" />
 		</mvc:interceptor>
 	</mvc:interceptors>

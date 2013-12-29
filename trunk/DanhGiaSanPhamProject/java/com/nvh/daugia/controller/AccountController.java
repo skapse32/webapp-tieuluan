@@ -19,8 +19,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.nvh.daugia.model.jpa.User;
-import com.nvh.daugia.service.UserService;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
@@ -33,30 +31,10 @@ public class AccountController {
 	public static final String ACCOUNT_ATTRIBUTE = "account";
 	final Logger logger = LoggerFactory.getLogger(AccountController.class);
 	// controller dang nhap va dang xuat
-	@Autowired
-	private UserService userService;
 
 	@RequestMapping(value = "/login")
 	public String getlogin(Model model, HttpServletRequest request) {
 
-		HttpSession session = request.getSession();
-		String role = (String) session.getAttribute("role");
-		String username = (String) session.getAttribute("username");
-		if (role != null) {
-			// User user =
-			// userService.findById(SecurityContextHolder.getContext().getAuthentication().getName());
-			session.setAttribute("account", username);
-			String weblink = "redirect:/";
-			switch (role) {
-			case "user":
-				weblink += "sinhvien";
-				break;
-			case "admin":
-				weblink += "admin";
-				break;
-			}
-			return weblink;
-		}
 		return "login";
 	}
 
@@ -66,10 +44,9 @@ public class AccountController {
 		String password = request.getParameter("password");
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
-		WebResource webResource = client.resource(Server.addressAuthenWS);
 		Form form = null;
 		// get authencode form AuthenService
-		webResource = client.resource(Server.addressAuthenWS);
+		WebResource webResource = client.resource(Server.addressAuthenWS);
 		String authencode = "";
 		form = new Form();
 		form.add("username", username);
@@ -105,7 +82,7 @@ public class AccountController {
 				String weblink = "redirect:/";
 				switch (role) {
 				case "User":
-					weblink+="sinhvien";
+					weblink+="user";
 					break;
 				case "Admin" :
 					weblink+="admin";
@@ -175,12 +152,12 @@ public class AccountController {
 	String changePassword(HttpServletRequest request) {
 		// lay pass word roi save
 		String iduser = request.getParameter("iduser");
-		User user = userService.findById(iduser);
+		/*User user = userService.findById(iduser);
 		if (!user.getPassword().equals(request.getParameter("pwdold"))) {
 			return "Mật khẩu hiện tại không dúng! Vui lòng nhập lại!.";
 		}
 		user.setPassword(request.getParameter("pwdnew"));
-		userService.save(user);
-		return "�?ổi mật khẩu thành công";
+		userService.save(user);*/
+		return "Dổi mật khẩu thành công";
 	}
 }

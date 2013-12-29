@@ -58,8 +58,7 @@ ul li {
 					</a>
 				</h2>
 				<span style="float: right; color: #1C407D; font-size: 14px;">
-					<u>Giảng Viên :</u> ${gv.hoten} <br /> <br /> <u>Môn :</u>
-					${mh.tenMH}
+					<u>Tên người bán :</u> ${nguoidang} <br /> <br />
 				</span>
 			</div>
 		</div>

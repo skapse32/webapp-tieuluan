@@ -30,33 +30,19 @@ import com.nvh.daugia.model.jpa.BangDanhGia;
 import com.nvh.daugia.model.jpa.BangDanhGiaKq;
 import com.nvh.daugia.model.jpa.CauHoi;
 import com.nvh.daugia.model.jpa.CauHoiKq;
-import com.nvh.daugia.model.jpa.LichSuDauGia;
 import com.nvh.daugia.model.jpa.LoaiCauHoi;
-import com.nvh.daugia.model.jpa.SanPham;
 import com.nvh.daugia.model.jpa.SearchCriteria;
 import com.nvh.daugia.model.jpa.ThongBao;
-import com.nvh.daugia.model.jpa.User;
 import com.nvh.daugia.service.BangDanhGiaKqService;
 import com.nvh.daugia.service.BangDanhGiaService;
-import com.nvh.daugia.service.MonHocService;
-import com.nvh.daugia.service.ThoiKhoaBieuService;
 import com.nvh.daugia.service.ThongBaoService;
-import com.nvh.daugia.service.UserService;
 import com.nvh.util.DisplayResult;
 
 @Controller
 @RequestMapping("/manager")
 public class ManagerController {
-	
-	@Autowired
-	private UserService userService;
 
-	@Autowired
-	private ThoiKhoaBieuService tkbService;
-	
-	@Autowired
-	private MonHocService mhService;
-	
+
 	final Logger logger = LoggerFactory.getLogger(AdminController.class);
 
 	@Autowired
@@ -76,19 +62,19 @@ public class ManagerController {
 	
 	@RequestMapping(value="/tracuugv" ,method = RequestMethod.GET)
 	public String tracuugiangvien(Model model){
-		List<User> gvs = userService.findByTypeAccount(4);
-		model.addAttribute("gvs", gvs);
+		/*List<User> gvs = userService.findByTypeAccount(4);
+		model.addAttribute("gvs", gvs);*/
 		return "tracuugiangvien";
 	}
 	
 	@RequestMapping(value="/tracuugv/{id}", method = RequestMethod.GET)
 	public String kqgiangvien(@PathVariable String id ,Model model, HttpServletRequest request){
-		User user = userService.findById(id);
+		/*User user = userService.findById(id);
 		Set<SanPham> mhs = user.getMhs();
 		model.addAttribute("gv", user);
 		List<BangDanhGia> dslchs = bdgService.findAll();
 		model.addAttribute("lchs", dslchs);
-		model.addAttribute("tkbs", mhs);
+		model.addAttribute("tkbs", mhs);*/
 		return "kqdanhgiaGV";
 	}
 	
@@ -100,17 +86,17 @@ public class ManagerController {
 	@RequestMapping(value="timkiemGV", method=RequestMethod.POST)
 	public String kqtimkiemGV(Model model, HttpServletRequest request) throws UnsupportedEncodingException{
 		request.setCharacterEncoding("UTF-8");
-		String idgv = request.getParameter("idgv");
+		/*String idgv = request.getParameter("idgv");
 		String hoten = request.getParameter("hoten");
 		List<User> gvs = userService.findByIdAndHoten(idgv, hoten);
-		model.addAttribute("gvs", gvs);
+		model.addAttribute("gvs", gvs);*/
 		return "tracuugiangvien";
 	}
 	
 	@RequestMapping(value = "kqdanhgiagv/{id}",method = RequestMethod.GET)
 	public String showkqdanhgiaGV(@PathVariable String id, Model model , HttpServletRequest request) {
 		// lay bang danh gia mau
-		User gv = userService.findById(id);
+		/*User gv = userService.findById(id);
 		model.addAttribute("gv", gv);
 		BangDanhGia bdg = bdgService.findById(Integer.parseInt(request.getParameter("iddg")));
 		if (bdg == null) {
@@ -170,7 +156,7 @@ public class ManagerController {
 			kq.setNoidungD("Chưa Tốt : " + kq.getNumD() + "%");
 			kqs.add(kq);
 		}
-		model.addAttribute("kqs", kqs);
+		model.addAttribute("kqs", kqs);*/
 		return "showkqdanhgiaGV";
 	}
 }
