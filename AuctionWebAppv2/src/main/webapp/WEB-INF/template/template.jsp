@@ -94,7 +94,7 @@
 	function RunWebSocketRecv() {
 		//website ho tro websocket
 		wssocketRe = new WebSocket(
-				"ws:/192.168.1.3:8080/daugia/websocket/dangsp");
+				"ws:/localhost:8080/daugia/websocket/dangsp");
 		wssocketRe.onopen = function(evt) {
 			onOpenRe(evt);
 		};

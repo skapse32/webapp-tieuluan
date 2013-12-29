@@ -21,13 +21,11 @@ table {
 }
 
 .registerSubmit {
-	text-align: center;
 	padding: 5px;
-	font-weight: bold;
-	background: #00A600 !important;
-	color: white;
-	border: 1px solid #00A600;
 	text-align: center;
+	background: #00A600 !important;
+	border: 1px solid #00A600;
+	color: white;
 }
 
 th,td {
