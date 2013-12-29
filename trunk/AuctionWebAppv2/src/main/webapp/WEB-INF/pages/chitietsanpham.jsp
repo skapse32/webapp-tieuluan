@@ -11,10 +11,11 @@
 		RunWebSocket();
 	}
 	function RunWebSocket() {
+		
 		if ("WebSocket" in window) {
 			//website ho tro websocket
 			wssocket = new WebSocket(
-					"ws://192.168.1.3:8080/daugia/websocket/daugia");
+					"ws://localhost:8080/daugia/websocket/daugia");
 			wssocket.onopen = function(evt) {
 				onOpen(evt);
 			};

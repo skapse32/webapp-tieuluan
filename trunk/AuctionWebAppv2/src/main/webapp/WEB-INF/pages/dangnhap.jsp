@@ -23,7 +23,7 @@
 				</tr>
 				<tr>
 					<td>Mật khẩu :</td>
-					<td><input id="password" name="password" size="25" type="text"
+					<td><input id="password" name="password" size="25" type="password"
 						value="" /></td>
 				</tr>
 				<tr>
