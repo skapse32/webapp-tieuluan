@@ -62,27 +62,35 @@ public class UserManagerResource {
 				.addAttribute("sex", sex)
 				.addAttribute("birthday", birthday)
 				.addAttribute("mail", mail)
-				.addAttribute("status", 1); // Deactive user
+				.addAttribute("status", 1);
 
 		Connection connection = null;
 		try {
 			connection = factory.getConnection();
 			connection.bind("cn=Directory Manager", "talavua".toCharArray());
 			connection.add(entry);
-			// Them user vao group chua xac nhan tai khoan UnregisterUser.
-			entry = new LinkedHashMapEntry("cn=DeactiveUsers,ou=groups,dc=springldap,dc=com");
+			// Them user vao group chua xac nhan tai khoan DeactiveUser.
+			entry = new LinkedHashMapEntry("cn=DeactiveUser,ou=groups,dc=springldap,dc=com");
 			Entry old = TreeMapEntry.deepCopyOfEntry(entry);
-			entry = entry.replaceAttribute("uniqueMember",
+			entry = entry.replaceAttribute("member",
 					"cn=" + username + ",ou=users,dc=springldap,dc=com");
 			ModifyRequest request = Entries.diffEntries(old, entry);
 			connection.modify(request);
+			// loi dau cho nay ak'/ kg dk user dc
+			log.info("1. ok");
 		} catch (final ErrorResultException e) {
+
+			log.info("2. error");
 			return "error";
 		} finally {
 			if (connection != null) {
 				connection.close();
 			}
+
+			log.info("3. finally");
 		}
+
+		log.info("4. success");
 		return "success";
 	}
 	
