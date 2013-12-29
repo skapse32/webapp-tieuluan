@@ -58,7 +58,7 @@ tr:nth-child(2n+3) {
 }
 
 /******************/
-label {
+.DangSanPham label {
 	float: left;
 	width: 200px;
 	margin-right: 0.5em;
@@ -88,5 +88,5 @@ textarea {
 }
 
 .btnDangSanPham {
-	background-color: green;
+	background-color: #46A412;
 	}
