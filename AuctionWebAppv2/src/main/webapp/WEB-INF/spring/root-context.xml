@@ -70,8 +70,9 @@
 			<bean class="com.tieuluan.daugia.interceptor.InterceptorUser" />
 		</mvc:interceptor>
 	</mvc:interceptors>
+	<!-- exportpdf -->
+ <context:component-scan base-package="com.tieuluan.daugia.exportpdf" />
 	
-
 	<bean
 		class="org.springframework.web.servlet.mvc.annotation.AnnotationMethodHandlerAdapter" />
 	<bean

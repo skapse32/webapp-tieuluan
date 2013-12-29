@@ -52,7 +52,7 @@
 					</c:forEach>
 				</table>
 			</div>
-			
+			<a href="${pageContext.request.contextPath}/downloadPDF">Download PDF Document</a>
 		</div>	
 	</div>
 	<!-- right box -->
