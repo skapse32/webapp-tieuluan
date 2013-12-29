@@ -40,7 +40,7 @@
 		</c:when>
 	</c:choose>
 	<c:forEach items="${dssp}" var="sp">
-		<a href="${pageContext.request.contextPath}/sinhvien/danhgia/${sp.masp}">
+		<a href="${pageContext.request.contextPath}/user/danhgia/${sp.masp}">
 			<div id="public">
 				<div style=" width: 500px ; float: left">
 				<div id="row" style="width: 500px">

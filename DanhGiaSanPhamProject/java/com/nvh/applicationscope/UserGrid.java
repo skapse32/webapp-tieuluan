@@ -3,7 +3,8 @@ package com.nvh.applicationscope;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.nvh.daugia.model.jpa.User;
+import com.nvh.daugia.model.User;
+
 
 public class UserGrid {
 

@@ -74,11 +74,11 @@ ul li {
 	<c:when test="${not empty error}">
 		<div class="content">
 			<div class="site-map-path">
-				<a href="${pageContext.request.contextPath}/sinhvien"><img
+				<a href="${pageContext.request.contextPath}/user"><img
 					src="${pageContext.request.contextPath}/resources/images/home.png"
 					height="18" width="18" border="0px" /></a> <label> Trang Chủ ></label>
 				<a class="focus"
-					href="${pageContext.request.contextPath}/sinhvien/danhgia/${bangdanhgia.id}">Đánh
+					href="${pageContext.request.contextPath}/user/danhgia/${bangdanhgia.id}">Đánh
 					giá giảng viên</a>
 				<hr class="line-header-padding" />
 			</div>
@@ -86,36 +86,34 @@ ul li {
 		</div>
 	</c:when>
 	<c:otherwise>
-		<div class="content" style="height: 100px">
-			<div class="site-map-path">
-				<a href="${pageContext.request.contextPath}/sinhvien"><img
-					src="${pageContext.request.contextPath}/resources/images/home.png"
-					height="18" width="18" border="0px" /></a> <label> Trang Chủ ></label>
-				<a class="focus"
-					href="${pageContext.request.contextPath}/sinhvien/danhgia/${bangdanhgia.id}">Đánh
-					giá giảng viên</a>
-				<hr class="line-header-padding" />
-			</div>
-			<div id="private">
-				<h2 style="float: left; color: #1C407D;">Phiếu Đánh Giá Chất
-					Lượng Giảng Viên Khoa Đào Tạo Chất Lượng Cao</h2>
-			</div>
-		</div>
 		<c:choose>
 			<c:when test="${not empty bangdanhgiakq }">
+				<div class="content" style="height: 100px">
+					<div class="site-map-path">
+						<a href="${pageContext.request.contextPath}/user"><img
+							src="${pageContext.request.contextPath}/resources/images/home.png"
+							height="18" width="18" border="0px" /></a> <label> Trang Chủ
+							></label> <a class="focus"
+							href="${pageContext.request.contextPath}/user/danhgia/${bangdanhgia.id}">Đánh
+							giá giảng viên</a>
+						<hr class="line-header-padding" />
+					</div>
+					<div id="private">
+						<h2 style="float: left; color: #1C407D;">Phiếu Đánh Giá Chất
+							Lượng Sản Phẩm Của Người Bán</h2>
+					</div>
+				</div>
 				<!-- da danh gia roi, gio show ket qua danh gia lan truoc -->
 				<div class="content" style="width: 100%">
 					<form id="#inputForm" method="post" class="formDanhGia"
-						action="${pageContext.request.contextPath}/sinhvien/danhgia/${bangdanhgia.id}?update" onsubmit="return isValidCapCha()">
+						action="${pageContext.request.contextPath}/user/danhgia/${bangdanhgia.id}?update"
+						onsubmit="return isValidCapCha()">
 						<div id="public" style="width: 860px">
 							<div id="row">
-								<b>${bangdanhgia.tenbang}</b>
+								<b>Đánh Giá Người Bán : ${sanpham.nguoidang}</b>
 							</div>
 							<div id="row">
-								<b>Đánh giá giảng viên : ${thoikhoabieu.gv.hoten}</b>
-							</div>
-							<div id="row">
-								<b>Môn học : ${thoikhoabieu.monhoc.tenMH}</b>
+								<b>Sản Phẩm : ${sanpham.tensp}</b>
 							</div>
 						</div>
 						<input type="hidden" name="idtkb" value="${thoikhoabieu.id}" />
@@ -179,38 +177,51 @@ ul li {
 								</div>
 							</div>
 						</c:forEach>
-						<div id="row" style="margin-top: 10px; width: 100% ;">
-							<div style="width: 318px ;">
-							<%
-								ReCaptcha c = ReCaptchaFactory.newReCaptcha(
-														"6Lds0OsSAAAAAHBd9GiU29wrZ9w6nJL0e_3gUnEx",
-														"6Lds0OsSAAAAAEQvu-fQETRqdTGYE9V9miUemZLR",
-														false);
-												out.print(c.createRecaptchaHtml(null, null));
-							%>
-							<input id="button" type="submit" value="Cập nhật" />
+						<div id="row" style="margin-top: 10px; width: 100%;">
+							<div style="width: 318px;">
+								<%
+									ReCaptcha c = ReCaptchaFactory.newReCaptcha(
+															"6Lds0OsSAAAAAHBd9GiU29wrZ9w6nJL0e_3gUnEx",
+															"6Lds0OsSAAAAAEQvu-fQETRqdTGYE9V9miUemZLR",
+															false);
+													out.print(c.createRecaptchaHtml(null, null));
+								%>
+								<input id="button" type="submit" value="Cập nhật" />
 							</div>
 						</div>
 					</form>
 				</div>
 			</c:when>
 			<c:otherwise>
+				<div class="content" style="height: 100px">
+					<div class="site-map-path">
+						<a href="${pageContext.request.contextPath}/user"><img
+							src="${pageContext.request.contextPath}/resources/images/home.png"
+							height="18" width="18" border="0px" /></a> <label> Trang Chủ
+							></label> <a class="focus"
+							href="${pageContext.request.contextPath}/user/danhgia/${bangdanhgia.id}">Đánh
+							giá giảng viên</a>
+						<hr class="line-header-padding" />
+					</div>
+					<div id="private">
+						<h2 style="float: left; color: #1C407D;">Phiếu Đánh Giá Chất
+							Lượng Sản Phẩm Của Người Bán</h2>
+					</div>
+					<div id="public" style="width: 400px">
+						<div id="row">
+							<b>Đánh Giá Người Bán : ${sanpham.nguoidang}</b>
+						</div>
+						<div id="row">
+							<b>Sản Phẩm : ${sanpham.tensp}</b>
+						</div>
+					</div>
+				</div>
 				<div class="content" style="width: 100%">
 					<form
-						action="${pageContext.request.contextPath}/sinhvien/danhgia/${bangdanhgia.id}"
+						action="${pageContext.request.contextPath}/user/danhgia/${bangdanhgia.id}"
 						method="post" onsubmit="return isValidForm()">
-						<div id="public" style="width: 860px">
-							<div id="row">
-								<b>${bangdanhgia.tenbang}</b>
-							</div>
-							<div id="row">
-								<b>Đánh giá giảng viên : ${thoikhoabieu.gv.hoten}</b>
-							</div>
-							<div id="row">
-								<b>Môn học : ${thoikhoabieu.monhoc.tenMH}</b>
-							</div>
-						</div>
-						<input type="hidden" name="idtkb" value="${thoikhoabieu.id}" />
+						<input type="hidden" name="userb" value="${sanpham.nguoidang}" />
+						<input type="hidden" name="userd" value="${sanpham.nguoidat}" />
 						<c:forEach var="lch" items="${lchs}">
 							<div id="public" style="width: 860px">
 								<b><u>Tiêu Chí ${lch.id} </u> : ${lch.tenloai}</b>

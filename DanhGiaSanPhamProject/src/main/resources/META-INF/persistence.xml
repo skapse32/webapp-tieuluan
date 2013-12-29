@@ -8,8 +8,5 @@
 		<class>com.nvh.daugia.model.jpa.CauHoi</class>
 		<class>com.nvh.daugia.model.jpa.CauHoiKq</class>
 		<class>com.nvh.daugia.model.jpa.LoaiCauHoi</class>
-		<class>com.nvh.daugia.model.jpa.SanPham</class>
-		<class>com.nvh.daugia.model.jpa.LichSuDauGia</class>
-		<class>com.nvh.daugia.model.jpa.User</class>
 	</persistence-unit>
 </persistence>

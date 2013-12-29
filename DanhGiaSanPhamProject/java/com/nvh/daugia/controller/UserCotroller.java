@@ -1,6 +1,7 @@
 package com.nvh.daugia.controller;
 
 import java.lang.reflect.Type;
+import java.rmi.dgc.DGC;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Date;
@@ -33,36 +34,31 @@ import com.nvh.daugia.model.jpa.BangDanhGia;
 import com.nvh.daugia.model.jpa.BangDanhGiaKq;
 import com.nvh.daugia.model.jpa.CauHoi;
 import com.nvh.daugia.model.jpa.CauHoiKq;
-import com.nvh.daugia.model.jpa.LichSuDauGia;
 import com.nvh.daugia.model.jpa.LoaiCauHoi;
 import com.nvh.daugia.model.jpa.ThongBao;
 import com.nvh.daugia.model.jpa.TimeBean;
-import com.nvh.daugia.model.jpa.User;
 import com.nvh.daugia.service.BangDanhGiaKqService;
 import com.nvh.daugia.service.BangDanhGiaService;
 import com.nvh.daugia.service.CauHoiKqService;
 import com.nvh.daugia.service.CauHoiService;
 import com.nvh.daugia.service.LoaiCauHoiService;
-import com.nvh.daugia.service.ThoiKhoaBieuService;
 import com.nvh.daugia.service.ThongBaoService;
-import com.nvh.daugia.service.UserService;
+import com.nvh.util.DisplayResult;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
+import com.sun.jersey.api.representation.Form;
 import com.tieuluan.daugia.function.Server;
 
 @Controller
-@RequestMapping("/sinhvien")
+@RequestMapping("/user")
 public class UserCotroller {
 
 	private Logger log = LoggerFactory.getLogger(UserCotroller.class);
 
 	@Autowired
 	private TimeBean time;
-
-	@Autowired
-	private ThoiKhoaBieuService tkbService;
 
 	@Autowired
 	private CauHoiService chService;
@@ -81,9 +77,6 @@ public class UserCotroller {
 
 	@Autowired
 	private BangDanhGiaKqService bdgkqService;
-
-	@Autowired
-	private UserService userService;
 
 	@Autowired
 	private ThongBaoService tbService;
@@ -117,12 +110,12 @@ public class UserCotroller {
 		dssp = gson.fromJson(json, typelist);
 		model.addAttribute("dssp", dssp);
 		model.addAttribute("imageDirectory", Server.addressAuctionImage);
-		model.addAttribute("tentrang", "Quản lý sản phẩm của tôi đã đấu");
+		model.addAttribute("tentrang", "Quản lý danh sách người đăng mà đã tham gia đấu");
 		return "sanphamduocdanhgia";
 	}
 	
 	
-	@RequestMapping(value = "dggv", method = RequestMethod.GET)
+	@RequestMapping(value = "dgsp", method = RequestMethod.GET)
 	public String sanphamchienthang(HttpServletRequest request, Model model, HttpSession session) {
 		//get danh sach san pham da tham gia va ket thuc.
 		ClientConfig config = new DefaultClientConfig();
@@ -172,19 +165,31 @@ public class UserCotroller {
 			if (resultKT == 1) {
 				// qua' han
 				model.addAttribute("error",
-						"�?ã quá hạn để đánh giá!. Vui lòng quay lại sau!");
+						"Đã quá hạn để đánh giá!. Vui lòng quay lại sau!");
 				return "sinhviendgia";
 			}
 		}
-		LichSuDauGia tkb = tkbService.findById(id);
-		BangDanhGiaKq dgkq = bdgkqService.findByMonhocdg(tkb);
+		//get sanpham ben webservice.
+		String json = "";
+		ClientConfig config = new DefaultClientConfig();
+		Client client = Client.create(config);
+		WebResource resource = client.resource(Server.addressAuctionWS);
+		Form form = new Form();
+		long masp = id;
+		form.add("masp", masp);
+		json = resource.path("sanpham/findById").post(String.class, form);
+		Sanpham sp = new Gson().fromJson(json, Sanpham.class);
+		System.out.println(sp);
+		//LichSuDauGia lsdg = tkbService.findBySanphamAndNguoidat(masp,);
+		
+		BangDanhGiaKq dgkq =  bdgkqService.findByUserbAndUserd(sp.getNguoidang(), sp.getNguoidat());
 		if (dgkq == null) {
 			BangDanhGia bdg = choose.getBgd();
 			List<LoaiCauHoi> lchs = new ArrayList<LoaiCauHoi>(bdg.getLchs());
 			Collections.sort(lchs);
 			model.addAttribute("lchs", lchs);
 			// gom nhom
-			model.addAttribute("thoikhoabieu", tkb);
+			model.addAttribute("sanpham", sp);
 			model.addAttribute("bangdanhgia", bdg);
 			return "sinhviendgia";
 		} else {
@@ -194,7 +199,7 @@ public class UserCotroller {
 			Collections.sort(lchs);
 			model.addAttribute("lchs", lchs);
 			// gom nhom
-			model.addAttribute("thoikhoabieu", tkb);
+			model.addAttribute("sanpham", sp);
 			model.addAttribute("bangdanhgia", bdg);
 			model.addAttribute("bangdanhgiakq", dgkq);
 			log.info(dgkq.toString());
@@ -223,11 +228,13 @@ public class UserCotroller {
 			HttpServletRequest request, Model model) {
 		try {
 
-			int id = Integer.parseInt(request.getParameter("idtkb"));
+			String iduserb = request.getParameter("userb");
+			String iduserd = request.getParameter("userd");
 			BangDanhGiaKq dgkq = new BangDanhGiaKq();
 			// tim loai bang dung de danh gia
 			dgkq.setLoaiBang(bdgService.findById(idBang));
-			dgkq.setMonhocdg(tkbService.findById(id));
+			dgkq.setUserb(iduserb);
+			dgkq.setUserd(iduserd);
 
 			dgkq.setNgaytao(new Date());
 			// luu ket qua bang danh gia
@@ -245,17 +252,17 @@ public class UserCotroller {
 				dgkq.getCauhoikqs().add(chkq);
 			}
 			bdgkqService.save(dgkq);
-			model.addAttribute("success", "�?ánh giá lưu thành công!");
-			User use = (User) request.getSession().getAttribute("account");
+			model.addAttribute("success", "Đánh giá lưu thành công!");
+			/*User use = (User) request.getSession().getAttribute("account");
 			List<LichSuDauGia> tkb = tkbService.findBySV(use);
-			model.addAttribute("tkblist", tkb);
+			model.addAttribute("tkblist", tkb);*/
 			return "sinhvien";
 		} catch (Exception e) {
 			// TODO: handle exception
-			User use = (User) request.getSession().getAttribute("account");
+			/*User use = (User) request.getSession().getAttribute("account");
 			List<LichSuDauGia> tkb = tkbService.findBySV(use);
-			model.addAttribute("tkblist", tkb);
-			model.addAttribute("fail", "�?ánh giá lưu không thành công!");
+			model.addAttribute("tkblist", tkb);*/
+			model.addAttribute("fail", "Đánh giá lưu không thành công!");
 			return "sinhvien";
 		}
 
@@ -264,9 +271,9 @@ public class UserCotroller {
 	@RequestMapping(value = "/danhgia/{id}", params = "update", method = RequestMethod.POST)
 	public String updatedanhgia(@PathVariable("id") int idBang,
 			HttpServletRequest request, Model model) {
-		int id = Integer.parseInt(request.getParameter("idtkb"));
-		BangDanhGiaKq dgkq = bdgkqService.findByMonhocdg(tkbService
-				.findById(id));
+		String userd = request.getParameter("userd");
+		String userb = request.getParameter("userb");
+		BangDanhGiaKq dgkq = bdgkqService.findByUserbAndUserd(userb, userd);
 		// tim loai bang dung de danh gia
 
 		// luu cau hoi
@@ -279,16 +286,75 @@ public class UserCotroller {
 		dgkq.setNgaytao(new Date());
 		model.addAttribute("success", "�?ánh giá lưu thành công!");
 		bdgkqService.save(dgkq);
-		User use = (User) request.getSession().getAttribute("account");
+		/*User use = (User) request.getSession().getAttribute("account");
 		List<LichSuDauGia> tkb = tkbService.findBySV(use);
-		model.addAttribute("tkblist", tkb);
+		model.addAttribute("tkblist", tkb);*/
 		return "sinhvien";
 	}
 
 	@RequestMapping(value = "/info", method = RequestMethod.GET)
 	public String getInfo(Model model, HttpServletRequest request) {
-		User user = userService.findById(request.getParameter("id"));
-		model.addAttribute("user", user);
+		/*User user = userService.findById(request.getParameter("id"));
+		model.addAttribute("user", user);*/
 		return "infosinhvien";
+	}
+	
+	@RequestMapping(value = "/kqdanhgia/{id}",method = RequestMethod.GET)
+	public String showkqdanhgia(@PathVariable("id") String userb, Model model , HttpServletRequest request) {
+		// lay bang danh gia mau
+		BangDanhGia bdg = choose.getBgd();
+
+		if (bdg == null) {
+			model.addAttribute("message", "Chưa ch�?n bảng đánh giá");
+			return "showkqdanhgia";
+		}
+		model.addAttribute("bangdanhgia", bdg);
+		List<LoaiCauHoi> lchs = new ArrayList<LoaiCauHoi>(bdg.getLchs());
+		Collections.sort(lchs);
+		model.addAttribute("lchs", lchs);
+		model.addAttribute("nguoidang", userb);
+		List<BangDanhGiaKq> dgkqs = bdgkqService.findByUserb(userb);
+		List<DisplayResult> kqs = new ArrayList<DisplayResult>();
+		for (CauHoi cauHoi : bdg.getCauhois()) {
+			DisplayResult kq = new DisplayResult();
+			kq.setCh(cauHoi);
+			kq.setMch(cauHoi.getId());
+			int a = 0, b = 0, c = 0, d = 0;
+			for (BangDanhGiaKq bangDanhGiaKq : dgkqs) {
+				if (bangDanhGiaKq.getLoaiBang().getId() == bdg.getId()) {
+					for (CauHoiKq chkq : bangDanhGiaKq.getCauhoikqs()) {
+						if (chkq.getCauhoi().getId().equals(cauHoi.getId())) {
+							switch (chkq.getKetqua()) {
+							case 'A':
+								a++;
+								break;
+							case 'B':
+								b++;
+								break;
+							case 'C':
+								c++;
+								break;
+							case 'D':
+								d++;
+								break;
+							}
+						}
+					}
+				}
+			}
+			kq.setNumA(((double) a / dgkqs.size()) * 100);
+			kq.setNoidungA("Rất Tốt : " + kq.getNumA() + "%");
+			kq.setNumB(((double) b / dgkqs.size()) * 100);
+			kq.setNoidungB("Tốt : " + kq.getNumB() + "%");
+			kq.setNumC(((double) c / dgkqs.size()) * 100);
+			kq.setNoidungC("Bình Thường : " + kq.getNumC() + "%");
+			kq.setNumD(((double) d / dgkqs.size()) * 100);
+			kq.setNoidungD("Chưa Tốt : " + kq.getNumD() + "%");
+			kqs.add(kq);
+		}
+		log.error("BangDanhGiakq  : " + dgkqs.toString());
+		log.info("bang ket qua : " + kqs.toString());
+		model.addAttribute("kqs", kqs);
+		return "showkqdanhgia";
 	}
 }

@@ -26,12 +26,10 @@ public class BangDanhGiaKq implements Serializable{
 
 	private int id;
 	
-
-	private LichSuDauGia monhocdg;
-	
 	private BangDanhGia loaiBang;
 	private Date ngaytao;
-	
+	private String userd;
+	private String userb;
 	private Set<CauHoiKq> cauhoikqs = new HashSet<CauHoiKq>();
 	
 	@Id
@@ -45,15 +43,6 @@ public class BangDanhGiaKq implements Serializable{
 		this.id = id;
 	}
 	
-	@OneToOne
-	@JoinColumn(name = "THOIKHOABIEU_ID", referencedColumnName = "ID")
-	public LichSuDauGia getMonhocdg() {
-		return monhocdg;
-	}
-
-	public void setMonhocdg(LichSuDauGia monhocdg) {
-		this.monhocdg = monhocdg;
-	}
 
 	@ManyToOne
 	@JoinColumn(name ="IDBDG")
@@ -86,11 +75,27 @@ public class BangDanhGiaKq implements Serializable{
 
 	@Override
 	public String toString() {
-		return "BangDanhGiaKq [id=" + id + ", ngaytao=" + ngaytao
-				+ "]";
+		return "BangDanhGiaKq [id=" + id + ", ngaytao=" + ngaytao + "]";
 	}
 
+	@Column(name = "USERD_ID")
+	public String getUserd() {
+		return userd;
+	}
 
+	public void setUserd(String userd) {
+		this.userd = userd;
+	}
+	
+
+	@Column(name = "USERB_ID")
+	public String getUserb() {
+		return userb;
+	}
+
+	public void setUserb(String userb) {
+		this.userb = userb;
+	}
 
 	
 }

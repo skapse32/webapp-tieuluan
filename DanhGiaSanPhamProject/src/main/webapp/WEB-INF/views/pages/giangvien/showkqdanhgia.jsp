@@ -65,8 +65,7 @@ function printResult(){
 				</h2>
 
 				<span style="float: right; color: #1C407D; font-size: 14px;">
-					<u>Giảng Viên :</u> ${account.hoten} <br /> <br /> <u>Môn :</u>
-					${mh.tenMH}
+					<u>Người bán :</u> ${nguoidang}
 				</span>
 			</div>
 		</div>
