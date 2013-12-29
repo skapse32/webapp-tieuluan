@@ -148,12 +148,12 @@ public class QuanLySanPhamUserController {
 		}.getType();
 		List<Sanpham> dssp = new ArrayList<Sanpham>();
 		dssp = gson.fromJson(json, typelist);
+		
 		model.addAttribute("tieude", "Sản phẩm chiến thắng");
 		model.addAttribute("dssp", dssp);
 		model.addAttribute("imageDirectory", imageDirectory);
 		model.addAttribute("trangthai", trangthai);
 		model.addAttribute("web", web);
-
 		model.addAttribute("method", "GET");
 		model.addAttribute("link", "/daugia/qlsanphamchienthang");
 		return "qlsanpham";

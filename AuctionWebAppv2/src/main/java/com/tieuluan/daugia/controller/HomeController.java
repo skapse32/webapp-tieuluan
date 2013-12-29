@@ -77,7 +77,20 @@ public class HomeController {
 		} catch (Exception e) {
 			// TODO: handle exception
 		}
-		
+		try {
+			json = webResource
+					.path("sanpham/findBySanPhamChienThangAll")
+					.cookie(new NewCookie("JSESSIONID", session.getAttribute(
+							"sessionid").toString())).post(String.class);
+
+			
+			List<Sanpham> dsspct = new ArrayList<Sanpham>();
+			dsspct = gson.fromJson(json, typelist);
+			model.addAttribute("dsspct", dsspct);
+			model.addAttribute("slspct", dsspct.size());	
+		} catch (Exception e) {
+			// TODO: handle exception
+		}
 		
 		// lay danh sach san pham
 		if (thuonghieu.length() > 2) {
