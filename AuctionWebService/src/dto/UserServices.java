@@ -49,7 +49,7 @@ public class UserServices {
 			request.getSession().setAttribute("username", username);
 			String role=getrole(result);
 			request.getSession().setAttribute("role", role);
-			return "AccessSuccessfully";
+			return result;
 		}
 	}
 
