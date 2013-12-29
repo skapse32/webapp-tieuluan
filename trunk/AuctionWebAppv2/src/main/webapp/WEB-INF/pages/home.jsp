@@ -14,6 +14,16 @@
 	});
 	function vartimertick() {
 		// get the form values
+		if($("#spct").hasClass( "isred")){
+			$("#spct a").css("color","red");
+			$("#spct").removeClass( "isred");
+		}else{
+			
+			$("#spct a").css("color","blue");
+			$("#spct").addClass( "isred");
+		}
+		
+		
 		var maLoaiSP = $('#maLoaiSP').val();
 		var size = $('#size').val();
 		var page = $('#page').val();
@@ -331,6 +341,10 @@
 				class="fl fontTahoma wright list-none top5">
 				<li class="fl pd5 w240 ">
 					<a class="fl  pdl20" href="${pageContext.request.contextPath}/qlsanphamdangthamgia">Đã đấu ${soluongsptg} sản phẩm</a>
+				</li>
+				<li class="fl wright das_top h1"></li>
+				<li id="spct" class="fl pd5 w240 isred">
+					<a class="fl  pdl20" href="${pageContext.request.contextPath}/qlsanphamchienthang">Đã chiến thắng ${slspct} sản phẩm</a>
 				</li>
 				<li class="fl wright das_top h1"></li>
 			</ul>
