@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.ModelAndView;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -306,6 +307,7 @@ public class QuanLySanPhamADController {
 		}.getType();
 		List<Hoadon> dshd = new ArrayList<Hoadon>();
 		dshd = gson.fromJson(json, typelist);
+		System.out.println("size"+dshd.size());
 		model.addAttribute("tieude", "Hoá đơn");
 		model.addAttribute("dshd", dshd);
 		model.addAttribute("web", web);
@@ -313,4 +315,28 @@ public class QuanLySanPhamADController {
 		model.addAttribute("method", "/daugia/hoadon");
 		return "hoadon";
 	}
+	@RequestMapping(value = "/downloadPDF", method = RequestMethod.GET)
+	public ModelAndView downloadExcel(Model model, HttpSession session) {
+		
+		String web = Server.web;
+		String json = "";
+		Gson gson = new Gson();
+		ClientConfig config = new DefaultClientConfig();
+		Client client = Client.create(config);
+		WebResource webResource = client.resource(Server.addressAuctionWS);
+		json = webResource
+				.path("hoadon/findAll")
+				.cookie(new NewCookie("JSESSIONID", session.getAttribute(
+						"sessionid").toString())).post(String.class);
+
+		Type typelist = new TypeToken<ArrayList<Hoadon>>() {
+		}.getType();
+		List<Hoadon> dshd = new ArrayList<Hoadon>();
+		dshd = gson.fromJson(json, typelist);
+		System.out.println("size"+dshd.size());
+		// return a view which will be resolved by an excel view resolver
+		return new ModelAndView("pdfView", "dshd", dshd);
+	}
+
+
 }
