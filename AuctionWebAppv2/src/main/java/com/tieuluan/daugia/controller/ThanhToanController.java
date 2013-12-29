@@ -156,14 +156,19 @@ public class ThanhToanController {
 		gson = new Gson();
 		Sanpham sp = new Sanpham();
 		sp = gson.fromJson(json, Sanpham.class);
-		User nguoiban=new User();
-		nguoiban.setHoTen("Pham Quy Anh");
-		nguoiban.setDienThoai("123456789");
-		nguoiban.setDiaChi("987654321");
-		User nguoimua=new User();
-		nguoimua.setHoTen("Pham Quy Anh");
-		nguoimua.setDienThoai("123456789");
-		nguoimua.setDiaChi("987654321");
+		form = new Form();
+		form.add("username", sp.getNguoidang());
+		json=webResource.path("user/getUserInfoNguoiBan")
+				.cookie(new NewCookie("JSESSIONID", session.getAttribute("sessionid").toString()))
+				.post(String.class, form);
+		User nguoiban = gson.fromJson(json, User.class);
+		//get thong tin nguoi mua
+		form = new Form();
+		String username=session.getAttribute("username").toString();
+		form.add("username", username);
+		json=webResource.path("user/getUserInfo").cookie(new NewCookie("JSESSIONID", session.getAttribute("sessionid").toString()))
+				.post(String.class, form);
+		User nguoimua = gson.fromJson(json, User.class);
 		//
 		sp.setGiahientai(sp.getGiamuangay());
 		model.addAttribute("sp", sp);

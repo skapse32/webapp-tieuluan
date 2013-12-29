@@ -23,7 +23,7 @@
 			</div>
 		</div>
 		<form id="Form_Registration" method="post"
-			action="${pageContext.request.contextPath}/taikhoan/doimatkhau?action=thaydoi">
+			action="${pageContext.request.contextPath}/doimatkhau?action=thaydoi">
 			<h2 class="h2row" align="center">Thay đổi mật khảu</h2>
 			<br />
 			<table style="width: 98%; font-size: 10pt">
