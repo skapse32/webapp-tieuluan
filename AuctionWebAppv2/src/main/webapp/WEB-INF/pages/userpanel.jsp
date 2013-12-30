@@ -129,8 +129,12 @@
 												phẩm đã kết thúc</a></li>
 										<li class="fl wright das_top h1"></li>
 										<li class="fl pd5 w240 "><a class="fl pd5 w240 "
-											href="${pageContext.request.contextPath}/qlsanphamchienthang">Sản
-												phẩm chiến thắng</a></li>
+											href="${pageContext.request.contextPath}/qlsanphamchienthang?trangthai=1">Sản
+												phẩm chiến thắng chưa thanh toán</a></li>
+										<li class="fl wright das_top h1"></li>
+										<li class="fl pd5 w240 "><a class="fl pd5 w240 "
+											href="${pageContext.request.contextPath}/qlsanphamchienthang?trangthai=3">Sản
+												phẩm chiến thắng đã thanh toán</a></li>
 										<li class="fl wright das_top h1"></li>
 									</ul>
 								</div>

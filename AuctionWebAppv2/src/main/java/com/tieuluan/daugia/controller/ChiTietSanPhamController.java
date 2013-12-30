@@ -150,6 +150,10 @@ public class ChiTietSanPhamController {
 			//ket huc
 			model.addAttribute("dadau", "da xong");
 		}
+		if(sp.getTinhtrangdaugia() == 3){
+			//ket huc
+			model.addAttribute("dathanhtoan", "da xong");
+		}
 		return "chitietsanpham.html";
 	}
 	
