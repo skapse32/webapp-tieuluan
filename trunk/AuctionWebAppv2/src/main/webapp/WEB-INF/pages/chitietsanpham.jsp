@@ -184,9 +184,6 @@
 											+ "&nbsp;đ";
 								});
 
-			},
-			error : function(e) {
-				alert('Error: ' + e);
 			}
 		});
 	};
@@ -211,9 +208,6 @@
 				nguoidat : nguoidatgia
 			},
 			success : function(data) {
-			},
-			error : function(e) {
-				alert('Error: ' + e);
 			}
 		});
 	}
@@ -382,6 +376,7 @@
 
 									</c:when>
 									<c:otherwise>
+									<c:if test="${empty dathanhtoan}">
 										<tr class="title"
 											style="background-image: initial; background-attachment: initial; background-origin: initial; background-clip: initial; background-color: rgb(229, 229, 229); color: rgb(204, 0, 0); font-weight: bold; text-align: center;">
 											<td colspan="2" lang="vi"
@@ -476,6 +471,7 @@
 												</script>
 											</tr>
 										</c:if>
+									</c:if>
 									</c:otherwise>
 								</c:choose>
 							</c:if>
@@ -504,95 +500,9 @@
 											id="time${sp.masp}" value="${sp.thoigianketthuc}">
 											<div id="Countdown${sp.masp}"
 												style="color: green; font-weight: bold;"></div> <input
-											id="countFunction" type="hidden" value="0" /> <script
-												type="text/javascript">
-												var stringday0 = $(
-														'#thoigianbatdau')
-														.val().toString();
-												var longday0;
-												var BigDay0;
-												if (stringday0 != null) {
-													longday0 = Number(stringday0);
-													BigDay0 = new Date(longday0);
-												}
-												var stringday = $(
-														'#time${sp.masp}')
-														.val().toString();
-												var longday = Number(stringday);
-												var BigDay = new Date(longday);
-												var msPerDay = 24 * 60 * 60 * 1000;
-												var timer;
-												$(function() {
-													timer = setInterval(
-															vartimertick, 1000);
-												});
-												var varCounter = 0;
-												function vartimertick() {
-													var count = $(
-															'#countFunction')
-															.val();
-													var today = new Date();
-													if (stringday0 != null) {
-														var timeLeft0 = (today
-																.getTime() - BigDay0
-																.getTime());
-														var divdatgia = $(
-																'#divdatgia')
-																.val();
-														if (timeLeft0 < 0) {
-															if (divdatgia != null
-																	&& count == 0) {
-																count++;
-																$(
-																		'#countFunction')
-																		.val(
-																				count);
-																document
-																		.getElementById('buttondatgia').style.visibility = 'hidden';
-																document
-																		.getElementById('hienthichuadaugia').style.visibility = 'visible';
-															}
-														} else {
-															if (divdatgia != null) {
-																document
-																		.getElementById('buttondatgia').style.visibility = 'visible';
-																document
-																		.getElementById('hienthichuadaugia').style.visibility = 'hidden';
-																window
-																		.clearInterval(timer);
-															}
-
-														}
-													}
-													var timeLeft = (BigDay
-															.getTime() - today
-															.getTime());
-													if (Math.floor(timeLeft) > 0) {
-														var e_daysLeft = timeLeft
-																/ msPerDay;
-														var daysLeft = pad(Math
-																.floor(e_daysLeft));
-														var e_hrsLeft = (e_daysLeft - daysLeft) * 24;
-														var hrsLeft = pad(Math
-																.floor(e_hrsLeft));
-														var e_minsLeft = (e_hrsLeft - hrsLeft) * 60;
-														var minsLeft = pad(Math
-																.floor(e_minsLeft));
-														var e_secsLeft = (e_minsLeft - minsLeft) * 60;
-														var secsLeft = pad(Math
-																.floor(e_secsLeft));
-														var timeString = daysLeft
-																+ " ngày "
-																+ hrsLeft
-																+ ":"
-																+ minsLeft
-																+ ":"
-																+ secsLeft;
-														$(
-																'#Countdown${sp.masp}')
-																.html(
-																		timeString);
-													} else {
+											id="countFunction" type="hidden" value="0" /> <c:choose>
+												<c:when test="${not empty dathanhtoan}">
+													<script>
 														window
 																.clearInterval(timer);
 														var timeString = "kết thúc";
@@ -604,29 +514,141 @@
 																.getElementById('Countdown${sp.masp}').style.color = 'red'; //'none';
 														document
 																.getElementById('numberbuocgia').style.visibility = 'hidden';
-														var divdatgia = $(
-																'#divdatgia')
-																.val();
-														if (divdatgia != null) {
-															document
-																	.getElementById('buttondatgia').style.visibility = 'hidden';
-															document
-																	.getElementById('hienthichuadaugia').style.visibility = 'hidden';
+													</script>
+												</c:when>
+												<c:otherwise>
+													<script type="text/javascript">
+														var stringday0 = $(
+																'#thoigianbatdau')
+																.val()
+																.toString();
+														var longday0;
+														var BigDay0;
+														if (stringday0 != null) {
+															longday0 = Number(stringday0);
+															BigDay0 = new Date(
+																	longday0);
 														}
-														//send request de thay doi tinh trang san pham.
+														var stringday = $(
+																'#time${sp.masp}')
+																.val()
+																.toString();
+														var longday = Number(stringday);
+														var BigDay = new Date(
+																longday);
+														var msPerDay = 24 * 60 * 60 * 1000;
+														var timer;
+														$(function() {
+															timer = setInterval(
+																	vartimertick,
+																	1000);
+														});
+														var varCounter = 0;
+														function vartimertick() {
+															var count = $(
+																	'#countFunction')
+																	.val();
+															var today = new Date();
+															if (stringday0 != null) {
+																var timeLeft0 = (today
+																		.getTime() - BigDay0
+																		.getTime());
+																var divdatgia = $(
+																		'#divdatgia')
+																		.val();
+																if (timeLeft0 < 0) {
+																	if (divdatgia != null
+																			&& count == 0) {
+																		count++;
+																		$(
+																				'#countFunction')
+																				.val(
+																						count);
+																		document
+																				.getElementById('buttondatgia').style.visibility = 'hidden';
+																		document
+																				.getElementById('hienthichuadaugia').style.visibility = 'visible';
+																	}
+																} else {
+																	if (divdatgia != null) {
+																		document
+																				.getElementById('buttondatgia').style.visibility = 'visible';
+																		document
+																				.getElementById('hienthichuadaugia').style.visibility = 'hidden';
+																		window
+																				.clearInterval(timer);
+																	}
 
-														var nguoidatgia = document
-																.getElementById('nguoidatgia').innerHTML;
-														var masp = "${sp.masp}";
-														updateTinhTrangSP(masp,
-																nguoidatgia);
+																}
+															}
+															var timeLeft = (BigDay
+																	.getTime() - today
+																	.getTime());
+															if (Math
+																	.floor(timeLeft) > 0) {
+																var e_daysLeft = timeLeft
+																		/ msPerDay;
+																var daysLeft = pad(Math
+																		.floor(e_daysLeft));
+																var e_hrsLeft = (e_daysLeft - daysLeft) * 24;
+																var hrsLeft = pad(Math
+																		.floor(e_hrsLeft));
+																var e_minsLeft = (e_hrsLeft - hrsLeft) * 60;
+																var minsLeft = pad(Math
+																		.floor(e_minsLeft));
+																var e_secsLeft = (e_minsLeft - minsLeft) * 60;
+																var secsLeft = pad(Math
+																		.floor(e_secsLeft));
+																var timeString = daysLeft
+																		+ " ngày "
+																		+ hrsLeft
+																		+ ":"
+																		+ minsLeft
+																		+ ":"
+																		+ secsLeft;
+																$(
+																		'#Countdown${sp.masp}')
+																		.html(
+																				timeString);
+															} else {
+																window
+																		.clearInterval(timer);
+																var timeString = "kết thúc";
+																$(
+																		'#Countdown${sp.masp}')
+																		.html(
+																				timeString);
+																document
+																		.getElementById('Countdown${sp.masp}').style.color = 'red'; //'none';
+																document
+																		.getElementById('numberbuocgia').style.visibility = 'hidden';
+																var divdatgia = $(
+																		'#divdatgia')
+																		.val();
+																if (divdatgia != null) {
+																	document
+																			.getElementById('buttondatgia').style.visibility = 'hidden';
+																	document
+																			.getElementById('hienthichuadaugia').style.visibility = 'hidden';
+																}
+																//send request de thay doi tinh trang san pham.
 
-														//kiem tra nguoi dat gia
+																var nguoidatgia = document
+																		.getElementById('nguoidatgia').innerHTML;
+																var masp = "${sp.masp}";
+																updateTinhTrangSP(
+																		masp,
+																		nguoidatgia);
 
-														kiemtraNguoiDat(nguoidatgia);
-													}
-												};
-											</script>
+																//kiem tra nguoi dat gia
+
+																kiemtraNguoiDat(nguoidatgia);
+															}
+														};
+													</script>
+												</c:otherwise>
+											</c:choose>
+
 									</span> </span></td>
 							</tr>
 							<tr class="technical" style="font-family: Tahoma, Verdana;">

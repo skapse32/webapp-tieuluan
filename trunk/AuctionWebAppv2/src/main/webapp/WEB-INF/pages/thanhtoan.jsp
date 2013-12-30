@@ -160,6 +160,21 @@
 		<div id="catalog-products" class="fl wright">
 			<div id="catalog-products-titles"
 				class="fl bg-titles top10 products-group-title-news color_white fontTahoma wright-26">
+				<strong>Người đăng : ${sp.nguoidang }</strong>
+			</div>
+			<ul id="catalog-products-list"
+				class="fl fontTahoma wright list-none top5">
+				<li class="fl pd5 w240 "><a class="fl pdl20" href="#">
+						Thông tin người đăng</a></li>
+				<li class="fl wright das_top h1"></li>
+				<li class="fl pd5 w240 "><a class="fl pdl20" href="#"> Độ
+						tin cậy : 50%</a></li>
+				<li class="fl wright das_top h1"></li>
+			</ul>
+		</div>
+		<div id="catalog-products" class="fl wright">
+			<div id="catalog-products-titles"
+				class="fl bg-titles top10 products-group-title-news color_white fontTahoma wright-26">
 				<strong>Quản lý tài khoản</strong>
 			</div>
 			<ul id="catalog-products-list"
@@ -191,8 +206,12 @@
 						phẩm đã kết thúc</a></li>
 				<li class="fl wright das_top h1"></li>
 				<li class="fl pd5 w240 "><a class="fl pd5 w240 "
-					href="${pageContext.request.contextPath}/qlsanphamchienthang">Sản
-						phẩm chiến thắng</a></li>
+					href="${pageContext.request.contextPath}/qlsanphamchienthang?trangthai=1">Sản
+						phẩm chiến thắng chưa thanh toán</a></li>
+				<li class="fl wright das_top h1"></li>
+				<li class="fl pd5 w240 "><a class="fl pd5 w240 "
+					href="${pageContext.request.contextPath}/qlsanphamchienthang?trangthai=3">Sản
+						phẩm chiến thắng đã thanh toán</a></li>
 				<li class="fl wright das_top h1"></li>
 			</ul>
 		</div>
