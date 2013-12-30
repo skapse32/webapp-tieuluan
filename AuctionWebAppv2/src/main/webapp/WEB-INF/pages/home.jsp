@@ -52,6 +52,39 @@
 			}
 		});
 	};
+	function updateTinhTrangSP(masp) {
+		$.ajax({
+			type : "POST",
+			url : "/daugia/updateTinhTrangDG",
+			data : {
+				maSP : masp
+			},
+			success : function(data) {
+			},
+			error : function(e) {
+				alert('Error: ' + e);
+			}
+		});
+	}
+
+	function kiemtraNguoiDat(nguoidatgia) {
+		$
+				.ajax({
+					type : "POST",
+					url : "/daugia/kiemtranguoidatgia",
+					data : "nguoidatgia=" + nguoidatgia,
+					success : function(data) {
+						// we have the response
+						if (data == "true") {
+							var r = confirm("Bạn đã thắng phiên này! Bấm OK để tiến hành thanh toán sản phẩm.");
+							if (r == true) {
+								window.location.href = "thanhtoan?masp=${sp.masp}";
+							} else {
+							}
+						}
+					}
+				});
+	}
 </script>
 <!-- Content -->
 <div id="content" class="wmain">
@@ -125,10 +158,9 @@
 																'#aCountdown${sp.masp}')
 																.html(
 																		timeString);
-														document
-																.getElementById('aCountdown${sp.masp}').style.color = 'red'; //'none';
-														document
-																.getElementById('abid${sp.masp}').style.visibility = 'hidden';
+														document.getElementById('aCountdown${sp.masp}').style.color = 'red'; //'none';
+														document.getElementById('abid${sp.masp}').style.visibility = 'hidden';
+														updateTinhTrangSP("${sp.masp}");
 													}
 												}, 1000);
 							});
@@ -309,6 +341,7 @@
 																.getElementById('Countdown${sp.masp}').style.color = 'red'; //'none';
 														document
 																.getElementById('bid${sp.masp}').style.visibility = 'hidden';
+														updateTinhTrangSP("${sp.masp}");
 													}
 												}, 1000);
 							});

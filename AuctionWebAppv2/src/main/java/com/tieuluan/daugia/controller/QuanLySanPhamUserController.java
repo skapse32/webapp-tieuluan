@@ -573,6 +573,7 @@ public class QuanLySanPhamUserController {
 		model.addAttribute("thuonghieu", thuonghieu);
 		mota = request.getParameter("txtmota");
 		giakhoidiem = request.getParameter("txtgiakhoidiem");
+		giahientai = giakhoidiem;
 		model.addAttribute("giakhoidiem", giakhoidiem);
 		buocgia = request.getParameter("txtbuocgia");
 		thoigianbatdau = request.getParameter("txttgbt");

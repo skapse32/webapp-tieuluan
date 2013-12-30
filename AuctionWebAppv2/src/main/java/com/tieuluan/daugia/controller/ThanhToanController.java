@@ -217,7 +217,6 @@ public class ThanhToanController {
 	@RequestMapping(value = "/updateTinhTrangDG" , method = RequestMethod.POST)
 	public @ResponseBody String updateTinhTrangDaugia(HttpServletRequest request , Model model){
 		String masp=request.getParameter("maSP");
-		String nguoidatagia = request.getParameter("nguoidat");
 		HttpSession session = request.getSession();
 		String json = "";
 		ClientConfig config = new DefaultClientConfig();
