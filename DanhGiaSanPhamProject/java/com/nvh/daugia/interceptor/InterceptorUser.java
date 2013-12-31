@@ -44,8 +44,7 @@ public class InterceptorUser implements HandlerInterceptor {
 			form.add("username", username);
 			String result = resource
 					.path("user/access")
-					.cookie(new NewCookie("JSESSIONID", session
-							.getAttribute("sessionid").toString()))
+					.cookie(new NewCookie("JSESSIONID", session.getAttribute("sessionid").toString()))
 					.post(String.class, form);
 			System.out.println(result);
 			if (result.equals("false")) {

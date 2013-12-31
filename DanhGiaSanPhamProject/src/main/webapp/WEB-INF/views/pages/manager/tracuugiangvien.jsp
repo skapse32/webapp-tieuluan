@@ -10,12 +10,12 @@
 		<hr class="line-header-padding" />
 	</div>
 	<div id="private">
-		<u>Danh sách giảng viên :</u>
-		<c:forEach items="${gvs}" var="gv">
-			<a href="${pageContext.request.contextPath}/manager/tracuugv/${gv.id}">
+		<u>Danh sách người đã đăng sản phẩm :</u>
+		<c:forEach items="${dsuser}" var="nguoidang">
+			<a href="${pageContext.request.contextPath}/user/kqdanhgia/${nguoidang.username}">
 				<div id="public" style="width: 570px">
-					<div style="width: 570px ; color: white; background-color: #3B5998;">${gv.id}</div>
-					<div style="width: 570px ; ">${gv.hoten}</div>
+					<div style="width: 570px ; color: white; background-color: #3B5998;">${nguoidang.username}</div>
+					<div style="width: 570px ; ">${nguoidang.hoTen}</div>
 				</div>
 			</a>
 		</c:forEach>
