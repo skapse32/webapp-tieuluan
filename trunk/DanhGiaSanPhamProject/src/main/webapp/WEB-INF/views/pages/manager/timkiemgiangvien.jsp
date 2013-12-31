@@ -11,13 +11,13 @@
 	</div>
 	<div id="public">
 		<span style="text-decoration: underline;">Tìm kiếm :</span>
-		<form action="${pageContext.request.contextPath}/manager/timkiemGV" method="post" style="width: 400px; margin: auto" >
+		<form action="${pageContext.request.contextPath}/user/timkiemnguoidang" method="post" style="width: 400px; margin: auto" >
 		<table>
 			<tr>
-				<td>ID :</td><td><input type="text" name="idgv"/></td>
+				<td>Tên Account :</td><td><input  type="text" name="username"/></td>
 			</tr>
 			<tr>
-				<td>Họ Tên :</td><td><input size="40" type="text" name="hoten"/></td>
+				<td>Email :</td><td><input type="text" size="40" name="email"/></td>
 			</tr>
 			<tr>
 				<td colspan="2" align="center"><input id="button" type="submit" value="Tìm Kiếm"/></td>

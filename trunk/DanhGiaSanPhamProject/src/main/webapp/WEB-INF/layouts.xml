@@ -135,6 +135,20 @@
 			value="/WEB-INF/views/pages/user/changePassword.jsp" />
 	</definition>
 
+	<definition extends="svTemplate" name="timkiemgiangvien">
+	    <put-attribute name="title" value="Wellcome to User's Page" />
+		<put-attribute name="pageName" value="KHÁCH HÀNG" />
+		<put-attribute name="body" value="/WEB-INF/views/pages/manager/timkiemgiangvien.jsp" />
+	</definition>
+	
+	<definition extends="svTemplate" name="tracuunguoidang">
+	    <put-attribute name="title" value="Wellcome to User's Page" />
+		<put-attribute name="pageName" value="KHÁCH HÀNG" />
+		<put-attribute name="body" value="/WEB-INF/views/pages/manager/tracuugiangvien.jsp" />
+	</definition>
+	
+	
+	
 	<definition extends="giangvienTemplate" name="changepasswordGV">
 		<put-attribute name="title" value="Wellcome to Giảng Viên's Page" />
 		<put-attribute name="pageName" value="GIẢNG VIÊN" />
@@ -154,13 +168,6 @@
 			value="/WEB-INF/views/pages/admin/header.jsp" />
 	</definition>
 
-	<definition extends="managerTemplate" name="manager">
-		<put-attribute name="body" value="/WEB-INF/views/pages/manager/manager.jsp" />
-	</definition>
-	
-	<definition extends="managerTemplate" name="tracuugiangvien">
-		<put-attribute name="body" value="/WEB-INF/views/pages/manager/tracuugiangvien.jsp" />
-	</definition>
 	
 	<definition extends="managerTemplate" name="kqdanhgiaGV">
 		<put-attribute name="body" value="/WEB-INF/views/pages/manager/kqdanhgiaGV.jsp" />
@@ -169,10 +176,6 @@
 	<definition extends="managerTemplate" name="showkqdanhgiaGV">
 		<put-attribute name="body" value="/WEB-INF/views/pages/manager/showkqdanhgiaGV.jsp" />
 	</definition>
-	<definition extends="managerTemplate" name="timkiemgiangvien">
-		<put-attribute name="body" value="/WEB-INF/views/pages/manager/timkiemgiangvien.jsp" />
-	</definition>
-	
 	<!-- logined Giang Vien Template -->
 	<definition name="giangvienTemplate" template="/WEB-INF/layout/adminlayout.jsp">
 		<put-attribute name="header" value="/WEB-INF/layout/headerlogined.jsp" />

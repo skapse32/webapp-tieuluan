@@ -1,5 +1,6 @@
 package com.nvh.daugia.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Type;
 import java.rmi.dgc.DGC;
 import java.util.ArrayList;
@@ -30,6 +31,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.nvh.applicationscope.BangDanhGiaChoose;
 import com.nvh.daugia.model.Sanpham;
+import com.nvh.daugia.model.User;
 import com.nvh.daugia.model.jpa.BangDanhGia;
 import com.nvh.daugia.model.jpa.BangDanhGiaKq;
 import com.nvh.daugia.model.jpa.CauHoi;
@@ -356,5 +358,44 @@ public class UserCotroller {
 		log.info("bang ket qua : " + kqs.toString());
 		model.addAttribute("kqs", kqs);
 		return "showkqdanhgia";
+	}
+	
+	@RequestMapping(value="/tracuunguoidang" ,method = RequestMethod.GET)
+	public String tracuugiangvien(Model model, HttpSession session){
+		//lay toan bo user trong san pham.
+		ClientConfig config = new DefaultClientConfig();
+		Client client = Client.create(config);
+		WebResource resource = client.resource(Server.addressAuthenWS);
+		Form form = new Form();
+		form.add("username", "");
+		form.add("email", "");
+		String json = resource.path("userinfo/findAll").cookie(new NewCookie("JSESSIONID", session.getAttribute("sessionid").toString())).post(String.class,form);
+		Type type = new TypeToken<ArrayList<User>>(){}.getType();
+		ArrayList<User> dsuser = new Gson().fromJson(json, type);
+		model.addAttribute("dsuser", dsuser);
+		return "tracuunguoidang";
+	}
+	
+	@RequestMapping(value="timkiemnguoiban", method=RequestMethod.GET)
+	public String timkiemGV(){
+		return "timkiemgiangvien";
+	}
+	
+	@RequestMapping(value="timkiemnguoidang", method=RequestMethod.POST)
+	public String kqtimkiemGV(Model model, HttpServletRequest request, HttpSession session) throws UnsupportedEncodingException{
+		request.setCharacterEncoding("UTF-8");
+		String email= request.getParameter("email");
+		String username = request.getParameter("username");
+		ClientConfig config = new DefaultClientConfig();
+		Client client = Client.create(config);
+		WebResource resource = client.resource(Server.addressAuthenWS);
+		Form form = new Form();
+		form.add("username", username);
+		form.add("email", email);
+		String json = resource.path("userinfo/findAll").cookie(new NewCookie("JSESSIONID", session.getAttribute("sessionid").toString())).post(String.class,form);
+		Type type = new TypeToken<ArrayList<User>>(){}.getType();
+		ArrayList<User> dsuser = new Gson().fromJson(json, type);
+		model.addAttribute("dsuser", dsuser);
+		return "tracuunguoidang";
 	}
 }

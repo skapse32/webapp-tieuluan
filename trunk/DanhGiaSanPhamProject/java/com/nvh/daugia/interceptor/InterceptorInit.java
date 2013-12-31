@@ -44,7 +44,85 @@ public class InterceptorInit implements HandlerInterceptor {
 	public boolean preHandle(HttpServletRequest request,
 			HttpServletResponse response, Object arg2) throws Exception {
 		HttpSession session = request.getSession();
-		return true;
-	}
 
+		if (session.getAttribute("sessionid") == null) {
+			ClientConfig config = new DefaultClientConfig();
+			Client client = Client.create(config);
+			WebResource webResource = client.resource(Server.addressAuctionWS);
+			ClientResponse clresponse = null;
+			// get session id
+			clresponse = webResource.path("user/getSessionID").post(
+					ClientResponse.class);
+			if (clresponse.getStatus() == 200) {
+				session.setAttribute("sessionid",
+						clresponse.getEntity(String.class));
+			} else {
+				response.sendRedirect("/" + Server.web + "/denied");
+				return true;
+			}
+			System.out.println(request.getPathInfo());
+			if (request.getPathInfo() == null) {
+				ClientConfig cofig = new DefaultClientConfig();
+				Client client1 = Client.create(cofig);
+				WebResource resource = client1.resource(Server.addressAuctionWS);
+				Form form = new Form();
+				String authenCode= request.getParameter("authcode");
+				String username = request.getParameter("username");
+				form.add("authencode", authenCode);
+				form.add("username", username);
+				String result = resource
+						.path("user/access")
+						.cookie(new NewCookie("JSESSIONID", session.getAttribute("sessionid").toString()))
+						.post(String.class, form);
+				System.out.println(result);
+				if (result.equals("false")) {
+					response.sendRedirect("/" + Server.web + "/login");
+					return false;
+				} else {
+					// send accessToken xuong authen de lay Role nguoi dung.
+					resource = client1.resource(Server.addressAuctionWS);
+					String role = resource.path("user/getRoleUser").cookie(new NewCookie("JSESSIONID", session
+							.getAttribute("sessionid").toString())).post(String.class);
+					session.setAttribute("role", role);
+					session.setAttribute("username", username);
+					System.out.println(role);
+				}
+				
+				//response.sendRedirect(Server.addressAuctionWA + "/userpanel");
+			}
+		}else{
+			System.out.println(request.getPathInfo());
+			if (request.getPathInfo() == null) {
+				ClientConfig cofig = new DefaultClientConfig();
+				Client client1 = Client.create(cofig);
+				WebResource resource = client1.resource(Server.addressAuctionWS);
+				Form form = new Form();
+				String authenCode= request.getParameter("authcode");
+				String username = request.getParameter("username");
+				form.add("authencode", authenCode);
+				form.add("username", username);
+				String result = resource
+						.path("user/access")
+						.cookie(new NewCookie("JSESSIONID", session.getAttribute("sessionid").toString()))
+						.post(String.class, form);
+				System.out.println(result);
+				if (result.equals("false")) {
+					// khong ton tai authencode. => vao trang login.
+					response.sendRedirect("/" + Server.web + "/login");
+					return false;
+				} else {
+					// send accessToken xuong authen de lay Role nguoi dung.
+					resource = client1.resource(Server.addressAuctionWS);
+					String role = resource.path("user/getRoleUser").cookie(new NewCookie("JSESSIONID", session
+							.getAttribute("sessionid").toString())).post(String.class);
+					session.setAttribute("role", role);
+					session.setAttribute("username", username);
+					System.out.println(role);
+				}
+				//response.sendRedirect(Server.addressAuctionWA + "/userpanel");
+			}
+		}
+		return true;
+
+	}
 }

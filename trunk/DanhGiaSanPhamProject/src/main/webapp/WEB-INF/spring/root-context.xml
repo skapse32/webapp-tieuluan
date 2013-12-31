@@ -28,13 +28,13 @@
 			<value>com.mysql.jdbc.Driver</value>
 		</property>
 		<property name="url">
-			<value>jdbc:mysql://localhost/giangvien</value>
+			<value>jdbc:mysql://us-cdbr-east-04.cleardb.com:3306/ad_0bb0f7bc0ec3534</value>
 		</property>
 		<property name="username">
-			<value>root</value>
+			<value>b380b7b7cb9edf</value>
 		</property>
 		<property name="password">
-			<value>root</value>
+			<value>15da4d60</value>
 		</property>
 	</bean>
 
@@ -95,10 +95,6 @@
 	<mvc:interceptors>
 		<mvc:interceptor>
 			<mvc:mapping path="/" />
-			<bean class="com.nvh.daugia.interceptor.InterceptorInit" />
-		</mvc:interceptor>
-		<mvc:interceptor>
-			<mvc:mapping path="/**"  />
 			<bean class="com.nvh.daugia.interceptor.InterceptorInit" />
 		</mvc:interceptor>
 		<mvc:interceptor>

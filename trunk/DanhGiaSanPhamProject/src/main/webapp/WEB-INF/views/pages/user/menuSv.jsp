@@ -17,7 +17,7 @@
 		<a href="${pageContext.request.contextPath}/user/kqdanhgia/${username}">
 			<div class="row">Xem kết quả đánh giá</div>
 		</a>
-		<a href="${pageContext.request.contextPath}/user/tracuunguoiban">
+		<a href="${pageContext.request.contextPath}/user/tracuunguoidang">
 			<div class="row">D/sách khách hàng cung cấp sản phẩm</div>
 		</a> <a href="${pageContext.request.contextPath}/user/timkiemnguoiban">
 			<div class="row">Tìm khách hàng cung cấp sản phẩm</div>

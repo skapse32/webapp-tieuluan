@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.WebResource;
 import com.sun.jersey.api.client.config.ClientConfig;
 import com.sun.jersey.api.client.config.DefaultClientConfig;
@@ -34,14 +35,47 @@ public class AccountController {
 
 	@RequestMapping(value = "/login")
 	public String getlogin(Model model, HttpServletRequest request) {
-
-		return "login";
+		try {
+			String role = request.getSession().getAttribute("role").toString();
+			String weblink = "redirect:/";
+			switch (role) {
+				
+			case "Admin":
+				weblink+="admin";
+				return weblink;
+			case "User":
+				weblink+="user";
+				return weblink;
+			default:
+				return "login";
+			}
+		} catch (Exception e) {
+			// TODO: handle exception
+			return "login";
+		}
+		
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
 	public String login(Model model, HttpServletRequest request, HttpSession session) {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
+		
+		
+		if (session.getAttribute("sessionid") == null) {
+			ClientConfig config = new DefaultClientConfig();
+			Client client = Client.create(config);
+			WebResource webResource = client.resource(Server.addressAuctionWS);
+			ClientResponse clresponse = null;
+			// get session id
+			clresponse = webResource.path("user/getSessionID").post(
+					ClientResponse.class);
+			if (clresponse.getStatus() == 200) {
+				session.setAttribute("sessionid",
+						clresponse.getEntity(String.class));
+			}
+		}
+		
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
 		Form form = null;
@@ -63,8 +97,7 @@ public class AccountController {
 			form.add("authencode", authencode);
 			String result = webResource
 					.path("user/access")
-					.cookie(new NewCookie("JSESSIONID", session
-							.getAttribute("sessionid").toString()))
+					.cookie(new NewCookie("JSESSIONID", session.getAttribute("sessionid").toString()))
 					.post(String.class, form);
 			if (result.equals("WrongAuthenCode")) {
 				model.addAttribute("error", "Wrong AuthenCode;"
