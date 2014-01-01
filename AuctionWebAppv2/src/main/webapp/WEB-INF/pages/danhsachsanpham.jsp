@@ -66,9 +66,13 @@
 								<a style="color: #00C"
 							href="${pageContext.request.contextPath}/?thuonghieu=${thuonghieu}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
 							</c:when>
+							<c:when test="${check == 'maloaiSP'}">
+								<a style="color: #00C"
+									href="${pageContext.request.contextPath}/?maLoaiSP=${maLoaiSP}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
+							</c:when>
 							<c:otherwise>
 								<a style="color: #00C"
-							href="${pageContext.request.contextPath}/?maLoaiSP=${maLoaiSP}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
+									href="${pageContext.request.contextPath}/?locsp=${locsp}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
 							</c:otherwise>
 						</c:choose>
 
@@ -244,6 +248,11 @@
 				</div>
 				<ul id="catalog-products-list"
 					class="fl fontTahoma wright list-none top5">
+								<li class="fl pd5 w240 "><a
+									class="fl  pdl20"
+									href="?locsp=0&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">Mới Nhất</a>
+								</li>
+								<li class="fl wright das_top h1"></li>
 								<li class="fl pd5 w240 "><a
 									class="fl  pdl20"
 									href="?locsp=1&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">Tăng dần</a>
