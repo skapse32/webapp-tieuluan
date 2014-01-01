@@ -2,6 +2,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
 
+
 <!-- Right side -->
 <div id="box-right" class="fl l10 top10 bg_white wright cright">
 	<c:choose>
@@ -41,6 +42,9 @@
 							<li class="fl pd5 w240 "><a class="fl  pdl20"
 								href="doimatkhau">Đổi mật khẩu</a></li>
 							<li class="fl wright das_top h1"></li>
+							<li class="fl pd5 w240 "><a class="fl  pdl20"
+								href="dangxuat">Đăng xuất</a></li>
+							<li class="fl wright das_top h1"></li>
 						</ul>
 					</div>
 					<div id="catalog-products" class="fl wright">
@@ -59,8 +63,12 @@
 									phẩm đã kết thúc</a></li>
 							<li class="fl wright das_top h1"></li>
 							<li class="fl pd5 w240 "><a class="fl pd5 w240 "
-								href="${pageContext.request.contextPath}/qlsanphamchienthang">Sản
-									phẩm chiến thắng</a></li>
+								href="${pageContext.request.contextPath}/qlsanphamchienthang?trangthai=1">Sản
+									phẩm chiến thắng chưa thanh toán</a></li>
+							<li class="fl wright das_top h1"></li>
+							<li class="fl pd5 w240 "><a class="fl pd5 w240 "
+								href="${pageContext.request.contextPath}/qlsanphamchienthang?trangthai=3">Sản
+									phẩm chiến thắng đã thanh toán</a></li>
 							<li class="fl wright das_top h1"></li>
 						</ul>
 					</div>
@@ -95,7 +103,7 @@
 					</div>
 				</c:otherwise>
 			</c:choose>
-		</c:when>
+			</c:when>
 	</c:choose>
 </div>
 <!-- Right side END -->
