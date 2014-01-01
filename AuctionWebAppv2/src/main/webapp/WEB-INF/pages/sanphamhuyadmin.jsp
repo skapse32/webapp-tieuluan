@@ -116,24 +116,4 @@
 			</div>
 		</div>
 	</div>
-	<!-- Right side -->
-	<div id="box-right" class="fl l10 top10 bg_white wright cright">
-		<div id="catalog-products" class="fl wright">
-			<div id="catalog-products-titles"
-				class="fl bg-titles top10 products-group-title-news color_white fontTahoma wright-26">
-				<strong>Quản lý</strong>
-			</div>
-			<ul id="catalog-products-list"
-				class="fl fontTahoma wright list-none top5">
-				<li class="fl pd5 w240 "><a class="fl  pdl20"
-					href="${pageContext.request.contextPath}/sanphamhuyadmin">Hủy
-						đấu giá</a></li>
-				<li class="fl wright das_top h1"></li>
-				<li class="fl pd5 w240 "><a class="fl  pdl20"
-					href="${pageContext.request.contextPath}/sanphamchophepdauadmin">Cho
-						phép đấu</a></li>
-				<li class="fl wright das_top h1"></li>
-			</ul>
-		</div>
-	</div>
 </div>

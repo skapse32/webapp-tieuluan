@@ -3,69 +3,42 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
-<%@taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags"%>
+
+
+<%@ page language="java" import="com.tieuluan.daugia.function.Server" %>
+
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN">
 <html>
 <head>
 <title>Đấu giá Online - <tiles:insertAttribute name="title"
 		ignore="true" /></title>
 
+<script type="text/javascript"
+	src="${pageContext.request.contextPath}/resources/v2/js/jquery-1.10.2.min.js"></script>
+	
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath}/resources/v2/css/style.css"
 	type="text/css" />
 
-<link rel="stylesheet"
-	href="${pageContext.request.contextPath}/resources/v2/css/validation.css"
-	type="text/css" />
-	
-	
-	
-	
-<link rel="stylesheet" type="text/css"
-	href="resources/v2/js/datetimepicker/jquery.datetimepicker.css" />
 <link rel="stylesheet" type="text/css"
 	href="resources/v2/css/slider-style.css" />
 <link href="http://www.jqueryscript.net/css/jquerysctipttop.css"
 	rel="stylesheet" type="text/css">
-<script src="${pageContext.request.contextPath}/resources/v2/js/datetimepicker/jquery.js"></script>
+
 <script src="${pageContext.request.contextPath}/resources/v2/js/jquery.flexisel.js"></script>
 
 
 <!-- OLD ------------------------------------------------------------------------------------->
-
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/001.css.OLD	">
-<link rel="stylesheet" type="text/css"
-	href="${pageContext.request.contextPath}/resources/css/reset.css_OLD">
 <link
 	href="${pageContext.request.contextPath}/resources/css/jquery.countdown.css"
 	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/resources/css/SpryValidationTextField.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/resources/css/SpryValidationPassword.css"
-	rel="stylesheet" type="text/css" />
-<link
-	href="${pageContext.request.contextPath}/resources/css/SpryValidationConfirm.css"
-	rel="stylesheet" type="text/css" />
-<script
-	src="${pageContext.request.contextPath}/resources/js/SpryValidationTextField.js"
-	type="text/javascript"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/SpryValidationPassword.js"
-	type="text/javascript"></script>
-<script
-	src="${pageContext.request.contextPath}/resources/js/SpryValidationConfirm.js"
-	type="text/javascript"></script>
-<script type="text/javascript"
-	src="${pageContext.request.contextPath}/resources/js/jquery-1.4.1.min.js__OLD"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/jquery.countdown.js"></script>
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/numeral.min.js"></script>
 <link
-	href="${pageContext.request.contextPath}/resources/v2/css/tiny.css"
+	href="${pageContext.request.contextPath}/resources/v2/css/tiny.css_OLD"
 	rel="stylesheet" type="text/css" />
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/v2/js/tinybox.js"></script>
@@ -94,7 +67,7 @@
 	function RunWebSocketRecv() {
 		//website ho tro websocket
 		wssocketRe = new WebSocket(
-				"ws:/192.168.1.8:8080/daugia/websocket/dangsp");
+				"<%= Server.addressWebSocket %>/daugia/websocket/dangsp");
 		wssocketRe.onopen = function(evt) {
 			onOpenRe(evt);
 		};
@@ -137,9 +110,13 @@
 </head>
 
 <body>
-
 	<tiles:insertAttribute name="header" />
-	<tiles:insertAttribute name="maincontent" />
+	
+	<!-- Content -->
+		<tiles:insertAttribute name="maincontent" />
+		<tiles:insertAttribute name="right" />
+	<!-- Content END -->
+	
 	<tiles:insertAttribute name="footer" />
 </body>
 </html>

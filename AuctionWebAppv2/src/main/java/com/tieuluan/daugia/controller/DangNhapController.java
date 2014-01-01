@@ -35,19 +35,28 @@ public class DangNhapController {
 			@RequestParam(value = "username", required = false) String username,
 			@RequestParam(value = "password", required = false) String password,
 			HttpSession session, Model model, HttpServletResponse response) throws IOException {
+		
 		String web = Server.web;
 		model.addAttribute("web", web);
 		model.addAttribute("tieude", "Ðăng nhập");
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
 		WebResource webResource = client.resource(Server.addressAuthenWS);
-		Form form = null;
-		if (action != null) {
+
+		if(session.getAttribute("username") != null)
+		{
+			model.addAttribute("noidung", "Bạn đã đăng nhập.");
+			return "thongbao";
+		}
+		else if (action != null) {
 			if (action.equals("dangnhap")) {
+
+				model.addAttribute("username", username);
+				model.addAttribute("password", password);
 				// get authencode form AuthenService
 				webResource = client.resource(Server.addressAuthenWS);
 				String authencode = "";
-				form = new Form();
+				Form form = new Form();
 				form.add("username", username);
 				form.add("password", password);
 				authencode = webResource.path("login/loginpost").cookie(new NewCookie("authenCode", authencode)).post(
@@ -87,7 +96,6 @@ public class DangNhapController {
 				}
 			}
 		}
-
 		return "dangnhap";
 	}
 	
