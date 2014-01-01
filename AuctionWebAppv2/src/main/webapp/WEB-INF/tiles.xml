@@ -77,9 +77,9 @@
 		<put-attribute name="title" value="Đăng sản phẩm" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/dangsanpham.jsp" />
 	</definition>
-	<definition name="capnhatsanpham" extends="baseLayout">
-		<put-attribute name="title" value="Cập nhật sản phẩm" />
-		<put-attribute name="maincontent" value="/WEB-INF/pages/capnhatsanpham.jsp" />
+	<definition name="suasanpham" extends="userLayout">
+		<put-attribute name="title" value="Sửa sản phẩm" />
+		<put-attribute name="maincontent" value="/WEB-INF/pages/dangsanpham.jsp" />
 	</definition>
 	<definition name="capnhatsanphambihuy" extends="baseLayout">
 		<put-attribute name="title" value="Cập nhật sản phẩm bị hủy" />

@@ -499,6 +499,17 @@ public class QuanLySanPhamUserController {
 		model.addAttribute("web", web);
 		return "capnhatsanphambihuy";
 	}
+
+	@RequestMapping(value = "/suasanpham",method = RequestMethod.GET)
+	public String suaSanPham(Model model, HttpSession session)
+			throws IOException {
+		String web = Server.web;
+
+		model.addAttribute("tieude", "Sửa sản phẩm");
+		model.addAttribute("web", web);
+		return "dangsanpham";
+	}
+
 	@RequestMapping(value = "/dangsanpham",method = RequestMethod.GET)
 	public String dangsanphamget(Model model, HttpSession session)
 			throws IOException {

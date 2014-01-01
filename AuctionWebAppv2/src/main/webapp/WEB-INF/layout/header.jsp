@@ -12,7 +12,7 @@
 <!-- Menu -->
     <div id="menu-horizontal" class="wmain">
         <div class="fl bg_menu wmain">
-            <a id="home" href="${pageContext.request.contextPath}/" class="fl w141 bold menuh">Trang chủ</a>
+            <a id="home" href="${pageContext.request.contextPath}/" class="fl w141 bold menuh msep">Trang chủ</a>
             <a id="sanphamdangdau.html" href="${pageContext.request.contextPath}/sanphamdangdau.html" class="fl w141 bold menuh msep">Đang đấu</a>
             <a id="sanphamsapdau.html" href="${pageContext.request.contextPath}/sanphamsapdau.html" class="fl w141 bold menuh msep">Sắp đấu</a>
             <a id="sanphamdadau.html" href="${pageContext.request.contextPath}/sanphamdadau.html" class="fl w141 bold menuh msep">Đã đấu</a>
