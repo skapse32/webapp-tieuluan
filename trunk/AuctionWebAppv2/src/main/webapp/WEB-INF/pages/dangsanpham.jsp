@@ -2,23 +2,29 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ page language="java" import="java.util.*" pageEncoding="UTF-8"%>
+
+<!-- Text Editor -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/v2/js/NicEdit/nicEdit.js"></script>
+<script type="text/javascript">
+        bkLib.onDomLoaded(function() { nicEditors.allTextAreas(); });
+</script>
+<!-- Text Editor END -->
+
+<!-- Validation -->
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/v2/js/SpryValidation/SpryValidationCheckbox.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/v2/js/SpryValidation/SpryValidationPassword.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/v2/js/SpryValidation/SpryValidationConfirm.js"></script>
+<script type="text/javascript" src="${pageContext.request.contextPath}/resources/v2/js/SpryValidation/SpryValidationTextField.js"></script>
+
+<link href="${pageContext.request.contextPath}/resources/v2/js/SpryValidation/SpryValidationCheckbox.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/v2/js/SpryValidation/SpryValidationPassword.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/v2/js/SpryValidation/SpryValidationConfirm.css" rel="stylesheet" type="text/css" />
+<link href="${pageContext.request.contextPath}/resources/v2/js/SpryValidation/SpryValidationTextField.css" rel="stylesheet" type="text/css" />
+<!-- Validation END -->
+
 <!-- Content -->
-<style>
-.Required {
-	color: red
-}
-</style>
-<!-- Editor -->
-<div id="sample">
-  <script type="text/javascript" src="${pageContext.request.contextPath}/resources/v2/js/NicEdit/nicEdit.js"></script> <script type="text/javascript">
-//<![CDATA[
-        bkLib.onDomLoaded(function() { nicEditors.allTextAreas() });
-  //]]>
-  </script>
-</div>
-<!-- Editor END -->
 <div id="content" class="wmain">
-	<!-- start left-box -->
+	<!-- Left side -->
 	<c:if test="${not empty error}">
 	<script type="text/javascript">
 		TINY.box.show({html:'${error}',animate:false,close:false,boxid:'error',top:5});
@@ -42,7 +48,7 @@
 		<form action="${pageContext.request.contextPath}/dangsanpham"
 			name="formdangsanpham" id="fdangsanpham" method="post"
 			enctype="multipart/form-data" >
-			<table class="DangSanPham">
+			<table id="DangSanPham">
   <tr>
     <td class="title">Thông tin sản phẩm</td>
   </tr>
@@ -112,11 +118,11 @@
   </tr>
   <tr>
     <td><label for="txttgbt">Thời gian bắt đầu :</label>
-    <input type="text" name="txttgbt" id="txttgbt"></td>
+    <input type="text" name="txttgbt" id="txttgbt" readonly="readonly"></td>
   </tr>
   <tr>
     <td><label for="txttgkt">Thời gian kết thúc :</label>
-    <input type="text" name="txttgkt" id="txttgkt"></td>
+    <input type="text" name="txttgkt" id="txttgkt" readonly="readonly"></td>
   </tr>
   <tr>
     <td><label for="selecthttt">Hình thức thanh toán :</label>
@@ -141,70 +147,23 @@
 		</form>
 	</div>
 </div>
-<!-- end left box -->
-<!-- right box -->
-<div id="box-right" class="fl l10 top10 bg_white wright cright">
-	<div id="catalog-products" class="fl wright">
-		<div id="catalog-products-titles"
-			class="fl bg-titles top10 products-group-title-news color_white fontTahoma wright-26">
-			<strong>DANH SÁCH ĐẤU GIÁ</strong>
-		</div>
-		<ul id="catalog-products-list"
-			class="fl fontTahoma wright list-none top5">
-			<li class="fl pd5 w240 "><a class="fl  pdl20"
-				href="${pageContext.request.contextPath}/qlsanphamdangthamgia">Sản
-					phẩm đang tham gia</a></li>
-			<li class="fl wright das_top h1"></li>
-			<li class="fl pd5 w240 "><a class="fl  pdl20"
-				href="${pageContext.request.contextPath}/qlsanphamdaketthuc">Sản
-					phẩm đã kết thúc</a></li>
-			<li class="fl wright das_top h1"></li>
-			<li class="fl pd5 w240 "><a class="fl  pdl20"
-				href="${pageContext.request.contextPath}/qlsanphamchienthang">Sản
-					phẩm chiến thắng</a></li>
-			<li class="fl wright das_top h1"></li>
-		</ul>
-	</div>
-	<div id="catalog-products" class="fl wright">
-		<div id="catalog-products-titles"
-			class="fl bg-titles top10 products-group-title-news color_white fontTahoma wright-26">
-			<strong>SẢN PHẨM CỦA TÔI</strong>
-		</div>
-		<ul id="catalog-products-list"
-			class="fl fontTahoma wright list-none top5">
-			<li class="fl pd5 w240 "><a class="fl  pdl20"
-				href="${pageContext.request.contextPath}/qlsanphamcuatoidangdau">Sản
-					phẩm đang đấu</a></li>
-			<li class="fl wright das_top h1"></li>
-			<li class="fl pd5 w240 "><a class="fl  pdl20"
-				href="${pageContext.request.contextPath}/qlsanphamcuatoisapdau">Sản
-					phẩm sắp đấu</a></li>
-			<li class="fl wright das_top h1"></li>
-			<li class="fl pd5 w240 "><a class="fl  pdl20"
-				href="${pageContext.request.contextPath}/qlsanphamcuatoidadauxong">Sản
-					phẩm đã đấu xong</a></li>
-			<li class="fl wright das_top h1"></li>
-			<li class="fl pd5 w240 "><a class="fl  pdl20"
-				href="${pageContext.request.contextPath}/qlsanphamcuatoibihuy">Sản
-					phẩm bị hủy</a></li>
-			<li class="fl wright das_top h1"></li>
-			<li class="fl pd5 w240 "><a class="fl  pdl20"
-				href="${pageContext.request.contextPath}/dangsanpham">Đăng sản
-					phẩm</a></li>
-			<li class="fl wright das_top h1"></li>
-		</ul>
-	</div>
 </div>
 <script src="${pageContext.request.contextPath}/resources/v2/js/datetimepicker/jquery.datetimepicker.js"></script>
+<link rel="stylesheet" type="text/css"	href="${pageContext.request.contextPath}/resources/v2/js/datetimepicker/jquery.datetimepicker.css" />
 <script>
 //2013-11-29 00:00:00
 $('#txttgbt').datetimepicker({
-	format:'Y-m-d H:i:00'
+	format:'Y-m-d H:00:00'
 });
 $('#txttgkt').datetimepicker({
-	format:'Y-m-d H:i:00'
+	format:'Y-m-d H:00:00'
 });
-var textfieldwidget1 = new Spry.Widget.ValidationTextField("txtgiakhoidiem", "currency" , { validateOn : [ "change" ]});
-var textfieldwidget1 = new Spry.Widget.ValidationTextField("txtbuocgia", "currency" , { validateOn : [ "change" ]});
-var textfieldwidget1 = new Spry.Widget.ValidationTextField("txtmuangay", "currency" , { validateOn : [ "change" ]});
+var sprytextfield = new Spry.Widget.ValidationTextField("stfNgaySinh",
+		"date", {
+			validateOn : [ "blur" ],
+			format : "dd-mm-yyyy"
+		});
+var validation = new Spry.Widget.ValidationTextField("txtgiakhoidiem", "integer" , { validateOn : [ "change" ]});
+var validation = new Spry.Widget.ValidationTextField("txtbuocgia", "integer" , { validateOn : [ "change" ]});
+var validation = new Spry.Widget.ValidationTextField("txtmuangay", "integer" , { validateOn : [ "change" ]});
 </script>

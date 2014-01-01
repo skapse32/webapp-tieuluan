@@ -5,39 +5,45 @@
 
 <tiles-definitions>
 
-	<definition name="baseLayout" template="/WEB-INF/template/template.jsp">
-		<put-attribute name="title" value="SivaLabs" />
+	<definition name="mainLayout" template="/WEB-INF/template/template.jsp">	
 		<put-attribute name="header" value="/WEB-INF/layout/header.jsp" />
 		<put-attribute name="maincontent" value="" />
+		<put-attribute name="right" value="" />
 		<put-attribute name="footer" value="/WEB-INF/layout/footer.jsp" />
 	</definition>
 
+	<definition name="baseLayout" extends="mainLayout">
+		<put-attribute name="right" value="/WEB-INF/pages/right.jsp" />
+	</definition>
 
+	<definition name="userLayout" extends="mainLayout">
+		<put-attribute name="right" value="/WEB-INF/pages/rightUser.jsp" />
+	</definition>
+	
+	
 	<definition name="luotdattrensp.html" extends="baseLayout">
 		<put-attribute name="title" value="Danh sách lượt Bid giá" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/luotdattrensp.jsp" />
 	</definition>
 
-	<definition name="quanlyuser" extends="baseLayout">
+	<definition name="quanlyuser" extends="userLayout">
 		<put-attribute name="title" value="Quản lý User" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/qlyUserAdmin.jsp" />
 	</definition>
 
-	<definition name="dangnhap" extends="baseLayout">
-		<put-attribute name="title" value="Đăng nhập" />
-		<put-attribute name="maincontent" value="/WEB-INF/pages/dangnhap.jsp" />
-	</definition>
-
-	<definition name="hoadon" extends="baseLayout">
+	<definition name="hoadon" extends="userLayout">
 		<put-attribute name="title" value="Đăng ký" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/hoadon.jsp" />
 	</definition>
-	
-	<definition name="dangky" extends="baseLayout">
+	<definition name="dangnhap" extends="userLayout">
+		<put-attribute name="title" value="Đăng nhập" />
+		<put-attribute name="maincontent" value="/WEB-INF/pages/dangnhap.jsp" />
+	</definition>
+	<definition name="dangky" extends="userLayout">
 		<put-attribute name="title" value="Đăng ký" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/dangky.jsp" />
 	</definition>
-	<definition name="doimatkhau" extends="baseLayout">
+	<definition name="doimatkhau" extends="userLayout">
 		<put-attribute name="title" value="Đăng ký" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/doimatkhau.jsp" />
 	</definition>
@@ -67,7 +73,7 @@
 		<put-attribute name="maincontent"
 			value="/WEB-INF/pages/timkiemsapdaujsp.jsp" />
 	</definition>
-	<definition name="dangsanpham" extends="baseLayout">
+	<definition name="dangsanpham" extends="userLayout">
 		<put-attribute name="title" value="Đăng sản phẩm" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/dangsanpham.jsp" />
 	</definition>
@@ -88,7 +94,7 @@
 		<put-attribute name="title" value="Hủy sản phẩm" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/huysanpham.jsp" />
 	</definition>
-	<definition name="thongbao" extends="baseLayout">
+	<definition name="thongbao" extends="mainLayout">
 		<put-attribute name="title" value="Thông báo" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/thongbao.jsp" />
 	</definition>
@@ -102,79 +108,44 @@
 		<put-attribute name="maincontent"
 			value="/WEB-INF/pages/thongbaoqlsanphamadmin.jsp" />
 	</definition>
-	<definition name="sanphamhuyadmin" extends="baseLayout">
+	<definition name="sanphamhuyadmin" extends="userLayout">
 		<put-attribute name="title" value="Quản lý sản phẩm (admin)" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/qlysanpham.jsp" />
 	</definition>
-	<definition name="sanphamchophepdauadmin" extends="baseLayout">
+	<definition name="sanphamchophepdauadmin" extends="userLayout">
 		<put-attribute name="title" value="Quản lý sản phẩm (admin)" />
 		<put-attribute name="maincontent"
 			value="/WEB-INF/pages/qlysanpham.jsp" />
 	</definition>
-	<definition name="qlsanpham" extends="baseLayout">
+	<definition name="qlsanpham" extends="userLayout">
 		<put-attribute name="title" value="Quản lý sản phẩm" />
 		<put-attribute name="maincontent"
 			value="/WEB-INF/pages/qlysanpham.jsp" />
 	</definition>
-	<definition name="qlsanphamdangthamgia" extends="baseLayout">
-		<put-attribute name="title" value="Sản phẩm đang tham gia" />
-		<put-attribute name="maincontent"
-			value="/WEB-INF/pages/qlsanphamdangthamgia.jsp" />
-	</definition>
-	<definition name="qlsanphamdaketthuc" extends="baseLayout">
-		<put-attribute name="title" value="Sản phẩm đã kết thúc" />
-		<put-attribute name="maincontent"
-			value="/WEB-INF/pages/qlsanphamdaketthuc.jsp" />
-	</definition>
-	<definition name="qlsanphamchienthang" extends="baseLayout">
-		<put-attribute name="title" value="Sản phẩm chiến thắng" />
-		<put-attribute name="maincontent"
-			value="/WEB-INF/pages/qlsanphamchienthang.jsp" />
-	</definition>
-
+	
 	<definition name="home" extends="baseLayout">
 		<put-attribute name="title" value="Trang chủ" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/home.jsp" />
 	</definition>
 
-	<definition name="userpanel" extends="baseLayout">
+	<definition name="userpanel" extends="userLayout">
 		<put-attribute name="title" value="Trang chủ" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/userpanel.jsp" />
 	</definition>
-	<definition name="denied" extends="baseLayout">
+	<definition name="denied" extends="mainLayout">
 		<put-attribute name="title" value="Error" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/denied.jsp" />
 	</definition>
-	<definition name="deniedadmin" extends="baseLayout">
+	<definition name="deniedadmin" extends="mainLayout">
 		<put-attribute name="title" value="Error" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/deniedadmin.jsp" />
 	</definition>
-	<definition name="taikhoan" extends="baseLayout">
+	<definition name="taikhoan" extends="userLayout">
 		<put-attribute name="title" value="Thông tin tài khoản" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/taikhoan.jsp" />
 	</definition>
-	<definition name="thanhtoan" extends="baseLayout">
+	<definition name="thanhtoan" extends="userLayout">
 		<put-attribute name="title" value="Thanh toán" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/thanhtoan.jsp" />
-	</definition>
-	<definition name="qlsanphamcuatoidangdau" extends="baseLayout">
-		<put-attribute name="title" value="Sản phẩm đang đấu" />
-		<put-attribute name="maincontent"
-			value="/WEB-INF/pages/qlsanphamcuatoidangdau.jsp" />
-	</definition>
-	<definition name="qlsanphamcuatoidadauxong" extends="baseLayout">
-		<put-attribute name="title" value="Sản phẩm đã đấu xong" />
-		<put-attribute name="maincontent"
-			value="/WEB-INF/pages/qlsanphamcuatoidadauxong.jsp" />
-	</definition>
-	<definition name="qlsanphamcuatoibihuy" extends="baseLayout">
-		<put-attribute name="title" value="Sản phẩm bị hủy" />
-		<put-attribute name="maincontent"
-			value="/WEB-INF/pages/qlsanphamcuatoibihuy.jsp" />
-	</definition>
-	<definition name="qlsanphamcuatoisapdau" extends="baseLayout">
-		<put-attribute name="title" value="Sản phẩm sắp đấu" />
-		<put-attribute name="maincontent"
-			value="/WEB-INF/pages/qlsanphamcuatoisapdau.jsp" />
 	</definition>
 </tiles-definitions>

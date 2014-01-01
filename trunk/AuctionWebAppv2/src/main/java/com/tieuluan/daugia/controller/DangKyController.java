@@ -1,14 +1,17 @@
 package com.tieuluan.daugia.controller;
 
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.Path;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -21,7 +24,13 @@ import com.tieuluan.daugia.function.Server;
 
 @Controller
 public class DangKyController {
-	@RequestMapping(value = "/dangky")
+
+	@RequestMapping(value = "dangky", method = RequestMethod.GET)
+	public String dangKy(Model model) {
+		return "dangky";
+	}
+
+	@RequestMapping(value = "dangky", method = RequestMethod.POST)
 	public String dangKy(
 			@RequestParam(value = "action", required = false) String action,
 			@RequestParam(value = "username", required = false) String username,
@@ -34,66 +43,44 @@ public class DangKyController {
 			@RequestParam(value = "GioiTinh", required = false) String gioiTinh,
 			HttpSession session, Model model)
 			throws UnsupportedEncodingException {
-		String web = Server.web;
-
-		if (action != null) {
-			if ("dangky".equals(action)) {
-				try {
-					model.addAttribute("tenDN", username);
-					if (!username.matches("[a-zA-Z0-9 ]*")) {
-						model.addAttribute("error",
-								"Tên đăng nhập không hợp lệ");
-						model.addAttribute("web", web);
-						model.addAttribute("tieude", "Trang chủ");
-						return "dangky";
-					}
-					String resutl = "";
-					ClientConfig config = new DefaultClientConfig();
-					Client client = Client.create(config);
-					WebResource webResource = client
-							.resource(Server.addressAuthenWS);
-					Form form = new Form();
-					form.add("username", username);
-					form.add("password", password);
-					form.add("fullname", URLEncoder.encode(hoTen, "UTF-8"));
-					form.add("address", URLEncoder.encode(diaChi, "UTF-8"));
-					form.add("telephoneNumber", soDT);
-					boolean gt = false;
-					if ("Nam".equals(gioiTinh))
-						gt = true;
-					form.add("sex", gt);
-					form.add("birthday", ngaySinh);
-					form.add("mail", email);
-					resutl = webResource.path("usermanager/addUser").post(
-							String.class, form);
-					if ("success".equals(resutl)) {
-
-						// ===========================
-						// Hi
-						// ===========================
-
-						model.addAttribute("web", web);
-						model.addAttribute("tieude", "Trang chủ");
-						return "dangnhap";
-					} else {
-						model.addAttribute("error",
-								"Tài khoản đã có người sử dụng");
-						model.addAttribute("web", web);
-						model.addAttribute("tieude", "Đăng ký");
-						return "dangky";
-					}
-				} catch (Exception e) {
-					model.addAttribute("error",
-							"Đăng ký không thành công, mời bạn đăng ký lại");
-					model.addAttribute("web", web);
-					model.addAttribute("tieude", "Đăng ký");
-					return "dangky";
-				}
-			}
+		if (session.getAttribute("username") != null) {
+			model.addAttribute("noidung", "Bạn đã đăng nhập.");
+			return "thongbao";
 		}
-		model.addAttribute("web", web);
-		model.addAttribute("tieude", "Đăng ký");
-		return "dangky";
+		try {
+			model.addAttribute("tenDN", username);
+			if (!username.matches("[a-zA-Z0-9 ]*")) {
+				model.addAttribute("error", "Tên đăng nhập không hợp lệ");
+				return "dangky";
+			}
+			String resutl = "";
+			ClientConfig config = new DefaultClientConfig();
+			Client client = Client.create(config);
+			WebResource webResource = client.resource(Server.addressAuthenWS);
+			Form form = new Form();
+			form.add("username", username);
+			form.add("password", password);
+			form.add("fullname", URLEncoder.encode(hoTen, "UTF-8"));
+			form.add("address", URLEncoder.encode(diaChi, "UTF-8"));
+			form.add("telephoneNumber", soDT);
+			form.add("sex", gioiTinh);
+			form.add("birthday", ngaySinh);
+			form.add("mail", email);
+			resutl = webResource.path("usermanager/addUser").post(String.class,
+					form);
+			if ("success".equals(resutl)) {
+				model.addAttribute("noidung",
+						"Đăng ký thành công<br>Click vào <a href='dangnhap'>đây</a> để đăng nhập.");
+				return "thongbao";
+			} else {
+				model.addAttribute("error", "Tài khoản đã có người sử dụng");
+				return "dangky";
+			}
+		} catch (Exception e) {
+			model.addAttribute("error",
+					"Đăng ký không thành công, mời bạn đăng ký lại");
+			return "dangky";
+		}
 	}
 
 	@RequestMapping("checkUser")
@@ -121,16 +108,20 @@ public class DangKyController {
 	@ResponseBody
 	public String checkEmail(@RequestParam(value = "email") String email,
 			Model model) {
-		Client client = Client.create(new DefaultClientConfig());
-		WebResource webResource = client.resource(Server.addressAuthenWS);
-		Form form = new Form();
-		form.add("email", email);
-		String result = webResource.path("usermanager/checkEmail").post(
-				String.class, form);
-		if (result.equals("true")) {
-			return "true";
-		} else {
-			return "false";
+		try {
+			Client client = Client.create(new DefaultClientConfig());
+			WebResource webResource = client.resource(Server.addressAuthenWS);
+			Form form = new Form();
+			form.add("email", email);
+			String result = webResource.path("usermanager/checkEmail").post(
+					String.class, form);
+			if (result.equals("true")) {
+				return "true";
+			} else {
+				return "false";
+			}
+		} catch (Exception ex) {
+			return "error";
 		}
 	}
 

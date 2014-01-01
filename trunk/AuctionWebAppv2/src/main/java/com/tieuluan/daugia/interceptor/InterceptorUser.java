@@ -36,8 +36,8 @@ public class InterceptorUser implements HandlerInterceptor {
 			return false;
 		}
 		if (session.getAttribute("role").equals("BannedUser")) {
-			response.sendRedirect("/" + Server.web + "/deniedadmin");
-			return false;
+			response.sendRedirect("/" + Server.web + "/denied");
+			return true;
 		}
 		return true;
 	}

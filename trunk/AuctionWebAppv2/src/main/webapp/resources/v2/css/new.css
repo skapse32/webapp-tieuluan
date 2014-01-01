@@ -50,43 +50,89 @@ tr:nth-child(2n+3) {
 	padding-bottom: 80px;
 }
 
-.login {
+.login,#login {
 	width: 300px;
 	margin-left: auto;
 	margin-right: auto;
 	text-align: center;
 }
 
+#login {
+	width: 100%;
+}
+
 /******************/
-.DangSanPham label {
+#DangSanPham,#DangKy {
+	width: 728px;
+}
+
+#DangSanPham label,#DangKy label {
 	float: left;
-	width: 200px;
+	width: 300px;
 	margin-right: 0.5em;
-	margin-top: 3px;
+	margin-top: 4px;
 	text-align: right;
 	font-weight: bold;
 }
 
-.DangSanPham {
-	width: 725px;
+#acceptContainer {
+	padding-left: 300px;
+	background: white;
+	border: 1px solid #DEDEDE;
 }
 
-input[type="number"]
-{
-	width: 50px;
+label[for="acceptRules"] {
+	float: none !important;
+	width: none !important;
+	margin-right: none !important;
+	margin-top: none !important;
+	text-align: none !important;
+	font-weight: normal !important;
+	margin-left: none !important;
 }
+
+input[type="number"] {
+	width: 50px;
+	margin-left: 2px;
+}
+
 select {
 	width: 120px;
+	margin-left: 2px;
 }
 
 textarea {
 	width: 100%;
+	margin-left: 2px;
 }
 
 .white {
 	background-color: white;
 }
 
-.btnDangSanPham {
+.note {
+	text-align: right;
+	background: white;
+}
+
+.btnDangSanPham,.btnDangKy {
 	background-color: #46A412;
-	}
+	border: 1px solid #46A412;
+}
+
+.announcement {
+	width: 500px;
+	margin-left: auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+#announcement {
+	width: 100%;
+}
+
+#error {
+	border:1px solid red;
+	background: yellow;
+	width: 100%;
+}

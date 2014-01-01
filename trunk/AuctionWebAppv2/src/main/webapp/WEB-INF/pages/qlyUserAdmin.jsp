@@ -99,35 +99,4 @@
 		<div id="pager"></div>
 	</div>
 	<!-- End Left side -->
-	<!-- Right side -->
-	<div id="box-right" class="fl l10 top10 bg_white wright cright">
-		<c:choose>
-			<c:when test="${sessionScope.role != null}">
-				<c:choose>
-					<c:when test="${sessionScope.role == 'Admin'}">
-						<div id="catalog-products-titles"
-							class="fl bg-titles top10 products-group-title-news color_white fontTahoma wright-26">
-							<strong>Quản lý Sản phẩm(Admin)</strong>
-						</div>
-						<ul id="catalog-products-list"
-							class="fl fontTahoma wright list-none top5">
-							<li class="fl pd5 w240 "><a class="fl  pdl20"
-								href="${pageContext.request.contextPath}/sanphamhuyadmin">Quản
-									lý sản phẩm (admin)</a></li>
-							<li class="fl wright das_top h1"></li>
-							<li class="fl pd5 w240 "><a class="fl  pdl20"
-								href="${pageContext.request.contextPath}/qlyuser">Quản lý
-									User</a></li>
-							<li class="fl wright das_top h1"></li>
-							<li class="fl pd5 w240 "><a class="fl  pdl20"
-								href="${pageContext.request.contextPath}/hoadon">Hoá đơn</a></li>
-							<li class="fl wright das_top h1"></li>
-						</ul>
-					</c:when>
-					<c:otherwise></c:otherwise>
-				</c:choose>
-			</c:when>
-		</c:choose>
-	</div>
-	<!-- Right side END -->
 </div>

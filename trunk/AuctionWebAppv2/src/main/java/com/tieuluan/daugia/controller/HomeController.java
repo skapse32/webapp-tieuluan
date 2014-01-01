@@ -42,6 +42,13 @@ public class HomeController {
 	/**
 	 * Simply selects the home view to render by returning its name.
 	 */
+	@RequestMapping(value = "/denied", method = RequestMethod.GET)
+	public String denied(Model model)
+	{
+		model.addAttribute("noidung", "Không tìm thấy Auctions Web service");
+		return "thongbao";
+		
+	}
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String sanphamhome(
 			@RequestParam(value = "locsp", required = false, defaultValue = "-2") int sort,
