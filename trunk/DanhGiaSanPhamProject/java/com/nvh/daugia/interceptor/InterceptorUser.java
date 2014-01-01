@@ -33,7 +33,6 @@ public class InterceptorUser implements HandlerInterceptor {
 		HttpSession session = request.getSession();
 		// filter
 		if (session.getAttribute("username") == null) {
-			
 			ClientConfig cofig = new DefaultClientConfig();
 			Client client = Client.create(cofig);
 			WebResource resource = client.resource(Server.addressAuctionWS);
