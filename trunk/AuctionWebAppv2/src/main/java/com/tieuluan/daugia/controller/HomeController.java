@@ -44,7 +44,7 @@ public class HomeController {
 	 */
 	@RequestMapping(value = "/", method = RequestMethod.GET)
 	public String sanphamhome(
-			@RequestParam(value = "locsp", required = false, defaultValue = "0") int sort,
+			@RequestParam(value = "locsp", required = false, defaultValue = "-2") int sort,
 			@RequestParam(value = "thuonghieu", required = false, defaultValue = "0") String thuonghieu,
 			@RequestParam(value = "maLoaiSP", required = false, defaultValue = "-1") int maLoaiSP,
 			@RequestParam(value = "soLuongSanPhamTrenTrang", required = false, defaultValue = "8") int soLuongSanPhamTrenTrang,
@@ -116,7 +116,7 @@ public class HomeController {
 			model.addAttribute("check", "masp");
 		}
 		// sort san pham
-		if(sort != 0) {
+		if(sort != -2) {
 			form = new Form();
 			form.add("loaisp", -1); // đang đấu 
 			form.add("sort", sort);

@@ -34,8 +34,7 @@
 			success : function(data) {
 				// we have the response
 				var dsspList = jQuery.parseJSON(data);
-				$
-						.each(dsspList,
+				$.each(dsspList,
 								function(index, element) {
 									var x = numeral(element.giahientai).format(
 											'0,0');
@@ -440,6 +439,11 @@
 				</div>
 				<ul id="catalog-products-list"
 					class="fl fontTahoma wright list-none top5">
+								<li class="fl pd5 w240"><a
+									class="fl pdl20"
+									href="${pageContext.request.contextPath}/?locsp=0&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">Mới Nhất</a>
+								</li>
+								<li class="fl wright das_top h1"></li>
 								<li class="fl pd5 w240 "><a
 									class="fl  pdl20"
 									href="${pageContext.request.contextPath}/?locsp=1&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">Tăng dần</a>
