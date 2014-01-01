@@ -92,11 +92,11 @@
 	<bean id="choosebang" class="com.nvh.applicationscope.BangDanhGiaChoose"></bean>
 	<bean id="time" class="com.nvh.daugia.model.jpa.TimeBean"></bean>
 
-	<mvc:interceptors>
+	<mvc:interceptors><!-- 
 		<mvc:interceptor>
 			<mvc:mapping path="/" />
 			<bean class="com.nvh.daugia.interceptor.InterceptorInit" />
-		</mvc:interceptor>
+		</mvc:interceptor> -->
 		<mvc:interceptor>
 			<mvc:mapping path="/admin/**" />
 			<bean class="com.nvh.daugia.interceptor.InterceptorAdmin" />

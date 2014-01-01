@@ -31,6 +31,7 @@ import com.tieuluan.daugia.function.Server;
 public class AccountController {
 	public static final String ACCOUNT_ATTRIBUTE = "account";
 	final Logger logger = LoggerFactory.getLogger(AccountController.class);
+
 	// controller dang nhap va dang xuat
 
 	@RequestMapping(value = "/login")
@@ -39,12 +40,11 @@ public class AccountController {
 			String role = request.getSession().getAttribute("role").toString();
 			String weblink = "redirect:/";
 			switch (role) {
-				
 			case "Admin":
-				weblink+="admin";
+				weblink += "admin";
 				return weblink;
 			case "User":
-				weblink+="user";
+				weblink += "user";
 				return weblink;
 			default:
 				return "login";
@@ -53,39 +53,39 @@ public class AccountController {
 			// TODO: handle exception
 			return "login";
 		}
-		
+
 	}
 
 	@RequestMapping(value = "/login", method = RequestMethod.POST)
-	public String login(Model model, HttpServletRequest request, HttpSession session) {
+	public String login(Model model, HttpServletRequest request,
+			HttpSession session) {
 		String username = request.getParameter("username");
 		String password = request.getParameter("password");
-		
-		
-		if (session.getAttribute("sessionid") == null) {
-			ClientConfig config = new DefaultClientConfig();
-			Client client = Client.create(config);
-			WebResource webResource = client.resource(Server.addressAuctionWS);
-			ClientResponse clresponse = null;
-			// get session id
-			clresponse = webResource.path("user/getSessionID").post(
-					ClientResponse.class);
-			if (clresponse.getStatus() == 200) {
-				session.setAttribute("sessionid",
-						clresponse.getEntity(String.class));
-			}
-		}
-		
+
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
+		WebResource webResource = client.resource(Server.addressAuctionWS);
+		ClientResponse clresponse = null;
+		// get session id
+		clresponse = webResource.path("user/getSessionID").post(
+				ClientResponse.class);
+		if (clresponse.getStatus() == 200) {
+			session.setAttribute("sessionid",
+					clresponse.getEntity(String.class));
+		}
+
+		config = new DefaultClientConfig();
+		client = Client.create(config);
 		Form form = null;
 		// get authencode form AuthenService
-		WebResource webResource = client.resource(Server.addressAuthenWS);
+		webResource = client.resource(Server.addressAuthenWS);
 		String authencode = "";
 		form = new Form();
 		form.add("username", username);
 		form.add("password", password);
-		authencode = webResource.path("login/loginpost").post(String.class, form);
+		authencode = webResource.path("login/loginpost")
+				.cookie(new NewCookie("authenCode", authencode))
+				.post(String.class, form);
 		if (authencode.equals("")) {
 			model.addAttribute("error", "Tài khoản hoặc mật khẩu không đúng !!");
 			return "login";
@@ -97,16 +97,15 @@ public class AccountController {
 			form.add("authencode", authencode);
 			String result = webResource
 					.path("user/access")
-					.cookie(new NewCookie("JSESSIONID", session.getAttribute("sessionid").toString()))
-					.post(String.class, form);
+					.cookie(new NewCookie("JSESSIONID", session.getAttribute(
+							"sessionid").toString())).post(String.class, form);
 			if (result.equals("WrongAuthenCode")) {
-				model.addAttribute("error", "Wrong AuthenCode;"
-						+ authencode);
+				model.addAttribute("error", "Wrong AuthenCode;" + authencode);
 				return "login";
 			} else {
 				session.setAttribute("username", username);
-				//get role
-				String role=webResource
+				// get role
+				String role = webResource
 						.path("user/getRoleUser")
 						.cookie(new NewCookie("JSESSIONID", session
 								.getAttribute("sessionid").toString()))
@@ -115,10 +114,10 @@ public class AccountController {
 				String weblink = "redirect:/";
 				switch (role) {
 				case "User":
-					weblink+="user";
+					weblink += "user";
 					break;
-				case "Admin" :
-					weblink+="admin";
+				case "Admin":
+					weblink += "admin";
 					break;
 				}
 				return weblink;
@@ -185,12 +184,13 @@ public class AccountController {
 	String changePassword(HttpServletRequest request) {
 		// lay pass word roi save
 		String iduser = request.getParameter("iduser");
-		/*User user = userService.findById(iduser);
-		if (!user.getPassword().equals(request.getParameter("pwdold"))) {
-			return "Mật khẩu hiện tại không dúng! Vui lòng nhập lại!.";
-		}
-		user.setPassword(request.getParameter("pwdnew"));
-		userService.save(user);*/
+		/*
+		 * User user = userService.findById(iduser); if
+		 * (!user.getPassword().equals(request.getParameter("pwdold"))) { return
+		 * "Mật khẩu hiện tại không dúng! Vui lòng nhập lại!."; }
+		 * user.setPassword(request.getParameter("pwdnew"));
+		 * userService.save(user);
+		 */
 		return "Dổi mật khẩu thành công";
 	}
 }

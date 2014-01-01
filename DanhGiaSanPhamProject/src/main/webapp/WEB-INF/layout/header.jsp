@@ -8,6 +8,8 @@
 			<li><a href="${pageContext.request.contextPath}/login"> <br /> USER <span><br />ĐĂNG
 						NHẬP</span>
 			</a></li>
+			<li><a href="Http://192.168.1.5:8080/daugia/"> <br /> Auction <span><br />Đấu giá</span>
+			</a></li>
 		</ul>
 	</div>
 </nav>
