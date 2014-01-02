@@ -93,7 +93,8 @@
 			//thong bao thang cuoc
 			//check nguoi dang online co phai la nguoi thang cuoc ko.
 			var resultArray = received_msg.split(",");
-			if("${username}" == resultArray[0]){
+			
+			if(resultArray[0] != "" && "${username}" == resultArray[0]){
 				TINY.box.show({
 					html : resultArray[1],
 					animate : false,
