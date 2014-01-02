@@ -89,6 +89,23 @@
 		var received_msg = evt.data;
 		leftX = screen.width - 400;
 		topY = screen.height - 300;
+		if(received_msg.charAt(0) != '<'){
+			//thong bao thang cuoc
+			//check nguoi dang online co phai la nguoi thang cuoc ko.
+			var resultArray = received_msg.split(",");
+			if("${username}" == resultArray[0]){
+				TINY.box.show({
+					html : resultArray[1],
+					animate : false,
+					close : false,
+					mask : false,
+					boxid : 'success',
+					autohide : 20,
+					top : topY,
+					left : leftX
+				});
+			}
+		}else{
 		TINY.box.show({
 			html : received_msg,
 			animate : false,
@@ -99,6 +116,7 @@
 			top : topY,
 			left : leftX
 		});
+		}
 	}
 
 	function sendToServerDangSP(message) {
