@@ -59,4 +59,19 @@ public class HoaDonServices {
 		return "ok";
 	}
 	
+	@POST
+	@Path("/findByNguoimua")
+	@Produces("application/json; charset=utf-8")
+	public List<model.Hoadon> findByNguoimua(@FormParam("nguoimua") String nguoimua) {
+		HoadonDAO hddao = new HoadonDAO();	
+		List<model.Hoadon> modelhd = new ArrayList<model.Hoadon>();	
+		List<dao.Hoadon> daohd = hddao.findByNguoimua(nguoimua);
+		for (dao.Hoadon hd : daohd) {
+			model.Hoadon modelhdon = new model.Hoadon(hd.getMahoadon(),hd.getSanpham().getMasp(), hd.getSanpham().getTensp(), hd.getDongia(), hd.getNguoidang(), hd.getNguoimua(), hd.getNgaylap().getTime());
+			modelhd.add(modelhdon);
+		}
+		System.out.println(modelhd.toString());
+		return modelhd;
+	}
+	
 }
