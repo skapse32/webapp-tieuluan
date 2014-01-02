@@ -335,7 +335,7 @@
 											updateTinhTrangSP("${sp.masp}", "");
 											var message = "${sp.nguoidat},<div id='titler'>Thông báo</div>"
 												+ "<div id='noidung'>"
-												+ "<table><tr><td>Thắng cuộc: </td><td id='ct'><a href='${pageContext.request.contextPath}/chitietsanpham?masp=${masp}'>${sp.tensp}</a></td></tr>"
+												+ "<table><tr><td>Thắng cuộc: </td><td id='ct'><a href='${pageContext.request.contextPath}/chitietsanpham?masp=${sp.masp}'>${sp.tensp}</a></td></tr>"
 												+ "<tr><td>Thương hiệu: </td><td id='ct'><label>${sp.thuonghieu}</label></td></tr>"
 												+ "<tr><td>Giá giá thắng : </td><td id='ct'><label>${sp.giahientai}</label></td></tr>";
 												//kiem tra nguoi dat gia
