@@ -159,7 +159,9 @@
 																		timeString);
 														document.getElementById('aCountdown${sp.masp}').style.color = 'red'; //'none';
 														document.getElementById('abid${sp.masp}').style.visibility = 'hidden';
+								
 														updateTinhTrangSP("${sp.masp}","");
+														//clearInterval(refreshIntervalId);
 													}
 												}, 1000);
 							});
@@ -331,6 +333,13 @@
 											//var timeString = "00 ngày " + "00:" +  "00:00";
 											var timeString = "kết thúc";
 											updateTinhTrangSP("${sp.masp}", "");
+											var message = "${sp.nguoidat},<div id='titler'>Thông báo</div>"
+												+ "<div id='noidung'>"
+												+ "<table><tr><td>Thắng cuộc: </td><td id='ct'><a href='${pageContext.request.contextPath}/chitietsanpham?masp=${masp}'>${sp.tensp}</a></td></tr>"
+												+ "<tr><td>Thương hiệu: </td><td id='ct'><label>${sp.thuonghieu}</label></td></tr>"
+												+ "<tr><td>Giá giá thắng : </td><td id='ct'><label>${sp.giahientai}</label></td></tr>";
+												//kiem tra nguoi dat gia
+											sendToServerDangSP(message);
 											$('#Countdown${sp.masp}').html(timeString);
 											document.getElementById('Countdown${sp.masp}').style.color = 'red'; //'none';
 											document.getElementById('bid${sp.masp}').style.visibility = 'hidden';
