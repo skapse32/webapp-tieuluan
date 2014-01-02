@@ -198,4 +198,37 @@ public class HomeController {
 		json = response.getEntity(String.class);
 		return json;
 	}
+	
+	@RequestMapping(value = "/loaddssanphamhot", method = RequestMethod.POST)
+	public @ResponseBody
+	String loaddssphamhot(HttpServletRequest request) {
+		HttpSession session = request.getSession();	
+		String json = "";
+		ClientConfig config = new DefaultClientConfig();
+		Client client = Client.create(config);
+		WebResource webResource = client.resource(Server.addressAuctionWS); 
+		Form form = new Form();	
+		form.add("top", 10);
+		ClientResponse response = null;
+		response = webResource
+				.path("sanpham/findSanPhamDangDauTop")
+				.cookie(new NewCookie("JSESSIONID", session.getAttribute(
+						"sessionid").toString()))
+				.post(ClientResponse.class, form);
+		json = response.getEntity(String.class);
+		return json;
+	}
+	@RequestMapping(value = "/huongdan", method = RequestMethod.GET)
+	public String huongdan(Model model) {
+		model.addAttribute("tieude", "Hướng dẫn");
+		return "huongdan";
+	}
+
+	@RequestMapping(value = "/lienhe", method = RequestMethod.GET)
+	public String lienhe(Model model) {
+		model.addAttribute("tieude", "Liên hệ");
+		return "lienhe";
+	}
+
+
 }

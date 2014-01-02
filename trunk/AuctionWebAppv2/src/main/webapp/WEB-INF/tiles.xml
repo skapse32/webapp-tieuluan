@@ -21,7 +21,7 @@
 	</definition>
 	
 	
-	<definition name="luotdattrensp.html" extends="baseLayout">
+	<definition name="luotdattrensp" extends="baseLayout">
 		<put-attribute name="title" value="Danh sách lượt Bid giá" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/luotdattrensp.jsp" />
 	</definition>
@@ -47,15 +47,15 @@
 		<put-attribute name="title" value="Đăng ký" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/doimatkhau.jsp" />
 	</definition>
-	<definition name="sanphamdangdau.html" extends="baseLayout">
+	<definition name="sanphamdangdau" extends="baseLayout">
 		<put-attribute name="title" value="Sản phẩm đang đấu" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/danhsachsanpham.jsp" />
 	</definition>
-	<definition name="sanphamdadau.html" extends="baseLayout">
+	<definition name="sanphamdadau" extends="baseLayout">
 		<put-attribute name="title" value="Sản phẩm đã đấu" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/danhsachsanpham.jsp" />
 	</definition>
-	<definition name="sanphamsapdau.html" extends="baseLayout">
+	<definition name="sanphamsapdau" extends="baseLayout">
 		<put-attribute name="title" value="Sản phẩm sắp đấu" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/danhsachsanpham.jsp" />
 	</definition>
@@ -86,7 +86,7 @@
 		<put-attribute name="maincontent"
 			value="/WEB-INF/pages/capnhatsanpham.jsp" />
 	</definition>
-	<definition name="chitietsanpham.html" extends="baseLayout">
+	<definition name="chitietsanpham" extends="baseLayout">
 		<put-attribute name="title" value="Chi tiết sản phẩm" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/chitietsanpham.jsp" />
 	</definition>
@@ -147,5 +147,19 @@
 	<definition name="thanhtoan" extends="userLayout">
 		<put-attribute name="title" value="Thanh toán" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/thanhtoan.jsp" />
+	</definition>
+	
+	<definition name="huongdan" extends="baseLayout">
+		<put-attribute name="title" value="Hướng Dẫn" />
+		<put-attribute name="maincontent" value="/WEB-INF/pages/huongdan.jsp" />
+	</definition>
+	<definition name="lienhe" extends="baseLayout">
+		<put-attribute name="title" value="Liên Hệ" />
+		<put-attribute name="maincontent" value="/WEB-INF/pages/lienhe.jsp" />
+	</definition>
+	
+	<definition name="hoadonuser" extends="baseLayout">
+		<put-attribute name="title" value="Liên Hệ" />
+		<put-attribute name="maincontent" value="/WEB-INF/pages/hoadonuser.jsp" />
 	</definition>
 </tiles-definitions>

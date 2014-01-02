@@ -83,7 +83,7 @@
 											<li class="fl wleft line24 bor-top color3d pdtop5 pdb5">
 												<span class="fl l35 w70 txc">${sp.masp}</span> <span
 												class="fl w350 "> <a class="fl"
-													href="chitietsanpham.html?masp=${sp.masp}" title=""> <img
+													href="chitietsanpham?masp=${sp.masp}" title=""> <img
 														alt="" class="img_small"
 														src="${imageDirectory}${sp.hinhanh}" />
 												</a>

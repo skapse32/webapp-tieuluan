@@ -530,7 +530,7 @@ public class QuanLySanPhamUserController {
 		HttpSession session = request.getSession();
 		String web = Server.web;
 		model.addAttribute("web", web);
-		String  tensp = "0000", maloaisp = "2", matinhtrangsp = "1", soluong = "1000", xuatxu = "QuyAnh", thuonghieu = "QuyAnh", mota = "MoTa", giakhoidiem = "1000000.0", giahientai = "0.0", buocgia = "200000.0", thoigianbatdau = "2013-05-10 22:35:29.589", thoigianketthuc = "2013-05-30 22:35:29.589", mahttt = "1", thongtinlienhe = "QuyAnh";
+		String  tensp = "", maloaisp = "", matinhtrangsp = "", soluong = "", xuatxu = "", thuonghieu = "", mota = "", giakhoidiem = "", giahientai = "", buocgia = "", thoigianbatdau = "", thoigianketthuc = "", mahttt = "", thongtinlienhe = "";
 		String giamuangay ="";
 		String nguoidang = session.getAttribute("username").toString();
 		String filename = "null", pathname = "", error = "", resultsaveimage = "", resultsavesanpham = "";
@@ -538,8 +538,19 @@ public class QuanLySanPhamUserController {
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
 		WebResource webResource = client.resource(Server.addressAuctionWS);
+
 		if (!file.getOriginalFilename().equals("")) {
 			filename = file.getOriginalFilename();
+			String[] deniedExt = new String[] {"jsp","html","shtml"};
+			String ext = filename.substring(filename.lastIndexOf(".") + 1, filename.length());
+			for (String e : deniedExt) {
+				if(ext.equals(e))
+				{
+					model.addAttribute("noidung", "File name : "+filename+"<br>Phát hiện nghi vấn hack.");
+					return "thongbao";
+				}
+			}
+			
 			pathname = Server.saveDirectory + file.getOriginalFilename();
 			file.transferTo(new File(pathname));
 			try {
@@ -638,10 +649,32 @@ public class QuanLySanPhamUserController {
 				.post(String.class, form);
 		log.info(resultsavesanpham);
 		String[] args = resultsavesanpham.split(",");
+		model.addAttribute("thanhcong", "thanhcong");
 		request.setAttribute("masp", args[1]);
-		request.setAttribute("tieude", "Kết quả thuộc sản phẩm");
 		request.setAttribute("noidung", args[0] + "<br>"+noidung);
-		request.setAttribute("thanhcong", "true");
-		return "thongbaoqlsanphamuser";
+		return "thongbao";
+	}
+	
+
+	@RequestMapping(value = "/hoadonuser", method = RequestMethod.GET)
+	public String hoadonuser(Model model,HttpServletRequest request, HttpSession session) throws IOException {
+		String json = "";
+		Gson gson = new Gson();
+		ClientConfig config = new DefaultClientConfig();
+		Client client = Client.create(config);
+		WebResource webResource = client.resource(Server.addressAuctionWS);
+		Form form = new Form();
+		form.add("nguoimua", session.getAttribute("username").toString());
+		ArrayList<Hoadon> hd = new ArrayList<Hoadon>();
+		json = webResource
+				.path("hoadon/findByNguoimua")
+				.cookie(new NewCookie("JSESSIONID", session.getAttribute(
+						"sessionid").toString())).post(String.class,form);
+		Type typelist = new TypeToken<ArrayList<Hoadon>>() {}.getType();
+		hd = gson.fromJson(json, typelist);
+		log.info(hd.toString());
+		model.addAttribute("hd", hd);
+		model.addAttribute("tieude", "Hoá đơn người dùng");
+		return "hoadonuser";
 	}
 }

@@ -47,8 +47,18 @@ public class DangKyController {
 			model.addAttribute("noidung", "Bạn đã đăng nhập.");
 			return "thongbao";
 		}
+		model.addAttribute("tenDN", username);
+		model.addAttribute("ngaysinh", ngaySinh);
+		model.addAttribute("email", email);
+		model.addAttribute("hoten", hoTen);
+		model.addAttribute("sdt", soDT);
+		model.addAttribute("diachi", diaChi);
+		if(checkEmail(email, null).equals("true"))
+		{
+			model.addAttribute("error", email + " : Email này đã có người sử dụng.");
+			return "dangky";
+		}
 		try {
-			model.addAttribute("tenDN", username);
 			if (!username.matches("[a-zA-Z0-9 ]*")) {
 				model.addAttribute("error", "Tên đăng nhập không hợp lệ");
 				return "dangky";
@@ -60,8 +70,8 @@ public class DangKyController {
 			Form form = new Form();
 			form.add("username", username);
 			form.add("password", password);
-			form.add("fullname", URLEncoder.encode(hoTen, "UTF-8"));
-			form.add("address", URLEncoder.encode(diaChi, "UTF-8"));
+			form.add("fullname", hoTen);
+			form.add("address", diaChi);
 			form.add("telephoneNumber", soDT);
 			form.add("sex", gioiTinh);
 			form.add("birthday", ngaySinh);

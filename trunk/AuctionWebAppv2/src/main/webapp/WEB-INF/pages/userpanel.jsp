@@ -48,7 +48,7 @@
 						<c:if test="${sessionScope.role != 'Admin'}">
 							<tr>
 								<td><a
-									href="${pageContext.request.contextPath}/sanphamdangdau.html"><img
+									href="${pageContext.request.contextPath}/sanphamdangdau"><img
 										src="${pageContext.request.contextPath}/resources/images/view_list.png" /><label>Danh
 											sách sản phẩm</label></a></td>
 							</tr>

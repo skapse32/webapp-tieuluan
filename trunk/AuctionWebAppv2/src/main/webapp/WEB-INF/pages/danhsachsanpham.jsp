@@ -7,6 +7,8 @@
 		return (d < 10) ? '0' + d.toString() : d.toString();
 	}
 </script>
+
+<c:if test = "${link == 'sanphamdangdau'}">
 <script type="text/javascript">
 	//
 	var timer;
@@ -19,8 +21,8 @@
 		var size = $('#size').val();
 		var page = $('#page').val();
 		$.ajax({
-			type : "${method}",
-			url : "${link}",
+			type : "POST",
+			url : "${pageContext.request.contextPath}/loaddssanphamdangdau",
 			data : "maLoaiSP=" + maLoaiSP + "&size=" + size + "&page=" + page,
 			success : function(data) {
 				// we have the response
@@ -39,6 +41,7 @@
 		});
 	};
 </script>
+</c:if>
 
 <!-- Content -->
 <div id="content" class="wmain">
@@ -64,15 +67,15 @@
 						<c:choose>
 							<c:when test="${check == 'thuonghieu'}">
 								<a style="color: #00C"
-							href="${pageContext.request.contextPath}/?thuonghieu=${thuonghieu}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
+							href="${pageContext.request.contextPath}/${link}?thuonghieu=${thuonghieu}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
 							</c:when>
 							<c:when test="${check == 'maloaiSP'}">
 								<a style="color: #00C"
-									href="${pageContext.request.contextPath}/?maLoaiSP=${maLoaiSP}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
+									href="${pageContext.request.contextPath}/${link}?maLoaiSP=${maLoaiSP}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
 							</c:when>
 							<c:otherwise>
 								<a style="color: #00C"
-									href="${pageContext.request.contextPath}/?locsp=${locsp}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
+									href="${pageContext.request.contextPath}/${link}?locsp=${locsp}&trang=${i}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">
 							</c:otherwise>
 						</c:choose>
 
@@ -113,7 +116,7 @@
 					<div align="center" class="fl pd05 w170 hpros sep_pros">
 						<div class="HinhSP">
 							<a
-								href="chitietsanpham.html?masp=${sp.masp}"><img
+								href="chitietsanpham?masp=${sp.masp}"><img
 								class="HinhSP_Resize" src="${imageDirectory}${sp.hinhanh}" /></a>
 						</div>
 						<div class="TenSP">${sp.tensp}</div>
@@ -121,6 +124,8 @@
 						<input type="hidden" id="time${sp.masp}"
 							value="${sp.thoigianketthuc}">
 						<div class="Countdown" id="Countdown${sp.masp}"></div>
+						
+						<c:if test="${link != 'sanphamdadau' }">
 						<script type="text/javascript">
 							$(function() {
 								var stringday = $('#time${sp.masp}').val()
@@ -171,10 +176,11 @@
 												}, 1000);
 							});
 						</script>
+						</c:if>
 
 						<p class="top10" align="center">
 							<a
-								href="${pageContext.request.contextPath}/chitietsanpham.html?masp=${sp.masp}"
+								href="${pageContext.request.contextPath}/chitietsanpham?masp=${sp.masp}"
 								class="fl l35 bg-hit detail_products">Đặt giá</a>
 						</p>
 					</div>

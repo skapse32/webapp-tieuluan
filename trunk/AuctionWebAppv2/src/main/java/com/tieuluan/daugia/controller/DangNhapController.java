@@ -1,10 +1,6 @@
 package com.tieuluan.daugia.controller;
 
 import java.io.IOException;
-import java.net.HttpCookie;
-
-import javax.servlet.http.Cookie;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.NewCookie;
@@ -24,48 +20,57 @@ import com.tieuluan.daugia.function.Server;
 @Controller
 public class DangNhapController {
 
-	@RequestMapping(value = "/userpanel")
-	public String userpanel(){
+	@RequestMapping(value = "userpanel")
+	public String userpanel(HttpSession session, Model model) {
+		if(session.getAttribute("username") == null)
+		{
+			model.addAttribute("noidung","Bạn chưa đăng nhập.");
+			return "thongbao";
+		}
 		return "userpanel";
 	}
-	
-	@RequestMapping(value = "/dangnhap")
+
+	@RequestMapping(value = "dangnhap")
 	public String dangNhap(
 			@RequestParam(value = "action", required = false) String action,
 			@RequestParam(value = "username", required = false) String username,
 			@RequestParam(value = "password", required = false) String password,
-			HttpSession session, Model model, HttpServletResponse response) throws IOException {
-		
+			HttpSession session, Model model, HttpServletResponse response)
+			throws IOException {
+		if(session.getAttribute("username") != null)
+		{
+			model.addAttribute("noidung", "Bạn đã đăng nhập");
+			return "thongbao";
+		}
 		String web = Server.web;
 		model.addAttribute("web", web);
 		model.addAttribute("tieude", "Ðăng nhập");
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
 		WebResource webResource = client.resource(Server.addressAuthenWS);
-
-		if(session.getAttribute("username") != null)
-		{
-			model.addAttribute("noidung", "Bạn đã đăng nhập.");
-			return "thongbao";
-		}
-		else if (action != null) {
+		Form form = null;
+		if (action != null) {
 			if (action.equals("dangnhap")) {
-
-				model.addAttribute("username", username);
-				model.addAttribute("password", password);
 				// get authencode form AuthenService
 				webResource = client.resource(Server.addressAuthenWS);
 				String authencode = "";
-				Form form = new Form();
+				form = new Form();
 				form.add("username", username);
 				form.add("password", password);
-				authencode = webResource.path("login/loginpost").cookie(new NewCookie("authenCode", authencode)).post(
-						String.class, form);
+				authencode = webResource.path("login/loginpost")
+						.cookie(new NewCookie("authenCode", authencode))
+						.post(String.class, form);
 				if (authencode.equals("")) {
 					model.addAttribute("error",
 							"Tài khoản hoặc mật khẩu không đúng !!");
 					return "dangnhap";
 				} else {
+					// login cho trang danh gia.
+					/*response.sendRedirect(Server.addressDanhGiaWA
+							+ "?authcode=" + authencode + "&username="
+							+ username)*/;
+
+					session.setAttribute("authCode", authencode);
 					// access to AuctionService
 					System.out.print("Auction Authencode : " + authencode);
 					webResource = client.resource(Server.addressAuctionWS);
@@ -84,8 +89,8 @@ public class DangNhapController {
 						return "thongbao";
 					} else {
 						session.setAttribute("username", username);
-						//get role
-						String role=webResource
+						// get role
+						String role = webResource
 								.path("user/getRoleUser")
 								.cookie(new NewCookie("JSESSIONID", session
 										.getAttribute("sessionid").toString()))
@@ -96,18 +101,16 @@ public class DangNhapController {
 				}
 			}
 		}
+
 		return "dangnhap";
 	}
-	
 
-	@RequestMapping(value = "/dangxuat")
-	public String dangXuat(HttpSession session, Model model) {
-		String web = Server.web;
-		model.addAttribute("web", web);
+	@RequestMapping(value = "dangxuat")
+	public String dangXuat(HttpSession session, Model model)
+	{
 		session.removeAttribute("username");
 		session.removeAttribute("role");
-		model.addAttribute("tieude", "Goodbye");
-		model.addAttribute("noidung", "See you again!");
+		model.addAttribute("noidung", "Đăng xuất thành công.");
 		return "thongbao";
 	}
 

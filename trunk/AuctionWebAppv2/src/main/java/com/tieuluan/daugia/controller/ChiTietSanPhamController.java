@@ -40,7 +40,7 @@ public class ChiTietSanPhamController {
 	
 	private Logger log = LoggerFactory.getLogger(ChiTietSanPhamController.class);
 	
-	@RequestMapping(value = "/chitietsanpham.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/chitietsanpham", method = RequestMethod.GET)
 	public String chitietsanpham(
 			@RequestParam(value = "trang", required = false, defaultValue = "1") int trang,
 			@RequestParam(value = "soLuongSanPhamTrenTrang", required = false, defaultValue = "8") int soLuongSanPhamTrenTrang,
@@ -154,10 +154,10 @@ public class ChiTietSanPhamController {
 			//ket huc
 			model.addAttribute("dathanhtoan", "da xong");
 		}
-		return "chitietsanpham.html";
+		return "chitietsanpham";
 	}
 	
-	@RequestMapping(value = "/luotdattrensp.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/luotdattrensp", method = RequestMethod.GET)
 	public String luotdattrensp(Model model,HttpServletRequest request, HttpSession session) throws IOException {
 		String masp = request.getParameter("masp");
 		String web = Server.web;
@@ -180,7 +180,7 @@ public class ChiTietSanPhamController {
 		log.info(lss.toString());
 		model.addAttribute("lss", lss);
 		model.addAttribute("tieude", "Lượt đặt trên sản phẩm");
-		return "luotdattrensp.html";
+		return "luotdattrensp";
 	}
 
 	

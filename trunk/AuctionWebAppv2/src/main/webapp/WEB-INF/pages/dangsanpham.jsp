@@ -53,7 +53,7 @@
     <td class="title">Thông tin sản phẩm</td>
   </tr>
   <tr>
-    <td width="544"><label for="txttensp">Tên sản phẩm :</label>
+    <td width="544" id="tensanpham"><label for="txttensp">Tên sản phẩm :</label>
     <input type="text" name="txttensp" id="txttensp"></td>
   </tr>
   <tr>
@@ -85,18 +85,18 @@
     <input name="txtsoluong" type="number" id="txtsoluong" min="1" value="1"></td>
   </tr>
   <tr>
-    <td><label for="txtxuatxu">Xuất xứ :</label>
+    <td id="xuatxu"><label for="txtxuatxu">Xuất xứ :</label>
     <input type="text" name="txtxuatxu" id="txtxuatxu"></td>
   </tr>
   <tr>
-    <td><label for="file">Ảnh đại diện :</label>
+    <td id="anhdaidien"><label for="file">Ảnh đại diện :</label>
     <input type="file" name="file" id="file"></td>
   </tr>
   <tr>
     <td class="title">Mô tả sản phẩm</td>
   </tr>
   <tr>
-    <td><textarea name="txtmota" id="txtmota" rows="8"></textarea></td>
+    <td id="motasanpham"><textarea name="txtmota" id="txtmota" rows="8"></textarea></td>
   </tr>
   <tr>
     <td class="title">Thông tin đấu giá</td>
@@ -117,11 +117,11 @@
     VNĐ <span class="textfieldInvalidFormatMsg"><br>Chưa đúng định dạng mệnh giá</span><span class="textfieldRequiredMsg">*</span></td>
   </tr>
   <tr>
-    <td><label for="txttgbt">Thời gian bắt đầu :</label>
+    <td id="tgbb"><label for="txttgbt">Thời gian bắt đầu :</label>
     <input type="text" name="txttgbt" id="txttgbt" readonly="readonly"></td>
   </tr>
   <tr>
-    <td><label for="txttgkt">Thời gian kết thúc :</label>
+    <td id="tgkt"><label for="txttgkt">Thời gian kết thúc :</label>
     <input type="text" name="txttgkt" id="txttgkt" readonly="readonly"></td>
   </tr>
   <tr>
@@ -163,7 +163,10 @@ var sprytextfield = new Spry.Widget.ValidationTextField("stfNgaySinh",
 			validateOn : [ "blur" ],
 			format : "dd-mm-yyyy"
 		});
+var validation = new Spry.Widget.ValidationTextField("tensanpham", "none" , { validateOn : [ "change" ]});
 var validation = new Spry.Widget.ValidationTextField("txtgiakhoidiem", "integer" , { validateOn : [ "change" ]});
 var validation = new Spry.Widget.ValidationTextField("txtbuocgia", "integer" , { validateOn : [ "change" ]});
 var validation = new Spry.Widget.ValidationTextField("txtmuangay", "integer" , { validateOn : [ "change" ]});
+var validation = new Spry.Widget.ValidationTextField("tensanpham", "none" , { validateOn : [ "change" ]});
+var validation = new Spry.Widget.ValidationTextField("tensanpham", "none" , { validateOn : [ "change" ]});
 </script>

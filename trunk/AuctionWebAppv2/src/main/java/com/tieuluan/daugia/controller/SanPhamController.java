@@ -38,7 +38,7 @@ public class SanPhamController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/sanphamdangdau.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/sanphamdangdau", method = RequestMethod.GET)
 	public String sanphamdangdau(
 			@RequestParam(value = "locsp", required = false, defaultValue = "-2") int sort,
 			@RequestParam(value = "thuonghieu", required = false, defaultValue = "0") String thuonghieu,
@@ -106,15 +106,15 @@ public class SanPhamController {
 		model.addAttribute("trang", trang);
 		model.addAttribute("maLoaiSP", maLoaiSP);
 		model.addAttribute("soTrang", soTrang);
+		model.addAttribute("locsp", sort);
 		model.addAttribute("dssp", dssp);
 		model.addAttribute("imageDirectory", imageDirectory);
 		
 		model.addAttribute("idxe", 1);
 		
-		model.addAttribute("method", "POST");
-		model.addAttribute("link", "/daugia/loaddssanphamdangdau");
+		model.addAttribute("link", "sanphamdangdau");
 		model.addAttribute("web", web);
-		return "sanphamdangdau.html";
+		return "sanphamdangdau";
 	}
 	@RequestMapping(value = "/loaddssanphamdangdau", method = RequestMethod.POST)
 	public @ResponseBody
@@ -139,7 +139,7 @@ public class SanPhamController {
 		json = response.getEntity(String.class);	
 		return json;
 	}
-	@RequestMapping(value = "/sanphamsapdau.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/sanphamsapdau", method = RequestMethod.GET)
 	public String sanphamsapdau(
 			
 			@RequestParam(value = "locsp", required = false, defaultValue = "-2") int sort,
@@ -195,14 +195,13 @@ public class SanPhamController {
 		model.addAttribute("maLoaiSP", maLoaiSP);
 		model.addAttribute("soTrang", soTrang);
 		model.addAttribute("dssp", dssp);
+		model.addAttribute("locsp", sort);
 		model.addAttribute("imageDirectory", imageDirectory);
 		model.addAttribute("web", web);
-
-		model.addAttribute("method", "GET");
-		model.addAttribute("link", "/daugia/sanphamsapdau.html");
-		return "sanphamsapdau.html";
+		model.addAttribute("link", "sanphamsapdau");
+		return "sanphamsapdau";
 	}
-	@RequestMapping(value = "/sanphamdadau.html", method = RequestMethod.GET)
+	@RequestMapping(value = "/sanphamdadau", method = RequestMethod.GET)
 	public String sanphamdadau(
 			@RequestParam(value = "locsp", required = false, defaultValue = "-2") int sort,
 			@RequestParam(value = "maLoaiSP", required = false, defaultValue = "-1") int maLoaiSP,
@@ -257,10 +256,10 @@ public class SanPhamController {
 		model.addAttribute("maLoaiSP", maLoaiSP);
 		model.addAttribute("soTrang", soTrang);
 		model.addAttribute("dssp", dssp);
+		model.addAttribute("locsp", sort);
 		model.addAttribute("imageDirectory", imageDirectory);
 		model.addAttribute("web", web);
-		model.addAttribute("method", "GET");
-		model.addAttribute("link", "/daugia/sanphamdadau.html");
-		return "sanphamdadau.html";
+		model.addAttribute("link", "sanphamdadau");
+		return "sanphamdadau";
 	}
 }
