@@ -98,6 +98,18 @@
 							<li class="fl pd5 w240 "><a class="fl pd5 w240 "
 								href="${pageContext.request.contextPath}/dangsanpham">Đăng
 									sản phẩm</a></li>
+						</ul>
+					</div>
+					
+					<div id="catalog-products" class="fl wright">
+						<div id="catalog-products-titles"
+							class="fl bg-titles top10 products-group-title-news color_white fontTahoma wright-26">
+							<strong>Hóa đơn</strong>
+						</div>
+						<ul id="catalog-products-list"
+							class="fl fontTahoma wright list-none top5">
+							<li class="fl pd5 w240 "><a class="fl pd5 w240 "
+								href="${pageContext.request.contextPath}/hoadonuser">Hóa đơn user</a></li>
 							<li class="fl wright das_top h1"></li>
 						</ul>
 					</div>

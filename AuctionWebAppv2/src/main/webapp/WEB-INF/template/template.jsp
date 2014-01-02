@@ -38,7 +38,7 @@
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/js/numeral.min.js"></script>
 <link
-	href="${pageContext.request.contextPath}/resources/v2/css/tiny.css_OLD"
+	href="${pageContext.request.contextPath}/resources/v2/css/tiny.css"
 	rel="stylesheet" type="text/css" />
 <script type="text/javascript"
 	src="${pageContext.request.contextPath}/resources/v2/js/tinybox.js"></script>

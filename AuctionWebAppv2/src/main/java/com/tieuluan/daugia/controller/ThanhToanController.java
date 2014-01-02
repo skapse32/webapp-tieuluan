@@ -223,6 +223,9 @@ public class ThanhToanController {
 	public @ResponseBody
 	String updateTinhTrangDaugia(HttpServletRequest request, Model model) {
 		String masp = request.getParameter("maSP");
+		String nguoithang = request.getParameter("nguoidat");
+		System.out.println("Update SP : " + masp + "| Nguoi dat : "
+				+ nguoithang);
 		HttpSession session = request.getSession();
 		String json = "";
 		ClientConfig config = new DefaultClientConfig();
@@ -230,14 +233,10 @@ public class ThanhToanController {
 		WebResource webResource = client.resource(Server.addressAuctionWS);
 		Gson gson = new Gson();
 		// lay thong tin user
-		json = webResource
-				.path("user/getUserInfo")
-				.cookie(new NewCookie("JSESSIONID", session.getAttribute(
-						"sessionid").toString())).post(String.class);
-		User user = gson.fromJson(json, User.class);
+		Form form = new Form();
 		// lay thong tin sanpham
 		ClientResponse response = null;
-		Form form = new Form();
+		form = new Form();
 		form.add("masp", masp);
 		response = webResource
 				.path("sanpham/findById")
@@ -247,7 +246,17 @@ public class ThanhToanController {
 		json = response.getEntity(String.class);
 		Sanpham sp = gson.fromJson(json, Sanpham.class);
 
-		Function.sendmail(user, sp);
+		if (!nguoithang.equals("")) {
+			form = new Form();
+			form.add("username", nguoithang);
+			json = webResource
+					.path("user/getUserInfoNguoiBan")
+					.cookie(new NewCookie("JSESSIONID", session.getAttribute(
+							"sessionid").toString())).post(String.class, form);
+			User user = gson.fromJson(json, User.class);
+
+			Function.sendmail(user, sp);
+		}
 
 		System.out.println(masp);
 		form = new Form();
@@ -258,6 +267,7 @@ public class ThanhToanController {
 						"sessionid").toString())).post(String.class, form);
 		if (json.equals("success")) {
 			return "success";
+
 		} else {
 			return "fail";
 		}

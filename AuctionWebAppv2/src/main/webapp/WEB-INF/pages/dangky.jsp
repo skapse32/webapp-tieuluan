@@ -118,7 +118,7 @@ function isEmail(x)
 		</div>
 		<div id="DangKy">
 			<form id="Form_Registration" method="post"
-				action="${pageContext.request.contextPath}/dangky?action=dangky">
+				action="">
 				<div id="error">${error}</div>
 				<table width="100%">
 	  <tr>
@@ -142,7 +142,7 @@ function isEmail(x)
 	  </tr>
 	  <tr>
 	    <td><span id="scNhapLai" class="Apple-style-span"><label for="NhapLai">Nhập lại mật khẩu :</label>
-	    <input type="text" name="NhapLai" id="NhapLai">
+	    <input type="password" name="NhapLai" id="NhapLai">
 	    <span class="confirmRequiredMsg">*</span>
 	    <span class="confirmInvalidMsg">Xác nhận mật khẩu chưa khớp</span>
 	    </span>
@@ -153,13 +153,13 @@ function isEmail(x)
 	  </tr>
 	  <tr>
 	    <td id="stfHoTen"><label for="HoTen">Họ &amp; Tên :</label>
-	    <input type="text" name="HoTen" id="HoTen">
+	    <input type="text" name="HoTen" id="HoTen" value="${hoten }">
 	    <span class="textfieldRequiredMsg">*</span>
 	    </td>
 	  </tr>
 	  <tr>
 	    <td id="stfNgaySinh"><label for="NgaySinh">Ngày sinh :</label>
-	    <input type="text" name="NgaySinh" id="NgaySinh">
+	    <input type="text" name="NgaySinh" id="NgaySinh" value=${ngaysinh }>
 	     <span class="textfieldRequiredMsg">*</span>
 	     <span class="textfieldInvalidFormatMsg">Ngày sinh không đúng định dạng</span>
 	     dd-mm-yyyy
@@ -167,13 +167,13 @@ function isEmail(x)
 	  </tr>  
 	  <tr>
 	    <td id="stfDiaChi"><label for="DiaChi">Địa chỉ :</label>
-	    <input type="text" name="DiaChi" id="DiaChi">
+	    <input type="text" name="DiaChi" id="DiaChi" value="${diachi }">
 	    <span class="textfieldRequiredMsg">*</span>
 	    </td>
 	  </tr>
 	  <tr>
 	    <td id="stfSoDienThoai"><label for="SoDienThoai">Số điện thoại :</label>
-	    <input type="text" name="SoDienThoai" id="SoDienThoai">
+	    <input type="text" name="SoDienThoai" id="SoDienThoai" value="${sdt }">
 	    <span class="textfieldRequiredMsg">*</span>
 	    <span class="textfieldInvalidFormatMsg">Bạn không được nhập chữ</span>
 		<span class="textfieldMaxCharsMsg">SĐT không được vượt quá 11 chữ số</span>
@@ -182,25 +182,15 @@ function isEmail(x)
 	  </tr>
 	  <tr>
 	    <td id="stfEmail"><label for="email">Email :</label>
-	    <input type="text" name="email" id="email" onchange="checkEmail(this.value)">
+	    <input type="text" name="email" id="email" onchange="checkEmail(this.value)" value="${email }">
 	    <span id="emailcheck"></span>
 		<span class="textfieldInvalidFormatMsg">Email chưa đúng định dạng</span>
 		<span class="textfieldRequiredMsg">*</span>
 		</td>
 	  </tr>
 	  <tr>
-	    <td><label>Giới tính :</label><input name="GioiTinh" type="radio" id="GioiTinh" value="1" checked> Nam
-	      <input type="radio" name="GioiTinh" id="GioiTinh" value="0"> Nữ</td>
-	  </tr>
-	  <tr>
-	    <td><label for="file">Ảnh đại diện :</label>
-	    <input type="file" name="file" id="file"></td>
-	  </tr>
-	  <tr>
-	    <td class="title">Thông tin thanh toán</td>
-	  </tr>
-	  <tr>
-	    <td><textarea name="txtthongtinthanhtoan" rows="8" id="txtthongtinthanhtoan"></textarea></td>
+	    <td><label>Giới tính :</label><input name="GioiTinh" type="radio" id="GioiTinh" value="true" checked> Nam
+	      <input type="radio" name="GioiTinh" id="GioiTinh" value="false"> Nữ</td>
 	  </tr>
 	  <tr>
 	    <td id="acceptContainer"><input type="checkbox" name="acceptRules" id="acceptRules">
@@ -245,7 +235,7 @@ function isEmail(x)
 				});
 		var sprytextfield = new Spry.Widget.ValidationTextField("stfNgaySinh",
 				"date", {
-					validateOn : [ "blur" ],
+					validateOn : [ "change" ],
 					format : "dd-mm-yyyy"
 				});
 		var sprytextfield = new Spry.Widget.ValidationTextField("stfDiaChi",
@@ -283,7 +273,6 @@ function isEmail(x)
 				<li class="fl wright das_top h1"></li>
 			</ul>
 		</div>
-
 		<!-- End right box -->
 	</div>
 </div>

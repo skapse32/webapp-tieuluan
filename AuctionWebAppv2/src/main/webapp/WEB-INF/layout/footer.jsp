@@ -22,11 +22,11 @@
 		<li class="fl top9 sep-footer-top"><a class="fl menu-footer"
 			href=".">Trang chủ</a></li>
 		<li class="fl top9 sep-footer-top"><a class="fl menu-footer"
-			href="sanphamdangdau.html">Đang đấu</a></li>
+			href="sanphamdangdau">Đang đấu</a></li>
 		<li class="fl top9 sep-footer-top"><a class="fl menu-footer"
-			href="sanphamsapdau.html">Sắp đấu</a></li>
+			href="sanphamsapdau">Sắp đấu</a></li>
 		<li class="fl top9 sep-footer-top"><a class="fl menu-footer"
-			href="sanphamdadau.html">Đã đấu</a></li>
+			href="sanphamdadau">Đã đấu</a></li>
 		<li class="fl top9 sep-footer-top"><a class="fl menu-footer"
 			href="#">Hướng dẫn</a></li>
 		<li class="fl top9 sep-footer-top"><a class="fl menu-footer"

@@ -43,6 +43,25 @@
 									document.getElementById("giahientai"
 											+ element.masp).innerHTML = x
 											+ "&nbsp;d";
+									
+								});
+
+			}
+		});
+		$.ajax({
+			type : "POST",
+			url : "/daugia/loaddssanphamhot",
+			data : "",
+			success : function(data) {
+				// we have the response
+				var dssphot = jQuery.parseJSON(data);
+				$.each(dssphot,
+								function(index, element) {
+									var x = numeral(element.giahientai).format(
+											'0,0');
+									x = x.replace(/,/g, ".");
+
+									
 									document.getElementById("agiahientai"
 											+ element.masp).innerHTML = x
 											+ "&nbsp;d";
@@ -51,39 +70,20 @@
 			}
 		});
 	};
-	function updateTinhTrangSP(masp) {
+	function updateTinhTrangSP(masp, nguoidatgia) {
 		$.ajax({
 			type : "POST",
 			url : "/daugia/updateTinhTrangDG",
 			data : {
-				maSP : masp
+				maSP : masp,
+				nguoidat : nguoidatgia
 			},
 			success : function(data) {
-			},
-			error : function(e) {
-				alert('Error: ' + e);
 			}
 		});
 	}
 
-	function kiemtraNguoiDat(nguoidatgia) {
-		$
-				.ajax({
-					type : "POST",
-					url : "/daugia/kiemtranguoidatgia",
-					data : "nguoidatgia=" + nguoidatgia,
-					success : function(data) {
-						// we have the response
-						if (data == "true") {
-							var r = confirm("Bạn đã thắng phiên này! Bấm OK để tiến hành thanh toán sản phẩm.");
-							if (r == true) {
-								window.location.href = "thanhtoan?masp=${sp.masp}";
-							} else {
-							}
-						}
-					}
-				});
-	}
+	
 </script>
 <!-- Content -->
 <div id="content" class="wmain">
@@ -103,7 +103,7 @@
 					<div align="center" class="fl pd05 w170 hpros sep_pros">
 						<div class="HinhSP">
 							<a
-								href="${pageContext.request.contextPath}/chitietsanpham.html?masp=${sp.masp}"><img
+								href="${pageContext.request.contextPath}/chitietsanpham?masp=${sp.masp}"><img
 								class="HinhSP_Resize" src="${imageDirectory}${sp.hinhanh}" /></a>
 						</div>
 						<div class="TenSP">${sp.tensp}</div>
@@ -159,14 +159,14 @@
 																		timeString);
 														document.getElementById('aCountdown${sp.masp}').style.color = 'red'; //'none';
 														document.getElementById('abid${sp.masp}').style.visibility = 'hidden';
-														updateTinhTrangSP("${sp.masp}");
+														updateTinhTrangSP("${sp.masp}","");
 													}
 												}, 1000);
 							});
 						</script>
 
 						<p class="top10" align="center">
-							<a href="${pageContext.request.contextPath}/chitietsanpham.html?masp=${sp.masp}" class="fl l35 bg-hit detail_products">Đặt giá</a>
+							<a href="${pageContext.request.contextPath}/chitietsanpham?masp=${sp.masp}" class="fl l35 bg-hit detail_products">Đặt giá</a>
 						</p>
 					</div>
 				</li>
@@ -282,7 +282,7 @@
 					<div align="center" class="fl pd05 w170 hpros sep_pros">
 						<div class="HinhSP">
 							<a
-								href="${pageContext.request.contextPath}/chitietsanpham.html?masp=${sp.masp}"><img
+								href="${pageContext.request.contextPath}/chitietsanpham?masp=${sp.masp}"><img
 								class="HinhSP_Resize" src="${imageDirectory}${sp.hinhanh}" /></a>
 						</div>
 						<div class="TenSP">${sp.tensp}</div>
@@ -292,63 +292,57 @@
 						<div class="Countdown" id="Countdown${sp.masp}"></div>
 						<script type="text/javascript">
 							$(function() {
-								var stringday = $('#time${sp.masp}').val()
-										.toString();
+								var stringday = $('#time${sp.masp}').val().toString();
 								var longday = Number(stringday);
 								var BigDay = new Date(longday);
 								var msPerDay = 24 * 60 * 60 * 1000;
-								window
-										.setInterval(
-												function() {
-													var today = new Date();
-													var timeLeft = (BigDay
-															.getTime() - today
-															.getTime());
-													if (Math.floor(timeLeft) > 0) {
-														var e_daysLeft = timeLeft
-																/ msPerDay;
-														var daysLeft = pad(Math
-																.floor(e_daysLeft));
-														var e_hrsLeft = (e_daysLeft - daysLeft) * 24;
-														var hrsLeft = pad(Math
-																.floor(e_hrsLeft));
-														var e_minsLeft = (e_hrsLeft - hrsLeft) * 60;
-														var minsLeft = pad(Math
-																.floor(e_minsLeft));
-														var e_secsLeft = (e_minsLeft - minsLeft) * 60;
-														var secsLeft = pad(Math
-																.floor(e_secsLeft));
-														var timeString = daysLeft
-																+ " ngày "
-																+ hrsLeft
-																+ ":"
-																+ minsLeft
-																+ ":"
-																+ secsLeft;
-														$(
-																'#Countdown${sp.masp}')
-																.html(
-																		timeString);
-													} else {
-														//var timeString = "00 ngày " + "00:" +  "00:00";
-														var timeString = "kết thúc";
-														$(
-																'#Countdown${sp.masp}')
-																.html(
-																		timeString);
-														document
-																.getElementById('Countdown${sp.masp}').style.color = 'red'; //'none';
-														document
-																.getElementById('bid${sp.masp}').style.visibility = 'hidden';
-														updateTinhTrangSP("${sp.masp}");
-													}
-												}, 1000);
+								window.setInterval(function() {
+										var today = new Date();
+										var timeLeft = (BigDay
+												.getTime() - today
+												.getTime());
+										if (Math.floor(timeLeft) > 0) {
+											var e_daysLeft = timeLeft
+													/ msPerDay;
+											var daysLeft = pad(Math
+													.floor(e_daysLeft));
+											var e_hrsLeft = (e_daysLeft - daysLeft) * 24;
+											var hrsLeft = pad(Math
+													.floor(e_hrsLeft));
+											var e_minsLeft = (e_hrsLeft - hrsLeft) * 60;
+											var minsLeft = pad(Math
+													.floor(e_minsLeft));
+											var e_secsLeft = (e_minsLeft - minsLeft) * 60;
+											var secsLeft = pad(Math
+													.floor(e_secsLeft));
+											var timeString = daysLeft
+													+ " ngày "
+													+ hrsLeft
+													+ ":"
+													+ minsLeft
+													+ ":"
+													+ secsLeft;
+											$(
+													'#Countdown${sp.masp}')
+													.html(
+															timeString);
+										} else {
+											
+											//var timeString = "00 ngày " + "00:" +  "00:00";
+											var timeString = "kết thúc";
+											updateTinhTrangSP("${sp.masp}", "");
+											$('#Countdown${sp.masp}').html(timeString);
+											document.getElementById('Countdown${sp.masp}').style.color = 'red'; //'none';
+											document.getElementById('bid${sp.masp}').style.visibility = 'hidden';
+											$('#content').load('home.jsp');
+										}
+									}, 1000);
 							});
 						</script>
 
 						<p class="top10" align="center">
 							<a
-								href="${pageContext.request.contextPath}/chitietsanpham.html?masp=${sp.masp}"
+								href="${pageContext.request.contextPath}/chitietsanpham?masp=${sp.masp}"
 								class="fl l35 bg-hit detail_products">Đặt giá</a>
 						</p>
 					</div>
@@ -359,6 +353,5 @@
 		<!-- Sản phẩm đang đấu end -->
 
 	</div>
-	<!-- Left side END -->
 </div>
 <!-- Content END -->
