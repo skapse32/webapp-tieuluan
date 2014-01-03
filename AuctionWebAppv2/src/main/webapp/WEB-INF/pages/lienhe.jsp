@@ -88,7 +88,8 @@
 						<td><textarea name="body" id="message" rows="8"></textarea></td>
 					</tr>
 					<tr>
-						<td colspan="2"><input type="submit" value="Gửi" /></td>
+						<td colspan="2"><div align="center">
+						<input type="submit" value="Gửi" /></div></td>
 					</tr>
 				</table>
 			</form>

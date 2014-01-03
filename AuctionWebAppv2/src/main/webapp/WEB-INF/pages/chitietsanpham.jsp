@@ -930,7 +930,7 @@
 							<a href="chitietsanpham?masp=${sp.masp}"><img
 								class="HinhSP_Resize" src="${imageDirectory}${sp.hinhanh}" /></a>
 						</div>
-						<div class="TenSP">${sp.tensp}</div>
+						<div class="TenSP"><c:out value="${sp.tensp}"/></div>
 						<div class="Gia" id="giahientai${sp.masp}"></div>
 						<input type="hidden" id="time${sp.masp}"
 							value="${sp.thoigianketthuc}">

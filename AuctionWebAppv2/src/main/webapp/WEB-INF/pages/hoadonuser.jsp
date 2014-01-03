@@ -50,7 +50,7 @@
 					</c:forEach>
 				</table>
 			</div>
-			<a href="${pageContext.request.contextPath}/downloadPDF">Download PDF Document</a>
+			<a href="${pageContext.request.contextPath}/downloadPDFhoadon">Download PDF Document</a>
 		</div>	
 	</div>
 </div>

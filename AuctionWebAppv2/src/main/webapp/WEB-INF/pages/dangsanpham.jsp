@@ -117,12 +117,12 @@
     VNĐ <span class="textfieldInvalidFormatMsg"><br>Chưa đúng định dạng mệnh giá</span><span class="textfieldRequiredMsg">*</span></td>
   </tr>
   <tr>
-    <td id="tgbb"><label for="txttgbt">Thời gian bắt đầu :</label>
-    <input type="text" name="txttgbt" id="txttgbt" readonly="readonly"></td>
+    <td id="tgbd"><label for="txttgbt">Thời gian bắt đầu :</label>
+    <input type="text" name="txttgbt" id="txttgbt"></td>
   </tr>
   <tr>
     <td id="tgkt"><label for="txttgkt">Thời gian kết thúc :</label>
-    <input type="text" name="txttgkt" id="txttgkt" readonly="readonly"></td>
+    <input type="text" name="txttgkt" id="txttgkt"></td>  <!-- readonly="readonly" -->
   </tr>
   <tr>
     <td><label for="selecthttt">Hình thức thanh toán :</label>
@@ -153,10 +153,10 @@
 <script>
 //2013-11-29 00:00:00
 $('#txttgbt').datetimepicker({
-	format:'Y-m-d H:00:00'
+	format:'Y-m-d H:m:00'
 });
 $('#txttgkt').datetimepicker({
-	format:'Y-m-d H:00:00'
+	format:'Y-m-d H:m:00'
 });
 var sprytextfield = new Spry.Widget.ValidationTextField("stfNgaySinh",
 		"date", {
@@ -167,6 +167,7 @@ var validation = new Spry.Widget.ValidationTextField("tensanpham", "none" , { va
 var validation = new Spry.Widget.ValidationTextField("txtgiakhoidiem", "integer" , { validateOn : [ "change" ]});
 var validation = new Spry.Widget.ValidationTextField("txtbuocgia", "integer" , { validateOn : [ "change" ]});
 var validation = new Spry.Widget.ValidationTextField("txtmuangay", "integer" , { validateOn : [ "change" ]});
-var validation = new Spry.Widget.ValidationTextField("tensanpham", "none" , { validateOn : [ "change" ]});
-var validation = new Spry.Widget.ValidationTextField("tensanpham", "none" , { validateOn : [ "change" ]});
+var validation = new Spry.Widget.ValidationTextField("tgbd", "none" , { validateOn : [ "change" ]});
+var validation = new Spry.Widget.ValidationTextField("tgkt", "none" , { validateOn : [ "change" ]});
+var validation = new Spry.Widget.ValidationTextField("xuatxu", "none" , { validateOn : [ "change" ]});
 </script>

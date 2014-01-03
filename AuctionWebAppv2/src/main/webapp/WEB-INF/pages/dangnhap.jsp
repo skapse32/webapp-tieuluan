@@ -22,7 +22,7 @@
 				<tr>
 					<td>Tên đăng nhập :</td>
 					<td id="vtfusername"><input id="username" name="username" size="25" type="text"
-						value="${username }" />
+						value="${userName }" />
 						<span class="textfieldRequiredMsg">*</span></td>
 				</tr>
 				<tr>

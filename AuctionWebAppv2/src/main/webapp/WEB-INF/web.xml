@@ -50,7 +50,7 @@
 		<servlet-name>wsGetSPDang</servlet-name>
 		<url-pattern>/websocket/dangsp</url-pattern>
 	</servlet-mapping>
-
+	
 
 	<filter>
 		<filter-name>encodingFilter</filter-name>

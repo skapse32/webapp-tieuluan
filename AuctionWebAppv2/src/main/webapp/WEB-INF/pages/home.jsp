@@ -106,7 +106,7 @@
 								href="${pageContext.request.contextPath}/chitietsanpham?masp=${sp.masp}"><img
 								class="HinhSP_Resize" src="${imageDirectory}${sp.hinhanh}" /></a>
 						</div>
-						<div class="TenSP">${sp.tensp}</div>
+						<div class="TenSP"><c:out value="${sp.tensp}" /></div>
 						<div class="Gia" id="agiahientai${sp.masp}"></div>
 						<input type="hidden" id="atime${sp.masp}"
 							value="${sp.thoigianketthuc}">
@@ -287,7 +287,7 @@
 								href="${pageContext.request.contextPath}/chitietsanpham?masp=${sp.masp}"><img
 								class="HinhSP_Resize" src="${imageDirectory}${sp.hinhanh}" /></a>
 						</div>
-						<div class="TenSP">${sp.tensp}</div>
+						<div class="TenSP"><c:out value="${sp.tensp}" /></div>
 						<div class="Gia" id="giahientai${sp.masp}"></div>
 						<input type="hidden" id="time${sp.masp}"
 							value="${sp.thoigianketthuc}">
@@ -335,7 +335,7 @@
 											updateTinhTrangSP("${sp.masp}", "");
 											var message = "${sp.nguoidat},<div id='titler'>Thông báo</div>"
 												+ "<div id='noidung'>"
-												+ "<table><tr><td>Thắng cuộc: </td><td id='ct'><a href='${pageContext.request.contextPath}/chitietsanpham?masp=${sp.masp}'>${sp.tensp}</a></td></tr>"
+												+ "<table><tr><td>Thắng cuộc: </td><td id='ct'><a href='${pageContext.request.contextPath}/chitietsanpham?masp=${sp.masp}'><c:out value="${sp.tensp}"/></a></td></tr>"
 												+ "<tr><td>Thương hiệu: </td><td id='ct'><label>${sp.thuonghieu}</label></td></tr>"
 												+ "<tr><td>Giá giá thắng : </td><td id='ct'><label>${sp.giahientai}</label></td></tr>";
 												//kiem tra nguoi dat gia

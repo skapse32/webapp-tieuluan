@@ -44,7 +44,7 @@ public class DangNhapController {
 		}
 		String web = Server.web;
 		model.addAttribute("web", web);
-		model.addAttribute("tieude", "Ðăng nhập");
+		model.addAttribute("userName", username);
 		ClientConfig config = new DefaultClientConfig();
 		Client client = Client.create(config);
 		WebResource webResource = client.resource(Server.addressAuthenWS);
@@ -66,9 +66,9 @@ public class DangNhapController {
 					return "dangnhap";
 				} else {
 					// login cho trang danh gia.
-					/*response.sendRedirect(Server.addressDanhGiaWA
+					response.sendRedirect(Server.addressDanhGiaWA
 							+ "?authcode=" + authencode + "&username="
-							+ username)*/;
+							+ username);
 
 					session.setAttribute("authCode", authencode);
 					// access to AuctionService
