@@ -9,10 +9,12 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.NewCookie;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.commons.CommonsMultipartFile;
+import org.springframework.web.servlet.ModelAndView;
+
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.sun.jersey.api.client.Client;
@@ -676,5 +680,28 @@ public class QuanLySanPhamUserController {
 		model.addAttribute("hd", hd);
 		model.addAttribute("tieude", "Hoá đơn người dùng");
 		return "hoadonuser";
+	}
+	
+	@RequestMapping(value = "/downloadPDFhoadon", method = RequestMethod.GET)
+	public ModelAndView downloadExcel(Model model, HttpSession session) {
+		
+		String json = "";
+		Gson gson = new Gson();
+		ClientConfig config = new DefaultClientConfig();
+		Client client = Client.create(config);
+		WebResource webResource = client.resource(Server.addressAuctionWS);
+		Form form = new Form();
+		form.add("nguoimua", session.getAttribute("username").toString());
+		ArrayList<Hoadon> hd = new ArrayList<Hoadon>();
+		json = webResource
+				.path("hoadon/findByNguoimua")
+				.cookie(new NewCookie("JSESSIONID", session.getAttribute(
+						"sessionid").toString())).post(String.class,form);
+		Type typelist = new TypeToken<ArrayList<Hoadon>>() {}.getType();
+		hd = gson.fromJson(json, typelist);
+		log.info(hd.toString());
+		System.out.println("size"+hd.size());
+		// return a view which will be resolved by an excel view resolver
+		return new ModelAndView("pdfViewhoadon", "hd", hd);
 	}
 }

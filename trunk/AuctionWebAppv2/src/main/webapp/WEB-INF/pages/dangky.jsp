@@ -126,7 +126,7 @@ function isEmail(x)
 	  </tr>
 	  <tr>
 	    <td id="stfTaiKhoan"><label for="username">Tên đăng nhập :</label>
-	    <input type="text" name="username" id="username" value="${tenDN}" onChange="checkUserName(this.value)">
+	    <input type="text" name="username" id="username" value="<c:out value="${tenDN}" />" onChange="checkUserName(this.value)">
 	    <span id="usercheck"></span>
 		<span class="textfieldRequiredMsg">*</span>
 		<label style="display: none; color: #F00" id="lblErrorTaiKhoan">Tài khoản này đã có người sử dụng</label>

@@ -81,6 +81,11 @@
 		<put-attribute name="title" value="Sửa sản phẩm" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/dangsanpham.jsp" />
 	</definition>
+	<definition name="capnhatsanpham" extends="baseLayout">
+		<put-attribute name="title" value="Cập nhật sản phẩm" />
+		<put-attribute name="maincontent"
+			value="/WEB-INF/pages/capnhatsanpham.jsp" />
+	</definition>
 	<definition name="capnhatsanphambihuy" extends="baseLayout">
 		<put-attribute name="title" value="Cập nhật sản phẩm bị hủy" />
 		<put-attribute name="maincontent"
@@ -158,7 +163,7 @@
 		<put-attribute name="maincontent" value="/WEB-INF/pages/lienhe.jsp" />
 	</definition>
 	
-	<definition name="hoadonuser" extends="baseLayout">
+	<definition name="hoadonuser" extends="userLayout">
 		<put-attribute name="title" value="Liên Hệ" />
 		<put-attribute name="maincontent" value="/WEB-INF/pages/hoadonuser.jsp" />
 	</definition>

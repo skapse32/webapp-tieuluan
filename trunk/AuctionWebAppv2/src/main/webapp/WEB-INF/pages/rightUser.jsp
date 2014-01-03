@@ -36,13 +36,13 @@
 						</div>
 						<ul id="catalog-products-list"
 							class="fl fontTahoma wright list-none top5">
-							<li class="fl pd5 w240 "><a class="fl  pdl20"
+							<li class="fl pd5 w240 "><a class="fl pd5 w240"
 								href="thongtintaikhoan">Thông tin tài khoản</a></li>
 							<li class="fl wright das_top h1"></li>
-							<li class="fl pd5 w240 "><a class="fl  pdl20"
+							<li class="fl pd5 w240 "><a class="fl pd5 w240"
 								href="doimatkhau">Đổi mật khẩu</a></li>
 							<li class="fl wright das_top h1"></li>
-							<li class="fl pd5 w240 "><a class="fl  pdl20"
+							<li class="fl pd5 w240 "><a class="fl pd5 w240"
 								href="dangxuat">Đăng xuất</a></li>
 							<li class="fl wright das_top h1"></li>
 						</ul>

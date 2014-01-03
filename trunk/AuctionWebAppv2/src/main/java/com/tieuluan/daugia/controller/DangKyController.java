@@ -60,7 +60,7 @@ public class DangKyController {
 		}
 		try {
 			if (!username.matches("[a-zA-Z0-9 ]*")) {
-				model.addAttribute("error", "Tên đăng nhập không hợp lệ");
+				model.addAttribute("error", "Tên đăng nhập không được chứa các ký tự đặc biệt");
 				return "dangky";
 			}
 			String resutl = "";

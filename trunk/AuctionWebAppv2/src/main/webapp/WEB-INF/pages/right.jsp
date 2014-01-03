@@ -38,13 +38,13 @@
 							<c:when test="${lsp.maloaisp == maLoaiSP}">
 								<li class="fl pd5 w240 set-group-bg"><a
 									class="fl set-group pdl20"
-									href="${pageContext.request.contextPath}/?maLoaiSP=${lsp.maloaisp}&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">${lsp.tenloaisp}</a>
+									href="${pageContext.request.contextPath}/${link }?maLoaiSP=${lsp.maloaisp}&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">${lsp.tenloaisp}</a>
 								</li>
 								<li class="fl wright das_top h1"></li>
 							</c:when>
 							<c:otherwise>
 								<li class="fl pd5 w240 "><a class="fl  pdl20"
-									href="${pageContext.request.contextPath}/?maLoaiSP=${lsp.maloaisp}&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">${lsp.tenloaisp}</a>
+									href="${pageContext.request.contextPath}/${link }?maLoaiSP=${lsp.maloaisp}&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">${lsp.tenloaisp}</a>
 								</li>
 								<li class="fl wright das_top h1"></li>
 							</c:otherwise>
@@ -55,13 +55,13 @@
 						<c:when test="${-1 == maLoaiSP}">
 							<li class="fl pd5 w240 set-group-bg"><a
 								class="fl set-group pdl20"
-								href="${pageContext.request.contextPath}/?maLoaiSP=-1&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">+&nbsp;Tất
+								href="${pageContext.request.contextPath}/${link }?maLoaiSP=-1&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">+&nbsp;Tất
 									cả</a></li>
 							<li class="fl wright das_top h1"></li>
 						</c:when>
 						<c:otherwise>
 							<li class="fl pd5 w240 "><a class="fl  pdl20"
-								href="${pageContext.request.contextPath}/?maLoaiSP=-1&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">+&nbsp;Tất
+								href="${pageContext.request.contextPath}/${link }?maLoaiSP=-1&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">+&nbsp;Tất
 									cả</a></li>
 							<li class="fl wright das_top h1"></li>
 						</c:otherwise>
@@ -82,17 +82,17 @@
 				class="fl fontTahoma wright list-none top5">
 							<li class="fl pd5 w240"><a
 								class="fl pdl20"
-								href="${pageContext.request.contextPath}/?locsp=0&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">Mới Nhất</a>
+								href="${pageContext.request.contextPath}/${link }?locsp=0&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">Mới Nhất</a>
 							</li>
 							<li class="fl wright das_top h1"></li>
 							<li class="fl pd5 w240 "><a
 								class="fl  pdl20"
-								href="${pageContext.request.contextPath}/?locsp=1&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">Tăng dần</a>
+								href="${pageContext.request.contextPath}/${link }?locsp=1&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">Tăng dần</a>
 							</li>
 							<li class="fl wright das_top h1"></li>
 							<li class="fl pd5 w240"><a
 								class="fl pdl20"
-								href="${pageContext.request.contextPath}/?locsp=-1&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">Giảm dần</a>
+								href="${pageContext.request.contextPath}/${link }?locsp=-1&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">Giảm dần</a>
 							</li>
 							<li class="fl wright das_top h1"></li>
 						
@@ -114,13 +114,13 @@
 						<c:when test="${xe.id == idxe}">
 							<li class="fl pd5 w240 set-group-bg"><a
 								class="fl set-group pdl20"
-								href="${pageContext.request.contextPath}/?thuonghieu=${xe.tenhang}&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">${xe.tenhang}</a>
+								href="${pageContext.request.contextPath}/${link }?thuonghieu=${xe.tenhang}&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">${xe.tenhang}</a>
 							</li>
 							<li class="fl wright das_top h1"></li>
 						</c:when>
 						<c:otherwise>
 							<li class="fl pd5 w240 "><a class="fl  pdl20"
-								href="${pageContext.request.contextPath}/?thuonghieu=${xe.tenhang}&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">${xe.tenhang}</a>
+								href="${pageContext.request.contextPath}/${link }?thuonghieu=${xe.tenhang}&trang=${trang}&soLuongSanPhamTrenTrang=${soLuongSanPhamTrenTrang}">${xe.tenhang}</a>
 							</li>
 							<li class="fl wright das_top h1"></li>
 						</c:otherwise>
