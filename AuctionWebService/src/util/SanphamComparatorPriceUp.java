@@ -2,7 +2,7 @@ package util;
 
 import java.util.Comparator;
 
-import dao.Sanpham;
+import domain.Sanpham;
 
 public class SanphamComparatorPriceUp implements Comparator<Sanpham>{
 

@@ -3,6 +3,8 @@ package dao;
 import java.util.List;
 import java.util.Set;
 
+import domain.Loaisp;
+
 /**
  * Interface for LoaispDAO.
  * @author MyEclipse Persistence Tools

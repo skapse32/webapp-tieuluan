@@ -4,6 +4,8 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
+import domain.Sanpham;
+
 /**
  * Interface for SanphamDAO.
  * @author MyEclipse Persistence Tools

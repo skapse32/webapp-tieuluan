@@ -3,7 +3,7 @@ package util;
 import java.sql.Timestamp;
 import java.util.Comparator;
 
-import dao.Sanpham;
+import domain.Sanpham;
 
 public class SanphamComparatorNew implements Comparator<Sanpham>{
 

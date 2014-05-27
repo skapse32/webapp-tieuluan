@@ -3,6 +3,8 @@ package dao;
 import java.util.List;
 import java.util.Set;
 
+import domain.Hinhthucthanhtoan;
+
 /**
  * Interface for HinhthucthanhtoanDAO.
  * @author MyEclipse Persistence Tools

@@ -2,6 +2,8 @@ package dao;
 
 import java.util.List;
 
+import domain.Hangxe;
+
 public interface IHangxeDAO {
 	public void save(Hangxe entity);
 
