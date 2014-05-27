@@ -11,8 +11,8 @@ import javax.mail.Transport;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
 
-import dao.Hangxe;
-import dao.HangxeDAO;
+import domain.Hangxe;
+import dto.HangxeDTO;
 
 public class Main {
 
@@ -57,7 +57,7 @@ public class Main {
 		}*/
 		
 		// thu load hang xe
-		HangxeDAO daoxe  = new HangxeDAO();
+		HangxeDTO daoxe  = new HangxeDTO();
 		List<Hangxe> xe = daoxe.findAll();
 		System.out.print(xe.toString());
 	}

@@ -15,7 +15,7 @@ import javax.mail.internet.MimeMessage;
 import dao.EntityManagerHelper;
 
 public class Function {
-	public static void sendmail(model.User user, dao.Sanpham sp){
+	public static void sendmail(model.User user, domain.Sanpham sp){
 		final String username = "auctionSPKT@gmail.com";
 		final String password = "congnghethongtin";
 
@@ -55,7 +55,7 @@ public class Function {
 			throw new RuntimeException(e);
 		}
 	}
-	public static void sendmail1(String email, dao.Sanpham sp){
+	public static void sendmail1(String email, domain.Sanpham sp){
 		final String username = "09110clc@gmail.com";
 		final String password = "thayphuong";
 

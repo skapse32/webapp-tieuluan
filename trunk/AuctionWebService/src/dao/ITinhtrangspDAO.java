@@ -3,6 +3,8 @@ package dao;
 import java.util.List;
 import java.util.Set;
 
+import domain.Tinhtrangsp;
+
 /**
  * Interface for TinhtrangspDAO.
  * @author MyEclipse Persistence Tools

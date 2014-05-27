@@ -23,13 +23,13 @@ public class FilterUser implements ResourceFilter, ContainerRequestFilter {
 	public ContainerRequest filter(ContainerRequest arg0) {
 		// Filter logic goes here.
 		HttpSession session= request.getSession(true);
-		if (session.getAttribute("username") == null) {
+		if (request.getSession().getAttribute("role") != null) {
+			
+		} else {
 			if(request.getContextPath().equals("sanpham/findById")){
 				
 			}else{
 				throw new WebApplicationException(Response.Status.UNAUTHORIZED);
-			//throw new WebApplicationException(Response.status(Response.Status.FORBIDDEN)
-    		//		.entity("404").build());
 			}
 		}
 		return arg0;

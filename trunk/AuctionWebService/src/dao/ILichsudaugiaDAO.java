@@ -3,6 +3,8 @@ package dao;
 import java.sql.Timestamp;
 import java.util.List;
 
+import domain.Lichsudaugia;
+
 /**
  * Interface for LichsudaugiaDAO.
  * @author MyEclipse Persistence Tools

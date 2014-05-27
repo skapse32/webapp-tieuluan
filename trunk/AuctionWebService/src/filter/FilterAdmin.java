@@ -24,7 +24,7 @@ public class FilterAdmin implements ResourceFilter, ContainerRequestFilter {
 		// Filter logic goes here.
 		if (request.getSession().getAttribute("role") != null) {
 			if (request.getSession().getAttribute("role").toString()
-					.equals("Admin")) {
+					.equals("ADMIN")) {
 				return arg0;
 			} else {
 				throw new WebApplicationException(
