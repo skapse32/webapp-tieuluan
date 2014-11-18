@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+  
+    <definition name="baselayout" template="/WEB-INF/layout/baselayout/layout.jsp">
+        <put-attribute name="header" value="/WEB-INF/layout/includes/header.jsp" />
+        <put-attribute name="menuleft" value="/WEB-INF/layout/includes/menuleft.jsp" />
+        <put-attribute name="content" value="" /> 
+        <put-attribute name="footer" value="/WEB-INF/layout/includes/footer.jsp" />
+    </definition>
+   <definition name="loginLayout" template="/WEB-INF/layout/baselayout/layout-login.jsp">
+        <put-attribute name="content" value="" /> 
+    </definition>
+    
+    <definition name="dangnhap" extends="loginLayout">
+		<put-attribute name="content" value="/WEB-INF/views/dangnhap.jsp" />
+	</definition> 
+    
+  	<definition name="home" extends="baselayout">
+  		<put-attribute name="title" value="Trang Chủ" />
+		<put-attribute name="content" value="/WEB-INF/views/home.jsp" />
+	</definition>
+	 <definition name="monhoc" extends="baselayout">
+  		<put-attribute name="title" value="Môn học" />
+		<put-attribute name="content" value="/WEB-INF/views/monhoc.jsp" />
+	</definition> 
+  	<definition name="hello" extends="baselayout">
+		<put-attribute name="content" value="/WEB-INF/views/hello.jsp" />
+	</definition> 
+</tiles-definitions>
