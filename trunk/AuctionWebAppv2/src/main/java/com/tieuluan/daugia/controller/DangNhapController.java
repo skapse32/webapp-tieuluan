@@ -66,9 +66,9 @@ public class DangNhapController {
 					return "dangnhap";
 				} else {
 					// login cho trang danh gia.
-					response.sendRedirect(Server.addressDanhGiaWA
+					/*response.sendRedirect(Server.addressDanhGiaWA
 							+ "?authcode=" + authencode + "&username="
-							+ username);
+							+ username);*/
 
 					session.setAttribute("authCode", authencode);
 					// access to AuctionService
